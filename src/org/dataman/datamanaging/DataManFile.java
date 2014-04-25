@@ -1,8 +1,6 @@
 package org.dataman.datamanaging;
 
 import java.io.*;
-import java.nio.file.*;
-import java.nio.file.attribute.*;
 
 public class DataManFile implements Serializable {
 
@@ -15,12 +13,14 @@ public class DataManFile implements Serializable {
 	public static final String T_OTHER = "dmf";
 
 	protected String type;
+	protected String dir;
 	protected String name;
 	protected Pointer filePointer;
 
-	public DataManFile(String ext, String name) {
+	public DataManFile(String ext, String name, String dir) {
 		type = ext;
 		this.name = name;
+		this.dir = dir;
 		filePointer = new Pointer(Pointer.FILE_POINTER);
 	}
 
@@ -36,18 +36,42 @@ public class DataManFile implements Serializable {
 		return name;
 	}
 
-	public final void setName(String name) {
+	public final boolean setName(String name) throws IOException {
+
+		File file = new File(this.name);
 		this.name = name;
+		// File (or directory) with new name
+		File file2 = new File(this.name);
+		if (file2.exists()) throw new java.io.IOException("file exists");
+
+		// Rename file (or directory)
+		boolean success = file.renameTo(file2);
+		if (!success) {
+			return false;
+		}
+		return true;
 	}
 
 	public final String getDir() {
-		return name;
+		return dir;
 	}
 
-	public final void setDir(String name) {
-		this.name = name;
+	public final boolean setDir(String dir) {
+		File afile = new File(getFullPath());
+		this.dir = dir;
+		if (afile.renameTo(new File(dir + name))) {
+			System.out.println("File is moved successful!");
+			return true;
+		} else {
+			System.out.println("File is failed to move!");
+			return false;
+		}
 	}
 
+	public final String getFullPath() {
+		return dir+name+type;
+	}
+	
 	public final Pointer getFilePointer() {
 		return filePointer;
 	}

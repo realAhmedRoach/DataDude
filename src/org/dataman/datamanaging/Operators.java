@@ -1,6 +1,7 @@
 package org.dataman.datamanaging;
 
 import java.io.File;
+import java.util.*;
 
 public class Operators {
 
@@ -10,9 +11,9 @@ public class Operators {
 		file = _file;
 	}
 	
-	public boolean write(){
+	public boolean write(ArrayList<String> data){
 		
-		File fileOp = new File(file.);
+		File fileOp = new File(file.getFullPath());
 		return true;
 	}
 }
