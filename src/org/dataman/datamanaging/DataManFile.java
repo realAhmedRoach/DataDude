@@ -24,21 +24,6 @@ public class DataManFile implements Serializable {
 		filePointer = new Pointer(Pointer.FILE_POINTER);
 	}
 
-	public boolean save(Directory path) {
-		try {
-			Files.createFile(Paths.get(path.getPath(), name), null);
-		} catch (Exception e) {
-			return false;
-		}
-
-		return true;
-	}
-
-	/*
-	 * private int findType(String ext) { switch (ext) { case T_TEXT: return 0;
-	 * case T_TABLE: return 1; } return -1; }
-	 */
-
 	public final String getType() {
 		return type;
 	}
@@ -52,6 +37,14 @@ public class DataManFile implements Serializable {
 	}
 
 	public final void setName(String name) {
+		this.name = name;
+	}
+
+	public final String getDir() {
+		return name;
+	}
+
+	public final void setDir(String name) {
 		this.name = name;
 	}
 

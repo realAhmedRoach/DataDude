@@ -7,17 +7,11 @@ import javax.swing.*;
 import org.dataman.gui.*;
 import org.dataman.nodes.*;
 
-import java.io.*;
 import java.awt.event.*;
 
 import javax.swing.border.*;
 
 import com.petersoft.advancedswing.jclosabletabbedpane.JClosableTabbedPane;
-import com.petersoft.white.FileChooserTreeModel;
-
-import javax.swing.tree.*;
-
-
 
 public class CoreEngine extends JFrame {
 	private static final long serialVersionUID = 1295L;
