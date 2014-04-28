@@ -6,7 +6,6 @@
 	<classpathentry kind="lib" path="libs/jasypt-1.9.1.jar"/>
 	<classpathentry kind="lib" path="libs/itextpdf-5.4.5.jar"/>
 	<classpathentry kind="lib" path="libs/commons-io-2.4.jar"/>
-	<classpathentry kind="lib" path="libs/forms-1.3.0.jar" sourcepath="forms-1.3.0-src.zip"/>
 	<classpathentry kind="lib" path="libs/OfficeLnFs.jar"/>
 	<classpathentry kind="lib" path="libs/PetersoftJavaStyle2_20120202.jar"/>
 	<classpathentry kind="lib" path="libs/napkinlaf.jar"/>

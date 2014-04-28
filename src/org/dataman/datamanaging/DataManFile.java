@@ -68,6 +68,8 @@ public class DataManFile implements Serializable {
 		}
 	}
 
+
+	
 	public final String getFullPath() {
 		return dir+name+type;
 	}
