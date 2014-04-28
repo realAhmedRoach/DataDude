@@ -15,7 +15,7 @@ public final class DataMan {
 	}
 	
 	public MemoryManager getMemoryManager() {
-		
+		return new MemoryManager();
 	}
 	
 	public static String getFolder() {
