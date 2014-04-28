@@ -2,11 +2,21 @@ package org.dataman;
 
 import javax.swing.*;
 
+import org.dataman.memory.MemoryManager;
+
 public final class DataMan {
 
 	private DataMan() {
 	}
 
+	
+	public static void openConsole() {
+		
+	}
+	
+	public MemoryManager getMemoryManager() {
+		
+	}
 	
 	public static String getFolder() {
 		JFileChooser fs = new JFileChooser();
