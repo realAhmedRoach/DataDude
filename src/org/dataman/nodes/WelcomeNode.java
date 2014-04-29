@@ -2,7 +2,6 @@ package org.dataman.nodes;
 
 
 import java.awt.FlowLayout;
-import java.awt.Graphics;
 
 import javax.swing.JLabel;
 
