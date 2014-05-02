@@ -3,14 +3,13 @@ package org.dataman.security;
 import java.security.*;
 
 import javax.crypto.*;
-import javax.crypto.spec.SecretKeySpec;
+import javax.crypto.spec.*;
 
-public final class PasswordEncryptor {
-
+public final class StringEncryptor {
 	private SecretKeySpec key;
 	private Cipher aes;
 
-	public PasswordEncryptor(String passphrase) {
+	public StringEncryptor(String passphrase) {
 
 		try {
 			MessageDigest digest;
@@ -25,6 +24,11 @@ public final class PasswordEncryptor {
 
 	}
 
+	public boolean checkPassword(String passToBeChecked, String _pass) {
+		String pass = decryptPassword(_pass);
+		return passToBeChecked == pass;
+	}
+	
 	public String encryptPassword(String pass) {
 		try {
 			aes = Cipher.getInstance("AES/ECB/PKCS5Padding");

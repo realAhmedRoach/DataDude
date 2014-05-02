@@ -4,10 +4,6 @@ import java.io.*;
 
 import org.jasypt.util.password.*;
 
-/*import javax.crypto.*;
- import javax.crypto.spec.*;
- import javax.swing.JOptionPane;*/
-
 public class User implements Serializable {
 	private static final long serialVersionUID = 254827L;
 
