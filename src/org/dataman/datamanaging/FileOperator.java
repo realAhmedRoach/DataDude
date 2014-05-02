@@ -3,11 +3,11 @@ package org.dataman.datamanaging;
 import java.io.*;
 import java.util.*;
 
-public class Operators {
+public class FileOperator {
 
 	private DataManFile file = null;
 
-	public Operators(DataManFile _file) {
+	public FileOperator(DataManFile _file) {
 		file = _file;
 	}
 
