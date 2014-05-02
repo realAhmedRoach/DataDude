@@ -4,7 +4,7 @@ import java.io.*;
 
 public class DataManFile implements Serializable {
 
-	private static final long serialVersionUID = 7301413521671295623L;
+	private static final long serialVersionUID = 730623L;
 
 	public static final String T_TEXT = "txt";
 	public static final String T_TABLE = "dmt";

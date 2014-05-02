@@ -19,6 +19,7 @@ public class NewDialog extends JDialog {
 	
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtName;
+	private JComboBox<String> comboBox;
 
 	/**
 	 * Launch the application.
@@ -33,6 +34,15 @@ public class NewDialog extends JDialog {
 		}
 	}
 
+	private ActionListener newListener = new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			
+		}
+		
+	};
+	
 	/**
 	 * Create the dialog.
 	 */
@@ -53,7 +63,7 @@ public class NewDialog extends JDialog {
 			txtName.setColumns(10);
 		}
 		{
-			JComboBox<String> comboBox = new JComboBox<String>();
+			comboBox = new JComboBox<String>();
 			comboBox.setBounds(100, 103, 230, 56);
 			comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Text", "Table", "Diagram", "PDF"}));
 			contentPanel.add(comboBox);
