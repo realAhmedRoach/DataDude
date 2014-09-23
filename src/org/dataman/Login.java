@@ -2,13 +2,17 @@ package org.dataman;
 
 import java.awt.event.*;
 import java.io.*;
+
 import javax.swing.*;
 
+import org.dataman.gui.Register;
 import org.dataman.security.User;
 
-public class Login {
+import java.awt.Font;
 
-	JFrame f;
+public class Login extends JFrame {
+	private static final long serialVersionUID = 3013538842330993038L;
+
 	JPanel display;
 	JTextField user;
 	JPasswordField pass;
@@ -31,42 +35,48 @@ public class Login {
 
 	public Login() {
 
-		f = new JFrame(VERSION + " Login Screen");
+		setTitle(VERSION + " Login Screen");
 		System.out.println("\n\nInitializing login frame...");
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setSize(600, 400);
-		f.setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(600, 400);
+		setResizable(false);
 		display = new JPanel();
 		display.setLayout(null);
 
 		user = new JTextField("username");
-		user.setBounds(x, 100, textWidth, textHeight);
+		user.setBounds(268, 99, 102, 28);
 		pass = new JPasswordField("password");
-		pass.setBounds(x, 130, textWidth, textHeight);
-
-		register = new JCheckBox("New?");
-		register.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
-				if (register.isSelected())
-					newuser = true;
-				if (!register.isSelected())
-					newuser = false;
-			}
-		});
-		register.setSelected(true);
-		register.setBounds(x, 150, 70, 20);
+		pass.setBounds(268, 130, 102, 28);
 
 		go = new JButton("Go");
 		go.addActionListener(new GO());
-		go.setBounds(x, 185, 70, 20);
+		go.setBounds(284, 185, 70, 28);
 
 		display.add(user);
 		display.add(pass);
-		display.add(register);
 		display.add(go);
 
-		f.add(display);
-		f.setVisible(true);
+		getContentPane().add(display);
+
+		JLabel lblWlcmtxt = new JLabel("Please Login to DataMan");
+		lblWlcmtxt.setFont(new Font("Tekton Pro Ext", Font.PLAIN, 17));
+		lblWlcmtxt.setBounds(196, 47, 237, 20);
+		display.add(lblWlcmtxt);
+
+		JButton btnRegister = new JButton("Register");
+		btnRegister.setBounds(268, 156, 90, 28);
+		btnRegister.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Register r = new Register();
+				r.initWindow();
+				dispose();
+			}
+			
+		});
+		display.add(btnRegister);
+		setVisible(true);
 		System.out.println("Completed initializing login frame");
 
 	}
@@ -80,21 +90,18 @@ public class Login {
 		String pass = new String(_pass);
 		System.out.println("Validating user...");
 		try {
-			FileInputStream fileIn = new FileInputStream("res/pass/" + user
-					+ ".ser");
+			FileInputStream fileIn = new FileInputStream("res/pass/" + user + ".ser");
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			currUser = (User) in.readObject();
 			in.close();
 			fileIn.close();
 		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(f, "Wrong Username", "Wrong Data",
-					JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Wrong Username", "Wrong Data", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 
 		if (!currUser.check(pass)) {
-			JOptionPane.showMessageDialog(f, "Wrong Password",
-					"Incorrect Validation", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Wrong Password", "Incorrect Validation", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		System.out.println("Completed validating user");
@@ -103,29 +110,17 @@ public class Login {
 
 	private class GO implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-
-			if (newuser) {
-				System.out.println("Got new user");
-				try {
-					currUser = new User(user.getText(), pass.getPassword());
-					currUser.encrypt();
-					currUser.save();
-				} catch (IOException i) {
-					i.printStackTrace();
-				}
-			} else {
-				System.out.println("Got old user");
-				if (validate(user.getText(), pass.getPassword()) == false) {
-					return;
-				}
-
-				if (currUser.getUserFolder() == null || currUser.getUserFolder() == "null") {
-					System.out.println("User's folder is null");
-					System.out.println(System.getProperty("user.home"));
-					currUser.setUserFolder(System.getProperty("user.home"));
-				}
+			System.out.println("Got old user");
+			if (validate(user.getText(), pass.getPassword()) == false) {
+				return;
 			}
-			f.dispose();
+
+			if (currUser.getUserFolder() == null || currUser.getUserFolder() == "null") {
+				System.out.println("User's folder is null");
+				System.out.println(System.getProperty("user.home"));
+				currUser.setUserFolder(System.getProperty("user.home"));
+			}
+			dispose();
 			System.out.println("Initializing Core Engine..!");
 			CoreEngine.init();
 		}

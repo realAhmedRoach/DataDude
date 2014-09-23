@@ -11,7 +11,7 @@ import java.awt.event.*;
 
 import javax.swing.border.*;
 
-import com.petersoft.advancedswing.jclosabletabbedpane.JClosableTabbedPane;
+import com.peterswing.advancedswing.jclosabletabbedpane.JClosableTabbedPane;
 
 public class CoreEngine extends JFrame {
 	private static final long serialVersionUID = 1295L;
@@ -34,6 +34,7 @@ public class CoreEngine extends JFrame {
 	JLabel lblCurrfolder;
 	JProgressBar progressBar;
 
+	@SuppressWarnings("unused")
 	private ActionListener quitListener = new ActionListener() {
 
 		@Override
@@ -68,7 +69,7 @@ public class CoreEngine extends JFrame {
 			public void run() {
 				try {
 					CoreEngine frame = new CoreEngine();
-					UIManager.setLookAndFeel("org.fife.plaf.VisualStudio2005.VisualStudio2005LookAndFeel");
+					UIManager.setLookAndFeel("de.javasoft.plaf.synthetica.SyntheticaBlueMoonLookAndFeel");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
