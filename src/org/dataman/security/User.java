@@ -7,6 +7,7 @@ import org.jasypt.util.password.*;
 public class User implements Serializable {
 	private static final long serialVersionUID = 254827L;
 
+	private String name;
 	private String user;
 	private String password;
 	private char[] passArray;
@@ -54,8 +55,10 @@ public class User implements Serializable {
 
 	public void save() throws IOException {
 		if (encrypted) {
-			FileOutputStream fileOut = new FileOutputStream("res/pass/"
-					+ getUserName() + ".ser");
+			File f = new File("res/pass/"+getUserName()+".ser");
+			f.mkdirs();
+			f.createNewFile();
+			FileOutputStream fileOut = new FileOutputStream(f);
 			ObjectOutputStream out = new ObjectOutputStream(fileOut);
 			out.writeObject(this);
 			out.close();
@@ -81,6 +84,14 @@ public class User implements Serializable {
 
 	public void setUserName(String name) {
 		user = name;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getPassword() {

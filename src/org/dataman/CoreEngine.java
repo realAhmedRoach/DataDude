@@ -69,7 +69,6 @@ public class CoreEngine extends JFrame {
 			public void run() {
 				try {
 					CoreEngine frame = new CoreEngine();
-					UIManager.setLookAndFeel("de.javasoft.plaf.synthetica.SyntheticaBlueMoonLookAndFeel");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -99,12 +98,14 @@ public class CoreEngine extends JFrame {
 		});
 		// }
 		// SETTING VALUES {
+		System.out.println("Setting Values");
 		setTitle(Login.VERSION);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 874, 625);
 		// }
 
 		// MENU ITEMS {
+		System.out.println("Initializing Menu Items");
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
@@ -123,12 +124,14 @@ public class CoreEngine extends JFrame {
 		// }
 
 		// CONTENT {
+		System.out.println("Adding Content");
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.GREEN);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 
 		// INFO PANEL {
+		System.out.println("Adding Info Panel");
 		JPanel infoPanel = new JPanel();
 		infoPanel.setBackground(Color.ORANGE);
 		infoPanel.setBorder(new TitledBorder(null, "Info",
@@ -136,7 +139,7 @@ public class CoreEngine extends JFrame {
 		infoPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 5));
 
 		JLabel lblWelcome = new JLabel("Welcome "
-				+ Login.getUser().getUserName());
+				+ Login.getUser().getName());
 		infoPanel.add(lblWelcome);
 
 		lblCurrfolder = new JLabel(Login.getUser().getUserFolder());
@@ -151,6 +154,7 @@ public class CoreEngine extends JFrame {
 		// }
 
 		// PROGRESS PANEL {
+		System.out.println("Initializing Progress Panel");
 		JPanel progresPanel = new JPanel();
 		progresPanel.setBackground(new Color(46, 139, 87));
 
@@ -161,6 +165,7 @@ public class CoreEngine extends JFrame {
 		// }
 
 		// COMMAND PANEL {
+		System.out.println("Initializing Command Panel");
 		JPanel commandPanel = new JPanel();
 		commandPanel.setBackground(Color.ORANGE);
 		commandPanel.setBorder(new TitledBorder(null, "Commands",
@@ -201,6 +206,7 @@ public class CoreEngine extends JFrame {
 		// }
 
 		// EDITOR {
+		System.out.println("Initializing Editor");
 		WelcomeNode n;
 		n = new WelcomeNode();
 		n.setBackground(Color.WHITE);

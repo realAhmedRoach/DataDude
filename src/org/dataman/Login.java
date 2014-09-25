@@ -30,10 +30,10 @@ public class Login extends JFrame {
 	boolean newuser;
 
 	public static void init(String[] args) {
-		new Login();
+		new Login(false);
 	}
 
-	public Login() {
+	public Login(boolean nwusr) {
 
 		setTitle(VERSION + " Login Screen");
 		System.out.println("\n\nInitializing login frame...");
@@ -57,12 +57,15 @@ public class Login extends JFrame {
 		display.add(go);
 
 		getContentPane().add(display);
-
-		JLabel lblWlcmtxt = new JLabel("Please Login to DataMan");
+		JLabel lblWlcmtxt;
+		if(nwusr=false) {
+		 lblWlcmtxt = new JLabel("Please Login to DataMan");
+		} else {
+			 lblWlcmtxt = new JLabel("Welcome to DataMan");
+		}
 		lblWlcmtxt.setFont(new Font("Tekton Pro Ext", Font.PLAIN, 17));
 		lblWlcmtxt.setBounds(196, 47, 237, 20);
 		display.add(lblWlcmtxt);
-
 		JButton btnRegister = new JButton("Register");
 		btnRegister.setBounds(268, 156, 90, 28);
 		btnRegister.addActionListener(new ActionListener() {
@@ -70,7 +73,6 @@ public class Login extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Register r = new Register();
-				r.initWindow();
 				dispose();
 			}
 			

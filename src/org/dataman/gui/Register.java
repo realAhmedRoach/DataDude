@@ -30,13 +30,13 @@ public class Register extends JDialog {
 			User currUser;
 			try {
 				File f = new File("res/pass/"+user.getText()+".ser");
-				f.mkdirs();
 				f.createNewFile();
 				currUser = new User(user.getText(), pass.getPassword());
+				currUser.setName(txtName.getText());
 				currUser.encrypt();
 				currUser.save();
 				@SuppressWarnings("unused")
-				Login l = new Login();
+				Login l = new Login(true);
 				dispose();
 			} catch (IOException i) {
 				i.printStackTrace();
@@ -46,38 +46,45 @@ public class Register extends JDialog {
 	};
 	private JTextField user;
 	private JPasswordField pass;
+	private JTextField txtName;
 
 	/**
 	 * Create the dialog.
 	 */
-	public void initWindow() {
+	public Register() {
 		setTitle("Register to DataMan");
 		setVisible(true);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(null);
+		contentPanel.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		JLabel lblDisplayName = new JLabel("Display Name");
+		contentPanel.add(lblDisplayName);
+		
+		txtName = new JTextField();
+		contentPanel.add(txtName);
+		txtName.setColumns(10);
 		{
 			JLabel lblUsername = new JLabel("Username");
-			lblUsername.setBounds(5, 32, 209, 44);
 			contentPanel.add(lblUsername);
 		}
 		{
 			user = new JTextField();
-			user.setBounds(219, 32, 209, 36);
 			contentPanel.add(user);
 			user.setColumns(10);
 		}
 		{
 			JLabel lblPassword = new JLabel("Password");
-			lblPassword.setBounds(5, 88, 209, 44);
 			contentPanel.add(lblPassword);
 		}
 		
 		pass = new JPasswordField();
-		pass.setBounds(219, 88, 209, 36);
 		contentPanel.add(pass);
+		
+		JLabel label = new JLabel("");
+		contentPanel.add(label);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
