@@ -1,3 +1,3 @@
 DataDude
 =======
-DataDude is a data managing application designed to manage many types of data in one application.
+DataDude is a data managing application designed to have many types of features in one application.
