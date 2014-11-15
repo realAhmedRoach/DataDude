@@ -5,10 +5,7 @@
 	<classpathentry exported="true" kind="lib" path="res"/>
 	<classpathentry exported="true" kind="lib" path="libs"/>
 	<classpathentry exported="true" kind="lib" path="libs/org-netbeans-swing-outline.jar"/>
-	<classpathentry exported="true" kind="lib" path="libs/peter-swing.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/jasypt-1.9.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="libs/syntheticaBlueMoon.jar"/>
-	<classpathentry exported="true" kind="lib" path="libs/itextpdf-5.5.3.jar"/>
-	<classpathentry exported="true" kind="lib" path="libs/seaglasslookandfeel-0.1.5.jar"/>
-	<classpathentry exported="true" kind="output" path="bin"/>
+	<classpathentry kind="lib" path="libs/PetersoftJavaStyle2_20120202.jar"/>
+	<classpathentry kind="output" path="bin"/>
 </classpath>

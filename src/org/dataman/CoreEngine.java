@@ -11,7 +11,7 @@ import java.awt.event.*;
 
 import javax.swing.border.*;
 
-import com.peterswing.advancedswing.jclosabletabbedpane.JClosableTabbedPane;
+import com.petersoft.advancedswing.jclosabletabbedpane.JClosableTabbedPane;
 
 public class CoreEngine extends JFrame {
 	private static final long serialVersionUID = 1295L;
@@ -33,7 +33,8 @@ public class CoreEngine extends JFrame {
 	String nodeSelection;
 	JLabel lblCurrfolder;
 	JProgressBar progressBar;
-
+	private static CoreEngine usableEngine;
+	
 	@SuppressWarnings("unused")
 	private ActionListener quitListener = new ActionListener() {
 
@@ -69,12 +70,17 @@ public class CoreEngine extends JFrame {
 			public void run() {
 				try {
 					CoreEngine frame = new CoreEngine();
+					setUsableEngine(frame);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
+	}
+
+	static CoreEngine getUsableEngine() {
+		return usableEngine;
 	}
 
 	/**
