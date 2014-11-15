@@ -10,13 +10,21 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
+
 //import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import javax.swing.JLabel;
+
+import org.dataman.CoreEngine;
+import org.dataman.nodes.TextNode;
+
+import java.awt.Font;
+
 public class NewDialog extends JDialog {
 	private static final long serialVersionUID = 12L;
-	
+
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtName;
 	private JComboBox<String> comboBox;
@@ -37,12 +45,13 @@ public class NewDialog extends JDialog {
 	private ActionListener newListener = new ActionListener() {
 
 		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			
+		public void actionPerformed(ActionEvent e) {
+			CoreEngine.getUsableEngine().addTab(new TextNode(),
+					txtName.getText());
 		}
-		
+
 	};
-	
+
 	/**
 	 * Create the dialog.
 	 */
@@ -65,9 +74,15 @@ public class NewDialog extends JDialog {
 		{
 			comboBox = new JComboBox<String>();
 			comboBox.setBounds(100, 103, 230, 56);
-			comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Text", "Table", "Diagram", "PDF"}));
+			comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {
+					"Text", "Table", "Diagram", "PDF" }));
 			contentPanel.add(comboBox);
 		}
+
+		JLabel lblCreateNewFile = new JLabel("Create New File");
+		lblCreateNewFile.setFont(new Font("Action Man", Font.PLAIN, 17));
+		lblCreateNewFile.setBounds(140, 20, 137, 16);
+		contentPanel.add(lblCreateNewFile);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -75,6 +90,7 @@ public class NewDialog extends JDialog {
 			{
 				JButton okButton = new JButton("OK");
 				okButton.setActionCommand("OK");
+				okButton.addActionListener(newListener);
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}

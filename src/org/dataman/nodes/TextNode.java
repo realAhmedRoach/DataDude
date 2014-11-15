@@ -15,6 +15,7 @@ public class TextNode extends Node {
 		a.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		a.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		this.add(a);
+		this.setVisible(true);
 	}
 	
 }

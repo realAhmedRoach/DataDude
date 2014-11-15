@@ -6,11 +6,11 @@ import javax.swing.*;
 
 import org.dataman.memory.MemoryManager;
 
-public final class DataMan {
+public final class DataDude {
 
 	public static final HashMap<String, String> fileClassNames;
 	
-	public static final String VERSION = "DataMan Beta 0.1";
+	public static final String VERSION = "DataDude Beta 0.1";
 	
 	public static final MemoryManager manager;
 	
@@ -22,7 +22,7 @@ public final class DataMan {
 		
 	}
 	
-	private DataMan() {
+	private DataDude() {
 	}
 
 	public static void openConsole() {

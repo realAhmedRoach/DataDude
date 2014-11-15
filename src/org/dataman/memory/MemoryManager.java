@@ -14,7 +14,7 @@ public class MemoryManager {
 	public long getUsedMemory() {
 		return r.freeMemory() - getAvailableMemory();
 	}
-	public void getFreeMemory() {
-		r.freeMemory();
+	public long getFreeMemory() {
+		return r.freeMemory();
 	}
 }

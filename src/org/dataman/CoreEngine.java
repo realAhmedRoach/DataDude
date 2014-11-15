@@ -33,6 +33,8 @@ public class CoreEngine extends JFrame {
 	String nodeSelection;
 	JLabel lblCurrfolder;
 	JProgressBar progressBar;
+	JClosableTabbedPane editorPane;
+	int x = 0;
 	private static CoreEngine usableEngine;
 	
 	@SuppressWarnings("unused")
@@ -69,17 +71,21 @@ public class CoreEngine extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CoreEngine frame = new CoreEngine();
-					setUsableEngine(frame);
-					frame.setVisible(true);
+					CoreEngine usableEngine = new CoreEngine();
+					usableEngine.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
 	}
-
-	static CoreEngine getUsableEngine() {
+	public void addTab(Node n, String title) {
+		editorPane.add(n);
+		editorPane.setTitleAt(x, title);
+		editorPane.setEnabledAt(x, true);
+		x++;
+	}
+	public static CoreEngine getUsableEngine() {
 		return usableEngine;
 	}
 
@@ -217,15 +223,16 @@ public class CoreEngine extends JFrame {
 		n = new WelcomeNode();
 		n.setBackground(Color.WHITE);
 
-		JClosableTabbedPane editorPane = new JClosableTabbedPane();
+		editorPane = new JClosableTabbedPane();
 		editorPane.setBorder(new TitledBorder(null, "Editor",
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		editorPane.setLayout(new FlowLayout());
 		editorPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		editorPane.setBackground(Color.GRAY);
 		editorPane.add(n);
-		editorPane.setTitleAt(0, "Welcome!");
-		editorPane.setEnabledAt(0, true);
+		editorPane.setTitleAt(x, "Welcome!");
+		editorPane.setEnabledAt(x, true);
+		x++;
 		contentPane.setLayout(new BorderLayout(0, 0));
 		contentPane.add(infoPanel, BorderLayout.NORTH);
 		contentPane.add(editorPane, BorderLayout.CENTER);
