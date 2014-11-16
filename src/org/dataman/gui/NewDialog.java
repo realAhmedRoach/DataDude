@@ -46,8 +46,8 @@ public class NewDialog extends JDialog {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			CoreEngine.getUsableEngine().addTab(new TextNode(),
-					txtName.getText());
+			TextNode n = new TextNode(txtName.getText());
+			CoreEngine.addTab(n);
 		}
 
 	};

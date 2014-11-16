@@ -7,9 +7,10 @@ public class TextNode extends Node {
 
 	JTextArea text;
 	JScrollPane a;
-	
-	public TextNode() {
-		text = new JTextArea(40,20);
+
+	public TextNode(String title) {
+		setTitle(title);
+		text = new JTextArea(40, 20);
 		text.setLineWrap(true);
 		a = new JScrollPane(text);
 		a.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -17,5 +18,4 @@ public class TextNode extends Node {
 		this.add(a);
 		this.setVisible(true);
 	}
-	
 }

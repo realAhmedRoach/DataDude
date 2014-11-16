@@ -33,8 +33,8 @@ public class CoreEngine extends JFrame {
 	String nodeSelection;
 	JLabel lblCurrfolder;
 	JProgressBar progressBar;
-	JClosableTabbedPane editorPane;
-	int x = 0;
+	static JClosableTabbedPane editorPane;
+	static int x = 0;
 	private static CoreEngine usableEngine;
 	
 	@SuppressWarnings("unused")
@@ -79,9 +79,8 @@ public class CoreEngine extends JFrame {
 			}
 		});
 	}
-	public void addTab(Node n, String title) {
-		editorPane.add(n);
-		editorPane.setTitleAt(x, title);
+	public static void addTab(Node n) {
+		editorPane.addTab(n.getTitle(), n);
 		editorPane.setEnabledAt(x, true);
 		x++;
 	}

@@ -10,9 +10,11 @@ public final class DataDude {
 
 	public static final HashMap<String, String> fileClassNames;
 	
-	public static final String VERSION = "DataDude Beta 0.1";
+	public static final String VERSION = "DataDude Alpha 0.1";
 	
 	public static final MemoryManager manager;
+	
+	private static String passLoc;
 	
 	static {
 		String pack = "org.dataman.nodes.";
@@ -23,6 +25,14 @@ public final class DataDude {
 	}
 	
 	private DataDude() {
+	}
+
+	public static String getPassLoc() {
+		return passLoc;
+	}
+
+	public static void setPassLoc(String passLoc) {
+		DataDude.passLoc = passLoc;
 	}
 
 	public static void openConsole() {
