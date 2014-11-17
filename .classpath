@@ -7,5 +7,6 @@
 	<classpathentry exported="true" kind="lib" path="libs/org-netbeans-swing-outline.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/jasypt-1.9.2.jar"/>
 	<classpathentry kind="lib" path="libs/PetersoftJavaStyle2_20120202.jar"/>
+	<classpathentry kind="lib" path="libs/JTattoo-1.6.10.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

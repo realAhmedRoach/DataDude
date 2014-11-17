@@ -21,6 +21,10 @@ public class Main {
 
 		checkForFolders();
 
+		if (firstTime == true) {
+			ifNew();
+		}
+		
 		Login.init(args);
 	}
 
