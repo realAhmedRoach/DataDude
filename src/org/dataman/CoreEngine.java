@@ -4,7 +4,6 @@ import java.awt.*;
 
 import javax.swing.*;
 
-import org.dataman.datamanaging.FileTree;
 import org.dataman.gui.*;
 import org.dataman.nodes.*;
 
@@ -222,7 +221,7 @@ public class CoreEngine extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.CYAN);
 		panel.setBorder(new TitledBorder(null, "File Explorer", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.add(new FileTree());
+		//panel.add(new FileTree());
 		contentPane.add(panel, BorderLayout.WEST);
 
 		long end = System.currentTimeMillis();
