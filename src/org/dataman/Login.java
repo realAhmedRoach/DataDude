@@ -25,8 +25,6 @@ public class Login extends JFrame {
 	int textHeight = 20;
 	int x = 300;
 
-	public static final String VERSION = "DataMan Beta 0.1";
-
 	boolean newuser;
 
 	public static void init(String[] args) {
@@ -42,7 +40,7 @@ public class Login extends JFrame {
 
 	public Login(boolean nwusr) {
 
-		setTitle(VERSION + " Login Screen");
+		setTitle(DataDude.VERSION + " Login Screen");
 		System.out.println("\n\nInitializing login frame...");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(600, 400);
@@ -70,6 +68,7 @@ public class Login extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				@SuppressWarnings("unused")
 				Register r = new Register();
 				dispose();
 			}
