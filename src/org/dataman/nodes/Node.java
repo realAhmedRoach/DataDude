@@ -5,10 +5,10 @@ import java.util.*;
 
 import javax.swing.*;
 
-public abstract class Node extends JComponent {
+public abstract class Node extends JInternalFrame {
 	private static final long serialVersionUID = -2795471245561416657L;
 	ArrayList<Component> comps = new ArrayList<Component>();	
-	private String title;
+	protected String title;
 	
 	
 	public String getTitle() {
