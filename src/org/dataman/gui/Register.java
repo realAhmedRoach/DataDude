@@ -7,8 +7,10 @@ import java.io.IOException;
 
 import javax.swing.*;
 
+import org.dataman.DataDude;
 import org.dataman.Login;
 import org.dataman.security.User;
+
 
 
 
@@ -29,7 +31,7 @@ public class Register extends JDialog {
 			System.out.println("Got new user");
 			User currUser;
 			try {
-				File f = new File("res/pass/"+user.getText()+".ser");
+				File f = new File(DataDude.getPassLoc()+user.getText()+".ser");
 				f.createNewFile();
 				currUser = new User(user.getText(), pass.getPassword());
 				currUser.setName(txtName.getText());

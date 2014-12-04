@@ -2,6 +2,7 @@ package org.dataman.security;
 
 import java.io.*;
 
+import org.dataman.DataDude;
 import org.jasypt.util.password.*;
 
 public class User implements Serializable {
@@ -55,7 +56,7 @@ public class User implements Serializable {
 
 	public void save() throws IOException {
 		if (encrypted) {
-			File f = new File("res/pass/"+getUserName()+".ser");
+			File f = new File(DataDude.getPassLoc()+getUserName()+".ser");
 			f.mkdirs();
 			f.createNewFile();
 			FileOutputStream fileOut = new FileOutputStream(f);

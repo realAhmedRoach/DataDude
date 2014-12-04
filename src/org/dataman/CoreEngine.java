@@ -156,13 +156,13 @@ public class CoreEngine extends JFrame {
 
 		// PROGRESS PANEL {
 		System.out.println("Initializing Progress Panel");
-		JPanel progresPanel = new JPanel();
-		progresPanel.setBackground(new Color(46, 139, 87));
+		JPanel progressPanel = new JPanel();
+		progressPanel.setBackground(new Color(46, 139, 87));
 
 		progressBar = new JProgressBar();
 		progressBar.setToolTipText("Not Loading");
 		progressBar.setStringPainted(true);
-		progresPanel.add(progressBar);
+		progressPanel.add(progressBar);
 		// }
 
 		// COMMAND PANEL {
@@ -216,13 +216,13 @@ public class CoreEngine extends JFrame {
 		contentPane.add(infoPanel, BorderLayout.NORTH);
 		contentPane.add(editorPane, BorderLayout.CENTER);
 		contentPane.add(commandPanel, BorderLayout.EAST);
-		contentPane.add(progresPanel, BorderLayout.SOUTH);
+		contentPane.add(progressPanel, BorderLayout.SOUTH);
 
-		JPanel panel = new JPanel();
+		/*JPanel panel = new JPanel();
 		panel.setBackground(Color.CYAN);
 		panel.setBorder(new TitledBorder(null, "File Explorer", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		//panel.add(new FileTree());
-		contentPane.add(panel, BorderLayout.WEST);
+		contentPane.add(panel, BorderLayout.WEST);*/
 
 		long end = System.currentTimeMillis();
 
