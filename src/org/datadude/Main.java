@@ -1,4 +1,4 @@
-package org.dataman;
+package org.datadude;
 
 import java.io.File;
 

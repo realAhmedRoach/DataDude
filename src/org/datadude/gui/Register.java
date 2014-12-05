@@ -1,4 +1,4 @@
-package org.dataman.gui;
+package org.datadude.gui;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -7,9 +7,10 @@ import java.io.IOException;
 
 import javax.swing.*;
 
-import org.dataman.DataDude;
-import org.dataman.Login;
-import org.dataman.security.User;
+import org.datadude.DataDude;
+import org.datadude.Login;
+import org.datadude.security.User;
+
 
 
 

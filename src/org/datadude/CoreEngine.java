@@ -1,11 +1,11 @@
-package org.dataman;
+package org.datadude;
 
 import java.awt.*;
 
 import javax.swing.*;
 
-import org.dataman.gui.*;
-import org.dataman.nodes.*;
+import org.datadude.gui.*;
+import org.datadude.nodes.*;
 
 import java.awt.event.*;
 

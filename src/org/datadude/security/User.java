@@ -1,8 +1,8 @@
-package org.dataman.security;
+package org.datadude.security;
 
 import java.io.*;
 
-import org.dataman.DataDude;
+import org.datadude.DataDude;
 import org.jasypt.util.password.*;
 
 public class User implements Serializable {
@@ -64,8 +64,8 @@ public class User implements Serializable {
 			out.writeObject(this);
 			out.close();
 			fileOut.close();
-			System.out.printf("Serialized data is saved in res/pass/"
-					+ getUserName() + ".ser");
+			System.out.printf("Serialized data is saved in "+ DataDude.getPassLoc() +
+					 getUserName() + ".ser");
 		} else {
 			throw new RuntimeException("User's Password not encrypted");
 		}

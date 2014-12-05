@@ -1,10 +1,10 @@
-package org.dataman;
+package org.datadude;
 
 import java.util.*;
 
 import javax.swing.*;
 
-import org.dataman.memory.MemoryManager;
+import org.datadude.memory.MemoryManager;
 
 public final class DataDude {
 

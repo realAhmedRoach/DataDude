@@ -1,4 +1,4 @@
-package org.dataman.security;
+package org.datadude.security;
 
 import java.security.*;
 

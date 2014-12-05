@@ -1,12 +1,12 @@
-package org.dataman;
+package org.datadude;
 
 import java.awt.event.*;
 import java.io.*;
 
 import javax.swing.*;
 
-import org.dataman.gui.Register;
-import org.dataman.security.User;
+import org.datadude.gui.Register;
+import org.datadude.security.User;
 
 import java.awt.Font;
 

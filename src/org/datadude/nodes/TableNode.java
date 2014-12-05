@@ -2,7 +2,7 @@
  * 
  */
 
-package org.dataman.nodes;
+package org.datadude.nodes;
 
 import javax.swing.*;
 

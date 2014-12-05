@@ -1,9 +1,9 @@
-package org.dataman.gui;
+package org.datadude.gui;
 
 import javax.swing.*;
 import javax.swing.border.*;
 
-import org.dataman.Login;
+import org.datadude.Login;
 
 import java.awt.*;
 import java.awt.event.*;

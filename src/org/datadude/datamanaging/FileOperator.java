@@ -1,4 +1,4 @@
-package org.dataman.datamanaging;
+package org.datadude.datamanaging;
 
 import java.io.*;
 import java.util.*;

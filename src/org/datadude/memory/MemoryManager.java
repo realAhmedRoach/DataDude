@@ -1,4 +1,4 @@
-package org.dataman.memory;
+package org.datadude.memory;
 
 public class MemoryManager implements Runnable{
 	

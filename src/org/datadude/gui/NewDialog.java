@@ -1,4 +1,4 @@
-package org.dataman.gui;
+package org.datadude.gui;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -11,14 +11,15 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
 
+
 //import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JLabel;
 
-import org.dataman.CoreEngine;
-import org.dataman.nodes.TextNode;
+import org.datadude.CoreEngine;
+import org.datadude.nodes.TextNode;
 
 import java.awt.Font;
 
