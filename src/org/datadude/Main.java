@@ -33,7 +33,7 @@ public class Main {
 		if (os.startsWith("Windows")) {
 			f = new File(System.getProperty("user.home") + File.separator
 					+ "AppData" + File.separator + "DataDude" + File.separator
-					+ "pass");
+					+ "pass"+File.separator);
 		} else {
 			f = new File("/var/lib/DataDude/pass");
 		}

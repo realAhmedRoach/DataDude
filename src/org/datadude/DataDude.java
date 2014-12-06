@@ -10,7 +10,7 @@ public final class DataDude {
 
 	public static final HashMap<String, String> fileClassNames;
 	
-	public static final String VERSION = "DataDude Alpha 0.1";
+	public static final String VERSION = "DataDude Alpha";
 	
 	public static final MemoryManager manager;
 	
@@ -31,7 +31,7 @@ public final class DataDude {
 		return passLoc;
 	}
 
-	public static void setPassLoc(String passLoc) {
+	protected static void setPassLoc(String passLoc) {
 		DataDude.passLoc = passLoc;
 	}
 
