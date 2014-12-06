@@ -1,27 +1,15 @@
 package org.datadude.gui;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import java.awt.*;
 
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JTextField;
 
-
-//import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import javax.swing.JLabel;
-
 import org.datadude.CoreEngine;
 import org.datadude.nodes.TextNode;
-
-import java.awt.Font;
 
 public class NewDialog extends JDialog {
 	private static final long serialVersionUID = 12L;
@@ -47,6 +35,7 @@ public class NewDialog extends JDialog {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			System.out.println(comboBox.getSelectedItem());
 			TextNode n = new TextNode(txtName.getText());
 			CoreEngine.addTab(n);
 		}
@@ -65,20 +54,16 @@ public class NewDialog extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		{
-			txtName = new JTextField();
-			txtName.setBounds(100, 49, 230, 42);
-			txtName.setText("Name");
-			contentPanel.add(txtName);
-			txtName.setColumns(10);
-		}
-		{
-			comboBox = new JComboBox<String>();
-			comboBox.setBounds(100, 103, 230, 56);
-			comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {
-					"Text", "Table", "Diagram", "PDF" }));
-			contentPanel.add(comboBox);
-		}
+
+		txtName = new JTextField();
+		txtName.setBounds(100, 49, 230, 42);
+		txtName.setText("Name");
+		contentPanel.add(txtName);
+		txtName.setColumns(10);
+
+		comboBox = new JComboBox<String>(new String[] { "Text", "Table"});
+		comboBox.setBounds(100, 103, 230, 56);
+		contentPanel.add(comboBox);
 
 		JLabel lblCreateNewFile = new JLabel("Create New File");
 		lblCreateNewFile.setFont(new Font("Action Man", Font.PLAIN, 17));

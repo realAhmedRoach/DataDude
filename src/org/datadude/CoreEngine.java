@@ -86,8 +86,6 @@ public class CoreEngine extends JFrame {
 	 * Create the frame.
 	 */
 	public CoreEngine() {
-		setOpacity(0.4f);
-
 		long start = System.currentTimeMillis();
 		System.out.println("\nInside Core Engine Constructor");
 		// SET ICON {
