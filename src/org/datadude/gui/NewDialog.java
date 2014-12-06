@@ -61,7 +61,7 @@ public class NewDialog extends JDialog {
 		contentPanel.add(txtName);
 		txtName.setColumns(10);
 
-		comboBox = new JComboBox<String>(new String[] { "Text", "Table"});
+		comboBox = new JComboBox<String>(new String[] { "Text", "Table" });
 		comboBox.setBounds(100, 103, 230, 56);
 		contentPanel.add(comboBox);
 

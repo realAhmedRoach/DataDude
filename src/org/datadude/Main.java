@@ -24,16 +24,15 @@ public class Main {
 		if (firstTime == true) {
 			ifNew();
 		}
-		
+
 		Login.init(args);
 	}
 
 	private static void checkForFolders() {
 		File f = null;
 		if (os.startsWith("Windows")) {
-			f = new File(System.getProperty("user.home") + File.separator
-					+ "AppData" + File.separator + "DataDude" + File.separator
-					+ "pass"+File.separator);
+			f = new File(System.getProperty("user.home") + File.separator + "AppData" + File.separator + "DataDude"
+					+ File.separator + "pass" + File.separator);
 		} else {
 			f = new File("/var/lib/DataDude/pass");
 		}
@@ -44,15 +43,12 @@ public class Main {
 			firstTime = true;
 			f.mkdirs();
 		}
-		
+
 		DataDude.setPassLoc(f.getAbsolutePath());
 	}
 
 	private static void ifNew() {
-		if (firstTime == true) {
-			JOptionPane.showMessageDialog(null, "Welcome to DataDude!",
-					"Welcome", JOptionPane.INFORMATION_MESSAGE);
-		}
+		JOptionPane.showMessageDialog(null, "Welcome to DataDude!", "Welcome", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 }

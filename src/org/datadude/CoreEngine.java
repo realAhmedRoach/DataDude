@@ -118,7 +118,7 @@ public class CoreEngine extends JFrame {
 		JMenuItem mntmNew = new JMenuItem("New...");
 		mntmNew.addActionListener(newListener);
 		mnFile.add(mntmNew);
-		
+
 		JMenuItem mntmQuit = new JMenuItem("New...");
 		mntmQuit.addActionListener(quitListener);
 		mnFile.add(mntmQuit);
@@ -198,7 +198,7 @@ public class CoreEngine extends JFrame {
 		System.out.println("Initializing Editor");
 		WelcomeNode n;
 		n = new WelcomeNode();
-		//n.setIcon(true);
+		// n.setIcon(true);
 		n.setBackground(Color.WHITE);
 
 		editorPane = new JClosableTabbedPane();
@@ -216,11 +216,12 @@ public class CoreEngine extends JFrame {
 		contentPane.add(commandPanel, BorderLayout.EAST);
 		contentPane.add(progressPanel, BorderLayout.SOUTH);
 
-		/*JPanel panel = new JPanel();
-		panel.setBackground(Color.CYAN);
-		panel.setBorder(new TitledBorder(null, "File Explorer", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		//panel.add(new FileTree());
-		contentPane.add(panel, BorderLayout.WEST);*/
+		/*
+		 * JPanel panel = new JPanel(); panel.setBackground(Color.CYAN);
+		 * panel.setBorder(new TitledBorder(null, "File Explorer",
+		 * TitledBorder.LEADING, TitledBorder.TOP, null, null)); //panel.add(new
+		 * FileTree()); contentPane.add(panel, BorderLayout.WEST);
+		 */
 
 		long end = System.currentTimeMillis();
 
