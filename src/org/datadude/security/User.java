@@ -25,7 +25,7 @@ public class User implements Serializable {
 		user = userName;
 		password = new String(pass);
 		passArray = pass;
-		passBytes = new String(password).getBytes();
+		passBytes = password.getBytes();
 		
 		userFolder = null;
 
