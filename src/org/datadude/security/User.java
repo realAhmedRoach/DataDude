@@ -1,5 +1,5 @@
 /**
-    DataDude is a data managing applicationdesigned to have mny types of data in one application
+    DataDude is a data managing application designed to have mny types of data in one application
     Copyright (C) 2015  Ahmed R. (theTechnoKid)
 
     This program is free software: you can redistribute it and/or modify
@@ -61,7 +61,6 @@ public class User implements Serializable {
 			enc = new StrongPasswordEncryptor();
 			return enc.checkPassword(str, password);	
 		} else {
-			
 			System.out.println("Password not encrypted!");
 			return false;
 		}

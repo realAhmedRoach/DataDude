@@ -29,11 +29,6 @@ import org.datadude.DataDude;
 import org.datadude.Login;
 import org.datadude.security.User;
 
-
-
-
-
-
 import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 
@@ -50,8 +45,12 @@ public class Register extends JDialog {
 			System.out.println("Got new user");
 			User currUser;
 			try {
-				File f = new File(DataDude.getPassLoc()+user.getText()+".ser");
-				f.createNewFile();
+				File f = new File(DataDude.getPassLoc() + user.getText() + ".ser");
+				if (!f.exists()) {
+					f.createNewFile();
+				} else {
+					JOptionPane.showMessageDialog(null, "There is already a user with that name.");
+				}
 				currUser = new User(user.getText(), pass.getPassword());
 				currUser.setName(txtName.getText());
 				currUser.encrypt();
@@ -63,7 +62,7 @@ public class Register extends JDialog {
 				i.printStackTrace();
 			}
 		}
-		
+
 	};
 	private JTextField user;
 	private JPasswordField pass;
@@ -80,10 +79,10 @@ public class Register extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new GridLayout(0, 2, 0, 0));
-		
+
 		JLabel lblDisplayName = new JLabel("Display Name");
 		contentPanel.add(lblDisplayName);
-		
+
 		txtName = new JTextField();
 		contentPanel.add(txtName);
 		txtName.setColumns(10);
@@ -100,10 +99,10 @@ public class Register extends JDialog {
 			JLabel lblPassword = new JLabel("Password");
 			contentPanel.add(lblPassword);
 		}
-		
+
 		pass = new JPasswordField();
 		contentPanel.add(pass);
-		
+
 		JLabel label = new JLabel("");
 		contentPanel.add(label);
 		{

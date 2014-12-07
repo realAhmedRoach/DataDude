@@ -27,7 +27,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import org.datadude.CoreEngine;
-import org.datadude.nodes.TextNode;
+import org.datadude.nodes.*;
 
 public class NewDialog extends JDialog {
 	private static final long serialVersionUID = 12L;
@@ -53,8 +53,9 @@ public class NewDialog extends JDialog {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			System.out.println(comboBox.getSelectedItem());
-			TextNode n = new TextNode(txtName.getText());
+			Node n = null;
+			if (comboBox.getSelectedItem() == "Text") n = new TextNode(txtName.getText());
+			else if  (comboBox.getSelectedItem() == "Table") n = new TableNode(txtName.getText());
 			CoreEngine.addTab(n);
 		}
 
@@ -79,7 +80,7 @@ public class NewDialog extends JDialog {
 		contentPanel.add(txtName);
 		txtName.setColumns(10);
 
-		comboBox = new JComboBox<String>(new String[] { "Text", "Table" });
+		comboBox = new JComboBox<String>(new String[] { "Text", "Table", "Yaml", "CSV" });
 		comboBox.setBounds(100, 103, 230, 56);
 		contentPanel.add(comboBox);
 

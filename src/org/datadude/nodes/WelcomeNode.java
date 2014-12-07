@@ -20,6 +20,7 @@ package org.datadude.nodes;
 
 
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
 
 import javax.swing.JLabel;
 
@@ -31,11 +32,15 @@ public class WelcomeNode extends Node {
 	 * Create the panel.
 	 */
 	public WelcomeNode() {
+		super("Welcome");
 		setLayout(new FlowLayout());
 		lblWelcome = new JLabel("Welcome to DataMan Beta 0.1! Click File -> New... to create a new file!");
 		add(lblWelcome);
 		setVisible(true);
 
 	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {}
 
 }

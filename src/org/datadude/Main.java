@@ -1,5 +1,5 @@
 /**
-    DataDude is a data managing applicationdesigned to have mny types of data in one application
+    DataDude is a data managing application designed to have mny types of data in one application
     Copyright (C) 2015  Ahmed R. (theTechnoKid)
 
     This program is free software: you can redistribute it and/or modify
@@ -43,6 +43,8 @@ public class Main {
 			ifNew();
 		}
 
+		System.out.println(DataDude.getPassLoc());
+		
 		Login.init(args);
 	}
 
@@ -61,8 +63,10 @@ public class Main {
 			f.mkdirs();
 		}
 
+		File f2 = new File(System.getProperty("user.home") + "AppData\\Local\\DataDude\\");
+		
 		DataDude.setPassLoc(f.getAbsolutePath());
-		DataDude.setSaveLoc((f.getParentFile()).getAbsolutePath());
+		DataDude.setSaveLoc(f2.getAbsolutePath());
 	}
 
 	private static void ifNew() {

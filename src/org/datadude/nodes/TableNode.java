@@ -18,25 +18,28 @@
 
 package org.datadude.nodes;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.event.ActionEvent;
+
 import javax.swing.*;
 
 /**
  * @author theTechnoKid
  */
-public class TableNode extends Node {
+public class TableNode extends Node{
 	private static final long serialVersionUID = -6603367461824939430L;
 
 	JTable mainTable;
-
-	public TableNode() {
+	
+	public TableNode(String _title) {
+		super(_title);
+		
 		int[] rac = this.askRowsAndColumns();
 		mainTable = new JTable(rac[0], rac[1]);
 		mainTable.setVisible(true);
 		this.add(mainTable);
-		this.setEnabled(true);
-		this.setVisible(true);
 	}
-	
 	
 	/**
 	 * 
@@ -51,6 +54,15 @@ public class TableNode extends Node {
 			JOptionPane.showMessageDialog(this, "Your're supposed to put in a number!");
 		}
 		return rac;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		JMenuItem choice = (JMenuItem) e.getSource();
+		if (choice == saveI) {
+			JFileChooser fs = new JFileChooser();
+			fs.showSaveDialog(this);
+		} else if (choice == exitI) System.exit(0);
 	}
 
 }
