@@ -31,10 +31,9 @@ public class Main {
 	private static void checkForFolders() {
 		File f = null;
 		if (os.startsWith("Windows")) {
-			f = new File(System.getProperty("user.home") + File.separator + "AppData" + File.separator + "DataDude"
-					+ File.separator + "pass" + File.separator);
+			f = new File(System.getProperty("user.home") + "AppData\\Local\\DataDude\\pass\\");
 		} else {
-			f = new File("/var/lib/DataDude/pass");
+			f = new File("/var/lib/DataDude/pass/");
 		}
 
 		if (f.isDirectory()) {
@@ -45,6 +44,7 @@ public class Main {
 		}
 
 		DataDude.setPassLoc(f.getAbsolutePath());
+		DataDude.setSaveLoc((f.getParentFile()).getAbsolutePath());
 	}
 
 	private static void ifNew() {

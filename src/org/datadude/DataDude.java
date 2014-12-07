@@ -1,5 +1,6 @@
 package org.datadude;
 
+import java.io.File;
 import java.util.*;
 
 import javax.swing.*;
@@ -15,7 +16,8 @@ public final class DataDude {
 	public static final MemoryManager manager;
 
 	private static String passLoc;
-
+	private static String saveLoc;
+	
 	static {
 		String pack = "org.dataman.nodes.";
 		fileClassNames = new HashMap<String, String>();
@@ -34,7 +36,15 @@ public final class DataDude {
 	protected static void setPassLoc(String passLoc) {
 		DataDude.passLoc = passLoc;
 	}
-
+	protected static void setPassLoc(File passLoc) {
+		DataDude.passLoc = passLoc.getAbsolutePath();
+	}
+	public static void setSaveLoc(File saveFile) {
+		DataDude.saveLoc = saveFile.getAbsolutePath();
+	}
+	protected static void setSaveLoc(String saveLoc) {
+		DataDude.saveLoc = saveLoc;
+	}
 	public static void openConsole() {
 	}
 
@@ -58,5 +68,7 @@ public final class DataDude {
 			return fs.getSelectedFile().getAbsolutePath();
 		return "null";
 	}
+
+
 
 }
