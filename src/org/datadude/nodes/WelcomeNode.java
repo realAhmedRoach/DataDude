@@ -18,7 +18,6 @@
 
 package org.datadude.nodes;
 
-
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 
@@ -27,7 +26,8 @@ import javax.swing.JLabel;
 public class WelcomeNode extends Node {
 	private static final long serialVersionUID = 123L;
 
-	JLabel lblWelcome; 
+	JLabel lblWelcome;
+
 	/**
 	 * Create the panel.
 	 */
@@ -39,8 +39,13 @@ public class WelcomeNode extends Node {
 		setVisible(true);
 
 	}
-	
+
+	public boolean save(String file) {
+		return false;
+	}
+
 	@Override
-	public void actionPerformed(ActionEvent e) {}
+	public void actionPerformed(ActionEvent e) {
+	}
 
 }

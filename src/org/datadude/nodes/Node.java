@@ -34,7 +34,7 @@ public abstract class Node extends JInternalFrame implements ActionListener {
 	protected JMenuItem loadI, cutI, copyI, pasteI, selectI, exitI, saveI;
 	protected JToolBar toolBar;
 	protected Container pane;
-	
+
 	public Node(String _title) {
 		title = _title;
 		setTitle(title);
@@ -42,7 +42,11 @@ public abstract class Node extends JInternalFrame implements ActionListener {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		pane = getContentPane();
 		pane.setLayout(new BorderLayout());
-		
+
+		menuBar = new JMenuBar(); // menubar
+		fileM = new JMenu("File");
+		editM = new JMenu("Edit");
+
 		exitI = new JMenuItem("Exit");
 		exitI.setIcon(new ImageIcon(TextNode.class.getResource("/org/fife/plaf/OfficeXP/delete.gif")));
 		cutI = new JMenuItem("Cut");
@@ -58,7 +62,7 @@ public abstract class Node extends JInternalFrame implements ActionListener {
 		loadI = new JMenuItem("Load");
 		loadI.setIcon(new ImageIcon(TextNode.class.getResource("/org/fife/plaf/Office2003/open.gif")));
 		toolBar = new JToolBar();
-		
+
 		menuBar.add(fileM);
 		menuBar.add(editM);
 
@@ -69,7 +73,8 @@ public abstract class Node extends JInternalFrame implements ActionListener {
 		editM.add(cutI);
 		editM.add(copyI);
 		editM.add(pasteI);
-		editM.add(selectI);menuBar.add(fileM);
+		editM.add(selectI);
+		menuBar.add(fileM);
 		menuBar.add(editM);
 
 		fileM.add(saveI);
@@ -80,25 +85,29 @@ public abstract class Node extends JInternalFrame implements ActionListener {
 		editM.add(copyI);
 		editM.add(pasteI);
 		editM.add(selectI);
-		
-		setJMenuBar(menuBar);
-		
+
 		this.setEnabled(true);
 		this.setVisible(true);
 	}
-	
+
+	public abstract boolean save(String file);
+
 	public int getTabPos() {
 		return tabPos;
 	}
+
 	public void increaseTabPos() {
 		tabPos++;
 	}
+
 	public void decreaseTabPos() {
 		tabPos--;
 	}
+
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		super.setTitle(title);
 		this.title = title;

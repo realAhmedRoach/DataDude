@@ -1,5 +1,5 @@
 /**
-    DataDude is a data managing applicationdesigned to have mny types of data in one application
+    DataDude is a data managing application designed to have many types of data in one application
     Copyright (C) 2015  Ahmed R. (theTechnoKid)
 
     This program is free software: you can redistribute it and/or modify
@@ -18,29 +18,31 @@
 
 package org.datadude.nodes;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
 import java.awt.event.ActionEvent;
+import java.io.*;
 
 import javax.swing.*;
+
+import org.datadude.Login;
+import org.datadude.datamanaging.DataDudeFile;
 
 /**
  * @author theTechnoKid
  */
-public class TableNode extends Node{
+public class TableNode extends Node {
 	private static final long serialVersionUID = -6603367461824939430L;
 
 	JTable mainTable;
-	
+
 	public TableNode(String _title) {
 		super(_title);
-		
+
 		int[] rac = this.askRowsAndColumns();
 		mainTable = new JTable(rac[0], rac[1]);
 		mainTable.setVisible(true);
 		this.add(mainTable);
 	}
-	
+
 	/**
 	 * 
 	 * @return An array with two values, the amount of rows and columns.
@@ -48,21 +50,42 @@ public class TableNode extends Node{
 	private int[] askRowsAndColumns() {
 		int[] rac = new int[2];
 		try {
-		rac[0] = Integer.parseInt(JOptionPane.showInputDialog("How many rows?"));
-		rac[1] = Integer.parseInt(JOptionPane.showInputDialog("How many columns?"));
+			rac[0] = Integer.parseInt(JOptionPane.showInputDialog("How many rows?"));
+			rac[1] = Integer.parseInt(JOptionPane.showInputDialog("How many columns?"));
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(this, "Your're supposed to put in a number!");
 		}
+		setJMenuBar(menuBar);
 		return rac;
+	}
+
+	/**
+	 * Saves the file.
+	 * 
+	 * @return Success of save.
+	 */
+	public boolean save(String file) {
+		File saveFile = new File(Login.getUser().getUserFolder() + File.separator + file + DataDudeFile.T_TABLE);
+		try {
+			FileOutputStream fileOut = new FileOutputStream(saveFile);
+			ObjectOutputStream in = new ObjectOutputStream(fileOut);
+			in.writeObject(mainTable);
+			in.close();
+			return true;
+		} catch (IOException e) {
+			String text = "Exception while trying to save file:\n\n" + e.getMessage();
+			JOptionPane.showMessageDialog(this, text, title, JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JMenuItem choice = (JMenuItem) e.getSource();
 		if (choice == saveI) {
-			JFileChooser fs = new JFileChooser();
-			fs.showSaveDialog(this);
-		} else if (choice == exitI) System.exit(0);
+			save(getTitle());
+		} else if (choice == exitI)
+			System.exit(0);
 	}
 
 }

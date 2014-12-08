@@ -47,8 +47,7 @@ public class Login extends JFrame {
 
 	public static void init(String[] args) {
 		try {
-			UIManager
-					.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
+			UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -122,21 +121,18 @@ public class Login extends JFrame {
 		String pass = new String(_pass);
 		System.out.println("Validating user...");
 		try {
-			FileInputStream fileIn = new FileInputStream(DataDude.getPassLoc()
-					+ user + ".ser");
+			FileInputStream fileIn = new FileInputStream(DataDude.getPassLoc() + user + ".ser");
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			currUser = (User) in.readObject();
 			in.close();
 			fileIn.close();
 		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(this, "Wrong Username", "Wrong Data",
-					JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Wrong Username", "Wrong Data", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 
 		if (!currUser.check(pass)) {
-			JOptionPane.showMessageDialog(this, "Wrong Password",
-					"Incorrect Validation", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Wrong Password", "Incorrect Validation", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		System.out.println("Completed validating user");
@@ -150,8 +146,7 @@ public class Login extends JFrame {
 				return;
 			}
 
-			if (currUser.getUserFolder() == null
-					|| currUser.getUserFolder() == "null") {
+			if (currUser.getUserFolder() == null || currUser.getUserFolder() == "null") {
 				System.out.println("User's folder is null");
 				System.out.println(System.getProperty("user.home"));
 				currUser.setUserFolder(System.getProperty("user.home"));

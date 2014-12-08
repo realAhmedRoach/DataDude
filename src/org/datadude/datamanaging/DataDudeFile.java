@@ -2,7 +2,7 @@
     DataDude is a data managing applicationdesigned to have mny types of data in one application
     Copyright (C) 2015  Ahmed R. (theTechnoKid)
 
-    This program is free software: you can redistribute it and/or modify
+    DataDude is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
@@ -25,10 +25,10 @@ public class DataDudeFile implements Serializable {
 	private static final long serialVersionUID = 730623L;
 
 	public static final String T_TEXT = "txt";
-	public static final String T_TABLE = "dmt";
-	public static final String T_DIAGRAM = "dmd";
+	public static final String T_TABLE = "ddt";
+	public static final String T_DIAGRAM = "ddd";
 	public static final String T_PROPERTIES = "properties";
-	public static final String T_OTHER = "dmf";
+	public static final String T_OTHER = "ddf";
 
 	protected String type;
 	protected String dir;
@@ -60,7 +60,8 @@ public class DataDudeFile implements Serializable {
 		this.name = name;
 		// File (or directory) with new name
 		File file2 = new File(this.name);
-		if (file2.exists()) throw new java.io.IOException("file exists");
+		if (file2.exists())
+			throw new java.io.IOException("file exists");
 
 		// Rename file (or directory)
 		boolean success = file.renameTo(file2);
@@ -86,12 +87,10 @@ public class DataDudeFile implements Serializable {
 		}
 	}
 
-
-	
 	public final String getFullPath() {
-		return dir+name+type;
+		return dir + name + type;
 	}
-	
+
 	public final Pointer getFilePointer() {
 		return filePointer;
 	}

@@ -44,14 +44,18 @@ public class Main {
 		}
 
 		System.out.println(DataDude.getPassLoc());
-		
+
 		Login.init(args);
 	}
 
+	/**
+	 * Checks to see if the DataDude app data folder is there. If not, set the
+	 * <code>firstTime</code> variable to true.
+	 */
 	private static void checkForFolders() {
 		File f = null;
 		if (os.startsWith("Windows")) {
-			f = new File(System.getProperty("user.home") + "AppData\\Local\\DataDude\\pass\\");
+			f = new File(System.getProperty("user.home") + "\\AppData\\Local\\DataDude\\pass");
 		} else {
 			f = new File("/var/lib/DataDude/pass/");
 		}
@@ -64,8 +68,8 @@ public class Main {
 		}
 
 		File f2 = new File(System.getProperty("user.home") + "AppData\\Local\\DataDude\\");
-		
-		DataDude.setPassLoc(f.getAbsolutePath());
+
+		DataDude.setPassLoc(f.getAbsolutePath() + "\\");
 		DataDude.setSaveLoc(f2.getAbsolutePath());
 	}
 
