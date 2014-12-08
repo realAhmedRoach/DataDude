@@ -96,7 +96,7 @@ public class CoreEngine extends JFrame {
 
 	public static void addTab(Node n) {
 		editorPane.addTab(n.getTitle(), n);
-		editorPane.setEnabledAt(++x, true);
+		//editorPane.setEnabledAt(++x, true);
 	}
 
 	/**

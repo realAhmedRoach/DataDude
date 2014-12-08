@@ -29,7 +29,7 @@ public final class DataDude {
 
 	public static final HashMap<String, String> fileClassNames;
 
-	public static final String VERSION = "DataDude Alpha";
+	public static final String VERSION = "DataDude kaukab-prerelease";
 
 	public static final MemoryManager manager;
 

@@ -95,6 +95,10 @@ public class User implements Serializable {
 					+ getUserName();
 		}
 		this.userFolder = userFolder;
+		if(!new File(this.userFolder).exists()){
+			new File(this.userFolder).mkdirs();
+		}
+		System.gc();
 	}
 
 	public String getUserName() {
