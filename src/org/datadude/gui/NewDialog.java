@@ -56,7 +56,12 @@ public class NewDialog extends JDialog {
 			Node n = null;
 			if (comboBox.getSelectedItem() == "Text") n = new TextNode(txtName.getText());
 			else if  (comboBox.getSelectedItem() == "Table") n = new TableNode(txtName.getText());
+			else{
+				JOptionPane.showMessageDialog(null, "Not yet implemented!", "Not Available", JOptionPane.ERROR_MESSAGE);
+				dispose();
+			}
 			CoreEngine.addTab(n);
+			dispose();
 		}
 
 	};

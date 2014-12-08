@@ -52,7 +52,7 @@ public class CoreEngine extends JFrame {
 	JLabel lblCurrfolder;
 	JProgressBar progressBar;
 	static JClosableTabbedPane editorPane;
-	static int x = 0;
+	static int x = 0  ;
 
 	private ActionListener quitListener = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
@@ -96,8 +96,7 @@ public class CoreEngine extends JFrame {
 
 	public static void addTab(Node n) {
 		editorPane.addTab(n.getTitle(), n);
-		editorPane.setEnabledAt(x, true);
-		x++;
+		editorPane.setEnabledAt(++x, true);
 	}
 
 	/**
@@ -137,7 +136,7 @@ public class CoreEngine extends JFrame {
 		mntmNew.addActionListener(newListener);
 		mnFile.add(mntmNew);
 
-		JMenuItem mntmQuit = new JMenuItem("New...");
+		JMenuItem mntmQuit = new JMenuItem("Quit");
 		mntmQuit.addActionListener(quitListener);
 		mnFile.add(mntmQuit);
 		// }
@@ -226,8 +225,8 @@ public class CoreEngine extends JFrame {
 		editorPane.setBackground(Color.GRAY);
 		editorPane.add(n);
 		editorPane.setTitleAt(x, "Welcome!");
-		editorPane.setEnabledAt(x, true);
-		x++;
+//		editorPane.setEnabledAt(x, true);
+//		x++;
 		contentPane.setLayout(new BorderLayout(0, 0));
 		contentPane.add(infoPanel, BorderLayout.NORTH);
 		contentPane.add(editorPane, BorderLayout.CENTER);

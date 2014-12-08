@@ -31,7 +31,7 @@ public class User implements Serializable {
 	private String password;
 	private char[] passArray;
 	private byte[] passBytes;
-	
+
 	private String userFolder;
 
 	private boolean encrypted = false;
@@ -44,7 +44,7 @@ public class User implements Serializable {
 		password = new String(pass);
 		passArray = pass;
 		passBytes = password.getBytes();
-		
+
 		userFolder = null;
 
 	}
@@ -54,26 +54,24 @@ public class User implements Serializable {
 		encrypted = true;
 	}
 
-	
-	
 	public boolean check(String str) {
 		if (encrypted) {
 			enc = new StrongPasswordEncryptor();
-			return enc.checkPassword(str, password);	
+			return enc.checkPassword(str, password);
 		} else {
 			System.out.println("Password not encrypted!");
 			return false;
 		}
-		
+
 	}
-	
+
 	public static boolean check(User s, String str) {
 		return s.check(str);
 	}
 
 	public void save() throws IOException {
 		if (encrypted) {
-			File f = new File(DataDude.getPassLoc()+getUserName()+".ser");
+			File f = new File(DataDude.getPassLoc() + getUserName() + ".ser");
 			f.mkdirs();
 			f.createNewFile();
 			FileOutputStream fileOut = new FileOutputStream(f);
@@ -81,8 +79,7 @@ public class User implements Serializable {
 			out.writeObject(this);
 			out.close();
 			fileOut.close();
-			System.out.printf("Serialized data is saved in "+ DataDude.getPassLoc() +
-					 getUserName() + ".ser");
+			System.out.println("Serialized data is saved in " + DataDude.getPassLoc() + getUserName() + ".ser");
 		} else {
 			throw new RuntimeException("User's Password not encrypted");
 		}
@@ -93,6 +90,10 @@ public class User implements Serializable {
 	}
 
 	public void setUserFolder(String userFolder) {
+		if (userFolder == null || userFolder == "null") {
+			this.userFolder = System.getProperty("user.home") + File.separator + "DataDude Users" + File.separator
+					+ getUserName();
+		}
 		this.userFolder = userFolder;
 	}
 

@@ -60,8 +60,11 @@ public final class DataDude {
 	public static void setSaveLoc(File saveFile) {
 		DataDude.saveLoc = saveFile.getAbsolutePath();
 	}
-	protected static void setSaveLoc(String saveLoc) {
+	public static void setSaveLoc(String saveLoc) {
 		DataDude.saveLoc = saveLoc;
+	}
+	public static String getSaveLoc() {
+		return saveLoc;
 	}
 	public static void openConsole() {
 	}

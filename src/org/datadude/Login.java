@@ -148,8 +148,7 @@ public class Login extends JFrame {
 
 			if (currUser.getUserFolder() == null || currUser.getUserFolder() == "null") {
 				System.out.println("User's folder is null");
-				System.out.println(System.getProperty("user.home"));
-				currUser.setUserFolder(System.getProperty("user.home"));
+				currUser.setUserFolder(null);
 			}
 			dispose();
 			System.out.println("Initializing Core Engine..!");
