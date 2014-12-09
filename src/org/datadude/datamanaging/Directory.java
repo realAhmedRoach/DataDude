@@ -32,9 +32,9 @@ public class Directory {
 		this.path = System.getProperty("user.home");
 	}
 
-	public Directory(File path) {
-		if (path.isDirectory())
-			this.path = path.getAbsolutePath();
+	public Directory(File _path) {
+		if (_path.isDirectory())
+			this.path = _path.getAbsolutePath();
 		else
 			this.path = System.getProperty("user.home");
 

@@ -23,7 +23,7 @@ import java.util.*;
 
 public class FileOperator {
 
-	private DataDudeFile file = null;
+	private DataDudeFile file;
 
 	public FileOperator(DataDudeFile _file) {
 		file = _file;

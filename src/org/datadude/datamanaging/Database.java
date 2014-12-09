@@ -42,14 +42,19 @@ public class Database {
 	}
 
 	/**
-	 * 
+	 * Adds a file to the project Array.
 	 * @param theFile file to be added
-	 * @return {@code true} if added successfully
 	 */
-	public boolean addFile(DataDudeFile theFile) {
+	public void addFile(DataDudeFile theFile) {
 		files.add(theFile);
-		
-		return true;
+	}
+	
+	/**
+	 * Set the files using an array.
+	 * @param _files The file ArrayList to add
+	 */
+	public void setFiles(ArrayList<DataDudeFile> _files) {
+		files = _files;
 	}
 	
 	/*

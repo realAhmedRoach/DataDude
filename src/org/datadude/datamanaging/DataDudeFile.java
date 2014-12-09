@@ -24,11 +24,11 @@ public class DataDudeFile implements Serializable {
 
 	private static final long serialVersionUID = 730623L;
 
-	public static final String T_TEXT = "txt";
-	public static final String T_TABLE = "ddt";
-	public static final String T_DIAGRAM = "ddd";
-	public static final String T_PROPERTIES = "properties";
-	public static final String T_OTHER = "ddf";
+	public static final String T_TEXT = ".txt";
+	public static final String T_TABLE = ".ddt";
+	public static final String T_DIAGRAM = ".ddd";
+	public static final String T_PROPERTIES = ".properties";
+	public static final String T_OTHER = ".ddf";
 
 	protected String type;
 	protected String dir;
@@ -65,10 +65,7 @@ public class DataDudeFile implements Serializable {
 
 		// Rename file (or directory)
 		boolean success = file.renameTo(file2);
-		if (!success) {
-			return false;
-		}
-		return true;
+		return success;
 	}
 
 	public final String getDir() {

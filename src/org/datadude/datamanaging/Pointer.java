@@ -46,7 +46,13 @@ public class Pointer {
 		this(0, type);
 	}
 
-	public String readLines(int u) throws IOException, IllegalAccessException {
+	/**
+	 * Reads lines from the current file.
+	 * @param until The stop line to read
+	 * @return The lines that have been read.
+	 * @throws IOException If there is an error with reading.
+	 */
+	public String readLines(int until) throws IOException {
 		/*
 		 * BufferedReader br = new BufferedReader(new FileReader(currFile));
 		 * char [] temp = null; if (u != -1) br.read(temp, location, u); else
@@ -55,7 +61,7 @@ public class Pointer {
 		 * br.close(); return new String(temp);
 		 */
 		StringBuffer temp = new StringBuffer();
-		for (int i = location; i < u; i++)
+		for (int i = location; i < until; i++)
 			temp.append(FileUtils.readLines(currFile).get(i));
 		return new String(temp);
 	}
