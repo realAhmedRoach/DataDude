@@ -1,5 +1,5 @@
 /**
-    DataDude is a data managing applicationdesigned to have mny types of data in one application
+    DataDude is a data managing application designed to have mny types of data in one application
     Copyright (C) 2015  Ahmed R. (theTechnoKid)
 
     This program is free software: you can redistribute it and/or modify
@@ -96,7 +96,8 @@ public class CoreEngine extends JFrame {
 
 	public static void addTab(Node n) {
 		editorPane.addTab(n.getTitle(), n);
-		//editorPane.setEnabledAt(++x, true);
+		System.out.println(editorPane.getTabCount());
+		editorPane.setSelectedIndex(editorPane.getTabCount()-1);
 	}
 
 	/**
