@@ -18,15 +18,26 @@
 
 package org.datadude;
 
-import java.awt.event.*;
-import java.io.*;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
 
 import org.datadude.gui.Register;
+import org.datadude.gui.Splash;
 import org.datadude.security.User;
-
-import java.awt.Font;
 
 public class Login extends JFrame {
 	private static final long serialVersionUID = 3013538842330993038L;
@@ -47,9 +58,8 @@ public class Login extends JFrame {
 
 	public static void init(String[] args) {
 		try {
-			UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		new Login(false);
@@ -57,10 +67,11 @@ public class Login extends JFrame {
 
 	public Login(boolean nwusr) {
 
-		setTitle(DataDude.VERSION + " Login Screen");
+		setTitle("DataDude Login Screen");
 		System.out.println("\n\nInitializing login frame...");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(600, 400);
+		setLocationRelativeTo(null);
 		setResizable(false);
 		display = new JPanel();
 		display.setLayout(null);
@@ -72,6 +83,7 @@ public class Login extends JFrame {
 
 		go = new JButton("Go");
 		go.addActionListener(new GO());
+		go.setMnemonic(KeyEvent.VK_ENTER);
 		go.setBounds(284, 185, 70, 28);
 
 		display.add(user);
@@ -81,12 +93,11 @@ public class Login extends JFrame {
 		getContentPane().add(display);
 		JButton btnRegister = new JButton("Register");
 		btnRegister.setBounds(284, 329, 90, 25);
+		btnRegister.setMnemonic('R');
 		btnRegister.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				@SuppressWarnings("unused")
-				Register r = new Register();
+				new Register();
 				dispose();
 			}
 
@@ -152,7 +163,7 @@ public class Login extends JFrame {
 			}
 			dispose();
 			System.out.println("Initializing Core Engine..!");
-			CoreEngine.init();
+			new Splash();
 		}
 	}
 }
