@@ -20,6 +20,7 @@ public class Splash extends JFrame {
 	 * Create the frame.
 	 */
 	public Splash() {
+		this.setUndecorated(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		setSize(500, 500);
@@ -30,9 +31,7 @@ public class Splash extends JFrame {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		// Set undecorated
-		this.setUndecorated(true);
-		
+				
 		// Apply a transparent color to the background
 		// This is ALL important, without this, it won't work!
 		setBackground(new Color(0, 255, 0, 0));

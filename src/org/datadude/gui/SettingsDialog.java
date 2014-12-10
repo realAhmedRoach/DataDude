@@ -21,6 +21,7 @@ package org.datadude.gui;
 import javax.swing.*;
 import javax.swing.border.*;
 
+import org.datadude.DataDude;
 import org.datadude.Login;
 
 import java.awt.*;
@@ -142,7 +143,7 @@ public class SettingsDialog extends JDialog {
 	private void changeSettings() {
 		if(Login.getUser().check(txtPass.getText())) {
 			if (txtUsername.getText() != "" || txtUsername.getText() != null) {
-				File f = new File("res/pass/" + Login.getUser().getUserName());
+				File f = new File(DataDude.getPassLoc() + Login.getUser().getUserName());
 				f.delete();
 				Login.getUser().setUserName(txtUsername.getText());
 			}
