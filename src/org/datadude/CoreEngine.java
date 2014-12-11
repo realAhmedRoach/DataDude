@@ -159,7 +159,7 @@ public class CoreEngine extends JFrame {
 		JLabel lblWelcome = new JLabel("Welcome " + Login.getUser().getName());
 		infoPanel.add(lblWelcome);
 
-		lblCurrfolder = new JLabel(Login.getUser().getUserFolder());
+		lblCurrfolder = new JLabel("User Folder:" + Login.getUser().getUserFolder());
 		infoPanel.add(lblCurrfolder);
 
 		JButton btnNew = new JButton("New");

@@ -125,12 +125,10 @@ public class SettingsDialog extends JDialog {
 		JButton cancelButton = new JButton("Cancel");
 		cancelButton.setActionCommand("Cancel");
 		cancelButton.addActionListener(new ActionListener () {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 			}
-			
 		});
 		buttonPane.add(cancelButton);
 
@@ -138,12 +136,12 @@ public class SettingsDialog extends JDialog {
 
 	private void changeSettings() {
 		if(Login.getUser().check(txtPass.getText())) {
-			if (txtUsername.getText() != "" || txtUsername.getText() != null) {
+			if (txtUsername.getText().length()!=0) {
 				File f = new File(DataDude.getPassLoc() + Login.getUser().getUserName());
 				f.delete();
 				Login.getUser().setUserName(txtUsername.getText());
 			}
-			if (txtFolder.getText() != "" || txtFolder.getText() != null) {
+			if (txtFolder.getText().length()!=0) {
 				Login.getUser().setUserFolder(txtFolder.getText());
 			}
 		} else {
