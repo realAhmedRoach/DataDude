@@ -62,10 +62,10 @@ public class Login extends JFrame {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		new Login(false);
+		new Login();
 	}
 
-	public Login(boolean nwusr) {
+	public Login() {
 
 		setTitle("DataDude Login Screen");
 		System.out.println("\n\nInitializing login frame...");
