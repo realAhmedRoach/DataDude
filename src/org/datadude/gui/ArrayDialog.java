@@ -40,7 +40,7 @@ public class ArrayDialog extends JDialog {
 	 * Launch the application.
 	 */
 
-	private String[] getValues() {
+	public String[] getValues() {
 		return values;
 	}
 
