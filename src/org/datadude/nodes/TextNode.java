@@ -36,7 +36,7 @@ public class TextNode extends Node implements ActionListener {
 
 	public TextNode(String _title) {
 		super(_title);
-
+		init();
 		pad = " ";
 		ta = new JTextArea(); // textarea
 		ta.setFont(new Font("DokChampa", Font.PLAIN, 14));

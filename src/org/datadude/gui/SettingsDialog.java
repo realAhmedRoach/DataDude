@@ -98,11 +98,7 @@ public class SettingsDialog extends JDialog {
 		JButton btnBrowse = new JButton();
 		btnBrowse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JFileChooser fs = new JFileChooser();
-				fs.setDialogType(JFileChooser.DIRECTORIES_ONLY);
-				fs.showOpenDialog(null);
-				if(fs.getSelectedFile() != null)
-					txtFolder.setText(fs.getSelectedFile().getAbsolutePath());
+					txtFolder.setText(DataDude.getFolder());
 			}
 		});
 		btnBrowse.setIcon(new ImageIcon(SettingsDialog.class.getResource("/javax/swing/plaf/metal/icons/ocean/upFolder.gif")));
@@ -131,7 +127,7 @@ public class SettingsDialog extends JDialog {
 		cancelButton.addActionListener(new ActionListener () {
 
 			@Override
-			public void actionPerformed(ActionEvent paramActionEvent) {
+			public void actionPerformed(ActionEvent e) {
 				dispose();
 			}
 			

@@ -36,7 +36,7 @@ public class TableNode extends Node {
 
 	public TableNode(String _title) {
 		super(_title);
-
+		init();
 		int[] rac = this.askRowsAndColumns();
 		mainTable = new JTable(rac[0], rac[1]);
 		mainTable.setVisible(true);
