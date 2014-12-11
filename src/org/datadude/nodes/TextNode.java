@@ -31,9 +31,8 @@ public class TextNode extends Node implements ActionListener {
 	private static final long serialVersionUID = 6657L;
 
 	private JTextArea ta;
-
 	private JScrollPane scpane;
-	private JLabel lblStatus;
+
 
 	public TextNode(String _title) {
 		super(_title);
@@ -72,6 +71,12 @@ public class TextNode extends Node implements ActionListener {
 		setVisible(true);
 	}
 
+	@Override
+	public String getFullName() {
+		return "org.datadude.nodes.TextNode";
+	}
+
+	
 	/**
 	 * Saves the file.
 	 * 
@@ -94,10 +99,10 @@ public class TextNode extends Node implements ActionListener {
 		JMenuItem choice = (JMenuItem) e.getSource();
 		if (choice == saveI) {
 			if (save(getTitle())) {
-				System.out.println("Succesfully saved text file.");
+				lblStatus.setText("Succesfully saved text file.");
 			}
 		} else if (choice == exitI)
-			System.exit(0);
+/*			System.exit(0)*/;
 		else if (choice == cutI) {
 			pad = ta.getSelectedText();
 			ta.replaceRange("", ta.getSelectionStart(), ta.getSelectionEnd());

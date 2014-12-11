@@ -59,6 +59,12 @@ public class TableNode extends Node {
 		return rac;
 	}
 
+	@Override
+	public String getFullName() {
+		return "org.datadude.nodes.TableNode";
+	}
+
+	
 	/**
 	 * Saves the file.
 	 * 

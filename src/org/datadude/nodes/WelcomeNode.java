@@ -48,4 +48,9 @@ public class WelcomeNode extends Node {
 	public void actionPerformed(ActionEvent e) {
 	}
 
+	@Override
+	public String getFullName() {
+		return "org.datadude.nodes.WelcomeNode";
+	}
+
 }
