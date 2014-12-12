@@ -64,7 +64,7 @@ public class FileOperator {
 		ArrayList<String> data = new ArrayList<String>();
 
 		if (!fileOp.exists()) {
-			System.out.println("Can't load file: File not found");
+			System.err.println("Can't load file: File not found");
 		} else {
 			try {
 				BufferedReader read = new BufferedReader(new FileReader(fileOp));

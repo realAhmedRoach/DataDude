@@ -29,6 +29,7 @@ public class DataDudeFile implements Serializable {
 	public static final String T_DIAGRAM = ".ddd";
 	public static final String T_PROPERTIES = ".properties";
 	public static final String T_OTHER = ".ddf";
+	public static final String T_CSV = ".csv";
 
 	protected String type;
 	protected String dir;

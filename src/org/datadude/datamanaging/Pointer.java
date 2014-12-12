@@ -48,9 +48,12 @@ public class Pointer {
 
 	/**
 	 * Reads lines from the current file.
-	 * @param until The stop line to read
+	 * 
+	 * @param until
+	 *            The stop line to read
 	 * @return The lines that have been read.
-	 * @throws IOException If there is an error with reading.
+	 * @throws IOException
+	 *             If there is an error with reading.
 	 */
 	public String readLines(int until) throws IOException {
 		/*
@@ -60,10 +63,14 @@ public class Pointer {
 		 * 
 		 * br.close(); return new String(temp);
 		 */
-		StringBuffer temp = new StringBuffer();
-		for (int i = location; i < until; i++)
-			temp.append(FileUtils.readLines(currFile).get(i));
-		return new String(temp);
+		if (this.type == FILE_POINTER) {
+			StringBuffer temp = new StringBuffer();
+			for (int i = location; i < until; i++)
+				temp.append(FileUtils.readLines(currFile).get(i));
+			return new String(temp);
+		} else {
+			throw new RuntimeException("Wrong pointer type.");
+		}
 	}
 
 	public int getLocation() {

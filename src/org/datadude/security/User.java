@@ -89,16 +89,18 @@ public class User implements Serializable {
 		return userFolder;
 	}
 
-	public void setUserFolder(String userFolder) {
-		if (userFolder == null || userFolder == "null") {
-			this.userFolder = System.getProperty("user.home") + File.separator + "DataDude Users" + File.separator
-					+ getUserName();
+	public void setUserFolder(String _userFolder) {
+		try {
+			this.userFolder = _userFolder;
+			if (!new File(this.userFolder).exists()) {
+				new File(this.userFolder).mkdirs();
+			}
+		} catch (NullPointerException e) {
+			setUserFolder(System.getProperty("user.home") + File.separator + "DataDude Users" + File.separator
+					+ getUserName());
+		} finally {
+			System.gc();
 		}
-		this.userFolder = userFolder;
-		if(!new File(this.userFolder).exists()){
-			new File(this.userFolder).mkdirs();
-		}
-		System.gc();
 	}
 
 	public String getUserName() {
