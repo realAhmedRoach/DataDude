@@ -34,7 +34,7 @@ public class WelcomeNode extends Node {
 	public WelcomeNode() {
 		super("Welcome");
 		setLayout(new FlowLayout());
-		lblWelcome = new JLabel("Welcome to DataMan Beta 0.1! Click File -> New... to create a new file!");
+		lblWelcome = new JLabel("Welcome to DataMan Alpha 0.1! Click File -> New... to create a new file!");
 		add(lblWelcome);
 		setVisible(true);
 

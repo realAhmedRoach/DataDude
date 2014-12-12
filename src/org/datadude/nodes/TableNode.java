@@ -63,7 +63,6 @@ public class TableNode extends Node {
 	public String getFullName() {
 		return "org.datadude.nodes.TableNode";
 	}
-
 	
 	/**
 	 * Saves the file.

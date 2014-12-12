@@ -47,7 +47,9 @@ public abstract class Node extends JInternalFrame implements ActionListener {
 	 * This MUST BE RIGHT or else plugins won't work
 	 * @return The full class (binary) name for the Node.
 	 */
-	public abstract String getFullName();
+	public String getFullName(){
+		return getClass().getCanonicalName();
+	}
 	
 	public void init() {
 		setSize(600, 600);
