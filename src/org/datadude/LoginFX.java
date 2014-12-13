@@ -31,7 +31,7 @@ public class LoginFX extends Application {
 	TextField userTextField;
 	PasswordField pwBox;
 
-	public static void main(String[] args) {
+	public static void init(String[] args) {
 		launch(args);
 	}
 
@@ -105,7 +105,7 @@ public class LoginFX extends Application {
 			in.close();
 			fileIn.close();
 		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(null, "Wrong Username", "Incorrect Validation", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Wrong Username\n"+ex, "Incorrect Validation", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 

@@ -45,7 +45,7 @@ public class Main {
 
 		System.out.println(DataDude.getPassLoc());
 
-		Login.init(args);
+		LoginFX.init(args);
 	}
 
 	/**
