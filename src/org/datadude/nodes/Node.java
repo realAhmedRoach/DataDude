@@ -35,22 +35,23 @@ public abstract class Node extends JInternalFrame implements ActionListener {
 	protected JToolBar toolBar;
 	protected Container pane;
 	protected JLabel lblStatus;
-	
+
 	public Node(String _title) {
 		title = _title;
 		setTitle(title);
-//		init();
+		// init();
 	}
 
 	/**
-	 * This is how plugins get loaded.
-	 * This MUST BE RIGHT or else plugins won't work
+	 * This is how plugins get loaded. This MUST BE RIGHT or else plugins won't
+	 * work
+	 * 
 	 * @return The full class (binary) name for the Node.
 	 */
-	public String getFullName(){
+	public String getFullName() {
 		return getClass().getCanonicalName();
 	}
-	
+
 	public void init() {
 		setSize(600, 600);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -103,7 +104,7 @@ public abstract class Node extends JInternalFrame implements ActionListener {
 		this.setEnabled(true);
 		this.setVisible(true);
 	}
-	
+
 	public abstract boolean save(String file);
 
 	public int getTabPos() {
