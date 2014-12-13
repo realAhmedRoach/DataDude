@@ -72,14 +72,15 @@ public class LoginFX extends Application {
 
 		Scene scene = new Scene(grid, 300, 250);
 		// grid.setGridLinesVisible(true);
-		stage.setTitle("Welcome to JavaFX!");
+		stage.setTitle("Login");
 		stage.setScene(scene);
 		stage.show();
 	}
 
 	EventHandler<ActionEvent> go = new EventHandler<ActionEvent>() {
 		public void handle(ActionEvent e) {
-			System.out.println("Got old user");
+//			System.out.println(userTextField.getText()+":"+pwBox.getText());
+//			/*System.out.println("Got old user");
 			if (validate(userTextField.getText(), pwBox.getText().toCharArray()) == false) {
 				return;
 			}

@@ -76,6 +76,7 @@ public class CoreEngine extends JFrame {
 	private void exit() {
 		try {
 			Login.getUser().save();
+			System.exit(0);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -159,7 +160,7 @@ public class CoreEngine extends JFrame {
 		JLabel lblWelcome = new JLabel("Welcome " + Login.getUser().getName());
 		infoPanel.add(lblWelcome);
 
-		lblCurrfolder = new JLabel("User Folder:" + Login.getUser().getUserFolder());
+		lblCurrfolder = new JLabel("<html><b>User Folder:</b> " + Login.getUser().getUserFolder()+"</html>");
 		infoPanel.add(lblCurrfolder);
 
 		JButton btnNew = new JButton("New");
