@@ -51,7 +51,7 @@ public class ArrayDialog extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public ArrayDialog() {
+	public ArrayDialog(String sel1, String sel2) {
 		setModalityType(ModalityType.APPLICATION_MODAL);
 		setBounds(100, 100, 200, 200);
 		getContentPane().setLayout(new BorderLayout());
@@ -59,22 +59,20 @@ public class ArrayDialog extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new GridLayout(2, 2, 0, 30));
 		{
-			JLabel lblSel1 = new JLabel("Sel1");
+			JLabel lblSel1 = new JLabel(sel1);
 			contentPanel.add(lblSel1);
 		}
 		{
 			txtArr1 = new JTextField();
-			txtArr1.setText("arr1");
 			contentPanel.add(txtArr1);
 			txtArr1.setColumns(10);
 		}
 		{
-			JLabel lblSel2 = new JLabel("Sel2");
+			JLabel lblSel2 = new JLabel(sel2);
 			contentPanel.add(lblSel2);
 		}
 		{
 			txtArr2 = new JTextField();
-			txtArr2.setText("arr2");
 			contentPanel.add(txtArr2);
 			txtArr2.setColumns(10);
 		}
@@ -87,7 +85,7 @@ public class ArrayDialog extends JDialog {
 				okButton.setActionCommand("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						String [] text = {txtArr1.getText(), txtArr2.getText()};
+						String[] text = {txtArr1.getText(), txtArr2.getText()};
 						setValues(text);
 						dispose();
 					}
