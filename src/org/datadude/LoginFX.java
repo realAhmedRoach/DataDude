@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 
 import javax.swing.JOptionPane;
 
+import org.datadude.gui.Register;
 import org.datadude.gui.Splash;
 import org.datadude.security.User;
 
@@ -30,14 +31,18 @@ public class LoginFX extends Application {
 	User currUser;
 	TextField userTextField;
 	PasswordField pwBox;
-
+	Stage stage;
 	public static void init(String[] args) {
+		Main.theme.put("windowDecoration", "off");
+		com.jtattoo.plaf.texture.TextureLookAndFeel.setTheme(Main.theme);
 		launch(args);
 	}
 
+
 	@Override
-	public void start(Stage stage) throws Exception {
+	public void start(final Stage _stage) throws Exception {
 		GridPane grid = new GridPane();
+		this.stage = _stage;
 		grid.setAlignment(Pos.CENTER);
 		grid.setHgap(10);
 		grid.setVgap(10);
@@ -60,15 +65,23 @@ public class LoginFX extends Application {
 		grid.add(pwBox, 1, 2);
 
 		Button btn = new Button("Sign in");
+		Button reg = new Button("Register...");
 		HBox hbBtn = new HBox(10);
 		hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
 		hbBtn.getChildren().add(btn);
+		hbBtn.getChildren().add(reg);
 		grid.add(hbBtn, 1, 4);
 
-		final Text actionTarget = new Text();
-		grid.add(actionTarget, 1, 6);
-
 		btn.setOnAction(go);
+		reg.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				new Register();
+				stage.close();
+			}
+
+		});
 
 		Scene scene = new Scene(grid, 300, 250);
 		// grid.setGridLinesVisible(true);
@@ -79,37 +92,38 @@ public class LoginFX extends Application {
 
 	EventHandler<ActionEvent> go = new EventHandler<ActionEvent>() {
 		public void handle(ActionEvent e) {
-//			System.out.println(userTextField.getText()+":"+pwBox.getText());
-//			/*System.out.println("Got old user");
+			System.out.println("Got old user");
 			if (validate(userTextField.getText(), pwBox.getText().toCharArray()) == false) {
 				return;
 			}
 
-			if (currUser.getUserFolder() == null || currUser.getUserFolder() == "null") {
+			if (Login.currUser.getUserFolder() == null || currUser.getUserFolder() == "null") {
 				System.out.println("User's folder is null");
-				currUser.setUserFolder(null);
+				Login.currUser.setUserFolder(null);
 			}
 			System.out.println("Initializing Core Engine..!");
 			new Splash();
+			stage.close();
 		}
 	};
 
 	private boolean validate(String user, char[] _pass) {
-		currUser = null;
+		Login.currUser = null;
 		String pass = new String(_pass);
 		System.out.println("Validating user...");
 		try {
 			FileInputStream fileIn = new FileInputStream(DataDude.getPassLoc() + user + ".ser");
 			ObjectInputStream in = new ObjectInputStream(fileIn);
-			currUser = (User) in.readObject();
+			Login.currUser = (User) in.readObject();
 			in.close();
 			fileIn.close();
 		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(null, "Wrong Username\n"+ex, "Incorrect Validation", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Wrong Username", "Incorrect Validation",
+					JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 
-		if (!currUser.check(pass)) {
+		if (!Login.currUser.check(pass)) {
 			JOptionPane.showMessageDialog(null, "Wrong Password", "Incorrect Validation", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}

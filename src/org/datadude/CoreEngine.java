@@ -18,16 +18,36 @@
 
 package org.datadude;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
-import javax.swing.*;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
 
-import org.datadude.gui.*;
-import org.datadude.nodes.*;
-
-import java.awt.event.*;
-
-import javax.swing.border.*;
+import org.datadude.gui.NewDialog;
+import org.datadude.gui.SettingsDialog;
+import org.datadude.nodes.Node;
+import org.datadude.nodes.WelcomeNode;
 
 import com.petersoft.advancedswing.jclosabletabbedpane.JClosableTabbedPane;
 
@@ -41,18 +61,12 @@ public class CoreEngine extends JFrame {
 	JPanel box2;
 	GridLayout box2l;
 	JLabel welcome;
-	JLabel currfold;
 	JScrollPane a;
-	JButton files;
-	JButton newFile;
-	JButton chat;
-	JButton settings;
-	JButton quit;
-	String nodeSelection;
+	JButton files, newFile, chat, settings, quit;
 	JLabel lblCurrfolder;
 	JProgressBar progressBar;
 	static JClosableTabbedPane editorPane;
-	static int x = 0  ;
+	static int x = 0;
 
 	private ActionListener quitListener = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
@@ -86,6 +100,8 @@ public class CoreEngine extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					Main.theme.put("windowDecoration", "on");
+					com.jtattoo.plaf.texture.TextureLookAndFeel.setTheme(Main.theme);
 					CoreEngine usableEngine = new CoreEngine();
 					usableEngine.setVisible(true);
 				} catch (Exception e) {
@@ -238,7 +254,7 @@ public class CoreEngine extends JFrame {
 		/*
 		 * JPanel panel = new JPanel(); panel.setBackground(Color.CYAN);
 		 * panel.setBorder(new TitledBorder(null, "File Explorer",
-		 * TitledBorder.LEADING, TitledBorder.TOP, null, null)); //panel.add(new
+		 * TitledBorder.LEADING, TitledBorder.TOP, null, null)); panel.add(new
 		 * FileTree()); contentPane.add(panel, BorderLayout.WEST);
 		 */
 

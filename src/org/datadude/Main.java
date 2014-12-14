@@ -19,14 +19,17 @@
 package org.datadude;
 
 import java.io.File;
+import java.util.Properties;
 
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 public class Main {
 
 	private static boolean firstTime;
 	private static String os;
-
+	static Properties theme;
+	
 	public static void main(String[] args) {
 		os = System.getProperty("os.name");
 		System.out.println(os);
@@ -38,7 +41,8 @@ public class Main {
 		System.out.println(System.getProperty("user.dir"));*/
 
 		checkForFolders();
-
+		setLnF();
+		
 		if (firstTime == true) {
 			ifNew();
 		}
@@ -67,12 +71,28 @@ public class Main {
 			f.mkdirs();
 		}
 
-		File f2 = new File(System.getProperty("user.home") + "AppData\\Local\\DataDude\\");
-
-		DataDude.setPassLoc(f.getAbsolutePath() + "\\");
-		DataDude.setSaveLoc(f2.getAbsolutePath()+"\\");
+		DataDude.setPassLoc(f.getAbsolutePath() + File.separator);
+		DataDude.setSaveLoc(f.getParent()+File.separator);
 	}
 
+	private static boolean setLnF() {
+		theme = new Properties();
+		theme.put("logoString", "SizzliNerds");
+        theme.put("windowTitleForegroundColor", "0 20 10");
+        theme.put("windowTitleBackgroundColor", "180 240 197"); 
+        theme.put("windowTitleColorLight", "218 254 230"); 
+        theme.put("windowTitleColorDark", "180 240 197"); 
+        theme.put("windowBorderColor", "218 254 230");
+        try {
+        	com.jtattoo.plaf.texture.TextureLookAndFeel.setTheme(theme);
+        	UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
+        	return true;
+        }catch(Exception e) {
+        	JOptionPane.showMessageDialog(null, "Failed:\n"+e,"Error setting Look&Feel",JOptionPane.ERROR_MESSAGE);
+        	return false;
+        }
+	}
+	
 	private static void ifNew() {
 		JOptionPane.showMessageDialog(null, "Welcome to DataDude!", "Welcome", JOptionPane.INFORMATION_MESSAGE);
 	}

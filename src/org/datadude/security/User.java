@@ -18,10 +18,16 @@
 
 package org.datadude.security;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+import javax.crypto.Cipher;
 
 import org.datadude.DataDude;
-import org.jasypt.util.password.*;
+import org.jasypt.util.password.StrongPasswordEncryptor;
 
 public class User implements Serializable {
 	private static final long serialVersionUID = 254827L;
@@ -31,7 +37,8 @@ public class User implements Serializable {
 	private String password;
 	private char[] passArray;
 	private byte[] passBytes;
-
+	private Cipher c;
+	
 	private String userFolder;
 
 	private boolean encrypted = false;
@@ -131,13 +138,20 @@ public class User implements Serializable {
 		return passBytes;
 	}
 
-	/*
-	 * public void decrypt() { try { c.init(Cipher.DECRYPT_MODE, key, ivSpec);
-	 * decrypted = new byte[c.getOutputSize(enc_len)]; dec_len =
-	 * c.update(encrypted, 0, enc_len, decrypted, 0); dec_len +=
-	 * c.doFinal(decrypted, dec_len); passBytes = decrypted; password = new
-	 * String(decrypted); passArray = password.toCharArray(); }catch(Exception
-	 * e) { e.printStackTrace(); return; } }
-	 */
+	/*public void decrypt() {
+		byte[] decrypted;
+		try {
+			c.init(Cipher.DECRYPT_MODE, key, ivSpec);
+			decrypted = new byte[c.getOutputSize(enc_len)];
+			dec_len = c.update(encrypted, 0, enc_len, decrypted, 0);
+			dec_len += c.doFinal(decrypted, dec_len);
+			passBytes = decrypted;
+			password = new String(decrypted);
+			passArray = password.toCharArray();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return;
+		}
+	}*/
 
 }
