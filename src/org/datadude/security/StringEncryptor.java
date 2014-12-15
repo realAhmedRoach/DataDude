@@ -28,7 +28,7 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
 public final class StringEncryptor {
-	
+
 	public byte[] encryptPassword(String password, byte[] salt) {
 		try {
 			// PBKDF2 with SHA-1 as the hashing algorithm.
@@ -59,12 +59,12 @@ public final class StringEncryptor {
 		// is equal to the stored hash
 		return Arrays.equals(encryptedPassword, encryptedAttemptedPassword);
 	}
-	
+
 	public byte[] generateSalt() throws NoSuchAlgorithmException {
 		SecureRandom r = SecureRandom.getInstance("SHA1PRNG");
-		byte[] salt = new byte[8];
+		byte[] salt = new byte[10];
 		r.nextBytes(salt);
 		return salt;
 	}
-	
+
 }
