@@ -37,7 +37,6 @@ public class SettingsDialog extends JDialog {
 	private JTextField txtPass;
 
 	private ActionListener settingsListener = new ActionListener() {
-
 		@Override
 		public void actionPerformed(ActionEvent paramActionEvent) {
 			changeSettings();
@@ -45,6 +44,7 @@ public class SettingsDialog extends JDialog {
 		
 	};
 	private JTextField txtFolder;
+	private JTextField txtUserDisplay;
 	
 	/**
 	 * Launch the application.
@@ -76,8 +76,16 @@ public class SettingsDialog extends JDialog {
 		JSeparator separator = new JSeparator();
 		contentPanel.add(separator);
 
+		JLabel lblUserDisplay = new JLabel("Display Name");
+		lblUserDisplay.setForeground(Color.RED);
+		contentPanel.add(lblUserDisplay);
+
+		txtUserDisplay = new JTextField();
+		contentPanel.add(txtUserDisplay);
+		txtUserDisplay.setColumns(10);
+		
 		JLabel lblUsername = new JLabel("Username");
-		lblUsername.setForeground(Color.RED);
+		lblUsername.setForeground(Color.CYAN);
 		contentPanel.add(lblUsername);
 
 		txtUsername = new JTextField();

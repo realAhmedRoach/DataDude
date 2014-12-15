@@ -102,6 +102,8 @@ public class ArrayDialog extends JDialog {
 					}
 				});
 				buttonPane.add(cancelButton);
+				while(getValues()==null)
+					;
 			}
 		}
 	}

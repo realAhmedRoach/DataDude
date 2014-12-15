@@ -35,7 +35,6 @@ public class Splash extends JFrame {
 		// This is ALL important, without this, it won't work!
 		setBackground(new Color(0, 255, 0, 0));
 		getContentPane().setBackground(Color.BLACK);
-		//setLayout(new BorderLayout());
 		add(new JLabel(new ImageIcon(splash)));
 		setVisible(true);
 		try {

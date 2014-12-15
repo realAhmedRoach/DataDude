@@ -55,8 +55,7 @@ public class Register extends JDialog {
 				currUser.setName(txtName.getText());
 				currUser.encrypt();
 				currUser.save();
-				@SuppressWarnings("unused")
-				Login l = new Login();
+				new Login();
 				dispose();
 			} catch (IOException i) {
 				i.printStackTrace();
