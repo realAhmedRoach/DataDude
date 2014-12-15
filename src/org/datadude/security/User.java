@@ -37,7 +37,6 @@ public class User implements Serializable {
 	private String password;
 	private char[] passArray;
 	private byte[] passBytes;
-	private Cipher c;
 	
 	private String userFolder;
 
