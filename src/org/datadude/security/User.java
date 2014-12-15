@@ -24,8 +24,6 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import javax.crypto.Cipher;
-
 import org.datadude.DataDude;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 
