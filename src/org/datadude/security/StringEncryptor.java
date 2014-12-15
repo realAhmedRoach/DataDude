@@ -18,56 +18,53 @@
 
 package org.datadude.security;
 
-import java.security.*;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.KeySpec;
+import java.util.Arrays;
 
-import javax.crypto.*;
-import javax.crypto.spec.*;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 
 public final class StringEncryptor {
-	private SecretKeySpec key;
-	private Cipher aes;
-
-	public StringEncryptor(String passphrase) {
-
+	
+	public byte[] encryptPassword(String password, byte[] salt) {
 		try {
-			MessageDigest digest;
-			digest = MessageDigest.getInstance("SHA");
-			digest.update(passphrase.getBytes());
-			SecretKeySpec key = new SecretKeySpec(digest.digest(), 0, 16, "AES");
-			this.key = key;
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
+			// PBKDF2 with SHA-1 as the hashing algorithm.
+			String algorithm = "PBKDF2WithHmacSHA1";
+			// SHA-1 generates 160 bit hashes, so that's what makes sense here
+			int derivedKeyLength = 160;
+			int iterations = 20000;
+
+			KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, iterations, derivedKeyLength);
+
+			SecretKeyFactory f = SecretKeyFactory.getInstance(algorithm);
+
+			return f.generateSecret(spec).getEncoded();
+		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		}
 
 	}
 
-	public boolean checkPassword(String passToBeChecked, String _pass) {
-		String pass = decryptPassword(_pass);
-		return passToBeChecked == pass;
+	public boolean authenticate(String attemptedPassword, byte[] encryptedPassword, byte[] salt)
+			throws NoSuchAlgorithmException, InvalidKeySpecException {
+		// Encrypt the clear-text password using the same salt that was used to
+		// encrypt the original password
+		byte[] encryptedAttemptedPassword = encryptPassword(attemptedPassword, salt);
+
+		// Authentication succeeds if encrypted password that the user entered
+		// is equal to the stored hash
+		return Arrays.equals(encryptedPassword, encryptedAttemptedPassword);
 	}
 	
-	public String encryptPassword(String pass) {
-		try {
-			aes = Cipher.getInstance("AES/ECB/PKCS5Padding");
-			aes.init(Cipher.ENCRYPT_MODE, key);
-			byte[] ciphertext = aes.doFinal(pass.getBytes());
-			return new String(ciphertext);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-
+	public byte[] generateSalt() throws NoSuchAlgorithmException {
+		SecureRandom r = SecureRandom.getInstance("SHA1PRNG");
+		byte[] salt = new byte[8];
+		r.nextBytes(salt);
+		return salt;
 	}
-
-	public String decryptPassword(String ciphertext) {
-		try {
-			aes.init(Cipher.DECRYPT_MODE, key);
-			String cleartext = new String(aes.doFinal(ciphertext.getBytes()));
-			return cleartext;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
+	
 }
