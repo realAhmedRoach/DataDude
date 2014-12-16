@@ -54,7 +54,7 @@ public class NewDialog extends JDialog {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			dispose();
-			Node n = null;
+			BasicNode n = null;
 			if (comboBox.getSelectedItem() == "Text") n = new TextNode(txtName.getText());
 			else if  (comboBox.getSelectedItem() == "Table") n = new TableNode(txtName.getText());
 			else{

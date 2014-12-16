@@ -47,7 +47,7 @@ import javax.swing.border.TitledBorder;
 
 import org.datadude.gui.NewDialog;
 import org.datadude.gui.SettingsDialog;
-import org.datadude.nodes.Node;
+import org.datadude.nodes.BasicNode;
 import org.datadude.nodes.WelcomeNode;
 
 import com.petersoft.advancedswing.jclosabletabbedpane.JClosableTabbedPane;
@@ -111,7 +111,7 @@ public class CoreEngine extends JFrame {
 		});
 	}
 
-	public static void addTab(Node n) {
+	public static void addTab(BasicNode n) {
 		editorPane.addTab(n.getTitle(), n);
 		System.out.println(editorPane.getTabCount());
 		editorPane.setSelectedIndex(editorPane.getTabCount()-1);

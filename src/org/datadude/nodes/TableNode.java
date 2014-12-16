@@ -29,7 +29,7 @@ import org.datadude.datamanaging.DataDudeFile;
 /**
  * @author theTechnoKid
  */
-public class TableNode extends Node {
+public class TableNode extends BasicNode {
 	private static final long serialVersionUID = -6603367461824939430L;
 
 	JTable mainTable;

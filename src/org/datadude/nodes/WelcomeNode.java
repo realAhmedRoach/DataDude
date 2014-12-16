@@ -23,7 +23,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JLabel;
 
-public class WelcomeNode extends Node {
+public class WelcomeNode extends BasicNode {
 	private static final long serialVersionUID = 123L;
 
 	JLabel lblWelcome;

@@ -24,7 +24,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-public abstract class Node extends JInternalFrame implements ActionListener {
+public abstract class BasicNode extends JInternalFrame implements ActionListener {
 	private static final long serialVersionUID = -2795471245561416657L;
 	protected String title;
 	protected JMenuBar menuBar;
@@ -36,7 +36,7 @@ public abstract class Node extends JInternalFrame implements ActionListener {
 	protected Container pane;
 	protected JLabel lblStatus;
 
-	public Node(String _title) {
+	public BasicNode(String _title) {
 		title = _title;
 		setTitle(title);
 		// init();
