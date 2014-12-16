@@ -19,10 +19,8 @@
 package org.datadude;
 
 import java.io.File;
-import java.util.Properties;
 
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
 
 public class Main {
 

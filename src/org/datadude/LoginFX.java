@@ -28,7 +28,6 @@ import org.datadude.security.User;
 
 public class LoginFX extends Application {
 
-	User currUser;
 	TextField userTextField;
 	PasswordField pwBox;
 	Stage stage;
@@ -96,7 +95,7 @@ public class LoginFX extends Application {
 				return;
 			}
 
-			if (Login.currUser.getUserFolder() == null || currUser.getUserFolder() == "null") {
+			if (Login.currUser.getUserFolder() == null || Login.currUser.getUserFolder() == "null") {
 				System.out.println("User's folder is null");
 				Login.currUser.setUserFolder(null);
 			}
