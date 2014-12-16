@@ -2,7 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="lib" path="libs"/>
-	<classpathentry exported="true" kind="lib" path="libs/org-netbeans-swing-outline.jar"/>
 	<classpathentry kind="lib" path="libs/PetersoftJavaStyle2_20120202.jar"/>
 	<classpathentry kind="lib" path="libs/JTattoo-1.6.10.jar"/>
 	<classpathentry kind="lib" path="libs/OfficeLnFs.jar"/>

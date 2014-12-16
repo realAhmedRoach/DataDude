@@ -24,7 +24,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-public abstract class BasicNode extends JInternalFrame implements ActionListener {
+public abstract class BasicNode extends JInternalFrame implements ActionListener, Node {
 	private static final long serialVersionUID = -2795471245561416657L;
 	protected String title;
 	protected JMenuBar menuBar;
@@ -110,15 +110,7 @@ public abstract class BasicNode extends JInternalFrame implements ActionListener
 	public int getTabPos() {
 		return tabPos;
 	}
-
-	public void increaseTabPos() {
-		tabPos++;
-	}
-
-	public void decreaseTabPos() {
-		tabPos--;
-	}
-
+	
 	public String getTitle() {
 		return title;
 	}
