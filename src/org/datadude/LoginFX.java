@@ -32,9 +32,8 @@ public class LoginFX extends Application {
 	TextField userTextField;
 	PasswordField pwBox;
 	Stage stage;
+	
 	public static void init(String[] args) {
-		Main.theme.put("windowDecoration", "off");
-		com.jtattoo.plaf.texture.TextureLookAndFeel.setTheme(Main.theme);
 		launch(args);
 	}
 
