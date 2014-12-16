@@ -3,8 +3,11 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
+# Manifest and jar signature
+datadude
+manifest.*
+
 # Package Files #
-*.jar
 *.war
 *.ear
 
