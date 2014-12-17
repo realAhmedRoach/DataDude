@@ -32,6 +32,7 @@ import javax.swing.JTable;
 
 import org.datadude.Login;
 import org.datadude.datamanaging.DataDudeFile;
+import org.datadude.gui.ListDialog;
 
 /**
  * @author theTechnoKid
@@ -91,13 +92,24 @@ public class TableNode extends BasicNode {
 		JMenuItem choice = (JMenuItem) e.getSource();
 		if (choice == saveI) {
 			save(getTitle());
-		} else if (choice == loadI)
-			;
+		} else if (choice == loadI) {
+			File[] f = new File(Login.getUser().getUserFolder()).listFiles();
+			String[] files = new String[f.length];
+			for (int i = 0; i < f.length; i++)
+				files[i] = f[i].getAbsolutePath();
+			ListDialog l = new ListDialog(files);
+			while (l.isVisible())
+				;
+			if (load(l.getSelection()))
+				lblStatus.setText("Succesfully loaded CSV file");
+			else
+				lblStatus.setText("Error while loading!");
+		}
 	}
 
 	@Override
 	public boolean load(String file) {
-		File loadFile = new File(Login.getUser().getUserFolder()+File.separator+file);
+		File loadFile = new File(Login.getUser().getUserFolder() + File.separator + file);
 		try {
 			FileInputStream f = new FileInputStream(loadFile);
 			ObjectInputStream o = new ObjectInputStream(f);

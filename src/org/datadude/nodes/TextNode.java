@@ -23,8 +23,10 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -36,6 +38,7 @@ import javax.swing.KeyStroke;
 
 import org.datadude.Login;
 import org.datadude.datamanaging.DataDudeFile;
+import org.datadude.gui.ListDialog;
 
 public class TextNode extends BasicNode implements ActionListener {
 	private static final long serialVersionUID = 6657L;
@@ -104,9 +107,19 @@ public class TextNode extends BasicNode implements ActionListener {
 			if (save(getTitle())) {
 				lblStatus.setText("Succesfully saved text file.");
 			}
-		} else if (choice == exitI)
-			;
-		else if (choice == cutI) {
+		} else if (choice == loadI) {
+			File[] f = new File(Login.getUser().getUserFolder()).listFiles();
+			String[] files = new String[f.length];
+			for (int i = 0; i < f.length; i++)
+				files[i] = f[i].getAbsolutePath();
+			ListDialog l = new ListDialog(files);
+			while (l.isVisible())
+				;
+			if (load(l.getSelection()))
+				lblStatus.setText("Succesfully loaded CSV file");
+			else
+				lblStatus.setText("Error while loading!");
+		} else if (choice == cutI) {
 			pad = ta.getSelectedText();
 			ta.replaceRange("", ta.getSelectionStart(), ta.getSelectionEnd());
 		} else if (choice == copyI)
@@ -119,7 +132,13 @@ public class TextNode extends BasicNode implements ActionListener {
 
 	@Override
 	public boolean load(String file) {
+		File loadFile = new File(Login.getUser().getUserFolder() + File.separator + file);
 		try {
+			BufferedReader r = new BufferedReader(new FileReader(loadFile));
+			String line;
+			while ((line = r.readLine()) != null)
+				ta.setText(line + "\n");
+			r.close();
 			return true;
 		} catch (Exception e) {
 			return false;
