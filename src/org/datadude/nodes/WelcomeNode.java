@@ -47,10 +47,4 @@ public class WelcomeNode extends BasicNode {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 	}
-
-	@Override
-	public String getFullName() {
-		return "org.datadude.nodes.WelcomeNode";
-	}
-
 }

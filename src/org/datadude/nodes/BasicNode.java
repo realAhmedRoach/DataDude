@@ -55,7 +55,7 @@ public abstract class BasicNode extends JInternalFrame implements ActionListener
 	 * 
 	 * @return The full class (binary) name for the Node.
 	 */
-	public String getFullName() {
+	public final String getFullName() {
 		return getClass().getCanonicalName();
 	}
 

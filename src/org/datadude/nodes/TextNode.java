@@ -80,12 +80,6 @@ public class TextNode extends BasicNode implements ActionListener {
 		setJMenuBar(menuBar);
 		setVisible(true);
 	}
-
-	@Override
-	public String getFullName() {
-		return "org.datadude.nodes.TextNode";
-	}
-
 	
 	/**
 	 * Saves the file.
