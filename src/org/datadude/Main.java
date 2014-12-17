@@ -21,7 +21,8 @@ package org.datadude;
 import java.io.File;
 
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
+
+import com.alee.laf.WebLookAndFeel;
 
 public class Main {
 
@@ -50,11 +51,7 @@ public class Main {
 	}
 
 	public static void setLnF() {
-		try{
-			UIManager.setLookAndFeel("org.fife.plaf.VisualStudio2005.VisualStudio2005LookAndFeel");
-		}catch(Exception e) {
-			
-		}
+		WebLookAndFeel.install();
 	}
 	
 	/**

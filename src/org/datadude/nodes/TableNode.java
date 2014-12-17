@@ -94,4 +94,10 @@ public class TableNode extends BasicNode {
 			System.exit(0);
 	}
 
+	@Override
+	public boolean load(String file) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

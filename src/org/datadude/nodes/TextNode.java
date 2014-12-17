@@ -43,7 +43,6 @@ public class TextNode extends BasicNode implements ActionListener {
 	private JTextArea ta;
 	private JScrollPane scpane;
 
-
 	public TextNode(String _title) {
 		super(_title);
 		init();
@@ -80,7 +79,7 @@ public class TextNode extends BasicNode implements ActionListener {
 		setJMenuBar(menuBar);
 		setVisible(true);
 	}
-	
+
 	/**
 	 * Saves the file.
 	 * 
@@ -106,7 +105,7 @@ public class TextNode extends BasicNode implements ActionListener {
 				lblStatus.setText("Succesfully saved text file.");
 			}
 		} else if (choice == exitI)
-/*			System.exit(0)*/;
+			;
 		else if (choice == cutI) {
 			pad = ta.getSelectedText();
 			ta.replaceRange("", ta.getSelectionStart(), ta.getSelectionEnd());
@@ -116,6 +115,12 @@ public class TextNode extends BasicNode implements ActionListener {
 			ta.insert(pad, ta.getCaretPosition());
 		else if (choice == selectI)
 			ta.selectAll();
+	}
+
+	@Override
+	public boolean load(String file) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

@@ -113,6 +113,8 @@ public abstract class BasicNode extends JInternalFrame implements ActionListener
 	}
 
 	public abstract boolean save(String file);
+	
+	public abstract boolean load(String file);
 
 	public int getTabPos() {
 		return tabPos;
