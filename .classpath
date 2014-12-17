@@ -5,6 +5,7 @@
 	<classpathentry kind="lib" path="libs/PetersoftJavaStyle2_20120202.jar"/>
 	<classpathentry kind="lib" path="libs/OfficeLnFs.jar"/>
 	<classpathentry kind="lib" path="libs/weblaf-complete-1.28.jar"/>
+	<classpathentry kind="lib" path="libs/javacsv.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="libs/jasypt-1.9.1.jar"/>
 	<classpathentry kind="lib" path="res"/>
