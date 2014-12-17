@@ -20,8 +20,10 @@ package org.datadude.nodes;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import javax.swing.JMenuItem;
@@ -64,7 +66,6 @@ public class TableNode extends BasicNode {
 		return rac;
 	}
 
-	
 	/**
 	 * Saves the file.
 	 * 
@@ -90,14 +91,25 @@ public class TableNode extends BasicNode {
 		JMenuItem choice = (JMenuItem) e.getSource();
 		if (choice == saveI) {
 			save(getTitle());
-		} else if (choice == exitI)
-			System.exit(0);
+		} else if (choice == loadI)
+			;
 	}
 
 	@Override
 	public boolean load(String file) {
-		// TODO Auto-generated method stub
-		return false;
+		File loadFile = new File(Login.getUser().getUserFolder()+File.separator+file);
+		try {
+			FileInputStream f = new FileInputStream(loadFile);
+			ObjectInputStream o = new ObjectInputStream(f);
+			JTable newTable = (JTable) o.readObject();
+			mainTable = newTable;
+			o.close();
+			revalidate();
+			repaint();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 }

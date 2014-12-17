@@ -119,8 +119,11 @@ public class TextNode extends BasicNode implements ActionListener {
 
 	@Override
 	public boolean load(String file) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 }
