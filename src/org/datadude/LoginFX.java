@@ -100,8 +100,8 @@ public class LoginFX extends Application {
 				Login.currUser.setUserFolder(null);
 			}
 			System.out.println("Initializing Core Engine..!");
-			new Splash();
 			stage.close();
+			new Splash();
 		}
 	};
 

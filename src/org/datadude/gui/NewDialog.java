@@ -35,6 +35,7 @@ import javax.swing.border.EmptyBorder;
 
 import org.datadude.CoreEngine;
 import org.datadude.nodes.BasicNode;
+import org.datadude.nodes.CSVNode;
 import org.datadude.nodes.TableNode;
 import org.datadude.nodes.TextNode;
 
@@ -66,6 +67,7 @@ public class NewDialog extends JDialog {
 			BasicNode n = null;
 			if (comboBox.getSelectedItem() == "Text") n = new TextNode(txtName.getText());
 			else if  (comboBox.getSelectedItem() == "Table") n = new TableNode(txtName.getText());
+			else if (comboBox.getSelectedItem()=="CSV") n = new CSVNode(txtName.getText());
 			else{
 				JOptionPane.showMessageDialog(null, "Not yet implemented!", "Not Available", JOptionPane.ERROR_MESSAGE);
 			}
