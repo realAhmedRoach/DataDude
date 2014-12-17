@@ -19,9 +19,14 @@
 package org.datadude.nodes;
 
 import java.awt.event.ActionEvent;
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
-import javax.swing.*;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 import org.datadude.Login;
 import org.datadude.datamanaging.DataDudeFile;

@@ -18,16 +18,25 @@
 
 package org.datadude.gui;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
 import org.datadude.CoreEngine;
-import org.datadude.nodes.*;
+import org.datadude.nodes.BasicNode;
+import org.datadude.nodes.TableNode;
+import org.datadude.nodes.TextNode;
 
 public class NewDialog extends JDialog {
 	private static final long serialVersionUID = 12L;

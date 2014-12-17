@@ -33,7 +33,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
 
 import org.datadude.gui.Register;
 import org.datadude.gui.Splash;
@@ -57,11 +56,6 @@ public class Login extends JFrame {
 	boolean newuser;
 
 	public static void init(String[] args) {
-		try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		new Login();
 	}
 

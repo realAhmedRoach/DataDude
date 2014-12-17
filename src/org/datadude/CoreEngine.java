@@ -41,7 +41,6 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
@@ -101,7 +100,6 @@ public class CoreEngine extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
 					CoreEngine usableEngine = new CoreEngine();
 					usableEngine.setVisible(true);
 				} catch (Exception e) {

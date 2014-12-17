@@ -18,8 +18,8 @@
 
 package org.datadude.datamanaging;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.util.ArrayList;
 //import java.nio.file.*;
 
 public class Database {

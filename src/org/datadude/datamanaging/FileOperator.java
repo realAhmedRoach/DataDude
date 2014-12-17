@@ -18,8 +18,12 @@
 
 package org.datadude.datamanaging;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.ArrayList;
 
 public class FileOperator {
 

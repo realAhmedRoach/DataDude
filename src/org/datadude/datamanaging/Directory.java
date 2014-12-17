@@ -19,7 +19,7 @@
 
 package org.datadude.datamanaging;
 
-import java.io.*;
+import java.io.File;
 
 public class Directory {
 

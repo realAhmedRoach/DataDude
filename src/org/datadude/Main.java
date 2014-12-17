@@ -21,6 +21,7 @@ package org.datadude;
 import java.io.File;
 
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 public class Main {
 
@@ -44,10 +45,18 @@ public class Main {
 		}
 
 		System.out.println(DataDude.getPassLoc());
-
+		setLnF();
 		LoginFX.init(args);
 	}
 
+	public static void setLnF() {
+		try{
+			UIManager.setLookAndFeel("org.fife.plaf.VisualStudio2005.VisualStudio2005LookAndFeel");
+		}catch(Exception e) {
+			
+		}
+	}
+	
 	/**
 	 * Checks to see if the DataDude app data folder is there. If not, set the
 	 * <code>firstTime</code> variable to true and make the folders.

@@ -22,7 +22,14 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JToolBar;
 
 public abstract class BasicNode extends JInternalFrame implements ActionListener, Node {
 	private static final long serialVersionUID = -2795471245561416657L;

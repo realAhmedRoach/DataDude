@@ -18,7 +18,9 @@
 
 package org.datadude.datamanaging;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.Serializable;
 
 public class DataDudeFile implements Serializable {
 
