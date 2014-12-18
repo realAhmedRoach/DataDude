@@ -122,8 +122,7 @@ public class CoreEngine extends JFrame {
 		long start = System.currentTimeMillis();
 		System.out.println("\nInside Core Engine Constructor");
 		// SET ICON {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(
-				CoreEngine.class.getResource("/javax/swing/plaf/metal/icons/ocean/directory.gif")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(CoreEngine.class.getResource("/images/icon.png")));
 		// }
 		// WINDOW LISTENER{
 		addWindowListener(new WindowAdapter() {
