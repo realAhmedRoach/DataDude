@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -15,7 +16,6 @@ import javax.swing.KeyStroke;
 
 import org.datadude.Login;
 import org.datadude.datamanaging.DataDudeFile;
-import org.datadude.gui.ListDialog;
 
 import com.csvreader.CsvReader;
 import com.csvreader.CsvWriter;
@@ -73,14 +73,11 @@ public class CSVNode extends BasicNode {
 			} else
 				lblStatus.setText("Error while saving!");
 		} else if (choice == loadI) {
-			File[] f = new File(Login.getUser().getUserFolder()).listFiles();
-			String[] files = new String[f.length];
-			for (int i = 0; i < f.length; i++)
-				files[i] = f[i].getAbsolutePath();
-			ListDialog l = new ListDialog(files);
-			while (l.isVisible())
-				;
-			if (load(l.getSelection()))
+			JFileChooser l = new JFileChooser();
+			l.setCurrentDirectory(new File(Login.getUser().getUserFolder()));
+			l.setDialogTitle("Open CSV File");
+			l.showOpenDialog(this);
+			if (load(l.getSelectedFile().getName()))
 				lblStatus.setText("Succesfully loaded CSV file");
 			else
 				lblStatus.setText("Error while loading!");
@@ -100,8 +97,9 @@ public class CSVNode extends BasicNode {
 			w.endRecord();
 
 			for (int i = 1; i < lines.length; i++) {
-				if (lines[i].getText().startsWith(w.getComment()+""))
-						w.writeComment(lines[i].getText().substring(1));;
+				if (lines[i].getText().startsWith(w.getComment() + ""))
+					w.writeComment(lines[i].getText().substring(1));
+				;
 				w.writeRecord(lines[i].getText().split(","));
 				w.endRecord();
 			}
