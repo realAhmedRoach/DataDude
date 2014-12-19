@@ -7,7 +7,7 @@
 .mtj.tmp/
 
 # Manifest and jar signature
-datadude
+datadude.sig
 manifest.*
 
 # releases
