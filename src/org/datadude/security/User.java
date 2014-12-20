@@ -76,7 +76,7 @@ public class User implements Serializable {
 	public void save() throws IOException {
 		if (encrypted) {
 			File f = new File(DataDude.getPassLoc() + getUserName() + ".ser");
-			f.mkdirs();
+			f.getParentFile().mkdirs();
 			f.createNewFile();
 			FileOutputStream fileOut = new FileOutputStream(f);
 			ObjectOutputStream out = new ObjectOutputStream(fileOut);
@@ -134,21 +134,4 @@ public class User implements Serializable {
 	public byte[] getPasswordBytes() {
 		return passBytes;
 	}
-
-	/*public void decrypt() {
-		byte[] decrypted;
-		try {
-			c.init(Cipher.DECRYPT_MODE, key, ivSpec);
-			decrypted = new byte[c.getOutputSize(enc_len)];
-			dec_len = c.update(encrypted, 0, enc_len, decrypted, 0);
-			dec_len += c.doFinal(decrypted, dec_len);
-			passBytes = decrypted;
-			password = new String(decrypted);
-			passArray = password.toCharArray();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return;
-		}
-	}*/
-
 }

@@ -19,6 +19,7 @@
 package org.datadude.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -28,6 +29,7 @@ import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -54,7 +56,7 @@ public class Register extends JDialog {
 			try {
 				File f = new File(DataDude.getPassLoc() + user.getText() + ".ser");
 				if (!f.exists()) {
-					f.mkdirs();
+					f.getParentFile().mkdirs();
 					f.createNewFile();
 				} else {
 					JOptionPane.showMessageDialog(null, "There is already a user with that name.");
@@ -79,13 +81,19 @@ public class Register extends JDialog {
 	 * Create the dialog.
 	 */
 	public Register() {
+		setResizable(false);
+		setModal(true);
+		setModalityType(ModalityType.APPLICATION_MODAL);
 		setTitle("Register to DataDude");
 		setVisible(true);
-		setBounds(100, 100, 450, 300);
-		getContentPane().setLayout(new BorderLayout());
+		setSize(450, 300);
+		setLocationRelativeTo(null);
+		contentPanel.setBackground(Color.YELLOW);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new GridLayout(0, 2, 0, 0));
+		contentPanel.setLayout(new GridLayout(0, 2, 5, 50));
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JLabel lblDisplayName = new JLabel("Display Name");
 		contentPanel.add(lblDisplayName);
@@ -93,41 +101,40 @@ public class Register extends JDialog {
 		txtName = new JTextField();
 		contentPanel.add(txtName);
 		txtName.setColumns(10);
-		{
-			JLabel lblUsername = new JLabel("Username");
-			contentPanel.add(lblUsername);
-		}
-		{
-			user = new JTextField();
-			contentPanel.add(user);
-			user.setColumns(10);
-		}
-		{
-			JLabel lblPassword = new JLabel("Password");
-			contentPanel.add(lblPassword);
-		}
+
+		JLabel lblUsername = new JLabel("Username");
+		contentPanel.add(lblUsername);
+
+		user = new JTextField();
+		contentPanel.add(user);
+		user.setColumns(10);
+
+		JLabel lblPassword = new JLabel("Password");
+		contentPanel.add(lblPassword);
 
 		pass = new JPasswordField();
 		contentPanel.add(pass);
 
-		JLabel label = new JLabel("");
-		contentPanel.add(label);
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				okButton.addActionListener(okListener);
-				getRootPane().setDefaultButton(okButton);
+		JPanel buttonPane = new JPanel();
+		buttonPane.setBackground(Color.ORANGE);
+		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		getContentPane().add(buttonPane, BorderLayout.SOUTH);
+
+		JButton okButton = new JButton("Register");
+		okButton.setActionCommand("OK");
+		buttonPane.add(okButton);
+		okButton.addActionListener(okListener);
+		getRootPane().setDefaultButton(okButton);
+
+		JButton cancelButton = new JButton("Cancel");
+		cancelButton.setActionCommand("Cancel");
+		cancelButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				Login.init(null);
 			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
-			}
-		}
+		});
+		buttonPane.add(cancelButton);
+
 	}
 }
