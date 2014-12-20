@@ -54,6 +54,7 @@ public class Register extends JDialog {
 			try {
 				File f = new File(DataDude.getPassLoc() + user.getText() + ".ser");
 				if (!f.exists()) {
+					f.mkdirs();
 					f.createNewFile();
 				} else {
 					JOptionPane.showMessageDialog(null, "There is already a user with that name.");
@@ -78,7 +79,7 @@ public class Register extends JDialog {
 	 * Create the dialog.
 	 */
 	public Register() {
-		setTitle("Register to DataMan");
+		setTitle("Register to DataDude");
 		setVisible(true);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());

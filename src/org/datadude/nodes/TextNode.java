@@ -30,6 +30,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
@@ -38,7 +39,6 @@ import javax.swing.KeyStroke;
 
 import org.datadude.Login;
 import org.datadude.datamanaging.DataDudeFile;
-import org.datadude.gui.ListDialog;
 
 public class TextNode extends BasicNode implements ActionListener {
 	private static final long serialVersionUID = 6657L;
@@ -108,15 +108,12 @@ public class TextNode extends BasicNode implements ActionListener {
 				lblStatus.setText("Succesfully saved text file.");
 			}
 		} else if (choice == loadI) {
-			File[] f = new File(Login.getUser().getUserFolder()).listFiles();
-			String[] files = new String[f.length];
-			for (int i = 0; i < f.length; i++)
-				files[i] = f[i].getAbsolutePath();
-			ListDialog l = new ListDialog(files);
-			while (l.isVisible())
-				;
-			if (load(l.getSelection()))
-				lblStatus.setText("Succesfully loaded CSV file");
+			JFileChooser l = new JFileChooser();
+			l.setCurrentDirectory(new File(Login.getUser().getUserFolder()));
+			l.setDialogTitle("Open text File");
+			l.showOpenDialog(this);
+			if (load(l.getSelectedFile().getAbsolutePath()))
+				lblStatus.setText("Succesfully loaded text file");
 			else
 				lblStatus.setText("Error while loading!");
 		} else if (choice == cutI) {
@@ -132,12 +129,14 @@ public class TextNode extends BasicNode implements ActionListener {
 
 	@Override
 	public boolean load(String file) {
-		File loadFile = new File(Login.getUser().getUserFolder() + File.separator + file);
+		File loadFile = new File(file);
 		try {
 			BufferedReader r = new BufferedReader(new FileReader(loadFile));
 			String line;
 			while ((line = r.readLine()) != null)
 				ta.setText(line + "\n");
+			revalidate();
+			repaint();
 			r.close();
 			return true;
 		} catch (Exception e) {

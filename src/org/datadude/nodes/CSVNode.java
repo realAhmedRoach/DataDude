@@ -93,14 +93,13 @@ public class CSVNode extends BasicNode {
 		try {
 			File f = new File(Login.getUser().getUserFolder() + File.separator + file + DataDudeFile.T_CSV);
 			f.createNewFile();
-			CSVWriter w = new CSVWriter(new FileWriter(f), '\t', CSVWriter.DEFAULT_QUOTE_CHARACTER,
-					CSVWriter.DEFAULT_ESCAPE_CHARACTER, System.getProperty("line.seperator"));
+			CSVWriter w = new CSVWriter(new FileWriter(f), ',', CSVWriter.DEFAULT_QUOTE_CHARACTER,
+					CSVWriter.DEFAULT_ESCAPE_CHARACTER, System.getProperty("line.separator"));
 
 			// Headers
 			for (int i = 0; i < lines.length; i++)
 				w.writeNext(lines[i].getText().split(","), false);
 
-			w.flush();
 			w.close();
 		} catch (Exception e) {
 			String text = "Exception while trying to save file:\n" + e.getMessage();
@@ -112,26 +111,22 @@ public class CSVNode extends BasicNode {
 
 	@Override
 	public boolean load(String file) {
-		List<String[]> data;
+		// Clear Panel
+		textPanel.removeAll();
+
 		try {
-			CSVReader r = new CSVReader(new FileReader(file), '\t');
-			data = r.readAll();
-
-			// Headers
-			String[] headers = data.get(0);
-			for (int i = 0; i < headers.length; i++) {
-				lines[0] = new JTextField();
-				lines[0].setText(lines[0].getText() + headers[i] + ",");
-			}
-
-			// The rest
-			for (int i = 1; i < data.size() - 1; i++) {
-				String[] currentData = data.get(i);
+			CSVReader r = new CSVReader(new FileReader(file), ',');
+			List<String[]> data = r.readAll();
+			
+			for(int i = 0; i<data.size(); i++){
 				lines[i] = new JTextField();
-				for (int y = 0; i < currentData.length - 1; y++)
-					lines[i].setText(lines[i].getText() + currentData[y] + ",");
-			}
+				lines[i].setText(String.join(",", data.get(i)));
+				lines[i].setColumns(50);
+				textPanel.add(lines[i]);
+			} 
 
+			revalidate();
+			repaint();
 			r.close();
 		} catch (Exception e) {
 			String text = "Exception while trying to load file:\n\n" + e.toString();

@@ -26,13 +26,13 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import javax.swing.JFileChooser;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 import org.datadude.Login;
 import org.datadude.datamanaging.DataDudeFile;
-import org.datadude.gui.ListDialog;
 
 /**
  * @author theTechnoKid
@@ -93,15 +93,12 @@ public class TableNode extends BasicNode {
 		if (choice == saveI) {
 			save(getTitle());
 		} else if (choice == loadI) {
-			File[] f = new File(Login.getUser().getUserFolder()).listFiles();
-			String[] files = new String[f.length];
-			for (int i = 0; i < f.length; i++)
-				files[i] = f[i].getAbsolutePath();
-			ListDialog l = new ListDialog(files);
-			while (l.isVisible())
-				;
-			if (load(l.getSelection()))
-				lblStatus.setText("Succesfully loaded CSV file");
+			JFileChooser l = new JFileChooser();
+			l.setCurrentDirectory(new File(Login.getUser().getUserFolder()));
+			l.setDialogTitle("Open Table File");
+			l.showOpenDialog(this);
+			if (load(l.getSelectedFile().getAbsolutePath()))
+				lblStatus.setText("Succesfully loaded Table file");
 			else
 				lblStatus.setText("Error while loading!");
 		}
@@ -109,7 +106,7 @@ public class TableNode extends BasicNode {
 
 	@Override
 	public boolean load(String file) {
-		File loadFile = new File(Login.getUser().getUserFolder() + File.separator + file);
+		File loadFile = new File(file);
 		try {
 			FileInputStream f = new FileInputStream(loadFile);
 			ObjectInputStream o = new ObjectInputStream(f);
