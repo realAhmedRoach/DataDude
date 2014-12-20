@@ -36,6 +36,7 @@ import javax.swing.KeyStroke;
 
 import org.datadude.Login;
 import org.datadude.datamanaging.DataDudeFile;
+import org.datadude.datamanaging.Utils;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
@@ -137,7 +138,7 @@ public class CSVNode extends BasicNode {
 			
 			for(int i = 0; i<data.size(); i++){
 				lines[i] = new JTextField();
-				lines[i].setText(String.join(",", data.get(i)));
+				lines[i].setText(Utils.join(data.get(i),","));
 				lines[i].setColumns(50);
 				textPanel.add(lines[i]);
 			} 
