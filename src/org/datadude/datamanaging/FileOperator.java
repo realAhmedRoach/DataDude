@@ -21,6 +21,7 @@ package org.datadude.datamanaging;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
@@ -63,12 +64,12 @@ public class FileOperator {
 		return true;
 	}
 
-	public ArrayList<String> loadFile() {
+	public ArrayList<String> loadFile() throws FileNotFoundException{
 		File fileOp = new File(file.getFullPath());
 		ArrayList<String> data = new ArrayList<String>();
 
 		if (!fileOp.exists()) {
-			System.err.println("Can't load file: File not found");
+			throw new FileNotFoundException("Can't load file: File not found");
 		} else {
 			try {
 				BufferedReader read = new BufferedReader(new FileReader(fileOp));
