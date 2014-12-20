@@ -23,6 +23,8 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -65,14 +67,17 @@ public class NewDialog extends JDialog {
 		public void actionPerformed(ActionEvent e) {
 			dispose();
 			BasicNode n = null;
-			if (comboBox.getSelectedItem() == "Text") n = new TextNode(txtName.getText());
-			else if  (comboBox.getSelectedItem() == "Table") n = new TableNode(txtName.getText());
-			else if (comboBox.getSelectedItem()=="CSV") n = new CSVNode(txtName.getText());
-			else{
+			if (comboBox.getSelectedItem() == "Text")
+				n = new TextNode(txtName.getText());
+			else if (comboBox.getSelectedItem() == "Table")
+				n = new TableNode(txtName.getText());
+			else if (comboBox.getSelectedItem() == "CSV")
+				n = new CSVNode(txtName.getText());
+			else {
 				JOptionPane.showMessageDialog(null, "Not yet implemented!", "Not Available", JOptionPane.ERROR_MESSAGE);
 			}
 			CoreEngine.addTab(n);
-			
+
 		}
 
 	};
@@ -93,10 +98,26 @@ public class NewDialog extends JDialog {
 		txtName = new JTextField();
 		txtName.setBounds(100, 49, 230, 42);
 		txtName.setText("Name");
+		txtName.addFocusListener(new FocusListener() {
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (txtName.getText().isEmpty()) {
+					txtName.setText("Name");
+				}
+			}
+
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (txtName.getText().equals("Name")) {
+					txtName.setText("");
+				}
+			}
+		});
 		contentPanel.add(txtName);
 		txtName.setColumns(10);
 
-		comboBox = new JComboBox<String>(new String[] { "Text", "Table", "Yaml", "CSV" });
+		comboBox = new JComboBox<String>(new String[] { "Text", "Table", "CSV" });
 		comboBox.setBounds(100, 103, 230, 56);
 		contentPanel.add(comboBox);
 
