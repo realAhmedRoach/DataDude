@@ -4,6 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -17,8 +20,8 @@ import javax.swing.KeyStroke;
 import org.datadude.Login;
 import org.datadude.datamanaging.DataDudeFile;
 
-import com.csvreader.CsvReader;
-import com.csvreader.CsvWriter;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
 
 public class CSVNode extends BasicNode {
 	private static final long serialVersionUID = -159829697718383315L;
@@ -77,7 +80,7 @@ public class CSVNode extends BasicNode {
 			l.setCurrentDirectory(new File(Login.getUser().getUserFolder()));
 			l.setDialogTitle("Open CSV File");
 			l.showOpenDialog(this);
-			if (load(l.getSelectedFile().getName()))
+			if (load(l.getSelectedFile().getAbsolutePath()))
 				lblStatus.setText("Succesfully loaded CSV file");
 			else
 				lblStatus.setText("Error while loading!");
@@ -90,19 +93,13 @@ public class CSVNode extends BasicNode {
 		try {
 			File f = new File(Login.getUser().getUserFolder() + File.separator + file + DataDudeFile.T_CSV);
 			f.createNewFile();
-			CsvWriter w = new CsvWriter(f.getAbsolutePath());
-			w.writeComment("Made with DataDude");
-			// Header
-			w.writeRecord(lines[0].getText().split(","));
-			w.endRecord();
+			CSVWriter w = new CSVWriter(new FileWriter(f), '\t', CSVWriter.DEFAULT_QUOTE_CHARACTER,
+					CSVWriter.DEFAULT_ESCAPE_CHARACTER, System.getProperty("line.seperator"));
 
-			for (int i = 1; i < lines.length; i++) {
-				if (lines[i].getText().startsWith(w.getComment() + ""))
-					w.writeComment(lines[i].getText().substring(1));
-				;
-				w.writeRecord(lines[i].getText().split(","));
-				w.endRecord();
-			}
+			// Headers
+			for (int i = 0; i < lines.length; i++)
+				w.writeNext(lines[i].getText().split(","), false);
+
 			w.flush();
 			w.close();
 		} catch (Exception e) {
@@ -115,25 +112,30 @@ public class CSVNode extends BasicNode {
 
 	@Override
 	public boolean load(String file) {
-		String[] headers;
+		List<String[]> data;
 		try {
-			CsvReader r = new CsvReader(Login.getUser().getUserFolder() + File.separator + file);
-			headers = r.getHeaders();
-			r.readHeaders();
-			// Print Headers {
-			lines[0] = new JTextField();
-			for (int i = 0; i < headers.length; i++)
+			CSVReader r = new CSVReader(new FileReader(file), '\t');
+			data = r.readAll();
+
+			// Headers
+			String[] headers = data.get(0);
+			for (int i = 0; i < headers.length; i++) {
+				lines[0] = new JTextField();
 				lines[0].setText(lines[0].getText() + headers[i] + ",");
-			// }
-			int i = 1;
-			while (r.readRecord()) {
-				lines[i] = new JTextField();
-				lines[i].setText(lines[i].getText() + r.get(headers[i]));
-				getContentPane().add(lines[i]);
-				i++;
 			}
+
+			// The rest
+			for (int i = 1; i < data.size() - 1; i++) {
+				String[] currentData = data.get(i);
+				lines[i] = new JTextField();
+				for (int y = 0; i < currentData.length - 1; y++)
+					lines[i].setText(lines[i].getText() + currentData[y] + ",");
+			}
+
+			r.close();
 		} catch (Exception e) {
-			String text = "Exception while trying to load file:\n\n" + e.getMessage();
+			String text = "Exception while trying to load file:\n\n" + e.toString();
+			e.printStackTrace();
 			JOptionPane.showMessageDialog(this, text, title, JOptionPane.ERROR_MESSAGE);
 			return false;
 		}

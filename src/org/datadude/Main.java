@@ -66,7 +66,7 @@ public class Main {
 			f = new File("/var/lib/DataDude/pass/");
 		}
 
-		if (f.isDirectory()) {
+		if (f.isDirectory()&&f.exists()) {
 			firstTime = false;
 		} else {
 			firstTime = true;
