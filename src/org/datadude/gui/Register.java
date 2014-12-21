@@ -29,7 +29,6 @@ import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -38,7 +37,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import org.datadude.DataDude;
-import org.datadude.Login;
+import org.datadude.LoginFX;
 import org.datadude.security.User;
 
 public class Register extends JDialog {
@@ -65,7 +64,7 @@ public class Register extends JDialog {
 				currUser.setName(txtName.getText());
 				currUser.encrypt();
 				currUser.save();
-				new Login();
+				LoginFX.init(null);
 				dispose();
 			} catch (IOException i) {
 				i.printStackTrace();
@@ -82,8 +81,6 @@ public class Register extends JDialog {
 	 */
 	public Register() {
 		setResizable(false);
-		setModal(true);
-		setModalityType(ModalityType.APPLICATION_MODAL);
 		setTitle("Register to DataDude");
 		setVisible(true);
 		setSize(450, 300);
@@ -92,8 +89,6 @@ public class Register extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new GridLayout(0, 2, 5, 50));
-		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JLabel lblDisplayName = new JLabel("Display Name");
 		contentPanel.add(lblDisplayName);
@@ -131,7 +126,7 @@ public class Register extends JDialog {
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				Login.init(null);
+				LoginFX.init(null);
 			}
 		});
 		buttonPane.add(cancelButton);

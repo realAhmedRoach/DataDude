@@ -26,10 +26,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import javax.swing.JFileChooser;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
+import javax.swing.*;
 
 import org.datadude.Login;
 import org.datadude.datamanaging.DataDudeFile;
@@ -45,9 +42,11 @@ public class TableNode extends BasicNode {
 	public TableNode(String _title) {
 		super(_title);
 		init();
+		lblStatus = new JLabel();
 		int[] rac = this.askRowsAndColumns();
 		mainTable = new JTable(rac[0], rac[1]);
 		mainTable.setVisible(true);
+		setJMenuBar(menuBar);
 		this.add(mainTable);
 	}
 
@@ -63,7 +62,7 @@ public class TableNode extends BasicNode {
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(this, "Your're supposed to put in a number!");
 		}
-		setJMenuBar(menuBar);
+		
 		return rac;
 	}
 
