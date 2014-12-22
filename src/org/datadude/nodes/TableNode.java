@@ -26,8 +26,13 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import javax.swing.*;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
+import org.datadude.DataDude;
 import org.datadude.Login;
 import org.datadude.datamanaging.DataDudeFile;
 
@@ -46,6 +51,8 @@ public class TableNode extends BasicNode {
 		int[] rac = this.askRowsAndColumns();
 		mainTable = new JTable(rac[0], rac[1]);
 		mainTable.setVisible(true);
+		// TODO: Add new row and column button
+
 		setJMenuBar(menuBar);
 		this.add(mainTable);
 	}
@@ -62,7 +69,7 @@ public class TableNode extends BasicNode {
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(this, "Your're supposed to put in a number!");
 		}
-		
+
 		return rac;
 	}
 
@@ -80,8 +87,26 @@ public class TableNode extends BasicNode {
 			in.close();
 			return true;
 		} catch (IOException e) {
-			String text = "Exception while trying to save file:\n\n" + e.getMessage();
-			JOptionPane.showMessageDialog(this, text, title, JOptionPane.ERROR_MESSAGE);
+			DataDude.showError(this, e, "Save failed");
+			return false;
+		}
+	}
+
+	@Override
+	public boolean load(String file) {
+		File loadFile = new File(file);
+		removeAll();
+		try {
+			FileInputStream f = new FileInputStream(loadFile);
+			ObjectInputStream o = new ObjectInputStream(f);
+			JTable newTable = (JTable) o.readObject();
+			add(newTable);
+			o.close();
+			revalidate();
+			repaint();
+			return true;
+		} catch (Exception e) {
+			DataDude.showError(this, e, "Load failed");
 			return false;
 		}
 	}
@@ -100,23 +125,6 @@ public class TableNode extends BasicNode {
 				lblStatus.setText("Succesfully loaded Table file");
 			else
 				lblStatus.setText("Error while loading!");
-		}
-	}
-
-	@Override
-	public boolean load(String file) {
-		File loadFile = new File(file);
-		try {
-			FileInputStream f = new FileInputStream(loadFile);
-			ObjectInputStream o = new ObjectInputStream(f);
-			JTable newTable = (JTable) o.readObject();
-			mainTable = newTable;
-			o.close();
-			revalidate();
-			repaint();
-			return true;
-		} catch (Exception e) {
-			return false;
 		}
 	}
 

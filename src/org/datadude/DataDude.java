@@ -18,9 +18,11 @@
 
 package org.datadude;
 
+import java.awt.Component;
 import java.io.File;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 import org.datadude.memory.MemoryManager;
 
@@ -69,6 +71,19 @@ public final class DataDude {
 
 	public MemoryManager getMemoryManager() {
 		return manager;
+	}
+
+	public static void showError(Component parent, Exception e, String title) {
+		String text = "Something bad happened:\n\n" + e;
+		JOptionPane.showMessageDialog(parent, text, title, JOptionPane.ERROR_MESSAGE);
+	}
+
+	public static void showError(Exception e, String title) {
+		showError(null, e, title);
+	}
+	
+	public static void showError(Exception e) {
+		showError(e,"Exception");
 	}
 
 	public static String getFolder() {
