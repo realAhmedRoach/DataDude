@@ -18,6 +18,7 @@
 
 package org.datadude.nodes;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.FileInputStream;
@@ -30,6 +31,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 
 import org.datadude.DataDude;
@@ -42,13 +44,17 @@ import org.datadude.datamanaging.DataDudeFile;
 public class TableNode extends BasicNode {
 	private static final long serialVersionUID = -6603367461824939430L;
 
+	JPanel main;
 	JTable mainTable;
 
 	public TableNode(String _title) {
 		super(_title);
 		init();
-		lblStatus = new JLabel();
+		lblStatus = new JLabel("Status");
 		toolBar.add(lblStatus);
+		
+		pane.add(toolBar, BorderLayout.SOUTH);
+		pane.add(main);
 		
 		saveI.addActionListener(this);
 		loadI.addActionListener(this);
@@ -64,7 +70,7 @@ public class TableNode extends BasicNode {
 		// TODO: Add new row and column button
 
 		setJMenuBar(menuBar);
-		this.add(mainTable);
+		main.add(mainTable);
 	}
 
 	/**
@@ -105,12 +111,12 @@ public class TableNode extends BasicNode {
 	@Override
 	public boolean load(String file) {
 		File loadFile = new File(file);
-		removeAll();
+		main.removeAll();
 		try {
 			FileInputStream f = new FileInputStream(loadFile);
 			ObjectInputStream o = new ObjectInputStream(f);
 			JTable newTable = (JTable) o.readObject();
-			add(newTable);
+			main.add(newTable);
 			o.close();
 			revalidate();
 			repaint();
