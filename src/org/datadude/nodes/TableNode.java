@@ -48,6 +48,16 @@ public class TableNode extends BasicNode {
 		super(_title);
 		init();
 		lblStatus = new JLabel();
+		toolBar.add(lblStatus);
+		
+		saveI.addActionListener(this);
+		loadI.addActionListener(this);
+		exitI.addActionListener(this);
+		cutI.addActionListener(this);
+		copyI.addActionListener(this);
+		pasteI.addActionListener(this);
+		selectI.addActionListener(this);
+		
 		int[] rac = this.askRowsAndColumns();
 		mainTable = new JTable(rac[0], rac[1]);
 		mainTable.setVisible(true);

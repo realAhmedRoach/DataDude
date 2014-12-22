@@ -20,7 +20,9 @@ package org.datadude.nodes;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -30,6 +32,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JToolBar;
+import javax.swing.KeyStroke;
+import javax.swing.border.BevelBorder;
 
 public abstract class BasicNode extends JInternalFrame implements ActionListener, Node {
 	private static final long serialVersionUID = -2795471245561416657L;
@@ -44,9 +48,11 @@ public abstract class BasicNode extends JInternalFrame implements ActionListener
 	protected JLabel lblStatus;
 
 	public BasicNode(String _title) {
+		setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		title = _title;
 		setTitle(title);
 		// init();
+
 	}
 
 	/**
@@ -70,20 +76,26 @@ public abstract class BasicNode extends JInternalFrame implements ActionListener
 		editM = new JMenu("Edit");
 
 		exitI = new JMenuItem("Exit");
-		exitI.setIcon(new ImageIcon(TextNode.class.getResource("/org/fife/plaf/OfficeXP/delete.gif")));
+		exitI.setIcon(new ImageIcon(BasicNode.class.getResource("/com/alee/laf/filechooser/icons/remove.png")));
 		cutI = new JMenuItem("Cut");
-		cutI.setIcon(new ImageIcon(TextNode.class.getResource("/org/fife/plaf/Office2003/cut.gif")));
+		cutI.setIcon(new ImageIcon(BasicNode.class.getResource("/com/sun/javafx/scene/web/skin/Cut_16x16_JFX.png")));
 		copyI = new JMenuItem("Copy");
-		copyI.setIcon(new ImageIcon(TextNode.class.getResource("/org/fife/plaf/Office2003/copy.gif")));
+		copyI.setIcon(new ImageIcon(BasicNode.class.getResource("/com/alee/extended/ninepatch/icons/copy.png")));
 		pasteI = new JMenuItem("Paste");
-		pasteI.setIcon(new ImageIcon(TextNode.class.getResource("/org/fife/plaf/Office2003/paste.gif")));
-		selectI = new JMenuItem("Select All"); // menuitems
-		selectI.setIcon(new ImageIcon(TextNode.class.getResource("/org/fife/plaf/Office2003/selectall.gif")));
+		pasteI.setIcon(new ImageIcon(BasicNode.class.getResource("/com/alee/extended/ninepatch/icons/paste.png")));
+		selectI = new JMenuItem("Select All");
 		saveI = new JMenuItem("Save"); // menuitems
-		saveI.setIcon(new ImageIcon(TextNode.class.getResource("/org/fife/plaf/Office2003/save.gif")));
+		saveI.setIcon(new ImageIcon(BasicNode.class.getResource("/com/alee/extended/ninepatch/icons/save.png")));
 		loadI = new JMenuItem("Load");
-		loadI.setIcon(new ImageIcon(TextNode.class.getResource("/org/fife/plaf/Office2003/open.gif")));
+		loadI.setIcon(new ImageIcon(BasicNode.class.getResource("/com/alee/extended/ninepatch/icons/open.png")));
 		toolBar = new JToolBar();
+
+		saveI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
+		loadI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, ActionEvent.CTRL_MASK));
+		cutI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, ActionEvent.CTRL_MASK));
+		copyI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK));
+		pasteI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, ActionEvent.CTRL_MASK));
+		selectI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.CTRL_MASK));
 
 		menuBar.add(fileM);
 		menuBar.add(editM);
@@ -113,13 +125,13 @@ public abstract class BasicNode extends JInternalFrame implements ActionListener
 	}
 
 	public abstract boolean save(String file);
-	
+
 	public abstract boolean load(String file);
 
 	public int getTabPos() {
 		return tabPos;
 	}
-	
+
 	public String getTitle() {
 		return title;
 	}
