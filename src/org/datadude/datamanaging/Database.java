@@ -60,15 +60,26 @@ public class Database {
 	/*
 	 * Getters And Setters
 	 */
-	
+	 /**
+	  * Directory getter
+	  * @return the directory used
+	  */
 	public Directory getDirectory() {
 		return directory;
 	}
 
+	/**
+	 * Directory setter
+	 * @param directory the directory to set it to
+	 */
 	public void setDirectory(Directory directory) {
 		this.directory = directory;
 	}
 	
+	/**
+	 * Sets the directory using a String
+	 * @param directory the String to use as directory
+	 */
 	public void setDirectory(String directory) {
 		this.directory = new Directory(directory);
 	}

@@ -23,6 +23,11 @@ import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
 
+/**
+ * Represents either a file pointer or directory pointer
+ * @author theTechnoKid
+ * @since 0.01
+ */
 public class Pointer {
 
 	int location;

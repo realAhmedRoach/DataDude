@@ -18,8 +18,8 @@
 package org.datadude.datamanaging;
 
 /**
- * @author aarh9
- *
+ * Utilities used by various classes in DataDude
+ * @author theTechnoKid
  */
 public abstract class Utils {
 

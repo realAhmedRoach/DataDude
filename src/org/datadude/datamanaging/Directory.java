@@ -32,6 +32,10 @@ public class Directory {
 		this.path = System.getProperty("user.home");
 	}
 
+	/**
+	 * Creates a new Directory with {@link File} Object
+	 * @param _path The file to use as the path
+	 */
 	public Directory(File _path) {
 		if (_path.isDirectory())
 			this.path = _path.getAbsolutePath();
@@ -40,6 +44,10 @@ public class Directory {
 
 	}
 
+	/**
+	 * Creates a new Directory with a String
+	 * @param path The string to use as path
+	 */
 	public Directory(String path) {
 		File temp = new File(path);
 		if (temp.isDirectory()) {

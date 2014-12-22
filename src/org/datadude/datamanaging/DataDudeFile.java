@@ -28,7 +28,7 @@ public class DataDudeFile implements Serializable {
 
 	public static final String T_TEXT = ".txt";
 	public static final String T_TABLE = ".ddt";
-	public static final String T_DIAGRAM = ".ddd";
+//	public static final String T_DIAGRAM = ".ddd";
 	public static final String T_PROPERTIES = ".properties";
 	public static final String T_OTHER = ".ddf";
 	public static final String T_CSV = ".csv";
@@ -79,10 +79,10 @@ public class DataDudeFile implements Serializable {
 		File afile = new File(getFullPath());
 		this.dir = dir;
 		if (afile.renameTo(new File(dir + name))) {
-			System.out.println("File is moved successful!");
+			System.out.println("File has moved successful!");
 			return true;
 		} else {
-			System.out.println("File is failed to move!");
+			System.out.println("File has failed to move!");
 			return false;
 		}
 	}
