@@ -88,7 +88,7 @@ public class Register extends JDialog {
 		contentPanel.setBackground(Color.YELLOW);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new GridLayout(0, 2, 5, 50));
+		contentPanel.setLayout(new GridLayout(3, 2, 5, 50));
 
 		JLabel lblDisplayName = new JLabel("Display Name");
 		contentPanel.add(lblDisplayName);

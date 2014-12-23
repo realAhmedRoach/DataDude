@@ -47,17 +47,23 @@ public class LoginFX extends Application {
 
 	TextField userTextField;
 	PasswordField pwBox;
-	Stage stage;
+	static Stage stage;
+	private static boolean launched;
 	
 	public static void init(String[] args) {
-		launch(args);
+		if(!launched){
+			launch(args);
+			launched = true;
+		}else
+			stage.show();
+			
 	}
 
 
 	@Override
 	public void start(final Stage _stage) throws Exception {
 		GridPane grid = new GridPane();
-		this.stage = _stage;
+		stage = _stage;
 		grid.setAlignment(Pos.CENTER);
 		grid.setHgap(10);
 		grid.setVgap(10);
