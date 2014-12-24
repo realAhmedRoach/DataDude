@@ -25,6 +25,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -87,6 +88,9 @@ public class LoginFX extends Application {
 		Button btnLogin = new Button("Login");
 		Button btnReg = new Button("Register");
 
+		btnLogin.setCursor(Cursor.HAND);
+		btnReg.setCursor(Cursor.HAND);
+		
 		// Adding Nodes to GridPane layout
 		grid.add(lblUserName, 0, 0);
 		grid.add(txtUserName, 1, 0);

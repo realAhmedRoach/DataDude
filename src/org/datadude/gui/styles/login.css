@@ -23,6 +23,6 @@
     -fx-background-color: linear-gradient(#2A5058, #61ffb1);
 }
 #text {
-  -fx-fill:  linear-gradient(orange, orangered);
+  -fx-fill:  linear-gradient(lightgreen, darkgreen);
 }
  

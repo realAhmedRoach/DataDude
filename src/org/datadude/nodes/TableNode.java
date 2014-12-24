@@ -28,6 +28,7 @@ import javax.swing.table.DefaultTableModel;
 import org.datadude.DataDude;
 import org.datadude.Login;
 import org.datadude.datamanaging.DataDudeFile;
+import org.datadude.datamanaging.Utils;
 
 /**
  * Node for showing tables
@@ -93,6 +94,7 @@ public class TableNode extends BasicNode {
 		try {
 			FileOutputStream fileOut = new FileOutputStream(saveFile);
 			ObjectOutputStream in = new ObjectOutputStream(fileOut);
+			Utils.removeListeners(mainTable);
 			DefaultTableModel m = (DefaultTableModel) mainTable.getModel();
 			in.writeObject(m);
 			in.close();
