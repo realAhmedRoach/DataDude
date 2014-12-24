@@ -20,20 +20,9 @@ package org.datadude.nodes;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.NotSerializableException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import org.datadude.DataDude;
@@ -41,6 +30,7 @@ import org.datadude.Login;
 import org.datadude.datamanaging.DataDudeFile;
 
 /**
+ * Node for showing tables
  * @author theTechnoKid
  */
 public class TableNode extends BasicNode {
