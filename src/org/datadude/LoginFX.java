@@ -24,12 +24,14 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.Reflection;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
@@ -37,84 +39,112 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import javax.swing.JOptionPane;
-
 import org.datadude.gui.Register;
 import org.datadude.gui.Splash;
 import org.datadude.security.User;
 
 public class LoginFX extends Application {
 
-	TextField userTextField;
-	PasswordField pwBox;
-	static Stage stage;
-	private static boolean launched;
+	final TextField txtUserName = new TextField();
+	final PasswordField pf = new PasswordField();
 	
+	final Label lblMessage = new Label();
+	public static Stage primaryStage;
+
+	// private static boolean launched;
+
 	public static void init(String[] args) {
-		if(!launched){
-			launch(args);
-			launched = true;
-		}else
-			stage.show();
-			
+		launch(args);
 	}
 
-
 	@Override
-	public void start(final Stage _stage) throws Exception {
+	public void start(final Stage stage) throws Exception {
+		primaryStage = stage;
+
+		primaryStage.setTitle("JavaFX 2 Login");
+
+		BorderPane bp = new BorderPane();
+		bp.setPadding(new Insets(10, 50, 50, 50));
+
+		// Adding HBox
+		HBox hb = new HBox();
+		hb.setPadding(new Insets(20, 20, 20, 30));
+
+		// Adding GridPane
 		GridPane grid = new GridPane();
-		stage = _stage;
-		grid.setAlignment(Pos.CENTER);
-		grid.setHgap(10);
-		grid.setVgap(10);
-		grid.setPadding(new Insets(25, 25, 25, 25));
+		grid.setPadding(new Insets(20, 20, 20, 20));
+		grid.setHgap(5);
+		grid.setVgap(5);
 
-		Text sceneTitle = new Text("Login");
-		sceneTitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-		grid.add(sceneTitle, 0, 0, 2, 1);
+		// Implementing Nodes for GridPane
+		Label lblUserName = new Label("Username:");
+		
+		Label lblPassword = new Label("Password:");
+		
+		Button btnLogin = new Button("Login");
+		Button btnReg = new Button("Register");
 
-		Label userName = new Label("User Name:");
-		grid.add(userName, 0, 1);
+		// Adding Nodes to GridPane layout
+		grid.add(lblUserName, 0, 0);
+		grid.add(txtUserName, 1, 0);
+		grid.add(lblPassword, 0, 1);
+		grid.add(pf, 1, 1);
+		grid.add(btnLogin, 2, 0);
+		grid.add(btnReg, 2, 1);
+		grid.add(lblMessage, 1, 2);
 
-		userTextField = new TextField();
-		grid.add(userTextField, 1, 1);
+		// Reflection for gridPane
+		Reflection r = new Reflection();
+		r.setFraction(0.7f);
+		grid.setEffect(r);
 
-		Label pw = new Label("Password:");
-		grid.add(pw, 0, 2);
+		// DropShadow effect
+		DropShadow dropShadow = new DropShadow();
+		dropShadow.setOffsetX(5);
+		dropShadow.setOffsetY(5);
 
-		pwBox = new PasswordField();
-		grid.add(pwBox, 1, 2);
+		// Adding text and DropShadow effect to it
+		Text text = new Text("DataDude Login");
+		text.setFont(Font.font("Courier New", FontWeight.BOLD, 28));
+		text.setEffect(dropShadow);
 
-		Button btn = new Button("Sign in");
-		Button reg = new Button("Register...");
-		HBox hbBtn = new HBox(10);
-		hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
-		hbBtn.getChildren().add(btn);
-		hbBtn.getChildren().add(reg);
-		grid.add(hbBtn, 1, 4);
+		// Adding text to HBox
+		hb.getChildren().add(text);
 
-		btn.setOnAction(go);
-		reg.setOnAction(new EventHandler<ActionEvent>() {
+		// Add ID's to Nodes
+		bp.setId("bp");
+		grid.setId("root");
+		btnLogin.setId("btnLogin");
+		btnReg.setId("btnReg");
+		text.setId("text");
 
+		// Action for btnLogin
+		btnLogin.setOnAction(go);
+		btnReg.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				new Register();
-				stage.close();
+				primaryStage.close();
 			}
-
 		});
 
-		Scene scene = new Scene(grid, 300, 250);
-		// grid.setGridLinesVisible(true);
-		stage.setTitle("Login");
-		stage.setScene(scene);
-		stage.show();
+		// Add HBox and GridPane layout to BorderPane Layout
+		bp.setTop(hb);
+		bp.setCenter(grid);
+
+		// Adding BorderPane to the scene and loading CSS
+		Scene scene = new Scene(bp);
+		scene.getStylesheets().add(getClass().getResource("gui/styles/login.css").toExternalForm());
+		primaryStage.setScene(scene);
+		primaryStage.setTitle("DataDude Login");
+		primaryStage.setResizable(false);
+		primaryStage.show();
 	}
 
 	EventHandler<ActionEvent> go = new EventHandler<ActionEvent>() {
 		public void handle(ActionEvent e) {
 			System.out.println("Got old user");
-			if (validate(userTextField.getText(), pwBox.getText().toCharArray()) == false) {
+			if (validate(txtUserName.getText(), (pf.getText()).toCharArray()) == false) {
 				return;
 			}
 
@@ -123,7 +153,7 @@ public class LoginFX extends Application {
 				Login.currUser.setUserFolder(null);
 			}
 			System.out.println("Initializing Core Engine..!");
-			stage.close();
+			primaryStage.close();
 			new Splash();
 		}
 	};
@@ -139,13 +169,16 @@ public class LoginFX extends Application {
 			in.close();
 			fileIn.close();
 		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(null, "Wrong Username", "Incorrect Validation",
-					JOptionPane.ERROR_MESSAGE);
+			// JOptionPane.showMessageDialog(null, "Wrong Username",
+			// "Incorrect Validation", JOptionPane.ERROR_MESSAGE);
+			lblMessage.setText("Wrong Username");
 			return false;
 		}
 
 		if (!Login.currUser.check(pass)) {
-			JOptionPane.showMessageDialog(null, "Wrong Password", "Incorrect Validation", JOptionPane.ERROR_MESSAGE);
+			// JOptionPane.showMessageDialog(null, "Wrong Password",
+			// "Incorrect Validation", JOptionPane.ERROR_MESSAGE);
+			lblMessage.setText("Wrong Password");
 			return false;
 		}
 		System.out.println("Completed validating user");

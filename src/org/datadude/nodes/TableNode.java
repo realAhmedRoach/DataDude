@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.NotSerializableException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
@@ -33,6 +34,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import org.datadude.DataDude;
 import org.datadude.Login;
@@ -52,10 +54,12 @@ public class TableNode extends BasicNode {
 		init();
 		lblStatus = new JLabel("Status");
 		toolBar.add(lblStatus);
-		
+
+		main = new JPanel();
+
 		pane.add(toolBar, BorderLayout.SOUTH);
 		pane.add(main);
-		
+
 		saveI.addActionListener(this);
 		loadI.addActionListener(this);
 		exitI.addActionListener(this);
@@ -63,7 +67,7 @@ public class TableNode extends BasicNode {
 		copyI.addActionListener(this);
 		pasteI.addActionListener(this);
 		selectI.addActionListener(this);
-		
+
 		int[] rac = this.askRowsAndColumns();
 		mainTable = new JTable(rac[0], rac[1]);
 		mainTable.setVisible(true);
@@ -99,13 +103,18 @@ public class TableNode extends BasicNode {
 		try {
 			FileOutputStream fileOut = new FileOutputStream(saveFile);
 			ObjectOutputStream in = new ObjectOutputStream(fileOut);
-			in.writeObject(mainTable);
+			DefaultTableModel m = (DefaultTableModel) mainTable.getModel();
+			in.writeObject(m);
 			in.close();
 			return true;
+		} catch (NotSerializableException nse) {
+			DataDude.showError(this, nse, "Serialization failed");
+			return false;
 		} catch (IOException e) {
 			DataDude.showError(this, e, "Save failed");
 			return false;
 		}
+
 	}
 
 	@Override
@@ -115,7 +124,8 @@ public class TableNode extends BasicNode {
 		try {
 			FileInputStream f = new FileInputStream(loadFile);
 			ObjectInputStream o = new ObjectInputStream(f);
-			JTable newTable = (JTable) o.readObject();
+			DefaultTableModel m = (DefaultTableModel) o.readObject();
+			JTable newTable = new JTable(m);
 			main.add(newTable);
 			o.close();
 			revalidate();

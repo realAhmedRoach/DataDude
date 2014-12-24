@@ -35,7 +35,7 @@ public class User implements Serializable {
 	private String password;
 	private char[] passArray;
 	private byte[] passBytes;
-	
+
 	private String userFolder;
 
 	private boolean encrypted = false;
@@ -76,7 +76,7 @@ public class User implements Serializable {
 	public void save() throws IOException {
 		if (encrypted) {
 			File f = new File(DataDude.getPassLoc() + getUserName() + ".ser");
-			f.getParentFile().mkdirs();
+			// f.getParentFile().mkdirs();
 			f.createNewFile();
 			FileOutputStream fileOut = new FileOutputStream(f);
 			ObjectOutputStream out = new ObjectOutputStream(fileOut);
