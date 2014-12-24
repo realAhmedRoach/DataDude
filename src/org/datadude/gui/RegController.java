@@ -59,6 +59,8 @@ public class RegController implements Initializable {
 			thisStage.close();
 			thisStage = null;
 			if (LoginFX.primaryStage != null) {
+				// Close this stage
+				thisStage.close();
 				// Setting original scene
 				LoginFX.primaryStage.setScene(LoginFX.scene);
 				// Showing the scene
