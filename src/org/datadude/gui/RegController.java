@@ -15,30 +15,31 @@ import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 
 import org.datadude.DataDude;
+import org.datadude.LoginFX;
 import org.datadude.security.User;
 
 public class RegController implements Initializable {
 
 	@FXML
 	public TextField displayName;
-	
+
 	@FXML
 	public TextField username;
-	
+
 	@FXML
 	public PasswordField password;
-	
+
 	private Stage thisStage;
-	
+
 	@Override
 	public void initialize(URL url, ResourceBundle arg1) {
 	}
-	
+
 	public void init(Stage s) {
 		thisStage = s;
 	}
-	
-	public void doReg(ActionEvent e){
+
+	public void doReg(ActionEvent e) {
 		System.out.println("Got new user");
 		User currUser;
 		try {
@@ -57,9 +58,19 @@ public class RegController implements Initializable {
 			thisStage.show();
 			thisStage.close();
 			thisStage = null;
+			if (LoginFX.primaryStage != null) {
+				// Setting original scene
+				LoginFX.primaryStage.setScene(LoginFX.scene);
+				// Showing the scene
+				LoginFX.primaryStage.show();
+			} else {
+				DataDude.showError(new IllegalStateException("LoginFX's primary "
+						+ "stage is null"));
+			}
+
 		} catch (IOException i) {
 			i.printStackTrace();
 		}
 	}
-	
+
 }

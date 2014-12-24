@@ -23,7 +23,9 @@ import java.io.ObjectInputStream;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -39,7 +41,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import org.datadude.gui.Register;
+import org.datadude.gui.RegController;
 import org.datadude.gui.Splash;
 import org.datadude.security.User;
 
@@ -47,8 +49,9 @@ public class LoginFX extends Application {
 
 	final TextField txtUserName = new TextField();
 	final PasswordField pf = new PasswordField();
-	
+
 	final Label lblMessage = new Label();
+	public static Scene scene;
 	public static Stage primaryStage;
 
 	// private static boolean launched;
@@ -78,9 +81,9 @@ public class LoginFX extends Application {
 
 		// Implementing Nodes for GridPane
 		Label lblUserName = new Label("Username:");
-		
+
 		Label lblPassword = new Label("Password:");
-		
+
 		Button btnLogin = new Button("Login");
 		Button btnReg = new Button("Register");
 
@@ -123,8 +126,25 @@ public class LoginFX extends Application {
 		btnReg.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				new Register();
 				primaryStage.close();
+				try {
+					FXMLLoader l = new FXMLLoader(getClass().getResource("gui/fxml/Register.fxml"));
+				
+				Parent root = l.load();
+				
+				RegController r = (RegController) l.getController();
+				r.init(stage);
+
+				stage.setResizable(false);
+
+				Scene s = new Scene(root);
+				stage.setScene(s);
+				stage.centerOnScreen();
+				stage.show();
+				} catch (Exception e) {
+					DataDude.showError(e);
+				}
+				
 			}
 		});
 
@@ -133,7 +153,7 @@ public class LoginFX extends Application {
 		bp.setCenter(grid);
 
 		// Adding BorderPane to the scene and loading CSS
-		Scene scene = new Scene(bp);
+		scene = new Scene(bp);
 		scene.getStylesheets().add(getClass().getResource("gui/styles/login.css").toExternalForm());
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("DataDude Login");
