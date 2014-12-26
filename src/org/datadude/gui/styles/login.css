@@ -19,9 +19,14 @@
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 ); 
 }
 
-.button:hover {
+.button:pressed {
     -fx-background-color: linear-gradient(#2A5058, #61ffb1);
 }
+
+.button:hover {
+	-fx-text-fill: white;
+}
+
 #text {
   -fx-fill:  linear-gradient(lightgreen, darkgreen);
 }
