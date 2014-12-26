@@ -62,7 +62,7 @@ public class TableNode extends BasicNode {
 		int[] rac = this.askRowsAndColumns();
 		mainTable = new JTable(rac[0], rac[1]);
 		mainTable.setVisible(true);
-		// TODO: Add new row and column button
+		// TODO: Add new row and column buttons
 
 		setJMenuBar(menuBar);
 		main.add(mainTable);
@@ -96,6 +96,7 @@ public class TableNode extends BasicNode {
 			ObjectOutputStream in = new ObjectOutputStream(fileOut);
 			Utils.removeListeners(mainTable);
 			DefaultTableModel m = (DefaultTableModel) mainTable.getModel();
+		
 			in.writeObject(m);
 			in.close();
 			return true;

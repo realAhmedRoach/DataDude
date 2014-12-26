@@ -21,8 +21,7 @@ package org.datadude;
 import java.io.File;
 
 import javax.swing.JOptionPane;
-
-import com.alee.laf.WebLookAndFeel;
+import javax.swing.UIManager;
 
 public class Main {
 
@@ -32,12 +31,6 @@ public class Main {
 	public static void main(String[] args) {
 		os = System.getProperty("os.name");
 		System.out.println(os);
-		/*System.out.println(System.getProperty("os.version"));
-		System.out.println(System.getProperty("os.arch"));
-		System.out.println(System.getProperty("java.home"));
-		System.out.println(System.getProperty("user.name"));
-		System.out.println(System.getProperty("user.home"));
-		System.out.println(System.getProperty("user.dir"));*/
 
 		checkForFolders();
 				
@@ -51,7 +44,12 @@ public class Main {
 	}
 
 	public static void setLnF() {
-		WebLookAndFeel.install();
+//		WebLookAndFeel.install();
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (Exception e) {
+			// How did this happen??
+		}
 	}
 	
 	/**
