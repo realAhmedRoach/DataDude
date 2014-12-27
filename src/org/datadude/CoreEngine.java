@@ -18,29 +18,10 @@
 
 package org.datadude;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.EventQueue;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.*;
+import java.awt.event.*;
 
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
@@ -55,14 +36,7 @@ public class CoreEngine extends JFrame {
 	private static final long serialVersionUID = 1295L;
 
 	private JPanel contentPane;
-	JPanel nodePanel;
-	JPanel box1;
-	GridLayout box1l;
-	JPanel box2;
-	GridLayout box2l;
-	JLabel welcome;
-	JScrollPane a;
-	JButton files, newFile, chat, settings, quit;
+	JButton files, newFile, chat, settings, quit, server;
 	JLabel lblCurrfolder;
 	JProgressBar progressBar;
 	static JClosableTabbedPane editorPane;
@@ -71,8 +45,8 @@ public class CoreEngine extends JFrame {
 	private ActionListener quitListener = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			exit();
+			System.exit(0);
 		}
-
 	};
 
 	private ActionListener newListener = new ActionListener() {
@@ -90,7 +64,6 @@ public class CoreEngine extends JFrame {
 	private void exit() {
 		try {
 			Login.getUser().save();
-			System.exit(0);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -112,7 +85,7 @@ public class CoreEngine extends JFrame {
 	public static void addTab(BasicNode n) {
 		editorPane.addTab(n.getTitle(), n);
 		System.out.println(editorPane.getTabCount());
-		editorPane.setSelectedIndex(editorPane.getTabCount()-1);
+		editorPane.setSelectedIndex(editorPane.getTabCount() - 1);
 	}
 
 	/**
@@ -148,10 +121,12 @@ public class CoreEngine extends JFrame {
 		menuBar.add(mnFile);
 
 		JMenuItem mntmNew = new JMenuItem("New...");
+		mntmNew.setIcon(new ImageIcon(CoreEngine.class.getResource("/images/silk/icons/page_add.png")));
 		mntmNew.addActionListener(newListener);
 		mnFile.add(mntmNew);
 
 		JMenuItem mntmQuit = new JMenuItem("Quit");
+		mntmQuit.setIcon(new ImageIcon(CoreEngine.class.getResource("/images/silk/icons/cross.png")));
 		mntmQuit.addActionListener(quitListener);
 		mnFile.add(mntmQuit);
 		// }
@@ -173,15 +148,16 @@ public class CoreEngine extends JFrame {
 		JLabel lblWelcome = new JLabel("Welcome " + Login.getUser().getName());
 		infoPanel.add(lblWelcome);
 
-		lblCurrfolder = new JLabel("<html><b>User Folder:</b> " + Login.getUser().getUserFolder()+"</html>");
+		lblCurrfolder = new JLabel("<html><b>User Folder:</b> " + Login.getUser().getUserFolder() + "</html>");
 		infoPanel.add(lblCurrfolder);
 
-		JButton btnNew = new JButton("New");
-		btnNew.addActionListener(newListener);
-		infoPanel.add(btnNew);
+		newFile = new JButton("New");
+		newFile.setIcon(new ImageIcon(CoreEngine.class.getResource("/images/silk/icons/page_add.png")));
+		newFile.addActionListener(newListener);
+		infoPanel.add(newFile);
 
-		JButton btnFiles = new JButton("Files");
-		infoPanel.add(btnFiles);
+		JButton files = new JButton("Files");
+		infoPanel.add(files);
 		// }
 
 		// PROGRESS PANEL {
@@ -198,30 +174,30 @@ public class CoreEngine extends JFrame {
 		// COMMAND PANEL {
 		System.out.println("Initializing Command Panel");
 		JPanel commandPanel = new JPanel();
-		commandPanel.setBackground(Color.ORANGE);
-		commandPanel.setBorder(new TitledBorder(null, "Commands", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		commandPanel.setBackground(Color.YELLOW);
+		commandPanel.setBorder(new TitledBorder("Commands"));
 		commandPanel.setLayout(new BoxLayout(commandPanel, BoxLayout.Y_AXIS));
-
-		JButton btnStartServer = new JButton("Start Server");
-		btnStartServer.setIcon(new ImageIcon(CoreEngine.class
+		
+		JButton server = new JButton("Start Server");
+		server.setIcon(new ImageIcon(CoreEngine.class
 				.getResource("/com/sun/java/swing/plaf/windows/icons/Computer.gif")));
-		commandPanel.add(btnStartServer);
+		commandPanel.add(server);
 
-		JButton btnChat = new JButton("Chat");
-		btnChat.setIcon(new ImageIcon(CoreEngine.class.getResource("/javax/swing/plaf/metal/icons/ocean/computer.gif")));
-		commandPanel.add(btnChat);
+		chat = new JButton("Chat");
+		chat.setIcon(new ImageIcon(CoreEngine.class.getResource("/javax/swing/plaf/metal/icons/ocean/computer.gif")));
+		commandPanel.add(chat);
 
-		JButton btnSettings = new JButton("Settings");
-		btnSettings.setIcon(new ImageIcon(CoreEngine.class
+		JButton settings = new JButton("Settings");
+		settings.setIcon(new ImageIcon(CoreEngine.class
 				.getResource("/com/sun/java/swing/plaf/windows/icons/DetailsView.gif")));
-		btnSettings.addActionListener(settingsListener);
-		commandPanel.add(btnSettings);
+		settings.addActionListener(settingsListener);
+		commandPanel.add(settings);
 
-		JButton btnQuit = new JButton("Quit");
-		commandPanel.add(btnQuit);
-		btnQuit.setIcon(new ImageIcon(CoreEngine.class
+		JButton quit = new JButton("Quit");
+		commandPanel.add(quit);
+		quit.setIcon(new ImageIcon(CoreEngine.class
 				.getResource("/javax/swing/plaf/metal/icons/ocean/paletteClose.gif")));
-		btnQuit.addActionListener(quitListener);
+		quit.addActionListener(quitListener);
 		// }
 
 		System.gc();
@@ -240,20 +216,12 @@ public class CoreEngine extends JFrame {
 		editorPane.setBackground(Color.GRAY);
 		editorPane.add(n);
 		editorPane.setTitleAt(x, "Welcome!");
-//		editorPane.setEnabledAt(x, true);
-//		x++;
-		contentPane.setLayout(new BorderLayout(0, 0));
+
+		contentPane.setLayout(new BorderLayout(0, 5));
 		contentPane.add(infoPanel, BorderLayout.NORTH);
 		contentPane.add(editorPane, BorderLayout.CENTER);
 		contentPane.add(commandPanel, BorderLayout.EAST);
 		contentPane.add(progressPanel, BorderLayout.SOUTH);
-
-		/*
-		 * JPanel panel = new JPanel(); panel.setBackground(Color.CYAN);
-		 * panel.setBorder(new TitledBorder(null, "File Explorer",
-		 * TitledBorder.LEADING, TitledBorder.TOP, null, null)); panel.add(new
-		 * FileTree()); contentPane.add(panel, BorderLayout.WEST);
-		 */
 
 		long end = System.currentTimeMillis();
 

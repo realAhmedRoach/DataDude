@@ -67,8 +67,6 @@ public abstract class Utils {
 					for (int j = 0; j < listeners.length; j++) {
 						try {
 							method.invoke(comp, new Object[] { listeners[j] });
-							// System.out.println("removed Listener " + name +
-							// "for comp " + comp + "\n");
 						} catch (Exception e) {
 							System.out.println("Cannot invoke removeListener method " + e);
 						}
