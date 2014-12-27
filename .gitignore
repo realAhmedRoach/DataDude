@@ -1,5 +1,8 @@
 *.class
 
+#client secrets for google
+client_secrets.json
+
 # settings
 .settings/
 
