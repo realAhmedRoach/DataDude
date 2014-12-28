@@ -17,7 +17,6 @@
           <items>
             <MenuItem mnemonicParsing="false" text="New" />
             <MenuItem mnemonicParsing="false" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" text="Close" />
             <MenuItem mnemonicParsing="false" text="Save" />
@@ -50,6 +49,23 @@
         </Menu>
       </menus>
     </MenuBar>
+      <FlowPane prefHeight="105.0" prefWidth="900.0">
+         <children>
+            <Label text="Info">
+               <FlowPane.margin>
+                  <Insets left="10.0" top="5.0" />
+               </FlowPane.margin>
+            </Label>
+            <Button mnemonicParsing="false" text="New">
+               <FlowPane.margin>
+                  <Insets left="30.0" top="55.0" />
+               </FlowPane.margin>
+               <font>
+                  <Font name="Lucida Sans Regular" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </FlowPane>
     <SplitPane dividerPositions="0.2505567928730512, 0.7505567928730512" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <items>
         <AnchorPane>
@@ -90,7 +106,6 @@
             <Color blue="0.625" green="0.625" red="0.625" fx:id="x4" />
           </textFill>
         </Label>
-        <Pane prefHeight="-1.0" prefWidth="-1.0" HBox.hgrow="ALWAYS" />
         <Label font="$x3" maxWidth="-1.0" text="Right status" textFill="$x4" HBox.hgrow="NEVER" />
       </children>
       <padding>
