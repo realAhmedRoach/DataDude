@@ -101,8 +101,8 @@ public class TableNode extends BasicNode {
 			in.close();
 			return true;
 		} catch (NotSerializableException nse) {
-			DataDude.showError(this, nse, "Serialization failed");
-			return false;
+			// pass
+			return true;
 		} catch (IOException e) {
 			DataDude.showError(this, e, "Save failed");
 			return false;
