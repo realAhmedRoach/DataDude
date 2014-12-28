@@ -18,6 +18,7 @@
 package org.datadude.nodes;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -25,7 +26,13 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import org.datadude.DataDude;
 import org.datadude.Login;
@@ -48,6 +55,7 @@ public class CSVNode extends BasicNode {
 
 		textPanel = new JPanel();
 		btnNew = new JButton("New");
+		btnNew.setIcon(new ImageIcon(CSVNode.class.getResource("/images/silk/icons/add.png")));
 		btnNew.addActionListener(new NewListener());
 
 		pane.add(toolBar, BorderLayout.SOUTH);
@@ -66,9 +74,14 @@ public class CSVNode extends BasicNode {
 		lines = new JTextField[3];
 		for (int i = 0; i < lines.length; i++) {
 			lines[i] = new JTextField();
-			lines[i].setColumns(50);
+			lines[i].setColumns(70);
 			textPanel.add(lines[i]);
+			// textPanel.add(Box.createVerticalStrut(70));
 		}
+
+		pack();
+
+		textPanel.setLayout(new GridLayout(0, 1, 10, 10));
 		textPanel.add(btnNew);
 		getContentPane().add(textPanel);
 		setJMenuBar(menuBar);
@@ -129,19 +142,21 @@ public class CSVNode extends BasicNode {
 			for (int i = 0; i < data.size(); i++) {
 				lines[i] = new JTextField();
 				lines[i].setText(Utils.join(data.get(i), ","));
-				lines[i].setColumns(50);
+				lines[i].setColumns(70);
 				textPanel.add(lines[i]);
+				// textPanel.add(Box.createRigidArea(new Dimension(1, 50)));
 			}
 
 			textPanel.add(btnNew);
-			
+
+			pack();
 			revalidate();
 			repaint();
 			r.close();
 		} catch (Exception e) {
-			String text = "Exception while trying to load file:\n\n" + e.toString();
+			String text = "Exception while trying to load file:\n" + e.toString();
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(this, text, title, JOptionPane.ERROR_MESSAGE);
+			DataDude.showError(this, e, text);
 			return false;
 		}
 		return true;
@@ -151,20 +166,29 @@ public class CSVNode extends BasicNode {
 		public void actionPerformed(ActionEvent e) {
 			// Clear Panel
 			textPanel.removeAll();
-			
-			JTextField[] oldLines = lines;
-			JTextField[] newLines = new JTextField[oldLines.length + 1];
+
+			JTextField[] newLines = new JTextField[lines.length + 1];
 			for (int i = 0; i < lines.length; i++)
-				newLines[i] = oldLines[i]; // Sets the old text field to the new
-											// one
+				newLines[i] = lines[i]; // Sets the old text field to the new
+										// one
 			JTextField newField = new JTextField();
-			newField.setColumns(50);
-			newLines[newLines.length-1] = newField;
-			
-			for(int i = 0; i < newLines.length; i++)
-				textPanel.add(newLines[i]);
-			
+			newField.setColumns(70);
+			newLines[newLines.length - 1] = newField;
+
+			lines = newLines;
+
+			for (int i = 0; i < lines.length; i++) {
+				textPanel.add(lines[i]);
+				// textPanel.add(Box.createRigidArea(new Dimension(1, 50)));
+			}
+
+			// textPanel.getLayout().;
+
 			textPanel.add(btnNew);
+
+			pack();
+			revalidate();
+			repaint();
 		}
 	}
 

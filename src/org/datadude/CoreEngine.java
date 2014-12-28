@@ -18,10 +18,30 @@
 
 package org.datadude;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Desktop;
+import java.awt.EventQueue;
+import java.awt.FlowLayout;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.IOException;
 
-import javax.swing.*;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
@@ -58,6 +78,16 @@ public class CoreEngine extends JFrame {
 	private ActionListener settingsListener = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			SettingsDialog.init();
+		}
+	};
+
+	private ActionListener filesListener = new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			try {
+				Desktop.getDesktop().open(new File(Login.getUser().getUserFolder()));
+			} catch (IOException ioe) {
+				/* How did this happen ? */
+			}
 		}
 	};
 
@@ -156,6 +186,9 @@ public class CoreEngine extends JFrame {
 		infoPanel.add(newFile);
 
 		JButton files = new JButton("Files");
+		files.addActionListener(filesListener);
+		files.setToolTipText("Opens platform explorer to your directory");
+		files.setIcon(new ImageIcon(CoreEngine.class.getResource("/images/silk/icons/application_view_detail.png")));
 		infoPanel.add(files);
 		// }
 
@@ -176,14 +209,16 @@ public class CoreEngine extends JFrame {
 		commandPanel.setBackground(Color.YELLOW);
 		commandPanel.setBorder(new TitledBorder("Commands"));
 		commandPanel.setLayout(new BoxLayout(commandPanel, BoxLayout.Y_AXIS));
-		
+
 		JButton server = new JButton("Start Server");
 		server.setIcon(new ImageIcon(CoreEngine.class
 				.getResource("/com/sun/java/swing/plaf/windows/icons/Computer.gif")));
+		server.setEnabled(false);
 		commandPanel.add(server);
 
 		chat = new JButton("Chat");
 		chat.setIcon(new ImageIcon(CoreEngine.class.getResource("/javax/swing/plaf/metal/icons/ocean/computer.gif")));
+		chat.setEnabled(false);
 		commandPanel.add(chat);
 
 		JButton settings = new JButton("Settings");
@@ -194,8 +229,7 @@ public class CoreEngine extends JFrame {
 
 		JButton quit = new JButton("Quit");
 		commandPanel.add(quit);
-		quit.setIcon(new ImageIcon(CoreEngine.class
-				.getResource("/javax/swing/plaf/metal/icons/ocean/paletteClose.gif")));
+		quit.setIcon(new ImageIcon(CoreEngine.class.getResource("/javax/swing/plaf/metal/icons/ocean/paletteClose.gif")));
 		quit.addActionListener(quitListener);
 		// }
 
