@@ -134,7 +134,10 @@ public class TableNode extends BasicNode {
 	public void actionPerformed(ActionEvent e) {
 		JMenuItem choice = (JMenuItem) e.getSource();
 		if (choice == saveI) {
-			save(getTitle());
+			if(save(getTitle()))
+				lblStatus.setText("Successfully saved Table!");
+			else
+				lblStatus.setText("Error while saving!");
 		} else if (choice == loadI) {
 			JFileChooser l = new JFileChooser();
 			l.setCurrentDirectory(new File(Login.getUser().getUserFolder()));

@@ -25,14 +25,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
+import org.datadude.DataDude;
 import org.datadude.Login;
 import org.datadude.datamanaging.DataDudeFile;
 import org.datadude.datamanaging.Utils;
@@ -74,6 +69,7 @@ public class CSVNode extends BasicNode {
 			lines[i].setColumns(50);
 			textPanel.add(lines[i]);
 		}
+		textPanel.add(btnNew);
 		getContentPane().add(textPanel);
 		setJMenuBar(menuBar);
 		setVisible(true);
@@ -108,14 +104,14 @@ public class CSVNode extends BasicNode {
 			CSVWriter w = new CSVWriter(new FileWriter(f), ',', CSVWriter.DEFAULT_QUOTE_CHARACTER,
 					CSVWriter.DEFAULT_ESCAPE_CHARACTER, System.getProperty("line.separator"));
 
-			// Headers
+			// Write It Out
 			for (int i = 0; i < lines.length; i++)
 				w.writeNext(lines[i].getText().split(","), false);
 
 			w.close();
 		} catch (Exception e) {
 			String text = "Exception while trying to save file:\n" + e.getMessage();
-			JOptionPane.showMessageDialog(this, text, title, JOptionPane.ERROR_MESSAGE);
+			DataDude.showError(this, e, text);
 			return false;
 		}
 		return true;
@@ -137,6 +133,8 @@ public class CSVNode extends BasicNode {
 				textPanel.add(lines[i]);
 			}
 
+			textPanel.add(btnNew);
+			
 			revalidate();
 			repaint();
 			r.close();
@@ -151,6 +149,9 @@ public class CSVNode extends BasicNode {
 
 	class NewListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			// Clear Panel
+			textPanel.removeAll();
+			
 			JTextField[] oldLines = lines;
 			JTextField[] newLines = new JTextField[oldLines.length + 1];
 			for (int i = 0; i < lines.length; i++)
@@ -159,6 +160,11 @@ public class CSVNode extends BasicNode {
 			JTextField newField = new JTextField();
 			newField.setColumns(50);
 			newLines[newLines.length-1] = newField;
+			
+			for(int i = 0; i < newLines.length; i++)
+				textPanel.add(newLines[i]);
+			
+			textPanel.add(btnNew);
 		}
 	}
 

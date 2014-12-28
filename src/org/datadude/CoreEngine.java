@@ -84,7 +84,6 @@ public class CoreEngine extends JFrame {
 
 	public static void addTab(BasicNode n) {
 		editorPane.addTab(n.getTitle(), n);
-		System.out.println(editorPane.getTabCount());
 		editorPane.setSelectedIndex(editorPane.getTabCount() - 1);
 	}
 
@@ -109,7 +108,7 @@ public class CoreEngine extends JFrame {
 		System.out.println("Setting Values");
 		setTitle(DataDude.VERSION);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 874, 625);
+		setSize(874, 625);
 		// }
 
 		// MENU ITEMS {
