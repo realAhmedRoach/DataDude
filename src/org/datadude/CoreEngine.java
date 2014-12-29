@@ -95,6 +95,7 @@ public class CoreEngine extends JFrame {
 				try {
 					CoreEngine usableEngine = new CoreEngine();
 					usableEngine.setVisible(true);
+					DataDude.setCurrentEngine(usableEngine); // For other classes to use
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

@@ -35,6 +35,8 @@ public final class DataDude {
 	private static String passLoc;
 	private static String saveLoc;
 
+	private static CoreEngine currentEngine;
+
 	static {
 		manager = new MemoryManager();
 	}
@@ -66,6 +68,14 @@ public final class DataDude {
 		return saveLoc;
 	}
 
+	static void setCurrentEngine(CoreEngine ce) {
+		currentEngine = ce;
+	}
+
+	public static CoreEngine getCurrentEngine() {
+		return currentEngine;
+	}
+
 	public static void openConsole() {
 	}
 
@@ -81,9 +91,9 @@ public final class DataDude {
 	public static void showError(Exception e, String title) {
 		showError(null, e, title);
 	}
-	
+
 	public static void showError(Exception e) {
-		showError(e,"Exception");
+		showError(e, "Exception");
 	}
 
 	public static String getFolder() {
