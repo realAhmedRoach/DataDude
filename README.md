@@ -13,6 +13,6 @@ It is made in both [JavaFX](https://en.wikipedia.org/wiki/JavaFX) and [Swing](ht
 ##Features
 1. Basic save and load
 2. Multi-user support
-3. Text, [CSV][1], and Table Nodes
+3. Text, [CSV][1], and Table Nodes!
 
 [1]: http://en.wikipedia.org/wiki/Comma-separated_values
