@@ -101,7 +101,7 @@ public class TableNode extends BasicNode {
 			in.close();
 			return true;
 		} catch (NotSerializableException nse) {
-			// pass
+			// catching exceptions is for communists
 			return true;
 		} catch (IOException e) {
 			DataDude.showError(this, e, "Save failed");
