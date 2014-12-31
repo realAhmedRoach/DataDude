@@ -139,13 +139,13 @@ public class CSVNode extends BasicNode {
 			CSVReader r = new CSVReader(new FileReader(file), ',');
 			List<String[]> data = r.readAll();
 
-			int theNewSizeForTheJTextFieldArrayThatsGonnaBeUsedForLoadingtheCSVFile;
+			int newSize;
 			
 			 // This works, I don't know why
-			for(theNewSizeForTheJTextFieldArrayThatsGonnaBeUsedForLoadingtheCSVFile=0;theNewSizeForTheJTextFieldArrayThatsGonnaBeUsedForLoadingtheCSVFile<data.size();theNewSizeForTheJTextFieldArrayThatsGonnaBeUsedForLoadingtheCSVFile++)
-				;
+			for(newSize=0;newSize<data.size();newSize++)
+				; // Do nothing while the newSize variable keeps getting incremented (violently)
 			
-			lines = new JTextField[theNewSizeForTheJTextFieldArrayThatsGonnaBeUsedForLoadingtheCSVFile];
+			lines = new JTextField[newSize];
 			
 			for (int i = 0; i < data.size(); i++) {
 				lines[i] = new JTextField();
