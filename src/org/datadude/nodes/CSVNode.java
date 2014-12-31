@@ -139,12 +139,19 @@ public class CSVNode extends BasicNode {
 			CSVReader r = new CSVReader(new FileReader(file), ',');
 			List<String[]> data = r.readAll();
 
+			int theNewSizeForTheJTextFieldArrayThatsGonnaBeUsedForLoadingtheCSVFile;
+			
+			 // This works, I don't know why
+			for(theNewSizeForTheJTextFieldArrayThatsGonnaBeUsedForLoadingtheCSVFile=0;theNewSizeForTheJTextFieldArrayThatsGonnaBeUsedForLoadingtheCSVFile<data.size();theNewSizeForTheJTextFieldArrayThatsGonnaBeUsedForLoadingtheCSVFile++)
+				;
+			
+			lines = new JTextField[theNewSizeForTheJTextFieldArrayThatsGonnaBeUsedForLoadingtheCSVFile];
+			
 			for (int i = 0; i < data.size(); i++) {
 				lines[i] = new JTextField();
 				lines[i].setText(Utils.join(data.get(i), ","));
 				lines[i].setColumns(70);
 				textPanel.add(lines[i]);
-				// textPanel.add(Box.createRigidArea(new Dimension(1, 50)));
 			}
 
 			textPanel.add(btnNew);
@@ -179,7 +186,6 @@ public class CSVNode extends BasicNode {
 
 			for (int i = 0; i < lines.length; i++) {
 				textPanel.add(lines[i]);
-				// textPanel.add(Box.createRigidArea(new Dimension(1, 50)));
 			}
 
 			// textPanel.getLayout().;
