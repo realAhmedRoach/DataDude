@@ -103,7 +103,7 @@ public class TableNode extends BasicNode {
 		} catch (NotSerializableException nse) {
 			// catching exceptions is for communists
 			return true;
-		} catch (IOException e) {
+		} catch (IOException e) { // they made me do this, beyond my will
 			DataDude.showError(this, e, "Save failed");
 			return false;
 		}
