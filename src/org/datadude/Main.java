@@ -21,7 +21,8 @@ package org.datadude;
 import java.io.File;
 
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
+
+import com.alee.laf.WebLookAndFeel;
 
 public class Main {
 
@@ -44,12 +45,7 @@ public class Main {
 	}
 
 	public static void setLnF() {
-//		WebLookAndFeel.install();
-		try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (Exception e) {
-			// How did this happen??
-		}
+		WebLookAndFeel.install();
 	}
 	
 	/**
