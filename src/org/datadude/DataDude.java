@@ -37,6 +37,15 @@ public final class DataDude {
 
 	private static CoreEngine currentEngine;
 
+	public static final String HTML_HLP_TXT = "<html>" + "<center><h1>DataDude " + VERSION + "</h1></center>"
+			+ "<h2>Intro</h2>" + "<p>DataDude is a data managing application designed to have "
+			+ "many nodes, or data types, that can be opened in it.</p>" + "<h2>Nodes</h2>"
+			+ "<p>Currently, DataDude has the following nodes:</p>" + "<ul>" + "<li>Text</li>"
+			+ "<li>CSV (Comma-seperated Values)</li>" + "<li>Table</li>" + "</ul>"
+			+ "<p>They are all self-explanatory</p>" + "<h2>License</h2>"
+			+ "<p>DataDude is licensed under the GNU GPLv3 license</p>" + "<h3>Have Fun</h3>"
+			+ "<p>Feel free to email me at: thetechnokid11@gmail.com</p>";
+
 	static {
 		manager = new MemoryManager();
 	}

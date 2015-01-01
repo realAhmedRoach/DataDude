@@ -76,7 +76,7 @@ public class CoreEngine extends JFrame {
 			try {
 				Desktop.getDesktop().open(new File(Login.getUser().getUserFolder()));
 			} catch (IOException ioe) {
-				/* How did this happen ? */
+				/* WTF? */
 			}
 		}
 	};
@@ -89,6 +89,14 @@ public class CoreEngine extends JFrame {
 		}
 	}
 
+	private void showHelp() {
+		JFrame f = new JFrame("About & Help");
+		f.getContentPane().add(new JLabel(DataDude.HTML_HLP_TXT));
+		f.setSize(300, 500);
+		f.setLocationRelativeTo(null);
+		f.setVisible(true);
+	}
+	
 	public static void init() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -149,6 +157,17 @@ public class CoreEngine extends JFrame {
 		mntmQuit.setIcon(new ImageIcon(CoreEngine.class.getResource("/images/silk/icons/cross.png")));
 		mntmQuit.addActionListener(quitListener);
 		mnFile.add(mntmQuit);
+		
+		JMenu mnHelp = new JMenu("Help");
+		menuBar.add(mnHelp);
+		
+		JMenuItem mntmShowAbout = new JMenuItem("Show About & Help");
+		mntmShowAbout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				showHelp();
+			}
+		});
+		mnHelp.add(mntmShowAbout);
 		// }
 
 		// CONTENT {
