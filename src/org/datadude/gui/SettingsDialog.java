@@ -32,8 +32,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -47,7 +47,7 @@ public class SettingsDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtUsername;
-	private JTextField txtPass;
+	private JPasswordField txtPass;
 
 	private ActionListener settingsListener = new ActionListener() {
 		@Override
@@ -76,11 +76,11 @@ public class SettingsDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public SettingsDialog() {
-		setBounds(100, 100, 530, 370);
+		setBounds(100, 100, 530, 427);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new GridLayout(0, 2, 0, 50));
+		contentPanel.setLayout(new GridLayout(0, 2, 0, 30));
 		
 		JLabel lblChangeSettings = new JLabel("Change Settings");
 		lblChangeSettings.setFont(new Font("Arial Black", Font.BOLD, 16));
@@ -110,6 +110,8 @@ public class SettingsDialog extends JDialog {
 		contentPanel.add(lblUserFolder);
 		
 		JPanel panel = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
+		flowLayout.setVgap(10);
 		contentPanel.add(panel);
 		
 		txtFolder = new JTextField();
@@ -129,7 +131,7 @@ public class SettingsDialog extends JDialog {
 		lblPassword.setForeground(Color.BLUE);
 		contentPanel.add(lblPassword);
 
-		txtPass = new JTextField();
+		txtPass = new JPasswordField();
 		contentPanel.add(txtPass);
 		txtPass.setColumns(10);
 
@@ -156,7 +158,7 @@ public class SettingsDialog extends JDialog {
 	}
 
 	private void changeSettings() {
-		if(Login.getUser().check(txtPass.getText())) {
+		if(Login.getUser().check(new String(txtPass.getPassword()))) {
 			if (txtUsername.getText().length()!=0) {
 				File f = new File(DataDude.getPassLoc() + Login.getUser().getUserName());
 				f.delete();
@@ -166,13 +168,13 @@ public class SettingsDialog extends JDialog {
 				Login.getUser().setUserFolder(txtFolder.getText());
 			}
 		} else {
-			JOptionPane.showMessageDialog(null, "Wrong Password", "Couldn't Change Settings", JOptionPane.ERROR_MESSAGE);
+			DataDude.showError(this,new Exception("Wrong Password"),"Couldn't Change Settings");
 		}
 		
 		try {
 			Login.getUser().save();
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, e, "Couldn't Change Settings", JOptionPane.ERROR_MESSAGE);
+			DataDude.showError(this, e, "Couldn't Change Settings");
 			e.printStackTrace();
 		} finally {
 			dispose();
