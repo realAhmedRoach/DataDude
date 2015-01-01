@@ -57,7 +57,6 @@ public class RegController implements Initializable {
 			currUser.save();
 			thisStage.show();
 			thisStage.close();
-			thisStage = null;
 			if (LoginFX.primaryStage != null) {
 				// Close this stage
 				thisStage.close();
@@ -69,7 +68,7 @@ public class RegController implements Initializable {
 				DataDude.showError(new IllegalStateException("LoginFX's primary "
 						+ "stage is null"));
 			}
-
+			thisStage = null;
 		} catch (IOException i) {
 			i.printStackTrace();
 		}
