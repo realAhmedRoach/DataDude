@@ -15,4 +15,8 @@ It is made in both [JavaFX](https://en.wikipedia.org/wiki/JavaFX) and [Swing](ht
 2. Multi-user support
 3. Text, [CSV][1], and Table Nodes!
 
+##License
+DataDude is licensed under the GNU [GPLv3][2]
+
 [1]: http://en.wikipedia.org/wiki/Comma-separated_values
+[2]: http://www.gnu.org/licenses/gpl.html
