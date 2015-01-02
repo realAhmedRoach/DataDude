@@ -37,7 +37,7 @@ public final class DataDude {
 
 	private static CoreEngine currentEngine;
 
-	public static final String HTML_HLP_TXT = "<html>" + "<center><h1>DataDude " + VERSION + "</h1></center>"
+	public static final String HTML_HLP_TXT = "<html>" + "<center><h1>" + VERSION + "</h1></center>"
 			+ "<h2>Intro</h2>" + "<p>DataDude is a data managing application designed to have "
 			+ "many nodes, or data types, that can be opened in it.</p>" + "<h2>Nodes</h2>"
 			+ "<p>Currently, DataDude has the following nodes:</p>" + "<ul>" + "<li>Text</li>"
