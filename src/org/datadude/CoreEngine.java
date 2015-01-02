@@ -31,7 +31,17 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 
-import javax.swing.*;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
@@ -40,7 +50,7 @@ import org.datadude.gui.SettingsDialog;
 import org.datadude.nodes.BasicNode;
 import org.datadude.nodes.WelcomeNode;
 
-import com.petersoft.advancedswing.jmaximizabletabbedpane.JMaximizableTabbedPane;
+import tab.CloseAndMaxTabbedPane;
 
 public class CoreEngine extends JFrame {
 	private static final long serialVersionUID = 1295L;
@@ -49,7 +59,7 @@ public class CoreEngine extends JFrame {
 	JButton files, newFile, chat, settings, quit, server;
 	JLabel lblCurrfolder;
 	JProgressBar progressBar;
-	static JMaximizableTabbedPane editorPane;
+	static CloseAndMaxTabbedPane editorPane;
 	static int x = 0;
 
 	private ActionListener quitListener = new ActionListener() {
@@ -252,7 +262,7 @@ public class CoreEngine extends JFrame {
 		// n.setIcon(true);
 		n.setBackground(Color.WHITE);
 
-		editorPane = new JMaximizableTabbedPane();
+		editorPane = new CloseAndMaxTabbedPane(true);
 		editorPane.setBorder(new TitledBorder(null, "Editor", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		editorPane.setLayout(new FlowLayout());
 		editorPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
