@@ -48,7 +48,7 @@ public class CoreEngine extends JFrame {
 	JLabel lblCurrfolder;
 	JProgressBar progressBar;
 	static JTabbedPane editorPane;
-	static int x = 0;
+	public static int currentTab = 0;
 
 	private ActionListener quitListener = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
@@ -112,8 +112,8 @@ public class CoreEngine extends JFrame {
 	public static void addTab(BasicNode n) {
 		editorPane.addTab(n.getTitle(), n);
 		editorPane.setSelectedIndex(editorPane.getTabCount() - 1);
-		x++;
-		editorPane.setTabComponentAt(x, new ButtonTabComponent(editorPane));
+		currentTab++;
+		editorPane.setTabComponentAt(currentTab, new ButtonTabComponent(editorPane));
 	}
 
 	/**
@@ -257,8 +257,8 @@ public class CoreEngine extends JFrame {
 		editorPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		editorPane.setBackground(Color.BLUE);
 		editorPane.add(n);
-		editorPane.setTitleAt(x, "Welcome!");
-		editorPane.setTabComponentAt(x, new ButtonTabComponent(editorPane));
+		editorPane.setTitleAt(currentTab, "Welcome!");
+		editorPane.setTabComponentAt(currentTab, new ButtonTabComponent(editorPane));
 
 		contentPane.setLayout(new BorderLayout(0, 5));
 		contentPane.add(infoPanel, BorderLayout.NORTH);

@@ -31,10 +31,29 @@ package org.datadude.gui;
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
  
-import javax.swing.*;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.AbstractButton;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.plaf.basic.BasicButtonUI;
-import java.awt.*;
-import java.awt.event.*;
+
+import org.datadude.CoreEngine;
  
 /**
  * Component to be used as tabComponent;
@@ -111,7 +130,8 @@ public class ButtonTabComponent extends JPanel {
             int ret = JOptionPane.showConfirmDialog(null, "Do you want go back and save unsaved changes?");
             if(ret == JOptionPane.CANCEL_OPTION || ret == JOptionPane.YES_OPTION)
             	return;
-            if (i != -1) {
+            else if (i != -1) {
+            	CoreEngine.currentTab--;
                 pane.remove(i);
             }
         }
