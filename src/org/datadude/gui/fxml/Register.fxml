@@ -37,7 +37,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button cancelButton="true" mnemonicParsing="false" text="Cancel" textFill="#bcb725" />
+            <Button cancelButton="true" mnemonicParsing="false" text="Cancel" onAction="#doCancel" textFill="#bcb725" />
          </children>
       </FlowPane>
       <GridPane layoutX="20.0" layoutY="44.0" prefHeight="92.0" prefWidth="233.0" AnchorPane.bottomAnchor="63.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="44.0">

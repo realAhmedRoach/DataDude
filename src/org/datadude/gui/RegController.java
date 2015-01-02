@@ -39,6 +39,20 @@ public class RegController implements Initializable {
 		thisStage = s;
 	}
 
+	public void doCancel ( ActionEvent e ) {
+		if (LoginFX.primaryStage != null) {
+			// Close this stage
+			thisStage.close();
+			// Setting original scene
+			LoginFX.primaryStage.setScene(LoginFX.scene);
+			// Showing the scene
+			LoginFX.primaryStage.show();
+		} else {
+			DataDude.showError(new IllegalStateException("LoginFX's primary "
+					+ "stage is null"));
+		}
+	}
+	
 	public void doReg(ActionEvent e) {
 		System.out.println("Got new user");
 		User currUser;
