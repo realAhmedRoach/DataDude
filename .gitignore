@@ -10,7 +10,7 @@ client_secrets.json
 .mtj.tmp/
 
 # Manifest and jar signature
-datadude.sig
+keystore.*
 manifest.*
 
 # releases
