@@ -28,13 +28,13 @@ public class Main {
 
 	private static boolean firstTime;
 	private static String os;
-	
+
 	public static void main(String[] args) {
 		os = System.getProperty("os.name");
 		System.out.println(os);
 
 		checkForFolders();
-				
+
 		if (firstTime == true) {
 			ifNew();
 		}
@@ -45,9 +45,9 @@ public class Main {
 	}
 
 	public static void setLnF() {
-		WebLookAndFeel.install();
+		 WebLookAndFeel.install();
 	}
-	
+
 	/**
 	 * Checks to see if the DataDude app data folder is there. If not, set the
 	 * <code>firstTime</code> variable to true and make the folders.
@@ -60,7 +60,7 @@ public class Main {
 			f = new File("/var/lib/DataDude/pass/");
 		}
 
-		if (f.isDirectory()&&f.exists()) {
+		if (f.isDirectory() && f.exists()) {
 			firstTime = false;
 		} else {
 			firstTime = true;
@@ -68,7 +68,7 @@ public class Main {
 		}
 
 		DataDude.setPassLoc(f.getAbsolutePath() + File.separator);
-		DataDude.setSaveLoc(f.getParent()+File.separator);
+		DataDude.setSaveLoc(f.getParent() + File.separator);
 	}
 
 	private static void ifNew() {

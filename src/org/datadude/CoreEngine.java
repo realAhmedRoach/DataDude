@@ -31,26 +31,14 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.JTabbedPane;
+import javax.swing.*;
+
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
-import org.datadude.gui.NewDialog;
-import org.datadude.gui.SettingsDialog;
+import org.datadude.gui.*;
 import org.datadude.nodes.BasicNode;
 import org.datadude.nodes.WelcomeNode;
-
-import tab.CloseAndMaxTabbedPane;
 
 public class CoreEngine extends JFrame {
 	private static final long serialVersionUID = 1295L;
@@ -59,7 +47,7 @@ public class CoreEngine extends JFrame {
 	JButton files, newFile, chat, settings, quit, server;
 	JLabel lblCurrfolder;
 	JProgressBar progressBar;
-	static CloseAndMaxTabbedPane editorPane;
+	static JTabbedPane editorPane;
 	static int x = 0;
 
 	private ActionListener quitListener = new ActionListener() {
@@ -102,7 +90,7 @@ public class CoreEngine extends JFrame {
 	private void showHelp() {
 		JFrame f = new JFrame("About & Help");
 		f.getContentPane().add(new JLabel(DataDude.HTML_HLP_TXT));
-		f.setSize(300, 500);
+		f.setSize(300, 540);
 		f.setLocationRelativeTo(null);
 		f.setVisible(true);
 	}
@@ -124,6 +112,8 @@ public class CoreEngine extends JFrame {
 	public static void addTab(BasicNode n) {
 		editorPane.addTab(n.getTitle(), n);
 		editorPane.setSelectedIndex(editorPane.getTabCount() - 1);
+		x++;
+		editorPane.setTabComponentAt(x, new ButtonTabComponent(editorPane));
 	}
 
 	/**
@@ -262,13 +252,13 @@ public class CoreEngine extends JFrame {
 		// n.setIcon(true);
 		n.setBackground(Color.WHITE);
 
-		editorPane = new CloseAndMaxTabbedPane(true);
+		editorPane = new JTabbedPane();
 		editorPane.setBorder(new TitledBorder(null, "Editor", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		editorPane.setLayout(new FlowLayout());
 		editorPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-		editorPane.setBackground(Color.GRAY);
+		editorPane.setBackground(Color.BLUE);
 		editorPane.add(n);
 		editorPane.setTitleAt(x, "Welcome!");
+		editorPane.setTabComponentAt(x, new ButtonTabComponent(editorPane));
 
 		contentPane.setLayout(new BorderLayout(0, 5));
 		contentPane.add(infoPanel, BorderLayout.NORTH);
