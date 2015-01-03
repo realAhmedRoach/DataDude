@@ -68,15 +68,15 @@ public class TableNode extends BasicNode {
 		main.add(mainTable);
 	}
 
-	/**
-	 * 
-	 * @return An array with two values, the amount of rows and columns.
-	 */
 	private int[] askRowsAndColumns() {
 		int[] rac = new int[2];
 		try {
 			rac[0] = Integer.parseInt(JOptionPane.showInputDialog("How many rows?"));
+			if(rac[0]>200)
+				rac[0]=200;
 			rac[1] = Integer.parseInt(JOptionPane.showInputDialog("How many columns?"));
+			if(rac[1]>200)
+				rac[1]=200;
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(this, "Your're supposed to put in a number!");
 		}

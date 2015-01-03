@@ -65,7 +65,7 @@ public class LoginFX extends Application {
 	public void start(final Stage stage) throws Exception {
 		primaryStage = stage;
 
-		primaryStage.setTitle("JavaFX 2 Login");
+		primaryStage.setTitle("DataDude Login");
 
 		BorderPane bp = new BorderPane();
 		bp.setPadding(new Insets(10, 50, 50, 50));
@@ -90,6 +90,8 @@ public class LoginFX extends Application {
 
 		btnLogin.setCursor(Cursor.HAND);
 		btnReg.setCursor(Cursor.HAND);
+		
+		btnLogin.setDefaultButton(true);
 		
 		// Adding Nodes to GridPane layout
 		grid.add(lblUserName, 0, 0);
