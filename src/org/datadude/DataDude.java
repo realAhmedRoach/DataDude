@@ -115,12 +115,17 @@ public final class DataDude {
 		return "null";
 	}
 
-	public static String getFile() {
+	public static String getFile(String dir) {
 		JFileChooser fs = new JFileChooser();
+		fs.setCurrentDirectory(new File(dir));
 		fs.showOpenDialog(null);
 		if (fs.getSelectedFile() != null)
 			return fs.getSelectedFile().getAbsolutePath();
 		return "null";
+	}
+	
+	public static String getFile() {
+		return getFile(Login.getUser().getUserFolder());
 	}
 
 }
