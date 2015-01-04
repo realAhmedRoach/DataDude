@@ -18,7 +18,7 @@
 
 package org.datadude.memory;
 
-public class MemoryManager implements Runnable{
+public class MemoryManager implements Runnable {
 	
 	private Runtime r;
 	final static long MEGABYTE = 1024L * 1024L;
@@ -31,7 +31,8 @@ public class MemoryManager implements Runnable{
 	public void run() {
 		while(true) {
 			System.out.println("Mem: " + getFreeMemory() + "KB");
-			//if ()
+			if (getFreeMemory()<2)
+				System.gc();
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {e.printStackTrace();}

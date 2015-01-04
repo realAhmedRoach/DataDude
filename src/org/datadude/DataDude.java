@@ -48,6 +48,7 @@ public final class DataDude {
 
 	static {
 		manager = new MemoryManager();
+		new Thread(manager,"Memory Jack").start();
 	}
 
 	private DataDude() {
