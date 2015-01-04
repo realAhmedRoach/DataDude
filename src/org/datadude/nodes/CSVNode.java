@@ -200,7 +200,7 @@ public class CSVNode extends BasicNode {
 
 			JTextField[] newLines = new JTextField[lines.length - 1];
 			for (int i = 0; i < (lines.length - 1); i++)
-				newLines[i] = lines[i]; // Copy all - 1 of lines
+				newLines[i] = lines[i]; // Copy all lines except last one
 
 			lines = newLines;
 
