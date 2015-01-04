@@ -19,6 +19,7 @@
 package org.datadude.nodes;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -48,7 +49,7 @@ public abstract class BasicNode extends JInternalFrame implements ActionListener
 	protected JLabel lblStatus;
 
 	public BasicNode(String _title) {
-		setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		setBorder(new BevelBorder(BevelBorder.RAISED, Color.CYAN, Color.RED, Color.GREEN, Color.YELLOW));
 		title = _title;
 		setTitle(title);
 		// init();
