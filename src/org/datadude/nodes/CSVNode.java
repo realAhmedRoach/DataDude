@@ -140,13 +140,14 @@ public class CSVNode extends BasicNode {
 			List<String[]> data = r.readAll();
 
 			int newSize;
-			
-			 // This works, I don't know why
-			for(newSize=0;newSize<data.size();newSize++)
-				; // Do nothing while the newSize variable keeps getting incremented (violently)
-			
+
+			// This works, I don't know why
+			for (newSize = 0; newSize < data.size(); newSize++)
+				; // Do nothing while the newSize variable keeps getting
+					// incremented (violently)
+
 			lines = new JTextField[newSize];
-			
+
 			for (int i = 0; i < data.size(); i++) {
 				lines[i] = new JTextField();
 				lines[i].setText(Utils.join(data.get(i), ","));
@@ -156,9 +157,7 @@ public class CSVNode extends BasicNode {
 
 			textPanel.add(btnNew);
 
-			pack();
-			revalidate();
-			repaint();
+			refresh();
 			r.close();
 		} catch (Exception e) {
 			String text = "Exception while trying to load file:\n" + e.toString();
@@ -188,14 +187,30 @@ public class CSVNode extends BasicNode {
 				textPanel.add(lines[i]);
 			}
 
-			// textPanel.getLayout().;
-
 			textPanel.add(btnNew);
 
-			pack();
-			revalidate();
-			repaint();
+			refresh();
 		}
 	}
 
+	class DeleteListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			// Clear Panel
+			textPanel.removeAll();
+
+			JTextField[] newLines = new JTextField[lines.length - 1];
+			for (int i = 0; i < (lines.length - 1); i++)
+				newLines[i] = lines[i]; // Copy all - 1 of lines
+
+			lines = newLines;
+
+			for (int i = 0; i < lines.length; i++) {
+				textPanel.add(lines[i]);
+			}
+
+			textPanel.add(btnNew);
+
+			refresh();
+		}
+	}
 }

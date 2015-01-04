@@ -132,6 +132,12 @@ public abstract class BasicNode extends JInternalFrame implements ActionListener
 		return tabPos;
 	}
 
+	public void refresh() {
+		pack();
+		revalidate();
+		repaint();
+	}
+	
 	public String getTitle() {
 		return title;
 	}
