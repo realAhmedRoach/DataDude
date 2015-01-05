@@ -20,15 +20,26 @@ package org.datadude.nodes;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.NotSerializableException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.Vector;
 
-import javax.swing.*;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import org.datadude.DataDude;
 import org.datadude.Login;
 import org.datadude.datamanaging.DataDudeFile;
-import org.datadude.datamanaging.Utils;
 
 /**
  * Node for showing tables
@@ -92,12 +103,10 @@ public class TableNode extends BasicNode {
 	public boolean save(String file) {
 		File saveFile = new File(Login.getUser().getUserFolder() + File.separator + file + DataDudeFile.T_TABLE);
 		try {
-			FileOutputStream fileOut = new FileOutputStream(saveFile);
-			ObjectOutputStream in = new ObjectOutputStream(fileOut);
-			Utils.removeListeners(mainTable);
+			ObjectOutputStream in = new ObjectOutputStream(new FileOutputStream(saveFile));
 			DefaultTableModel m = (DefaultTableModel) mainTable.getModel();
-		
-			in.writeObject(m);
+			Vector<?> c = m.getDataVector();
+			in.writeObject(c);
 			in.close();
 			return true;
 		} catch (NotSerializableException nse) {
@@ -115,14 +124,18 @@ public class TableNode extends BasicNode {
 		File loadFile = new File(file);
 		main.removeAll();
 		try {
-			FileInputStream f = new FileInputStream(loadFile);
-			ObjectInputStream o = new ObjectInputStream(f);
-			DefaultTableModel m = (DefaultTableModel) o.readObject();
+			ObjectInputStream o = new ObjectInputStream(new FileInputStream(loadFile));
+			
+			Vector<?> c = (Vector<?>) o.readObject();
+			DefaultTableModel m = new DefaultTableModel();
+			m.setDataVector(c, null);
+			
 			JTable newTable = new JTable(m);
+			newTable.setDragEnabled(true);
 			main.add(newTable);
+			
 			o.close();
-			revalidate();
-			repaint();
+			refresh();
 			return true;
 		} catch (Exception e) {
 			DataDude.showError(this, e, "Load failed");

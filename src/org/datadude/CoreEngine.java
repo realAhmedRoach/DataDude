@@ -253,9 +253,9 @@ public class CoreEngine extends JFrame {
 		n.setBackground(Color.WHITE);
 
 		editorPane = new JTabbedPane();
-		editorPane.setBorder(new TitledBorder(null, "Editor", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		editorPane.setBorder(new TitledBorder(null, "Editor", TitledBorder.LEADING, TitledBorder.TOP, null, Color.CYAN));
 		editorPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-		editorPane.setBackground(Color.BLUE);
+		editorPane.setBackground(Color.RED);
 		editorPane.add(n);
 		editorPane.setTitleAt(currentTab, "Welcome!");
 		editorPane.setTabComponentAt(currentTab, new ButtonTabComponent(editorPane));
