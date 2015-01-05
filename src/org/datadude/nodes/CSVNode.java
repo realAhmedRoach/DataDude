@@ -48,6 +48,9 @@ public class CSVNode extends BasicNode {
 	JTextField[] lines;
 	JPanel actionPanel, textPanel;
 	JButton btnNew;
+	JButton btnDelete;
+	
+	private GridLayout layout = new GridLayout(0, 1, 10, 20);
 
 	public CSVNode(String _title) {
 		super(_title);
@@ -57,6 +60,10 @@ public class CSVNode extends BasicNode {
 		btnNew = new JButton("New");
 		btnNew.setIcon(new ImageIcon(CSVNode.class.getResource("/images/silk/icons/add.png")));
 		btnNew.addActionListener(new NewListener());
+		
+		btnDelete = new JButton("Delete");
+		btnDelete.setIcon(new ImageIcon(CSVNode.class.getResource("/images/silk/icons/delete.png")));
+		btnDelete.addActionListener(new DeleteListener());
 
 		pane.add(toolBar, BorderLayout.SOUTH);
 
@@ -79,10 +86,9 @@ public class CSVNode extends BasicNode {
 			// textPanel.add(Box.createVerticalStrut(70));
 		}
 
-		pack();
-
-		textPanel.setLayout(new GridLayout(0, 1, 10, 10));
+		textPanel.setLayout(layout);
 		textPanel.add(btnNew);
+		textPanel.add(btnDelete);
 		getContentPane().add(textPanel);
 		setJMenuBar(menuBar);
 		setVisible(true);
@@ -173,12 +179,15 @@ public class CSVNode extends BasicNode {
 			// Clear Panel
 			textPanel.removeAll();
 
+			layout.setVgap(layout.getVgap()-5);
+			
 			JTextField[] newLines = new JTextField[lines.length + 1];
 			for (int i = 0; i < lines.length; i++)
 				newLines[i] = lines[i]; // Sets the old text field to the new
 										// one
 			JTextField newField = new JTextField();
 			newField.setColumns(70);
+			newField.requestFocus();
 			newLines[newLines.length - 1] = newField;
 
 			lines = newLines;
@@ -188,7 +197,8 @@ public class CSVNode extends BasicNode {
 			}
 
 			textPanel.add(btnNew);
-
+			textPanel.add(btnDelete);
+			
 			refresh();
 		}
 	}
@@ -198,6 +208,8 @@ public class CSVNode extends BasicNode {
 			// Clear Panel
 			textPanel.removeAll();
 
+			layout.setVgap(layout.getVgap()+5);
+			
 			JTextField[] newLines = new JTextField[lines.length - 1];
 			for (int i = 0; i < (lines.length - 1); i++)
 				newLines[i] = lines[i]; // Copy all lines except last one
@@ -209,6 +221,7 @@ public class CSVNode extends BasicNode {
 			}
 
 			textPanel.add(btnNew);
+			textPanel.add(btnDelete);
 
 			refresh();
 		}
