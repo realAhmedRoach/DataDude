@@ -43,6 +43,7 @@ import org.datadude.datamanaging.DataDudeFile;
 
 /**
  * Node for showing tables
+ * 
  * @author theTechnoKid
  */
 public class TableNode extends BasicNode {
@@ -83,11 +84,11 @@ public class TableNode extends BasicNode {
 		int[] rac = new int[2];
 		try {
 			rac[0] = Integer.parseInt(JOptionPane.showInputDialog("How many rows?"));
-			if(rac[0]>200)
-				rac[0]=200;
+			if (rac[0] > 200)
+				rac[0] = 200;
 			rac[1] = Integer.parseInt(JOptionPane.showInputDialog("How many columns?"));
-			if(rac[1]>200)
-				rac[1]=200;
+			if (rac[1] > 200)
+				rac[1] = 200;
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(this, "Your're supposed to put in a number!");
 		}
@@ -105,8 +106,10 @@ public class TableNode extends BasicNode {
 		try {
 			ObjectOutputStream in = new ObjectOutputStream(new FileOutputStream(saveFile));
 			DefaultTableModel m = (DefaultTableModel) mainTable.getModel();
-			Vector<?> c = m.getDataVector();
+			@SuppressWarnings("rawtypes")
+			Vector c = m.getDataVector();
 			in.writeObject(c);
+			in.writeObject(getColumnNames());
 			in.close();
 			return true;
 		} catch (NotSerializableException nse) {
@@ -120,20 +123,21 @@ public class TableNode extends BasicNode {
 	}
 
 	@Override
+	@SuppressWarnings("rawtypes")
 	public boolean load(String file) {
 		File loadFile = new File(file);
 		main.removeAll();
 		try {
 			ObjectInputStream o = new ObjectInputStream(new FileInputStream(loadFile));
-			
-			Vector<?> c = (Vector<?>) o.readObject();
+
+			Vector c = (Vector) o.readObject();
 			DefaultTableModel m = new DefaultTableModel();
-			m.setDataVector(c, null);
-			
+			m.setDataVector(c, (Vector) o.readObject());
+
 			JTable newTable = new JTable(m);
 			newTable.setDragEnabled(true);
 			main.add(newTable);
-			
+
 			o.close();
 			refresh();
 			return true;
@@ -147,7 +151,7 @@ public class TableNode extends BasicNode {
 	public void actionPerformed(ActionEvent e) {
 		JMenuItem choice = (JMenuItem) e.getSource();
 		if (choice == saveI) {
-			if(save(getTitle()))
+			if (save(getTitle()))
 				lblStatus.setText("Successfully saved Table!");
 			else
 				lblStatus.setText("Error while saving!");
@@ -163,4 +167,10 @@ public class TableNode extends BasicNode {
 		}
 	}
 
+	private Vector<String> getColumnNames() {
+		Vector<String> names = new Vector<String>();
+		for (int i = 0; i < mainTable.getColumnCount(); i++) 
+			names.add(mainTable.getColumnName(i));
+		return names;
+	}
 }
