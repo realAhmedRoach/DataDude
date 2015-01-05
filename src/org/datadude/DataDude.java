@@ -28,7 +28,7 @@ import org.datadude.memory.MemoryManager;
 
 public final class DataDude {
 
-	public static final String VERSION = "DataDude 0.01 Prerelease";
+	public static final String VERSION = "DataDude 0.0.2 Prerelease";
 
 	public static final MemoryManager manager;
 
