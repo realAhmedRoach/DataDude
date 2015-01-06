@@ -90,9 +90,9 @@ public class LoginFX extends Application {
 
 		btnLogin.setCursor(Cursor.HAND);
 		btnReg.setCursor(Cursor.HAND);
-		
+
 		btnLogin.setDefaultButton(true);
-		
+
 		// Adding Nodes to GridPane layout
 		grid.add(lblUserName, 0, 0);
 		grid.add(txtUserName, 1, 0);
@@ -114,7 +114,7 @@ public class LoginFX extends Application {
 
 		// Adding text and DropShadow effect to it
 		Text text = new Text("DataDude Login");
-		text.setFont(Font.font("Courier New", FontWeight.BOLD, 28));
+		text.setFont(Font.font("Segoe UI", FontWeight.BOLD, 28));
 		text.setEffect(dropShadow);
 
 		// Adding text to HBox
@@ -135,22 +135,22 @@ public class LoginFX extends Application {
 				primaryStage.close();
 				try {
 					FXMLLoader l = new FXMLLoader(getClass().getResource("gui/fxml/Register.fxml"));
-				
-				Parent root = l.load();
-				
-				RegController r = (RegController) l.getController();
-				r.init(stage);
 
-				stage.setResizable(false);
+					Parent root = l.load();
 
-				Scene s = new Scene(root);
-				stage.setScene(s);
-				stage.centerOnScreen();
-				stage.show();
+					RegController r = (RegController) l.getController();
+					r.init(stage);
+
+					stage.setResizable(false);
+
+					Scene s = new Scene(root);
+					stage.setScene(s);
+					stage.centerOnScreen();
+					stage.show();
 				} catch (Exception e) {
 					DataDude.showError(e);
 				}
-				
+
 			}
 		});
 
@@ -164,6 +164,7 @@ public class LoginFX extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("DataDude Login");
 		primaryStage.setResizable(false);
+		DataDude.endPreloader();
 		primaryStage.show();
 	}
 

@@ -41,7 +41,7 @@ public class Main {
 
 		System.out.println(DataDude.getPassLoc());
 		setLnF();
-		LoginFX.init(args);
+		DataDude.showPreloaderAndStart();
 	}
 
 	public static void setLnF() {

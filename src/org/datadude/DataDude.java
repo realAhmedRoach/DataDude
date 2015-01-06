@@ -18,15 +18,17 @@
 
 package org.datadude;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.io.File;
 
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 import org.datadude.memory.MemoryManager;
 
 public final class DataDude {
+
+	static JFrame preloader;
 
 	public static final String VERSION = "DataDude 0.0.2 Prerelease";
 
@@ -37,8 +39,8 @@ public final class DataDude {
 
 	private static CoreEngine currentEngine;
 
-	public static final String HTML_HLP_TXT = "<html>" + "<center><h1>" + VERSION + "</h1></center>"
-			+ "<h2>Intro</h2>" + "<p>DataDude is a data managing application designed to have "
+	public static final String HTML_HLP_TXT = "<html>" + "<center><h1>" + VERSION + "</h1></center>" + "<h2>Intro</h2>"
+			+ "<p>DataDude is a data managing application designed to have "
 			+ "many nodes, or data types, that can be opened in it.</p>" + "<h2>Nodes</h2>"
 			+ "<p>Currently, DataDude has the following nodes:</p>" + "<ul>" + "<li>Text</li>"
 			+ "<li>CSV (Comma-seperated Values)</li>" + "<li>Table</li>" + "</ul>"
@@ -48,21 +50,43 @@ public final class DataDude {
 
 	static {
 		manager = new MemoryManager();
-		new Thread(manager,"Memory Jack").start();
+		new Thread(manager, "Memory Jack").start();
 	}
 
 	private DataDude() {
 	}
 
+	static void showPreloaderAndStart() {
+		preloader = new JFrame("Loading...");
+		preloader.setSize(100, 100);
+		preloader.setLocationRelativeTo(null);
+		JProgressBar p = new JProgressBar();
+		p.setIndeterminate(true);
+		preloader.getContentPane().add(new JLabel("Loading DataDude.."),BorderLayout.NORTH);
+		preloader.getContentPane().add(p);
+		preloader.setVisible(true);
+
+		try {
+			Thread.sleep(3000);
+		} catch (Exception e) {
+		}
+		
+		LoginFX.init(null);
+	}
+
+	static void endPreloader() {
+		preloader.dispose();
+	}
+	
 	public static String getPassLoc() {
 		return passLoc;
 	}
 
-	protected static void setPassLoc(String passLoc) {
+	static void setPassLoc(String passLoc) {
 		DataDude.passLoc = passLoc;
 	}
 
-	protected static void setPassLoc(File passLoc) {
+	static void setPassLoc(File passLoc) {
 		DataDude.passLoc = passLoc.getAbsolutePath();
 	}
 
@@ -84,9 +108,6 @@ public final class DataDude {
 
 	public static CoreEngine getCurrentEngine() {
 		return currentEngine;
-	}
-
-	public static void openConsole() {
 	}
 
 	public MemoryManager getMemoryManager() {
@@ -123,7 +144,7 @@ public final class DataDude {
 			return fs.getSelectedFile().getAbsolutePath();
 		return "null";
 	}
-	
+
 	public static String getFile() {
 		return getFile(Login.getUser().getUserFolder());
 	}
