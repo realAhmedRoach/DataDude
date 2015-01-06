@@ -18,13 +18,15 @@
 
 package org.datadude.datamanaging;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
-
-import org.apache.commons.io.FileUtils;
+import java.util.ArrayList;
 
 /**
  * Represents either a file pointer or directory pointer
+ * 
  * @author theTechnoKid
  * @since 0.01
  */
@@ -37,6 +39,16 @@ public class Pointer {
 	public static final int FILE_POINTER = 0;
 	public static final int DIRECTORY_POINTER = 1;
 
+	/**
+	 * Makes a pointer with the specified parameters
+	 * 
+	 * @param file
+	 *            the file to read from
+	 * @param loc
+	 *            the starting location of the pointer
+	 * @param type
+	 *            the type of pointer
+	 */
 	public Pointer(File file, int loc, int type) {
 		this.currFile = file;
 		this.location = loc;
@@ -44,8 +56,7 @@ public class Pointer {
 	}
 
 	public Pointer(int loc, int type) {
-		this.location = loc;
-		this.type = type;
+		this(null, 0, FILE_POINTER);
 	}
 
 	public Pointer(int type) {
@@ -61,21 +72,29 @@ public class Pointer {
 	 * @throws IOException
 	 *             If there is an error with reading.
 	 */
-	public String readLines(int until) throws IOException {
-		/*
-		 * BufferedReader br = new BufferedReader(new FileReader(currFile));
-		 * char [] temp = null; if (u != -1) br.read(temp, location, u); else
-		 * for (int i = location + 1; i < u; i ++) br.readLine();
-		 * 
-		 * br.close(); return new String(temp);
-		 */
+	public ArrayList<String> readLines(int until) throws IOException {
+		ArrayList<String> swag = new ArrayList<String>();
 		if (this.type == FILE_POINTER) {
-			StringBuffer temp = new StringBuffer();
-			for (int i = location; i < until; i++)
-				temp.append(FileUtils.readLines(currFile).get(i));
-			return new String(temp);
+			BufferedReader br = new BufferedReader(new FileReader(currFile));
+
+			if (location > 0)
+				for (int i = 0; i < location; i++)
+					br.readLine();
+			if (until <= 0) {
+				String line = null;
+				while ((line = br.readLine()) != null)
+					swag.add(line);
+			} else {
+				for (int y = 0; y < until; y++) {
+					String line = null;
+					while ((line = br.readLine()) != null)
+						swag.add(line);
+				}
+			}
+			br.close();
+			return swag;
 		} else {
-			throw new RuntimeException("Wrong pointer type.");
+			throw new IllegalStateException("Wrong pointer type.");
 		}
 	}
 

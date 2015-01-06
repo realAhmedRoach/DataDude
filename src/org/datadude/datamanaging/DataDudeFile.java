@@ -64,7 +64,7 @@ public class DataDudeFile implements Serializable {
 		// File (or directory) with new name
 		File file2 = new File(this.name);
 		if (file2.exists())
-			throw new java.io.IOException("file exists");
+			throw new IOException("file exists");
 
 		// Rename file (or directory)
 		boolean success = file.renameTo(file2);
