@@ -30,8 +30,7 @@ public class Main {
 	private static String os;
 
 	public static void main(String[] args) {
-		os = System.getProperty("os.name");
-		System.out.println(os);
+		os = (System.getProperty("os.name")).toUpperCase();
 
 		checkForFolders();
 
@@ -45,7 +44,7 @@ public class Main {
 	}
 
 	public static void setLnF() {
-		 WebLookAndFeel.install();
+		WebLookAndFeel.install();
 	}
 
 	/**
@@ -53,14 +52,9 @@ public class Main {
 	 * <code>firstTime</code> variable to true and make the folders.
 	 */
 	private static void checkForFolders() {
-		File f = null;
-		if (os.startsWith("Windows")) {
-			f = new File(System.getProperty("user.home") + "\\AppData\\Local\\DataDude\\pass");
-		} else {
-			f = new File("/var/lib/DataDude/pass/");
-		}
+		File f = new File(defaultDirectory() + "\\DataDude\\pass");;
 
-		if (f.isDirectory() && f.exists()) {
+		if (f.isDirectory()) {
 			firstTime = false;
 		} else {
 			firstTime = true;
@@ -69,6 +63,16 @@ public class Main {
 
 		DataDude.setPassLoc(f.getAbsolutePath() + File.separator);
 		DataDude.setSaveLoc(f.getParent() + File.separator);
+	}
+
+	private static String defaultDirectory() {
+		if (os.contains("WIN"))
+			return System.getenv("APPDATA");
+		else if (os.contains("MAC"))
+			return System.getProperty("user.home") + "/Library/Application Support";
+		else if (os.contains("NUX"))
+			return System.getProperty("user.home");
+		return System.getProperty("user.dir");
 	}
 
 	private static void ifNew() {
