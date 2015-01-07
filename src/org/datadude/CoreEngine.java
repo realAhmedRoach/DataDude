@@ -31,12 +31,23 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 
-import javax.swing.*;
-
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
-import org.datadude.gui.*;
+import org.datadude.gui.ButtonTabComponent;
+import org.datadude.gui.NewDialog;
+import org.datadude.gui.SettingsDialog;
 import org.datadude.nodes.BasicNode;
 import org.datadude.nodes.WelcomeNode;
 
@@ -236,6 +247,16 @@ public class CoreEngine extends JFrame {
 				.getResource("/com/sun/java/swing/plaf/windows/icons/DetailsView.gif")));
 		settings.addActionListener(settingsListener);
 		commandPanel.add(settings);
+		
+		JButton btnRefresh = new JButton("Refresh");
+		btnRefresh.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pack();
+				revalidate();
+				repaint();
+			}
+		});
+		commandPanel.add(btnRefresh);
 
 		JButton quit = new JButton("Quit");
 		commandPanel.add(quit);
@@ -255,7 +276,7 @@ public class CoreEngine extends JFrame {
 		editorPane = new JTabbedPane();
 		editorPane.setBorder(new TitledBorder(null, "Editor", TitledBorder.LEADING, TitledBorder.TOP, null, Color.CYAN));
 		editorPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-		editorPane.setBackground(Color.RED);
+		editorPane.setBackground(new Color(152, 118, 54));
 		editorPane.add(n);
 		editorPane.setTitleAt(currentTab, "Welcome!");
 		editorPane.setTabComponentAt(currentTab, new ButtonTabComponent(editorPane));
