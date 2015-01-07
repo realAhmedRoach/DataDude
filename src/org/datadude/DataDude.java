@@ -70,7 +70,7 @@ public final class DataDude {
 	static void showPreloaderAndStart() {
 		JLabel text = new JLabel("Loading DataDude..");
 		preloader = new JFrame("Loading...");
-		preloader.setSize(200, 150);
+		preloader.setSize(200, 100);
 		preloader.setLocationRelativeTo(null);
 		JProgressBar p = new JProgressBar();
 		p.setIndeterminate(true);
@@ -80,8 +80,14 @@ public final class DataDude {
 
 		checkForUpdates();
 		if(download!=null) {
+			preloader.setSize(200,150);
 			preloader.add(getUpdatePanel(), BorderLayout.SOUTH);
-			text.setText("Do you want to run updated DataDude?");
+			try {
+				text.setText("Run updated DataDude ("+Updater.getVersionNo()+") ?");
+				Thread.sleep(4500);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
 		LoginFX.init(null);
@@ -93,7 +99,7 @@ public final class DataDude {
 		yes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					download.start();
+					Thread.currentThread().notify();
 					Updater.run();
 				} catch (IOException ioe) {
 					showError(ioe);

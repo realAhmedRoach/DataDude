@@ -21,6 +21,7 @@ import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -41,6 +42,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import org.datadude.gui.RegController;
 import org.datadude.gui.Splash;
@@ -157,7 +159,13 @@ public class LoginFX extends Application {
 		// Add HBox and GridPane layout to BorderPane Layout
 		bp.setTop(hb);
 		bp.setCenter(grid);
-
+		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			@Override
+			public void handle(WindowEvent t) {
+				Platform.exit();
+				System.exit(0);
+			}
+		});
 		// Adding BorderPane to the scene and loading CSS
 		scene = new Scene(bp);
 		scene.getStylesheets().add(getClass().getResource("gui/styles/login.css").toExternalForm());
@@ -171,13 +179,11 @@ public class LoginFX extends Application {
 
 	EventHandler<ActionEvent> go = new EventHandler<ActionEvent>() {
 		public void handle(ActionEvent e) {
-			System.out.println("Got old user");
 			if (validate(txtUserName.getText(), (pf.getText()).toCharArray()) == false) {
 				return;
 			}
 
 			if (Login.currUser.getUserFolder() == null || Login.currUser.getUserFolder() == "null") {
-				System.out.println("User's folder is null");
 				Login.currUser.setUserFolder(null);
 			}
 			System.out.println("Initializing Core Engine..!");
