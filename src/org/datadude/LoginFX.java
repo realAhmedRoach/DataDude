@@ -38,6 +38,7 @@ import javafx.scene.effect.Reflection;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -95,6 +96,8 @@ public class LoginFX extends Application {
 
 		btnLogin.setDefaultButton(true);
 
+		lblMessage.setTextFill(Color.RED);
+		
 		// Adding Nodes to GridPane layout
 		grid.add(lblUserName, 0, 0);
 		grid.add(txtUserName, 1, 0);
@@ -203,15 +206,11 @@ public class LoginFX extends Application {
 			in.close();
 			fileIn.close();
 		} catch (Exception ex) {
-			// JOptionPane.showMessageDialog(null, "Wrong Username",
-			// "Incorrect Validation", JOptionPane.ERROR_MESSAGE);
 			lblMessage.setText("Wrong Username");
 			return false;
 		}
 
 		if (!Login.currUser.check(pass)) {
-			// JOptionPane.showMessageDialog(null, "Wrong Password",
-			// "Incorrect Validation", JOptionPane.ERROR_MESSAGE);
 			lblMessage.setText("Wrong Password");
 			return false;
 		}
