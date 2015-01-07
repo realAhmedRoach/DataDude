@@ -164,8 +164,9 @@ public class LoginFX extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("DataDude Login");
 		primaryStage.setResizable(false);
-		DataDude.endPreloader();
 		primaryStage.show();
+
+		DataDude.endPreloader();
 	}
 
 	EventHandler<ActionEvent> go = new EventHandler<ActionEvent>() {

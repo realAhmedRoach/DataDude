@@ -20,17 +20,20 @@ package org.datadude;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.io.IOException;
 
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
-import org.datadude.datamanaging.*;
+import org.datadude.datamanaging.Updater;
 import org.datadude.memory.MemoryManager;
 
 public final class DataDude {
@@ -43,7 +46,8 @@ public final class DataDude {
 
 	private static String passLoc;
 	private static String saveLoc;
-
+	private static Thread download;
+	
 	private static CoreEngine currentEngine;
 
 	public static final String HTML_HLP_TXT = "<html>" + "<center><h1>" + VERSION + "</h1></center>" + "<h2>Intro</h2>"
@@ -64,25 +68,52 @@ public final class DataDude {
 	}
 
 	static void showPreloaderAndStart() {
+		JLabel text = new JLabel("Loading DataDude..");
 		preloader = new JFrame("Loading...");
-		preloader.setSize(100, 100);
+		preloader.setSize(200, 150);
 		preloader.setLocationRelativeTo(null);
 		JProgressBar p = new JProgressBar();
 		p.setIndeterminate(true);
-		preloader.getContentPane().add(new JLabel("Loading DataDude.."), BorderLayout.NORTH);
+		preloader.getContentPane().add(text, BorderLayout.NORTH);
 		preloader.getContentPane().add(p);
 		preloader.setVisible(true);
 
-		try {
-			Thread.sleep(3000);
-		} catch (Exception e) {
+		checkForUpdates();
+		if(download!=null) {
+			preloader.add(getUpdatePanel(), BorderLayout.SOUTH);
+			text.setText("Do you want to run updated DataDude?");
 		}
 
 		LoginFX.init(null);
 	}
 
+	private static JPanel getUpdatePanel() {
+		JPanel p = new JPanel();
+		JButton yes = new JButton("Yes");
+		yes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					download.start();
+					Updater.run();
+				} catch (IOException ioe) {
+					showError(ioe);
+				}
+			}
+		});
+		JButton no = new JButton("No");
+		no.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				p.setVisible(false);
+			}
+		});
+		p.add(yes);
+		p.add(no);
+		return p;
+	}
+	
 	static void endPreloader() {
 		preloader.dispose();
+		preloader = null;
 	}
 
 	public static String getPassLoc() {
@@ -158,8 +189,8 @@ public final class DataDude {
 
 	private static void checkForUpdates() {
 		try {
-			if (Updater.getVersion() != VERSION) {
-				Thread download = new Thread() {
+			if (!Updater.getVersion().contains(VERSION)) {
+				download = new Thread() {
 					public void run() {
 						try {
 							Updater.download();
@@ -169,7 +200,8 @@ public final class DataDude {
 
 					}
 				};
-				download.start();
+			} else {
+				download = null;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
