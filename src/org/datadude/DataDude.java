@@ -21,9 +21,16 @@ package org.datadude;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 
-import javax.swing.*;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JProgressBar;
 
+import org.datadude.datamanaging.*;
 import org.datadude.memory.MemoryManager;
 
 public final class DataDude {
@@ -62,7 +69,7 @@ public final class DataDude {
 		preloader.setLocationRelativeTo(null);
 		JProgressBar p = new JProgressBar();
 		p.setIndeterminate(true);
-		preloader.getContentPane().add(new JLabel("Loading DataDude.."),BorderLayout.NORTH);
+		preloader.getContentPane().add(new JLabel("Loading DataDude.."), BorderLayout.NORTH);
 		preloader.getContentPane().add(p);
 		preloader.setVisible(true);
 
@@ -70,14 +77,14 @@ public final class DataDude {
 			Thread.sleep(3000);
 		} catch (Exception e) {
 		}
-		
+
 		LoginFX.init(null);
 	}
 
 	static void endPreloader() {
 		preloader.dispose();
 	}
-	
+
 	public static String getPassLoc() {
 		return passLoc;
 	}
@@ -147,6 +154,26 @@ public final class DataDude {
 
 	public static String getFile() {
 		return getFile(Login.getUser().getUserFolder());
+	}
+
+	private static void checkForUpdates() {
+		try {
+			if (Updater.getVersion() != VERSION) {
+				Thread download = new Thread() {
+					public void run() {
+						try {
+							Updater.download();
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+
+					}
+				};
+				download.start();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
