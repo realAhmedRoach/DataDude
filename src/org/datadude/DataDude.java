@@ -85,6 +85,7 @@ public final class DataDude {
 			try {
 				text.setText("Run updated DataDude ("+Updater.getVersionNo()+") ?");
 				Thread.sleep(4500);
+				text.setText("Loading...");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
