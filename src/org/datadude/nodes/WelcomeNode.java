@@ -23,6 +23,8 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JLabel;
 
+import org.datadude.DataDude;
+
 public class WelcomeNode extends BasicNode {
 	private static final long serialVersionUID = 123L;
 
@@ -34,7 +36,7 @@ public class WelcomeNode extends BasicNode {
 	public WelcomeNode() {
 		super("Welcome");
 		setLayout(new FlowLayout());
-		lblWelcome = new JLabel("Welcome to DataDude Alpha 0.1! Click File -> New... to create a new file!");
+		lblWelcome = new JLabel("Welcome to "+DataDude.VERSION+" Click File -> New... to create a new file!");
 		add(lblWelcome);
 		setVisible(true);
 
