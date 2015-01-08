@@ -40,7 +40,7 @@ public final class DataDude {
 
 	static JFrame preloader;
 
-	public static final String VERSION = "DataDude 0.0.2 Prerelease";
+	public static final String VERSION = "DataDude 0.0.3 Prerelease";
 
 	public static final MemoryManager manager;
 
