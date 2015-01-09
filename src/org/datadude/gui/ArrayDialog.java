@@ -33,12 +33,12 @@ import javax.swing.border.EmptyBorder;
 public class ArrayDialog extends JDialog {
 
 	private static final long serialVersionUID = 7741891346675409491L;
-	
+
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtArr1;
 	private JTextField txtArr2;
 	private String[] values;
-	
+
 	/**
 	 * Launch the application.
 	 */
@@ -55,60 +55,53 @@ public class ArrayDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public ArrayDialog(String sel1, String sel2) {
+		setResizable(false);
+		setModal(true);
 		setModalityType(ModalityType.APPLICATION_MODAL);
-		setBounds(100, 100, 200, 200);
+		setSize(200, 190);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new GridLayout(2, 2, 0, 30));
-		{
-			JLabel lblSel1 = new JLabel(sel1);
-			contentPanel.add(lblSel1);
-		}
-		{
-			txtArr1 = new JTextField();
-			contentPanel.add(txtArr1);
-			txtArr1.setColumns(10);
-		}
-		{
-			JLabel lblSel2 = new JLabel(sel2);
-			contentPanel.add(lblSel2);
-		}
-		{
-			txtArr2 = new JTextField();
-			contentPanel.add(txtArr2);
-			txtArr2.setColumns(10);
-		}
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
-				okButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						String[] text = {txtArr1.getText(), txtArr2.getText()};
-						setValues(text);
-						dispose();
-					}
-				});
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
-				cancelButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						dispose();
-					}
-				});
-				buttonPane.add(cancelButton);
-				while(getValues()==null)
-					;
-			}
-		}
-	}
 
+		JLabel lblSel1 = new JLabel(sel1);
+		contentPanel.add(lblSel1);
+
+		txtArr1 = new JTextField();
+		contentPanel.add(txtArr1);
+		txtArr1.setColumns(10);
+
+		JLabel lblSel2 = new JLabel(sel2);
+		contentPanel.add(lblSel2);
+
+		txtArr2 = new JTextField();
+		contentPanel.add(txtArr2);
+		txtArr2.setColumns(10);
+
+		JPanel buttonPane = new JPanel();
+		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		getContentPane().add(buttonPane, BorderLayout.SOUTH);
+
+		JButton okButton = new JButton("OK");
+		okButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String[] text = { txtArr1.getText(), txtArr2.getText() };
+				setValues(text);
+				dispose();
+			}
+		});
+		buttonPane.add(okButton);
+		getRootPane().setDefaultButton(okButton);
+
+		JButton cancelButton = new JButton("Cancel");
+		cancelButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		buttonPane.add(cancelButton);
+		while (getValues() == null)
+			setVisible(true);
+
+	}
 }
