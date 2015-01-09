@@ -26,14 +26,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import org.datadude.DataDude;
@@ -41,12 +34,6 @@ import org.datadude.nodes.BasicNode;
 import org.datadude.nodes.CSVNode;
 import org.datadude.nodes.TableNode;
 import org.datadude.nodes.TextNode;
-
-import javax.swing.BoxLayout;
-
-import java.awt.GridLayout;
-import javax.swing.SpringLayout;
-import java.awt.Dialog.ModalityType;
 
 public class NewDialog extends JDialog {
 	private static final long serialVersionUID = 12L;

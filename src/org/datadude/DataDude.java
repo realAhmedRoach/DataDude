@@ -39,7 +39,8 @@ import org.datadude.memory.MemoryManager;
 public final class DataDude {
 
 	static JFrame preloader;
-
+	private static JLabel text;
+	
 	public static final String VERSION = "DataDude 0.0.3 Prerelease";
 
 	public static final MemoryManager manager;
@@ -68,7 +69,7 @@ public final class DataDude {
 	}
 
 	static void showPreloaderAndStart() {
-		JLabel text = new JLabel("Loading DataDude..");
+		text = new JLabel("Loading DataDude..");
 		preloader = new JFrame("Loading...");
 		preloader.setSize(200, 100);
 		preloader.setLocationRelativeTo(null);
@@ -85,7 +86,6 @@ public final class DataDude {
 			try {
 				text.setText("Run updated DataDude ("+Updater.getVersionNo()+") ?");
 				Thread.sleep(4500);
-				text.setText("Loading...");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -111,6 +111,7 @@ public final class DataDude {
 		no.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				p.setVisible(false);
+				text.setText("Loading...");
 			}
 		});
 		p.add(yes);
@@ -207,8 +208,6 @@ public final class DataDude {
 
 					}
 				};
-			} else {
-				download = null;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
