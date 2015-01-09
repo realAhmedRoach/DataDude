@@ -33,13 +33,20 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import org.datadude.CoreEngine;
+import org.datadude.DataDude;
 import org.datadude.nodes.BasicNode;
 import org.datadude.nodes.CSVNode;
 import org.datadude.nodes.TableNode;
 import org.datadude.nodes.TextNode;
+
+import javax.swing.BoxLayout;
+
+import java.awt.GridLayout;
+import javax.swing.SpringLayout;
+import java.awt.Dialog.ModalityType;
 
 public class NewDialog extends JDialog {
 	private static final long serialVersionUID = 12L;
@@ -55,6 +62,7 @@ public class NewDialog extends JDialog {
 		try {
 			NewDialog dialog = new NewDialog();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.pack();
 			dialog.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -76,7 +84,7 @@ public class NewDialog extends JDialog {
 			else {
 				JOptionPane.showMessageDialog(null, "Not yet implemented!", "Not Available", JOptionPane.ERROR_MESSAGE);
 			}
-			CoreEngine.addTab(n);
+			DataDude.getCurrentEngine().addTab(n);
 
 		}
 
@@ -86,17 +94,19 @@ public class NewDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public NewDialog() {
-		setBounds(100, 100, 450, 300);
+		setTitle("New File");
+		setResizable(false);
+		setModal(true);
+		setAlwaysOnTop(true);
+		setSize(450, 300);
 		BorderLayout borderLayout = new BorderLayout();
 		borderLayout.setVgap(3);
 		borderLayout.setHgap(3);
-		getContentPane().setLayout(borderLayout);
+		contentPanel.setLayout(borderLayout);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(null);
-
+		getContentPane().add(contentPanel);
+		JPanel it = new JPanel();
 		txtName = new JTextField();
-		txtName.setBounds(100, 49, 230, 42);
 		txtName.setText("Name");
 		txtName.addFocusListener(new FocusListener() {
 
@@ -114,38 +124,48 @@ public class NewDialog extends JDialog {
 				}
 			}
 		});
-		contentPanel.add(txtName);
+		contentPanel.setLayout(new BorderLayout(0, 0));
+		SpringLayout sl_it = new SpringLayout();
+		sl_it.putConstraint(SpringLayout.NORTH, txtName, 40, SpringLayout.NORTH, it);
+		sl_it.putConstraint(SpringLayout.WEST, txtName, 0, SpringLayout.WEST, it);
+		sl_it.putConstraint(SpringLayout.SOUTH, txtName, -107, SpringLayout.SOUTH, it);
+		sl_it.putConstraint(SpringLayout.EAST, txtName, 0, SpringLayout.EAST, it);
+		it.setLayout(sl_it);
+		it.add(txtName);
 		txtName.setColumns(10);
+		
+		
+		
+		String[] values = new String[] { "Text", "Table", "CSV" };
 
-		comboBox = new JComboBox<String>(new String[] { "Text", "Table", "CSV" });
-		comboBox.setBounds(100, 103, 230, 56);
-		contentPanel.add(comboBox);
-
-		JLabel lblCreateNewFile = new JLabel("Create New File");
+		JLabel lblCreateNewFile = new JLabel("Create New File",SwingConstants.CENTER);
 		lblCreateNewFile.setFont(new Font("Action Man", Font.PLAIN, 17));
-		lblCreateNewFile.setBounds(140, 20, 137, 16);
-		contentPanel.add(lblCreateNewFile);
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
-				okButton.addActionListener(newListener);
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+		contentPanel.add(lblCreateNewFile,BorderLayout.NORTH);
+		comboBox = new JComboBox<String>(values);
+		sl_it.putConstraint(SpringLayout.NORTH, comboBox, 6, SpringLayout.SOUTH, txtName);
+		sl_it.putConstraint(SpringLayout.WEST, comboBox, 0, SpringLayout.WEST, txtName);
+		sl_it.putConstraint(SpringLayout.SOUTH, comboBox, -44, SpringLayout.SOUTH, it);
+		sl_it.putConstraint(SpringLayout.EAST, comboBox, 0, SpringLayout.EAST, txtName);
+		it.add(comboBox);
+
+		contentPanel.add(it);
+		
+		JPanel buttonPane = new JPanel();
+		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		getContentPane().add(buttonPane, BorderLayout.SOUTH);
+
+		JButton okButton = new JButton("OK");
+		okButton.addActionListener(newListener);
+		buttonPane.add(okButton);
+		getRootPane().setDefaultButton(okButton);
+
+		JButton cancelButton = new JButton("Cancel");
+		cancelButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
 			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						dispose();
-					}
-				});
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
-			}
-		}
+		});
+		buttonPane.add(cancelButton);
+
 	}
 }

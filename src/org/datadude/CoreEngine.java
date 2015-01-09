@@ -61,32 +61,20 @@ public class CoreEngine extends JFrame {
 	static JTabbedPane editorPane;
 	public static int currentTab = 0;
 
-	private ActionListener quitListener = new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			exit();
-			System.exit(0);
-		}
+	private ActionListener quitListener = (ActionEvent e) -> {
+		exit();
+		System.exit(0);
 	};
 
-	private ActionListener newListener = new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			NewDialog.init();
-		}
-	};
+	private ActionListener newListener = (ActionEvent e) -> NewDialog.init();
 
-	private ActionListener settingsListener = new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			SettingsDialog.init();
-		}
-	};
+	private ActionListener settingsListener = (ActionEvent e) -> SettingsDialog.init();
 
-	private ActionListener filesListener = new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			try {
-				Desktop.getDesktop().open(new File(Login.getUser().getUserFolder()));
-			} catch (IOException ioe) {
-				/* WTF? */
-			}
+	private ActionListener filesListener = (ActionEvent e) -> {
+		try {
+			Desktop.getDesktop().open(new File(Login.getUser().getUserFolder()));
+		} catch (IOException ioe) {
+			/* WTF? */
 		}
 	};
 
@@ -105,14 +93,16 @@ public class CoreEngine extends JFrame {
 		f.setLocationRelativeTo(null);
 		f.setVisible(true);
 	}
-	
+
 	public static void init() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					CoreEngine usableEngine = new CoreEngine();
 					usableEngine.setVisible(true);
-					DataDude.setCurrentEngine(usableEngine); // For other classes to use
+					DataDude.setCurrentEngine(usableEngine); // For other
+																// classes to
+																// use
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -120,7 +110,7 @@ public class CoreEngine extends JFrame {
 		});
 	}
 
-	public static void addTab(BasicNode n) {
+	public void addTab(BasicNode n) {
 		editorPane.addTab(n.getTitle(), n);
 		editorPane.setSelectedIndex(editorPane.getTabCount() - 1);
 		currentTab++;
@@ -168,16 +158,12 @@ public class CoreEngine extends JFrame {
 		mntmQuit.setIcon(new ImageIcon(CoreEngine.class.getResource("/images/silk/icons/cross.png")));
 		mntmQuit.addActionListener(quitListener);
 		mnFile.add(mntmQuit);
-		
+
 		JMenu mnHelp = new JMenu("Help");
 		menuBar.add(mnHelp);
-		
+
 		JMenuItem mntmShowAbout = new JMenuItem("Show About & Help");
-		mntmShowAbout.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				showHelp();
-			}
-		});
+		mntmShowAbout.addActionListener((ActionEvent e) -> showHelp());
 		mnHelp.add(mntmShowAbout);
 		// }
 
@@ -195,7 +181,7 @@ public class CoreEngine extends JFrame {
 		infoPanel.setBorder(new TitledBorder(null, "Info", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		infoPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 5));
 
-		JLabel lblWelcome = new JLabel("Welcome " + Login.getUser().getName());
+		JLabel lblWelcome = new JLabel("Welcome, " + Login.getUser().getName());
 		infoPanel.add(lblWelcome);
 
 		lblCurrfolder = new JLabel("<html><b>User Folder:</b> " + Login.getUser().getUserFolder() + "</html>");
@@ -247,15 +233,14 @@ public class CoreEngine extends JFrame {
 				.getResource("/com/sun/java/swing/plaf/windows/icons/DetailsView.gif")));
 		settings.addActionListener(settingsListener);
 		commandPanel.add(settings);
-		
+
 		JButton btnRefresh = new JButton("Refresh");
-		btnRefresh.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				pack();
-				revalidate();
-				repaint();
-			}
-		});
+		btnRefresh.addActionListener((ActionEvent e) -> {
+			lblCurrfolder.setText("<html><b>User Folder:</b> " + Login.getUser().getUserFolder() + "</html>");
+			lblWelcome.setText("Welcome, " + Login.getUser().getName());
+			revalidate();
+			repaint();
+		}); 
 		commandPanel.add(btnRefresh);
 
 		JButton quit = new JButton("Quit");
@@ -274,7 +259,8 @@ public class CoreEngine extends JFrame {
 		n.setBackground(Color.WHITE);
 
 		editorPane = new JTabbedPane();
-		editorPane.setBorder(new TitledBorder(null, "Editor", TitledBorder.LEADING, TitledBorder.TOP, null, Color.CYAN));
+		editorPane
+				.setBorder(new TitledBorder(null, "Editor", TitledBorder.LEADING, TitledBorder.TOP, null, Color.CYAN));
 		editorPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		editorPane.setBackground(new Color(152, 118, 54));
 		editorPane.add(n);
