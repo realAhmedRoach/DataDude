@@ -4,11 +4,11 @@ DataDude is a data managing application designed to have many nodes (data types)
 It is made in both [JavaFX](https://en.wikipedia.org/wiki/JavaFX) and [Swing](https://en.wikipedia.org/wiki/Swing_(Java)).
 
 ##Libraries
-1. Jasypt
-2. Petersoft/PeterSwing Java Style
+1. [Jasypt](http://www.jasypt.org)
+2. [PeterSwing Java Style](https://github.com/mcheung63/peter-swing/)
 3. [WebLaF](http://weblookandfeel.com)
-4. OpenCSV
-5. FamFamFam Silk Icons
+4. [OpenCSV](http://opencsv.sourceforge.net)
+5. [FamFamFam Silk Icons](http://www.famfamfam.com/lab/icons/silk/)
 
 ##Features
 1. Basic save and load
