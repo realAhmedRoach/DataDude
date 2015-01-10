@@ -6,7 +6,7 @@ It is made in both [JavaFX](https://en.wikipedia.org/wiki/JavaFX) and [Swing](ht
 ##Libraries
 1. Jasypt
 2. Petersoft/PeterSwing Java Style
-3. WebLaF
+3. [WebLaF](http://weblookandfeel.com)
 4. OpenCSV
 5. FamFamFam Silk Icons
 
