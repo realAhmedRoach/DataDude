@@ -129,12 +129,13 @@ public class TextNode extends BasicNode implements ActionListener {
 
 	@Override
 	public boolean load(String file) {
+		ta.setText("");
 		File loadFile = new File(file);
 		try {
 			BufferedReader r = new BufferedReader(new FileReader(loadFile));
 			String line;
 			while ((line = r.readLine()) != null)
-				ta.setText(line + "\n");
+				ta.append(line + "\n");
 			revalidate();
 			repaint();
 			r.close();
