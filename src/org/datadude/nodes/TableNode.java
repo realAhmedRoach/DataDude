@@ -20,13 +20,7 @@ package org.datadude.nodes;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.NotSerializableException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.Vector;
 
 import javax.swing.JFileChooser;

@@ -49,7 +49,6 @@ public class NewDialog extends JDialog {
 		try {
 			NewDialog dialog = new NewDialog();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.pack();
 			dialog.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -85,7 +84,7 @@ public class NewDialog extends JDialog {
 		setResizable(false);
 		setModal(true);
 		setAlwaysOnTop(true);
-		setSize(450, 300);
+		setSize(440, 290);
 		BorderLayout borderLayout = new BorderLayout();
 		borderLayout.setVgap(3);
 		borderLayout.setHgap(3);

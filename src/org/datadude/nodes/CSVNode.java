@@ -125,7 +125,7 @@ public class CSVNode extends BasicNode {
 
 			// Write It Out
 			for (int i = 0; i < lines.length; i++)
-				w.writeNext(lines[i].getText().split(","), false);
+				w.writeNext(lines[i].getText().split("\\s*,\\s*"), false);
 
 			w.close();
 		} catch (Exception e) {
