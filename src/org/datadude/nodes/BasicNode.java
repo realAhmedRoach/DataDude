@@ -24,6 +24,7 @@ import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.File;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -40,7 +41,6 @@ public abstract class BasicNode extends JInternalFrame implements ActionListener
 	private static final long serialVersionUID = -2795471245561416657L;
 	protected String title;
 	protected JMenuBar menuBar;
-	protected int tabPos;
 	protected String pad;
 	protected JMenu fileM, editM;
 	protected JMenuItem loadI, cutI, copyI, pasteI, selectI, exitI, saveI;
@@ -52,8 +52,6 @@ public abstract class BasicNode extends JInternalFrame implements ActionListener
 		setBorder(new BevelBorder(BevelBorder.RAISED, Color.CYAN, Color.RED, Color.GREEN, Color.YELLOW));
 		title = _title;
 		setTitle(title);
-		// init();
-
 	}
 
 	/**
@@ -129,16 +127,12 @@ public abstract class BasicNode extends JInternalFrame implements ActionListener
 
 	public abstract boolean load(String file);
 
-	public int getTabPos() {
-		return tabPos;
-	}
-
 	public void refresh() {
 		pack();
 		revalidate();
 		repaint();
 	}
-	
+
 	public String getTitle() {
 		return title;
 	}
@@ -146,5 +140,12 @@ public abstract class BasicNode extends JInternalFrame implements ActionListener
 	public void setTitle(String title) {
 		super.setTitle(title);
 		this.title = title;
+	}
+
+	protected void setNewTitle(File f) {
+		if ((f.getName()).contains("."))
+			setTitle((f.getName()).split(".")[1]);
+		else
+			setTitle(f.getName());
 	}
 }

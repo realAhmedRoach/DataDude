@@ -132,6 +132,8 @@ public class TableNode extends BasicNode {
 			newTable.setDragEnabled(true);
 			main.add(newTable);
 
+			setNewTitle(new File(file));
+			
 			o.close();
 			refresh();
 			return true;

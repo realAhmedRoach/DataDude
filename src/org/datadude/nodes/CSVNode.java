@@ -49,7 +49,7 @@ public class CSVNode extends BasicNode {
 	JPanel actionPanel, textPanel;
 	JButton btnNew;
 	JButton btnDelete;
-	
+
 	private GridLayout layout = new GridLayout(0, 1, 10, 20);
 
 	public CSVNode(String _title) {
@@ -60,7 +60,7 @@ public class CSVNode extends BasicNode {
 		btnNew = new JButton("New");
 		btnNew.setIcon(new ImageIcon(CSVNode.class.getResource("/images/silk/icons/add.png")));
 		btnNew.addActionListener(new NewListener());
-		
+
 		btnDelete = new JButton("Delete");
 		btnDelete.setIcon(new ImageIcon(CSVNode.class.getResource("/images/silk/icons/delete.png")));
 		btnDelete.addActionListener(new DeleteListener());
@@ -163,6 +163,8 @@ public class CSVNode extends BasicNode {
 
 			textPanel.add(btnNew);
 
+			setNewTitle(new File(file));
+
 			refresh();
 			r.close();
 		} catch (Exception e) {
@@ -179,8 +181,8 @@ public class CSVNode extends BasicNode {
 			// Clear Panel
 			textPanel.removeAll();
 
-			layout.setVgap(layout.getVgap()-5);
-			
+			layout.setVgap(layout.getVgap() - 5);
+
 			JTextField[] newLines = new JTextField[lines.length + 1];
 			for (int i = 0; i < lines.length; i++)
 				newLines[i] = lines[i]; // Sets the old text field to the new
@@ -198,7 +200,7 @@ public class CSVNode extends BasicNode {
 
 			textPanel.add(btnNew);
 			textPanel.add(btnDelete);
-			
+
 			refresh();
 		}
 	}
@@ -208,8 +210,8 @@ public class CSVNode extends BasicNode {
 			// Clear Panel
 			textPanel.removeAll();
 
-			layout.setVgap(layout.getVgap()+5);
-			
+			layout.setVgap(layout.getVgap() + 5);
+
 			JTextField[] newLines = new JTextField[lines.length - 1];
 			for (int i = 0; i < (lines.length - 1); i++)
 				newLines[i] = lines[i]; // Copy all lines except last one

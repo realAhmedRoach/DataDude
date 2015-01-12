@@ -136,8 +136,8 @@ public class TextNode extends BasicNode implements ActionListener {
 			String line;
 			while ((line = r.readLine()) != null)
 				ta.append(line + "\n");
-			revalidate();
-			repaint();
+			setNewTitle(new File(file));
+			refresh();
 			r.close();
 			return true;
 		} catch (Exception e) {
