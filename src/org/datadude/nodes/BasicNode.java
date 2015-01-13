@@ -144,7 +144,7 @@ public abstract class BasicNode extends JInternalFrame implements ActionListener
 
 	protected void setNewTitle(File f) {
 		if ((f.getName()).contains("."))
-			setTitle((f.getName()).split(".")[1]);
+			setTitle((f.getName()).split(".")[0]);
 		else
 			setTitle(f.getName());
 	}
