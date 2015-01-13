@@ -58,7 +58,7 @@ public class CoreEngine extends JFrame {
 	JButton files, newFile, chat, settings, quit, server;
 	JLabel lblCurrfolder;
 	JProgressBar progressBar;
-	static JTabbedPane editorPane;
+	JTabbedPane editorPane;
 	public static int currentTab = 0;
 
 	private ActionListener quitListener = (ActionEvent e) -> {
@@ -117,6 +117,10 @@ public class CoreEngine extends JFrame {
 		editorPane.setTabComponentAt(currentTab, new ButtonTabComponent(editorPane));
 	}
 
+	public void setTitleAt(int index, String title) {
+		editorPane.setTitleAt(index, title);
+	}
+	
 	/**
 	 * Create the frame.
 	 */
