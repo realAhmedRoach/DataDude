@@ -15,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
- ******************************************************************************
+ * *****************************************************************************
  */
 package org.datadude.security;
 
@@ -28,8 +28,19 @@ import java.util.Arrays;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
+/**
+ * A class that can encrypt and authenticate Strings using the PBKDF2 with SHA1
+ * algorithm. Useful for storing passwords.
+ *
+ * @author theTechnoKid
+ */
 public final class StringEncryptor {
 
+    /**
+     * @param password the password to encrypt
+     * @param salt the salt to encrypt the password
+     * @return the encrypted password in bytes
+     */
     public byte[] encryptPassword(String password, byte[] salt) {
         try {
             // PBKDF2 with SHA-1 as the hashing algorithm.
@@ -50,17 +61,34 @@ public final class StringEncryptor {
 
     }
 
+    /**
+     * Authenticates the <code>attemptedPassword</code> by
+     * encrypting it with the same salt and seeing if they both
+     * are equal.
+     * @param attemptedPassword the attempted password to be checked
+     * @param encryptedPassword the encrypted password to check against
+     * @param salt the <code>encryptedPassword</code>s salt
+     * @return whether the <code>attemptedPassword</code> is correct
+     * @throws NoSuchAlgorithmException
+     * @throws InvalidKeySpecException 
+     */
     public boolean authenticate(String attemptedPassword, byte[] encryptedPassword, byte[] salt)
             throws NoSuchAlgorithmException, InvalidKeySpecException {
-		// Encrypt the clear-text password using the same salt that was used to
+        // Encrypt the clear-text password using the same salt that was used to
         // encrypt the original password
         byte[] encryptedAttemptedPassword = encryptPassword(attemptedPassword, salt);
 
-		// Authentication succeeds if encrypted password that the user entered
+        // Authentication succeeds if encrypted password that the user entered
         // is equal to the stored hash
         return Arrays.equals(encryptedPassword, encryptedAttemptedPassword);
     }
 
+    /**
+     * Generates a random salt to be used for
+     * encrypting passwords
+     * @return a random salt
+     * @throws NoSuchAlgorithmException 
+     */
     public static byte[] generateSalt() throws NoSuchAlgorithmException {
         SecureRandom r = SecureRandom.getInstance("SHA1PRNG");
         byte[] salt = new byte[10];
