@@ -114,7 +114,7 @@ public class CoreEngine extends JFrame {
 		editorPane.addTab(n.getTitle(), n);
 		editorPane.setSelectedIndex(editorPane.getTabCount() - 1);
 		currentTab++;
-		editorPane.setTabComponentAt(currentTab, new ButtonTabComponent(editorPane));
+		editorPane.setTabComponentAt(currentTab, new ButtonTabComponent(editorPane,true));
 	}
 
 	public void setTitleAt(int index, String title) {
@@ -269,7 +269,7 @@ public class CoreEngine extends JFrame {
 		editorPane.setBackground(new Color(152, 118, 54));
 		editorPane.add(n);
 		editorPane.setTitleAt(currentTab, "Welcome!");
-		editorPane.setTabComponentAt(currentTab, new ButtonTabComponent(editorPane));
+		editorPane.setTabComponentAt(currentTab, new ButtonTabComponent(editorPane,false));
 
 		contentPane.setLayout(new BorderLayout(0, 5));
 		contentPane.add(infoPanel, BorderLayout.NORTH);
