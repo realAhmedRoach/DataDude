@@ -1,5 +1,9 @@
 *.class
 
+# Netbeans files
+nbproject/
+build.xml
+
 #client secrets for google
 client_secrets.json
 
@@ -23,3 +27,5 @@ releases
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 /bin
+/nbproject/private/
+/build/
