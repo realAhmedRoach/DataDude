@@ -18,17 +18,12 @@
 
 package org.datadude.security;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.*;
+import java.security.*;
+import java.security.spec.*;
+import java.util.logging.*;
 
-import org.datadude.DataDude;
+import org.datadude.*;
 
 public class User implements Serializable {
 	private static final long serialVersionUID = 254827L;
@@ -38,7 +33,7 @@ public class User implements Serializable {
 	private final String password;
 	private final char[] passArray;
 	private byte[] passBytes;
-        private byte[] salt;
+	private byte[] salt;
 
 	private String userFolder;
 
@@ -52,29 +47,30 @@ public class User implements Serializable {
 		password = new String(pass);
 		passArray = pass;
 		passBytes = password.getBytes();
-            try {
-                salt = StringEncryptor.generateSalt();
-            } catch (NoSuchAlgorithmException ex) {
-                Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
-            }
+		try {
+			salt = StringEncryptor.generateSalt();
+		} catch (NoSuchAlgorithmException ex) {
+			Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+		}
 
 		userFolder = null;
 
 	}
 
 	public void encrypt() {
-		passBytes = enc.encryptPassword(password,salt);
+		passBytes = enc.encryptPassword(password, salt);
 		encrypted = true;
 	}
 
 	public boolean check(String str) {
 		if (encrypted) {
-                    try {
-                        return enc.authenticate(str, passBytes,salt);
-                    } catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
-                        Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
-                        return false;
-                    }
+			try {
+				enc = new StringEncryptor();
+				return enc.authenticate(str, passBytes, salt);
+			} catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
+				Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+				return false;
+			}
 		} else {
 			System.out.println("Password not encrypted!");
 			return false;
