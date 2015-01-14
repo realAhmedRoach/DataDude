@@ -57,13 +57,13 @@ public abstract class BasicNode extends JInternalFrame implements ActionListener
 	/**
 	 * This is how plugins get loaded. This MUST BE RIGHT or else plugins won't
 	 * work
-	 * 
 	 * @return The full class (binary) name for the Node.
 	 */
 	public final String getFullName() {
 		return getClass().getCanonicalName();
 	}
 
+        @Override
 	public void init() {
 		setSize(600, 600);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -123,9 +123,10 @@ public abstract class BasicNode extends JInternalFrame implements ActionListener
 		this.setVisible(true);
 	}
 
-	public abstract boolean save(String file);
+	@Override public abstract boolean save(String file);
 
-	public abstract boolean load(String file);
+        
+	@Override public abstract boolean load(String file);
 
 	public void refresh() {
 		pack();
@@ -133,10 +134,12 @@ public abstract class BasicNode extends JInternalFrame implements ActionListener
 		repaint();
 	}
 
+        @Override
 	public String getTitle() {
 		return title;
 	}
 
+        @Override
 	public void setTitle(String title) {
 		super.setTitle(title);
 		this.title = title;
