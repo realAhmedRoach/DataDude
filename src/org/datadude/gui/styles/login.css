@@ -1,14 +1,14 @@
 #root {
- -fx-background-color:  linear-gradient(lightgray, gray);
- -fx-border-color: white;
- -fx-border-radius: 20.0;
- -fx-padding: 10.0 10.0 10.0 10.0;
- -fx-background-radius: 20.0;
- 
+    -fx-background-color:  linear-gradient(lightgray, gray);
+    -fx-border-color: white;
+    -fx-border-radius: 20.0;
+    -fx-padding: 10.0 10.0 10.0 10.0;
+    -fx-background-radius: 20.0;
+
 }
 
 #bp {
-	-fx-background-color:  linear-gradient(gray,DimGrey ); 
+    -fx-background-color:  linear-gradient(gray,DimGrey ); 
 }
 
 #infolabl {
@@ -19,8 +19,8 @@
 }
 
 #message {
-	-fx-font-weight: bold;
-	-fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
     -fx-text-fill: orangered;
 }
 
@@ -37,10 +37,10 @@
 }
 
 .button:hover {
-	-fx-text-fill: white;
+    -fx-text-fill: white;
 }
 
 #text {
-  -fx-fill:  linear-gradient(lightgreen, darkgreen);
+    -fx-fill:  linear-gradient(lightgreen, darkgreen);
+    -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
 }
- 
