@@ -96,7 +96,7 @@ public class LoginFX extends Application {
 
 		btnLogin.setDefaultButton(true);
 
-		lblMessage.setTextFill(Color.RED);
+		lblMessage.setTextFill(Color.ORANGERED);
 		
 		// Adding Nodes to GridPane layout
 		grid.add(lblUserName, 0, 0);
@@ -131,6 +131,9 @@ public class LoginFX extends Application {
 		btnLogin.setId("btnLogin");
 		btnReg.setId("btnReg");
 		text.setId("text");
+		lblUserName.setId("infolabl");
+		lblPassword.setId("infolabl");
+		lblMessage.setId("message");
 
 		// Action for btnLogin
 		btnLogin.setOnAction(go);
