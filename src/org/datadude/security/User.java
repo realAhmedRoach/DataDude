@@ -23,24 +23,28 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.datadude.DataDude;
-import org.jasypt.util.password.StrongPasswordEncryptor;
 
 public class User implements Serializable {
 	private static final long serialVersionUID = 254827L;
 
 	private String name;
 	private String user;
-	private String password;
-	private char[] passArray;
+	private final String password;
+	private final char[] passArray;
 	private byte[] passBytes;
+        private byte[] salt;
 
 	private String userFolder;
 
 	private boolean encrypted = false;
 
-	private transient StrongPasswordEncryptor enc = new StrongPasswordEncryptor();
+	private transient StringEncryptor enc = new StringEncryptor();
 
 	public User(String userName, char[] pass) {
 
@@ -48,25 +52,33 @@ public class User implements Serializable {
 		password = new String(pass);
 		passArray = pass;
 		passBytes = password.getBytes();
+            try {
+                salt = StringEncryptor.generateSalt();
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
 		userFolder = null;
 
 	}
 
 	public void encrypt() {
-		password = enc.encryptPassword(password);
+		passBytes = enc.encryptPassword(password,salt);
 		encrypted = true;
 	}
 
 	public boolean check(String str) {
 		if (encrypted) {
-			enc = new StrongPasswordEncryptor();
-			return enc.checkPassword(str, password);
+                    try {
+                        return enc.authenticate(str, passBytes,salt);
+                    } catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
+                        Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+                        return false;
+                    }
 		} else {
 			System.out.println("Password not encrypted!");
 			return false;
 		}
-
 	}
 
 	public static boolean check(User s, String str) {
@@ -124,7 +136,7 @@ public class User implements Serializable {
 	}
 
 	public String getPassword() {
-		return new String(password);
+		return password;
 	}
 
 	public char[] getPasswordArray() {
