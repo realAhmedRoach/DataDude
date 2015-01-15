@@ -9,7 +9,6 @@
 			<accessrule kind="accessible" pattern="com/sun/java/swing/**"/>
 		</accessrules>
 	</classpathentry>
-	<classpathentry kind="lib" path="libs/jasypt-1.9.1.jar"/>
 	<classpathentry kind="lib" path="res"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
