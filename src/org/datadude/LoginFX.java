@@ -42,8 +42,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
+import javafx.stage.*;
 
 import org.datadude.gui.RegController;
 import org.datadude.gui.Splash;
@@ -57,9 +56,7 @@ public class LoginFX extends Application {
 	final Label lblMessage = new Label();
 	public static Scene scene;
 	public static Stage primaryStage;
-
-	// private static boolean launched;
-
+	
 	public static void init(String[] args) {
 		launch(args);
 	}
@@ -165,12 +162,9 @@ public class LoginFX extends Application {
 		// Add HBox and GridPane layout to BorderPane Layout
 		bp.setTop(hb);
 		bp.setCenter(grid);
-		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-			@Override
-			public void handle(WindowEvent t) {
-				Platform.exit();
-				System.exit(0);
-			}
+		primaryStage.setOnCloseRequest((WindowEvent t) -> {
+			Platform.exit();
+			System.exit(0);
 		});
 		// Adding BorderPane to the scene and loading CSS
 		scene = new Scene(bp);
@@ -183,19 +177,16 @@ public class LoginFX extends Application {
 		DataDude.endPreloader();
 	}
 
-	EventHandler<ActionEvent> go = new EventHandler<ActionEvent>() {
-		public void handle(ActionEvent e) {
-			if (validate(txtUserName.getText(), (pf.getText()).toCharArray()) == false) {
-				return;
-			}
-
-			if (Login.currUser.getUserFolder() == null || Login.currUser.getUserFolder() == "null") {
-				Login.currUser.setUserFolder(null);
-			}
-			System.out.println("Initializing Core Engine..!");
-			primaryStage.close();
-			new Splash();
+	EventHandler<ActionEvent> go = (ActionEvent e) -> {
+		if (validate(txtUserName.getText(), (pf.getText()).toCharArray()) == false) {
+			return;
 		}
+
+		if (Login.currUser.getUserFolder() == null) {
+			Login.currUser.setUserFolder(null);
+		}
+		primaryStage.close();
+		new Splash();
 	};
 
 	private boolean validate(String user, char[] _pass) {
