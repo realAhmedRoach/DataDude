@@ -18,7 +18,7 @@
 package org.datadude.nodes;
 
 /**
- * @author aarh9
+ * @author theTechnoKid
  *	All nodes extend this interface
  */
 public interface Node {
@@ -38,5 +38,9 @@ public interface Node {
 	 * @return success of the load
 	 */
 	boolean load(String file);
-	
+	/*
+	 * Performs cleanup
+	 * processes for that node
+	 */
+	void cleanup();
 }

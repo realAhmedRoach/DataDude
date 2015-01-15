@@ -21,30 +21,32 @@ import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
-import javax.swing.plaf.basic.*;
+import javax.swing.plaf.basic.BasicButtonUI;
 
-import org.datadude.*;
+import org.datadude.CoreEngine;
+import org.datadude.DataDude;
 
 /**
  * Component to be used as tabComponent; Contains a JLabel to show the text and
  * a JButton to close the tab it belongs to
  */
+// THIS IS AN EDITED VERSION OF ORACLE(tm)'S JTabbedPane tutorial
 public class ButtonTabComponent extends JPanel {
 
 	private static final long serialVersionUID = -4758721958374176431L;
 
 	private final JTabbedPane pane;
 	private boolean saveable;
+	private int index;
 
-	public ButtonTabComponent(final JTabbedPane pane, boolean saveable) {
+	public ButtonTabComponent(boolean saveable) {
 
 		// unset default FlowLayout' gaps
 		super(new FlowLayout(FlowLayout.LEFT, 0, 0));
+		this.index = CoreEngine.currentTab;
 		this.saveable = saveable;
-		if (pane == null) {
-			throw new NullPointerException("TabbedPane is null");
-		}
-		this.pane = pane;
+
+		this.pane = DataDude.getCurrentEngine().editorPane;
 		setOpaque(false);
 
 		// make JLabel read titles from JTabbedPane
@@ -106,6 +108,7 @@ public class ButtonTabComponent extends JPanel {
 			}
 			if (i != -1) {
 				CoreEngine.currentTab--;
+				DataDude.getCurrentEngine().getNodes().remove(index);
 				pane.remove(i);
 			}
 		}

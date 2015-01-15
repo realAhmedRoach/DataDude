@@ -18,23 +18,11 @@
 
 package org.datadude.nodes;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
+import java.awt.*;
+import java.awt.event.*;
 import java.io.File;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JToolBar;
-import javax.swing.KeyStroke;
+import javax.swing.*;
 import javax.swing.border.BevelBorder;
 
 public abstract class BasicNode extends JInternalFrame implements ActionListener, Node {
@@ -57,13 +45,14 @@ public abstract class BasicNode extends JInternalFrame implements ActionListener
 	/**
 	 * This is how plugins get loaded. This MUST BE RIGHT or else plugins won't
 	 * work
+	 * 
 	 * @return The full class (binary) name for the Node.
 	 */
 	public final String getFullName() {
 		return getClass().getCanonicalName();
 	}
 
-        @Override
+	@Override
 	public void init() {
 		setSize(600, 600);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -123,10 +112,11 @@ public abstract class BasicNode extends JInternalFrame implements ActionListener
 		this.setVisible(true);
 	}
 
-	@Override public abstract boolean save(String file);
+	@Override
+	public abstract boolean save(String file);
 
-        
-	@Override public abstract boolean load(String file);
+	@Override
+	public abstract boolean load(String file);
 
 	public void refresh() {
 		pack();
@@ -134,15 +124,18 @@ public abstract class BasicNode extends JInternalFrame implements ActionListener
 		repaint();
 	}
 
-        @Override
+	@Override
 	public String getTitle() {
 		return title;
 	}
 
-        @Override
+	@Override
 	public void setTitle(String title) {
 		super.setTitle(title);
 		this.title = title;
+	}
+
+	public void cleanup() {
 	}
 
 	protected void setNewTitle(File f) {

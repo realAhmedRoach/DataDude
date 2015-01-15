@@ -18,38 +18,16 @@
 
 package org.datadude;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Desktop;
-import java.awt.EventQueue;
-import java.awt.FlowLayout;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.File;
-import java.io.IOException;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import java.util.*;
 
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.JTabbedPane;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.TitledBorder;
+import javax.swing.*;
+import javax.swing.border.*;
 
-import org.datadude.gui.ButtonTabComponent;
-import org.datadude.gui.NewDialog;
-import org.datadude.gui.SettingsDialog;
-import org.datadude.nodes.BasicNode;
-import org.datadude.nodes.WelcomeNode;
+import org.datadude.gui.*;
+import org.datadude.nodes.*;
 
 public class CoreEngine extends JFrame {
 	private static final long serialVersionUID = 1295L;
@@ -58,8 +36,10 @@ public class CoreEngine extends JFrame {
 	JButton files, newFile, chat, settings, quit, server;
 	JLabel lblCurrfolder;
 	JProgressBar progressBar;
-	JTabbedPane editorPane;
+	public final JTabbedPane editorPane;
+	
 	public static int currentTab = 0;
+	private final ArrayList<Node> nodes = new ArrayList<>();
 
 	private ActionListener quitListener = (ActionEvent e) -> {
 		exit();
@@ -100,9 +80,7 @@ public class CoreEngine extends JFrame {
 				try {
 					CoreEngine usableEngine = new CoreEngine();
 					usableEngine.setVisible(true);
-					DataDude.setCurrentEngine(usableEngine); // For other
-																// classes to
-																// use
+					DataDude.setCurrentEngine(usableEngine);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -111,10 +89,15 @@ public class CoreEngine extends JFrame {
 	}
 
 	public void addTab(BasicNode n) {
+		getNodes().add(n);
 		editorPane.addTab(n.getTitle(), n);
 		editorPane.setSelectedIndex(editorPane.getTabCount() - 1);
 		currentTab++;
-		editorPane.setTabComponentAt(currentTab, new ButtonTabComponent(editorPane,true));
+		editorPane.setTabComponentAt(currentTab, new ButtonTabComponent(true));
+	}
+
+	public ArrayList<Node> getNodes() {
+		return nodes;
 	}
 
 	public void setTitleAt(int index, String title) {
@@ -126,7 +109,6 @@ public class CoreEngine extends JFrame {
 	 */
 	public CoreEngine() {
 		long start = System.currentTimeMillis();
-		System.out.println("\nInside Core Engine Constructor");
 		// SET ICON {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/icon.png")));
 		// }
@@ -266,10 +248,10 @@ public class CoreEngine extends JFrame {
 		editorPane
 				.setBorder(new TitledBorder(null, "Editor", TitledBorder.LEADING, TitledBorder.TOP, null, Color.CYAN));
 		editorPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-		editorPane.setBackground(new Color(152, 118, 54));
+		editorPane.setBackground(new Color(255, 153, 102));
 		editorPane.add(n);
 		editorPane.setTitleAt(currentTab, "Welcome!");
-		editorPane.setTabComponentAt(currentTab, new ButtonTabComponent(editorPane,false));
+		editorPane.setTabComponentAt(currentTab, new ButtonTabComponent(false));
 
 		contentPane.setLayout(new BorderLayout(0, 5));
 		contentPane.add(infoPanel, BorderLayout.NORTH);
