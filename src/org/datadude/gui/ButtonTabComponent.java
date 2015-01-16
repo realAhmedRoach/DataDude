@@ -74,9 +74,6 @@ public class ButtonTabComponent extends JPanel {
 	}
 
 	private class TabButton extends JButton implements ActionListener {
-		/**
-		 * 
-		 */
 		private static final long serialVersionUID = 5788687194838799495L;
 
 		public TabButton() {

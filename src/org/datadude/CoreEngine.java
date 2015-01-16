@@ -89,7 +89,7 @@ public class CoreEngine extends JFrame {
 	}
 
 	public void addTab(BasicNode n) {
-		getNodes().add(n);
+		nodes.add(n);
 		editorPane.addTab(n.getTitle(), n);
 		editorPane.setSelectedIndex(editorPane.getTabCount() - 1);
 		currentTab++;
@@ -241,7 +241,7 @@ public class CoreEngine extends JFrame {
 		System.out.println("Initializing Editor");
 		WelcomeNode n;
 		n = new WelcomeNode();
-		// n.setIcon(true);
+		nodes.add(n);
 		n.setBackground(Color.WHITE);
 
 		editorPane = new JTabbedPane();
