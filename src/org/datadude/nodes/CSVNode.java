@@ -121,6 +121,8 @@ public class CSVNode extends BasicNode {
 			lines[selectedIndex].replaceSelection("");
 		} else if(choice == selectI)
 			lines[selectedIndex].selectAll();
+		 else if (choice == exitI)
+				exit();
 	}
 
 	@Override

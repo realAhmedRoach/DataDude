@@ -21,9 +21,13 @@ package org.datadude.nodes;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
+
+import org.datadude.CoreEngine;
+import org.datadude.DataDude;
 
 public abstract class BasicNode extends JInternalFrame implements ActionListener, Node {
 	private static final long serialVersionUID = -2795471245561416657L;
@@ -80,6 +84,7 @@ public abstract class BasicNode extends JInternalFrame implements ActionListener
 
 		saveI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
 		loadI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, ActionEvent.CTRL_MASK));
+		exitI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X,ActionEvent.CTRL_MASK));
 		cutI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, ActionEvent.CTRL_MASK));
 		copyI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK));
 		pasteI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, ActionEvent.CTRL_MASK));
@@ -138,6 +143,11 @@ public abstract class BasicNode extends JInternalFrame implements ActionListener
 	public void cleanup() {
 	}
 
+	protected void exit() {
+		ArrayList<Node> nodes = DataDude.getCurrentEngine().getNodes();
+		CoreEngine.editorPane.removeTabAt(nodes.indexOf(this));
+	}
+	
 	protected void setNewTitle(File f) {
 		if ((f.getName()).contains("."))
 			setTitle((f.getName()).split(".")[0]);

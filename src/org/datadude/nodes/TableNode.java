@@ -169,7 +169,8 @@ public class TableNode extends BasicNode {
 			mainTable.setValueAt("", mainTable.getSelectedRow(), mainTable.getSelectedColumn());
 			DataDude.setClipboard((String) mainTable.getValueAt(mainTable.getSelectedRow(),
 					mainTable.getSelectedColumn()));
-		}
+		} else if (choice == exitI)
+			exit();
 	}
 
 	private Vector<String> getColumnNames() {

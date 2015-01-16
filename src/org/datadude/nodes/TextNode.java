@@ -44,13 +44,6 @@ public class TextNode extends BasicNode {
 		ta.setLineWrap(true);
 		ta.setWrapStyleWord(true);
 
-		saveI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
-		loadI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, ActionEvent.CTRL_MASK));
-		cutI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, ActionEvent.CTRL_MASK));
-		copyI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK));
-		pasteI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, ActionEvent.CTRL_MASK));
-		selectI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.CTRL_MASK));
-
 		pane.add(scpane, BorderLayout.CENTER);
 		pane.add(toolBar, BorderLayout.SOUTH);
 
@@ -111,6 +104,8 @@ public class TextNode extends BasicNode {
 			ta.insert(DataDude.getClipboard(), ta.getCaretPosition());
 		else if (choice == selectI)
 			ta.selectAll();
+		else if (choice == exitI)
+			exit();
 	}
 
 	@Override
