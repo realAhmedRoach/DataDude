@@ -36,7 +36,7 @@ public class CoreEngine extends JFrame {
 	JButton files, newFile, chat, settings, quit, server;
 	JLabel lblCurrfolder;
 	JProgressBar progressBar;
-	public final JTabbedPane editorPane;
+	public static JTabbedPane editorPane;
 	
 	public static int currentTab = 0;
 	private final ArrayList<Node> nodes = new ArrayList<>();
@@ -261,7 +261,7 @@ public class CoreEngine extends JFrame {
 
 		long end = System.currentTimeMillis();
 
-		System.out.println("\nCompleted Initializing Core Engine" + "\nTotal time: " + (end - start) + "ms");
+		System.out.println("\nCompleted Initializing Core Engine\nTotal time: " + (end - start) + "ms");
 		// }
 		// }
 

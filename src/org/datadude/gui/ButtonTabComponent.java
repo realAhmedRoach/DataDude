@@ -46,7 +46,8 @@ public class ButtonTabComponent extends JPanel {
 		this.index = CoreEngine.currentTab;
 		this.saveable = saveable;
 
-		this.pane = DataDude.getCurrentEngine().editorPane;
+		DataDude.getCurrentEngine();
+		this.pane = CoreEngine.editorPane;
 		setOpaque(false);
 
 		// make JLabel read titles from JTabbedPane
