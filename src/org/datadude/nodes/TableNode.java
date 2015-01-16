@@ -133,7 +133,7 @@ public class TableNode extends BasicNode {
 			main.add(newTable);
 
 			setNewTitle(new File(file));
-			
+
 			o.close();
 			refresh();
 			return true;
@@ -160,12 +160,21 @@ public class TableNode extends BasicNode {
 				lblStatus.setText("Succesfully loaded Table file");
 			else
 				lblStatus.setText("Error while loading!");
+		} else if (choice == pasteI)
+			mainTable.setValueAt(DataDude.getClipboard(), mainTable.getSelectedRow(), mainTable.getSelectedColumn());
+		else if (choice == copyI)
+			DataDude.setClipboard((String) mainTable.getValueAt(mainTable.getSelectedRow(),
+					mainTable.getSelectedColumn()));
+		else if (choice == cutI) {
+			mainTable.setValueAt("", mainTable.getSelectedRow(), mainTable.getSelectedColumn());
+			DataDude.setClipboard((String) mainTable.getValueAt(mainTable.getSelectedRow(),
+					mainTable.getSelectedColumn()));
 		}
 	}
 
 	private Vector<String> getColumnNames() {
 		Vector<String> names = new Vector<String>();
-		for (int i = 0; i < mainTable.getColumnCount(); i++) 
+		for (int i = 0; i < mainTable.getColumnCount(); i++)
 			names.add(mainTable.getColumnName(i));
 		return names;
 	}
