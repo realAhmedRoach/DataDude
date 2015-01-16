@@ -45,8 +45,7 @@ public class ButtonTabComponent extends JPanel {
 		super(new FlowLayout(FlowLayout.LEFT, 0, 0));
 		this.index = CoreEngine.currentTab;
 		this.saveable = saveable;
-
-		DataDude.getCurrentEngine();
+		
 		this.pane = CoreEngine.editorPane;
 		setOpaque(false);
 

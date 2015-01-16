@@ -83,7 +83,6 @@ public class CSVNode extends BasicNode {
 			lines[i] = new JTextField();
 			lines[i].setColumns(70);
 			textPanel.add(lines[i]);
-			// textPanel.add(Box.createVerticalStrut(70));
 		}
 
 		textPanel.setLayout(layout);

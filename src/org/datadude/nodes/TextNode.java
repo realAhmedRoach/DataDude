@@ -27,7 +27,7 @@ import javax.swing.*;
 import org.datadude.*;
 import org.datadude.datamanaging.*;
 
-public class TextNode extends BasicNode implements ActionListener {
+public class TextNode extends BasicNode {
 	private static final long serialVersionUID = 6657L;
 
 	private JTextArea ta;
