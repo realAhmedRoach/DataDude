@@ -18,20 +18,14 @@
 
 package org.datadude;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
+import java.awt.*;
+import java.awt.datatransfer.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
+import javax.swing.*;
 
 import org.datadude.datamanaging.Updater;
 import org.datadude.memory.MemoryManager;
@@ -40,7 +34,7 @@ public final class DataDude {
 
 	static JFrame preloader;
 	private static JLabel text;
-	
+
 	public static final String VERSION = "DataDude 0.0.3 Patch 1";
 
 	public static final MemoryManager manager;
@@ -48,7 +42,7 @@ public final class DataDude {
 	private static String passLoc;
 	private static String saveLoc;
 	private static Thread download;
-	
+
 	private static CoreEngine currentEngine;
 
 	public static final String HTML_HLP_TXT = "<html>" + "<center><h1>" + VERSION + "</h1></center>" + "<h2>Intro</h2>"
@@ -80,11 +74,11 @@ public final class DataDude {
 		preloader.setVisible(true);
 
 		checkForUpdates();
-		if(download!=null) {
-			preloader.setSize(200,150);
+		if (download != null) {
+			preloader.setSize(200, 150);
 			preloader.add(getUpdatePanel(), BorderLayout.SOUTH);
 			try {
-				text.setText("Run updated DataDude ("+Updater.getVersionNo()+") ?");
+				text.setText("Run updated DataDude (" + Updater.getVersionNo() + ") ?");
 				Thread.sleep(4500);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -118,7 +112,7 @@ public final class DataDude {
 		p.add(no);
 		return p;
 	}
-	
+
 	static void endPreloader() {
 		preloader.dispose();
 		preloader = null;
@@ -158,6 +152,25 @@ public final class DataDude {
 
 	public MemoryManager getMemoryManager() {
 		return manager;
+	}
+
+	public static void setClipboard(String text) {
+		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+		clipboard.setContents(new StringSelection(text), null);
+	}
+
+	public static String getClipboard() {
+		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+		Transferable tran = clipboard.getContents(null);
+		String clipboardContent = null;
+		if (tran != null && tran.isDataFlavorSupported(DataFlavor.stringFlavor)) {
+			try {
+				clipboardContent = (String) tran.getTransferData(DataFlavor.stringFlavor);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return clipboardContent;
 	}
 
 	public static void showError(Component parent, Exception e, String title) {

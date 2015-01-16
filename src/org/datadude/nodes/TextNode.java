@@ -103,12 +103,12 @@ public class TextNode extends BasicNode {
 			else
 				lblStatus.setText("Error while loading!");
 		} else if (choice == cutI) {
-			pad = ta.getSelectedText();
+			DataDude.setClipboard(ta.getSelectedText());
 			ta.replaceRange("", ta.getSelectionStart(), ta.getSelectionEnd());
 		} else if (choice == copyI)
-			pad = ta.getSelectedText();
+			DataDude.setClipboard(ta.getSelectedText());
 		else if (choice == pasteI)
-			ta.insert(pad, ta.getCaretPosition());
+			ta.insert(DataDude.getClipboard(), ta.getCaretPosition());
 		else if (choice == selectI)
 			ta.selectAll();
 	}
