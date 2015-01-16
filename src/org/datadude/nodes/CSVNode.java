@@ -19,20 +19,12 @@ package org.datadude.nodes;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.awt.event.*;
+import java.io.*;
 import java.util.List;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
+import javax.swing.text.BadLocationException;
 
 import org.datadude.DataDude;
 import org.datadude.Login;
@@ -46,9 +38,10 @@ public class CSVNode extends BasicNode {
 	private static final long serialVersionUID = -159829697718383315L;
 
 	JTextField[] lines;
-	JPanel actionPanel, textPanel;
+	JPanel textPanel;
 	JButton btnNew;
 	JButton btnDelete;
+	int selectedIndex;
 
 	private GridLayout layout = new GridLayout(0, 1, 10, 20);
 
@@ -58,11 +51,11 @@ public class CSVNode extends BasicNode {
 
 		textPanel = new JPanel();
 		btnNew = new JButton("New");
-		btnNew.setIcon(new ImageIcon(CSVNode.class.getResource("/images/silk/icons/add.png")));
+		btnNew.setIcon(new ImageIcon(getClass().getResource("/images/silk/icons/add.png")));
 		btnNew.addActionListener(new NewListener());
 
 		btnDelete = new JButton("Delete");
-		btnDelete.setIcon(new ImageIcon(CSVNode.class.getResource("/images/silk/icons/delete.png")));
+		btnDelete.setIcon(new ImageIcon(getClass().getResource("/images/silk/icons/delete.png")));
 		btnDelete.addActionListener(new DeleteListener());
 
 		pane.add(toolBar, BorderLayout.SOUTH);
@@ -82,6 +75,7 @@ public class CSVNode extends BasicNode {
 		for (int i = 0; i < lines.length; i++) {
 			lines[i] = new JTextField();
 			lines[i].setColumns(70);
+			lines[i].addFocusListener(new SelectListener(i));
 			textPanel.add(lines[i]);
 		}
 
@@ -110,8 +104,23 @@ public class CSVNode extends BasicNode {
 				lblStatus.setText("Succesfully loaded CSV file");
 			else
 				lblStatus.setText("Error while loading!");
-		}
-
+		} else if (choice == pasteI)
+			if (lines[selectedIndex].getSelectedText() != null)
+				lines[selectedIndex].replaceSelection(DataDude.getClipboard());
+			else
+				try {
+					lines[selectedIndex].getDocument().insertString(lines[selectedIndex].getCaretPosition(),
+							DataDude.getClipboard(), null);
+				} catch (BadLocationException e1) {
+					e1.printStackTrace();
+				}
+		else if (choice == copyI)
+			DataDude.setClipboard(lines[selectedIndex].getSelectedText());
+		else if (choice == cutI) {
+			DataDude.setClipboard(lines[selectedIndex].getSelectedText());
+			lines[selectedIndex].replaceSelection("");
+		} else if(choice == selectI)
+			lines[selectedIndex].selectAll();
 	}
 
 	@Override
@@ -157,6 +166,7 @@ public class CSVNode extends BasicNode {
 				lines[i] = new JTextField();
 				lines[i].setText(Utils.join(data.get(i), ","));
 				lines[i].setColumns(70);
+				lines[i].addFocusListener(new SelectListener(i));
 				textPanel.add(lines[i]);
 			}
 
@@ -188,6 +198,7 @@ public class CSVNode extends BasicNode {
 										// one
 			JTextField newField = new JTextField();
 			newField.setColumns(70);
+			newField.addFocusListener(new SelectListener(newLines.length - 1));
 			newField.requestFocus();
 			newLines[newLines.length - 1] = newField;
 
@@ -225,6 +236,19 @@ public class CSVNode extends BasicNode {
 			textPanel.add(btnDelete);
 
 			refresh();
+		}
+	}
+
+	class SelectListener extends FocusAdapter {
+		private int index;
+
+		public SelectListener(int i) {
+			index = i;
+		}
+
+		@Override
+		public void focusGained(FocusEvent e) {
+			selectedIndex = index;
 		}
 	}
 }

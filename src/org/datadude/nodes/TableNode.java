@@ -63,7 +63,7 @@ public class TableNode extends BasicNode {
 		cutI.addActionListener(this);
 		copyI.addActionListener(this);
 		pasteI.addActionListener(this);
-		selectI.addActionListener(this);
+		selectI.setVisible(false);
 
 		int[] rac = this.askRowsAndColumns();
 		mainTable = new JTable(rac[0], rac[1]);
