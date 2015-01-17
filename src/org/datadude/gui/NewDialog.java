@@ -49,6 +49,7 @@ public class NewDialog extends JDialog {
 		try {
 			NewDialog dialog = new NewDialog();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+                        dialog.setLocationRelativeTo(DataDude.getCurrentEngine());
 			dialog.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
