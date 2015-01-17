@@ -94,7 +94,7 @@ public class CoreEngine extends JFrame {
         nodes.add(n);
         editorPane.addTab(n.getTitle(), n);
         editorPane.setSelectedIndex(editorPane.getTabCount() - 1);
-        currentTab++;
+        currentTab++; 
         editorPane.setTabComponentAt(currentTab, new ButtonTabComponent(true));
     }
 
@@ -113,7 +113,7 @@ public class CoreEngine extends JFrame {
         long start = System.currentTimeMillis();
         // SET ICON {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/icon.png")));
-		// }
+	// }
         // WINDOW LISTENER{
         addWindowListener(new WindowAdapter() {
             @Override
@@ -121,13 +121,13 @@ public class CoreEngine extends JFrame {
                 exit();
             }
         });
-		// }
+	// }
         // SETTING VALUES {
         System.out.println("Setting Values");
         setTitle(DataDude.VERSION);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(874, 625);
-		// }
+	// }
 
         // MENU ITEMS {
         System.out.println("Initializing Menu Items");
@@ -153,7 +153,7 @@ public class CoreEngine extends JFrame {
         JMenuItem mntmShowAbout = new JMenuItem("Show About & Help");
         mntmShowAbout.addActionListener((ActionEvent e) -> showHelp());
         mnHelp.add(mntmShowAbout);
-		// }
+	// }
 
         // CONTENT {
         System.out.println("Adding Content");
@@ -185,7 +185,7 @@ public class CoreEngine extends JFrame {
         files.setToolTipText("Opens platform explorer to your directory");
         files.setIcon(new ImageIcon(CoreEngine.class.getResource("/images/silk/icons/application_view_detail.png")));
         infoPanel.add(files);
-		// }
+	// }
 
         // PROGRESS PANEL {
         System.out.println("Initializing Progress Panel");
@@ -201,7 +201,7 @@ public class CoreEngine extends JFrame {
         memBar.setShowMaximumMemory(true);
         progressPanel.add(progressBar);
         progressPanel.add(memBar);
-		// }
+	// }
 
         // COMMAND PANEL {
         System.out.println("Initializing Command Panel");
@@ -269,7 +269,7 @@ public class CoreEngine extends JFrame {
         long end = System.currentTimeMillis();
 
         System.out.println("\nCompleted Initializing Core Engine\nTotal time: " + (end - start) + "ms");
-		// }
+	// }
         // }
 
     }
