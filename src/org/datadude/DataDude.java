@@ -189,7 +189,7 @@ public final class DataDude {
 	public static String getFolder() {
 		JFileChooser fs = new JFileChooser();
 		fs.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-		fs.showSaveDialog(null);
+		fs.showOpenDialog(null);
 		if (fs.getSelectedFile() != null)
 			return fs.getSelectedFile().getAbsolutePath();
 		return "null";

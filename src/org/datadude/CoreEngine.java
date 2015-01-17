@@ -20,14 +20,18 @@ package org.datadude;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.*;
-import javax.swing.border.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
 
 import org.datadude.gui.*;
 import org.datadude.nodes.*;
+
+import com.alee.extended.statusbar.WebMemoryBar;
 
 public class CoreEngine extends JFrame {
 	private static final long serialVersionUID = 1295L;
@@ -188,12 +192,17 @@ public class CoreEngine extends JFrame {
 		// PROGRESS PANEL {
 		System.out.println("Initializing Progress Panel");
 		JPanel progressPanel = new JPanel();
+		progressPanel.setLayout(new FlowLayout(FlowLayout.CENTER,21,0));
 		progressPanel.setBackground(new Color(46, 139, 87));
 
 		progressBar = new JProgressBar();
 		progressBar.setToolTipText("Not Loading");
 		progressBar.setStringPainted(true);
+		
+		WebMemoryBar memBar = new WebMemoryBar();
+		memBar.setShowMaximumMemory(true);
 		progressPanel.add(progressBar);
+		progressPanel.add(memBar);
 		// }
 
 		// COMMAND PANEL {
