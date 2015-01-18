@@ -85,7 +85,8 @@ public class TableNode extends BasicNode {
 			if (rac[1] > 200)
 				rac[1] = 200;
 		} catch (NumberFormatException e) {
-			JOptionPane.showMessageDialog(this, "Your're supposed to put in a number!");
+			rac[0] = 3;
+			rac[1] = 3;
 		}
 
 		return rac;
