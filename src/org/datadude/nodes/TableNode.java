@@ -20,6 +20,7 @@ package org.datadude.nodes;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.Vector;
 
@@ -40,6 +41,7 @@ public class TableNode extends BasicNode {
 
 	JPanel main;
 	JTable mainTable;
+	JButton nwClmn, nwRow;
 
 	public TableNode(String _title) {
 		super(_title);
@@ -47,7 +49,7 @@ public class TableNode extends BasicNode {
 		lblStatus = new JLabel("Status");
 		toolBar.add(lblStatus);
 
-		main = new JPanel();
+		main = new JPanel(new BorderLayout(10, 10));
 
 		pane.add(toolBar, BorderLayout.SOUTH);
 		pane.add(main);
@@ -64,10 +66,18 @@ public class TableNode extends BasicNode {
 		mainTable = new JTable(rac[0], rac[1]);
 		mainTable.setColumnSelectionAllowed(true);
 		mainTable.setVisible(true);
-		// TODO: Add new row and column buttons
+
+		nwClmn = new JButton("New Column");
+		nwClmn.setActionCommand("COLUMN");
+		nwRow = new JButton("New Row");
+		nwRow.setActionCommand("ROW");
+		nwClmn.addActionListener(newListener);
+		nwRow.addActionListener(newListener);
 
 		setJMenuBar(menuBar);
-		main.add(mainTable);
+		main.add(new JScrollPane(mainTable));
+		main.add(nwClmn, BorderLayout.NORTH);
+		main.add(nwRow, BorderLayout.SOUTH);
 	}
 
 	private int[] askRowsAndColumns() {
@@ -177,4 +187,13 @@ public class TableNode extends BasicNode {
 			names.add(mainTable.getColumnName(i));
 		return names;
 	}
+
+	private ActionListener newListener = (ActionEvent e) -> {
+		DefaultTableModel model = (DefaultTableModel) mainTable.getModel();
+		if ((e.getActionCommand()).equalsIgnoreCase("COLUMN")) {
+			model.addColumn(null);
+		} else {
+			model.addRow((Vector<?>)null);
+		}
+	};
 }
