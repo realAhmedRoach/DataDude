@@ -144,8 +144,7 @@ public abstract class BasicNode extends JInternalFrame implements ActionListener
 	}
 
 	protected void exit() {
-		ArrayList<Node> nodes = DataDude.getCurrentEngine().getNodes();
-		CoreEngine.editorPane.removeTabAt(nodes.indexOf(this));
+		DataDude.getCurrentEngine().removeTab(this);
 	}
 	
 	protected void setNewTitle(File f) {

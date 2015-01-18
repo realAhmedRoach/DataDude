@@ -34,243 +34,249 @@ import com.alee.extended.statusbar.WebMemoryBar;
 
 public class CoreEngine extends JFrame {
 
-    private static final long serialVersionUID = 1295L;
+	private static final long serialVersionUID = 1295L;
 
-    private JPanel contentPane;
-    JButton files, newFile, chat, settings, quit, server;
-    JLabel lblCurrfolder;
-    JProgressBar progressBar;
-    public static JTabbedPane editorPane;
+	private JPanel contentPane;
+	JButton files, newFile, chat, settings, quit, server;
+	JLabel lblCurrfolder;
+	JProgressBar progressBar;
+	public static JTabbedPane editorPane;
 
-    public static int currentTab = 0;
-    private final ArrayList<Node> nodes = new ArrayList<>();
+	public static int currentTab = 0;
+	private final ArrayList<Node> nodes = new ArrayList<>();
 
-    private ActionListener quitListener = (ActionEvent e) -> {
-        exit();
-        System.exit(0);
-    };
+	private ActionListener quitListener = (ActionEvent e) -> {
+		exit();
+		System.exit(0);
+	};
 
-    private ActionListener newListener = (ActionEvent e) -> NewDialog.init();
+	private ActionListener newListener = (ActionEvent e) -> NewDialog.init();
 
-    private ActionListener settingsListener = (ActionEvent e) -> SettingsDialog.init();
+	private ActionListener settingsListener = (ActionEvent e) -> SettingsDialog.init();
 
-    private ActionListener filesListener = (ActionEvent e) -> {
-        try {
-            Desktop.getDesktop().open(new File(Login.getUser().getUserFolder()));
-        } catch (IOException ioe) {
-            /* WTF? */
-        }
-    };
+	private ActionListener filesListener = (ActionEvent e) -> {
+		try {
+			Desktop.getDesktop().open(new File(Login.getUser().getUserFolder()));
+		} catch (IOException ioe) {
+			/* WTF? */
+		}
+	};
 
-    private void exit() {
-        try {
-            Login.getUser().save();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+	private void exit() {
+		try {
+			Login.getUser().save();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-    private void showHelp() {
-        JFrame f = new JFrame("About & Help");
-        f.getContentPane().add(new JLabel(DataDude.HTML_HLP_TXT));
-        f.setSize(300, 540);
-        f.setLocationRelativeTo(null);
-        f.setVisible(true);
-    }
+	private void showHelp() {
+		JFrame f = new JFrame("About & Help");
+		f.getContentPane().add(new JLabel(DataDude.HTML_HLP_TXT));
+		f.setSize(300, 540);
+		f.setLocationRelativeTo(null);
+		f.setVisible(true);
+	}
 
-    public static void init() {
-        EventQueue.invokeLater(() -> {
-            try {
-                CoreEngine usableEngine = new CoreEngine();
-                usableEngine.setVisible(true);
-                DataDude.setCurrentEngine(usableEngine);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-    }
+	public static void init() {
+		EventQueue.invokeLater(() -> {
+			try {
+				CoreEngine usableEngine = new CoreEngine();
+				usableEngine.setVisible(true);
+				DataDude.setCurrentEngine(usableEngine);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+	}
 
-    public void addTab(BasicNode n) {
-        nodes.add(n);
-        editorPane.addTab(n.getTitle(), n);
-        editorPane.setSelectedIndex(editorPane.getTabCount() - 1);
-        currentTab++; 
-        editorPane.setTabComponentAt(currentTab, new ButtonTabComponent(true));
-    }
+	public void addTab(BasicNode n) {
+		nodes.add(n);
+		editorPane.addTab(n.getTitle(), n);
+		editorPane.setSelectedIndex(editorPane.getTabCount() - 1);
+		currentTab++;
+		editorPane.setTabComponentAt(currentTab, new ButtonTabComponent(true));
+	}
 
-    public ArrayList<Node> getNodes() {
-        return nodes;
-    }
+	public void removeTab(Node n) {
+		editorPane.removeTabAt(nodes.indexOf(n));
+		nodes.remove(n);
+		currentTab--;
+	}
 
-    public void setTitleAt(int index, String title) {
-        editorPane.setTitleAt(index, title);
-    }
+	public ArrayList<Node> getNodes() {
+		return nodes;
+	}
 
-    /**
-     * Create the frame.
-     */
-    public CoreEngine() {
-        long start = System.currentTimeMillis();
-        // SET ICON {
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/icon.png")));
-	// }
-        // WINDOW LISTENER{
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                exit();
-            }
-        });
-	// }
-        // SETTING VALUES {
-        System.out.println("Setting Values");
-        setTitle(DataDude.VERSION);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(874, 625);
-	// }
+	public void setTitleAt(int index, String title) {
+		editorPane.setTitleAt(index, title);
+	}
 
-        // MENU ITEMS {
-        System.out.println("Initializing Menu Items");
-        JMenuBar menuBar = new JMenuBar();
-        setJMenuBar(menuBar);
+	/**
+	 * Create the frame.
+	 */
+	public CoreEngine() {
+		long start = System.currentTimeMillis();
+		// SET ICON {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/icon.png")));
+		// }
+		// WINDOW LISTENER{
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				exit();
+			}
+		});
+		// }
+		// SETTING VALUES {
+		System.out.println("Setting Values");
+		setTitle(DataDude.VERSION);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(874, 625);
+		// }
 
-        JMenu mnFile = new JMenu("File");
-        menuBar.add(mnFile);
+		// MENU ITEMS {
+		System.out.println("Initializing Menu Items");
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
 
-        JMenuItem mntmNew = new JMenuItem("New...");
-        mntmNew.setIcon(new ImageIcon(CoreEngine.class.getResource("/images/silk/icons/page_add.png")));
-        mntmNew.addActionListener(newListener);
-        mnFile.add(mntmNew);
+		JMenu mnFile = new JMenu("File");
+		menuBar.add(mnFile);
 
-        JMenuItem mntmQuit = new JMenuItem("Quit");
-        mntmQuit.setIcon(new ImageIcon(CoreEngine.class.getResource("/images/silk/icons/cross.png")));
-        mntmQuit.addActionListener(quitListener);
-        mnFile.add(mntmQuit);
+		JMenuItem mntmNew = new JMenuItem("New...");
+		mntmNew.setIcon(new ImageIcon(CoreEngine.class.getResource("/images/silk/icons/page_add.png")));
+		mntmNew.addActionListener(newListener);
+		mnFile.add(mntmNew);
 
-        JMenu mnHelp = new JMenu("Help");
-        menuBar.add(mnHelp);
+		JMenuItem mntmQuit = new JMenuItem("Quit");
+		mntmQuit.setIcon(new ImageIcon(CoreEngine.class.getResource("/images/silk/icons/cross.png")));
+		mntmQuit.addActionListener(quitListener);
+		mnFile.add(mntmQuit);
 
-        JMenuItem mntmShowAbout = new JMenuItem("Show About & Help");
-        mntmShowAbout.addActionListener((ActionEvent e) -> showHelp());
-        mnHelp.add(mntmShowAbout);
-	// }
+		JMenu mnHelp = new JMenu("Help");
+		menuBar.add(mnHelp);
 
-        // CONTENT {
-        System.out.println("Adding Content");
-        contentPane = new JPanel();
-        contentPane.setBackground(Color.GREEN);
-        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        setContentPane(contentPane);
+		JMenuItem mntmShowAbout = new JMenuItem("Show About & Help");
+		mntmShowAbout.addActionListener((ActionEvent e) -> showHelp());
+		mnHelp.add(mntmShowAbout);
+		// }
 
-        // INFO PANEL {
-        System.out.println("Adding Info Panel");
-        JPanel infoPanel = new JPanel();
-        infoPanel.setBackground(Color.ORANGE);
-        infoPanel.setBorder(new TitledBorder(null, "Info", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-        infoPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 5));
+		// CONTENT {
+		System.out.println("Adding Content");
+		contentPane = new JPanel();
+		contentPane.setBackground(Color.GREEN);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
 
-        JLabel lblWelcome = new JLabel("Welcome, " + Login.getUser().getName());
-        infoPanel.add(lblWelcome);
+		// INFO PANEL {
+		System.out.println("Adding Info Panel");
+		JPanel infoPanel = new JPanel();
+		infoPanel.setBackground(Color.ORANGE);
+		infoPanel.setBorder(new TitledBorder(null, "Info", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		infoPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 5));
 
-        lblCurrfolder = new JLabel("<html><b>User Folder:</b> " + Login.getUser().getUserFolder() + "</html>");
-        infoPanel.add(lblCurrfolder);
+		JLabel lblWelcome = new JLabel("Welcome, " + Login.getUser().getName());
+		infoPanel.add(lblWelcome);
 
-        newFile = new JButton("New");
-        newFile.setIcon(new ImageIcon(CoreEngine.class.getResource("/images/silk/icons/page_add.png")));
-        newFile.addActionListener(newListener);
-        infoPanel.add(newFile);
+		lblCurrfolder = new JLabel("<html><b>User Folder:</b> " + Login.getUser().getUserFolder() + "</html>");
+		infoPanel.add(lblCurrfolder);
 
-        files = new JButton("Files");
-        files.addActionListener(filesListener);
-        files.setToolTipText("Opens platform explorer to your directory");
-        files.setIcon(new ImageIcon(CoreEngine.class.getResource("/images/silk/icons/application_view_detail.png")));
-        infoPanel.add(files);
-	// }
+		newFile = new JButton("New");
+		newFile.setIcon(new ImageIcon(CoreEngine.class.getResource("/images/silk/icons/page_add.png")));
+		newFile.addActionListener(newListener);
+		infoPanel.add(newFile);
 
-        // PROGRESS PANEL {
-        System.out.println("Initializing Progress Panel");
-        JPanel progressPanel = new JPanel();
-        progressPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 21, 0));
-        progressPanel.setBackground(new Color(46, 139, 87));
+		files = new JButton("Files");
+		files.addActionListener(filesListener);
+		files.setToolTipText("Opens platform explorer to your directory");
+		files.setIcon(new ImageIcon(CoreEngine.class.getResource("/images/silk/icons/application_view_detail.png")));
+		infoPanel.add(files);
+		// }
 
-        progressBar = new JProgressBar();
-        progressBar.setToolTipText("Not Loading");
-        progressBar.setStringPainted(true);
+		// PROGRESS PANEL {
+		System.out.println("Initializing Progress Panel");
+		JPanel progressPanel = new JPanel();
+		progressPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 21, 0));
+		progressPanel.setBackground(new Color(46, 139, 87));
 
-        WebMemoryBar memBar = new WebMemoryBar();
-        memBar.setShowMaximumMemory(true);
-        progressPanel.add(progressBar);
-        progressPanel.add(memBar);
-	// }
+		progressBar = new JProgressBar();
+		progressBar.setToolTipText("Not Loading");
+		progressBar.setStringPainted(true);
 
-        // COMMAND PANEL {
-        System.out.println("Initializing Command Panel");
-        JPanel commandPanel = new JPanel();
-        commandPanel.setBackground(Color.YELLOW);
-        commandPanel.setBorder(new TitledBorder("Commands"));
-        commandPanel.setLayout(new BoxLayout(commandPanel, BoxLayout.Y_AXIS));
+		WebMemoryBar memBar = new WebMemoryBar();
+		memBar.setShowMaximumMemory(true);
+		progressPanel.add(progressBar);
+		progressPanel.add(memBar);
+		// }
 
-        server = new JButton("Start Server");
-        server.setIcon(new ImageIcon(CoreEngine.class
-                .getResource("/com/sun/java/swing/plaf/windows/icons/Computer.gif")));
-        server.setEnabled(false);
-        commandPanel.add(server);
+		// COMMAND PANEL {
+		System.out.println("Initializing Command Panel");
+		JPanel commandPanel = new JPanel();
+		commandPanel.setBackground(Color.YELLOW);
+		commandPanel.setBorder(new TitledBorder("Commands"));
+		commandPanel.setLayout(new BoxLayout(commandPanel, BoxLayout.Y_AXIS));
 
-        chat = new JButton("Chat");
-        chat.setIcon(new ImageIcon(CoreEngine.class.getResource("/javax/swing/plaf/metal/icons/ocean/computer.gif")));
-        chat.setEnabled(false);
-        commandPanel.add(chat);
+		server = new JButton("Start Server");
+		server.setIcon(new ImageIcon(CoreEngine.class
+				.getResource("/com/sun/java/swing/plaf/windows/icons/Computer.gif")));
+		server.setEnabled(false);
+		commandPanel.add(server);
 
-        settings = new JButton("Settings");
-        settings.setIcon(new ImageIcon(CoreEngine.class
-                .getResource("/com/sun/java/swing/plaf/windows/icons/DetailsView.gif")));
-        settings.addActionListener(settingsListener);
-        commandPanel.add(settings);
+		chat = new JButton("Chat");
+		chat.setIcon(new ImageIcon(CoreEngine.class.getResource("/javax/swing/plaf/metal/icons/ocean/computer.gif")));
+		chat.setEnabled(false);
+		commandPanel.add(chat);
 
-        JButton btnRefresh = new JButton("Refresh");
-        btnRefresh.addActionListener((ActionEvent e) -> {
-            lblCurrfolder.setText("<html><b>User Folder:</b> " + Login.getUser().getUserFolder() + "</html>");
-            lblWelcome.setText("Welcome, " + Login.getUser().getName());
-            revalidate();
-            repaint();
-        });
-        commandPanel.add(btnRefresh);
+		settings = new JButton("Settings");
+		settings.setIcon(new ImageIcon(CoreEngine.class
+				.getResource("/com/sun/java/swing/plaf/windows/icons/DetailsView.gif")));
+		settings.addActionListener(settingsListener);
+		commandPanel.add(settings);
 
-        quit = new JButton("Quit");
-        commandPanel.add(quit);
-        quit.setIcon(new ImageIcon(CoreEngine.class.getResource("/javax/swing/plaf/metal/icons/ocean/paletteClose.gif")));
-        quit.addActionListener(quitListener);
-        // }
+		JButton btnRefresh = new JButton("Refresh");
+		btnRefresh.addActionListener((ActionEvent e) -> {
+			lblCurrfolder.setText("<html><b>User Folder:</b> " + Login.getUser().getUserFolder() + "</html>");
+			lblWelcome.setText("Welcome, " + Login.getUser().getName());
+			revalidate();
+			repaint();
+		});
+		commandPanel.add(btnRefresh);
 
-        System.gc();
+		quit = new JButton("Quit");
+		commandPanel.add(quit);
+		quit.setIcon(new ImageIcon(CoreEngine.class.getResource("/javax/swing/plaf/metal/icons/ocean/paletteClose.gif")));
+		quit.addActionListener(quitListener);
+		// }
 
-        // EDITOR {
-        System.out.println("Initializing Editor");
-        WelcomeNode n;
-        n = new WelcomeNode();
-        nodes.add(n);
-        n.setBackground(Color.WHITE);
+		System.gc();
 
-        editorPane = new JTabbedPane();
-        editorPane
-                .setBorder(new TitledBorder(null, "Editor", TitledBorder.LEADING, TitledBorder.TOP, null, Color.CYAN));
-        editorPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-        editorPane.setBackground(new Color(255, 153, 102));
-        editorPane.add(n);
-        editorPane.setTitleAt(currentTab, "Welcome!");
-        editorPane.setTabComponentAt(currentTab, new ButtonTabComponent(false));
+		// EDITOR {
+		System.out.println("Initializing Editor");
+		WelcomeNode n;
+		n = new WelcomeNode();
+		nodes.add(n);
+		n.setBackground(Color.WHITE);
 
-        contentPane.setLayout(new BorderLayout(0, 5));
-        contentPane.add(infoPanel, BorderLayout.NORTH);
-        contentPane.add(editorPane, BorderLayout.CENTER);
-        contentPane.add(commandPanel, BorderLayout.EAST);
-        contentPane.add(progressPanel, BorderLayout.SOUTH);
+		editorPane = new JTabbedPane();
+		editorPane
+				.setBorder(new TitledBorder(null, "Editor", TitledBorder.LEADING, TitledBorder.TOP, null, Color.CYAN));
+		editorPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+		editorPane.setBackground(new Color(255, 153, 102));
+		editorPane.add(n);
+		editorPane.setTitleAt(currentTab, "Welcome!");
+		editorPane.setTabComponentAt(currentTab, new ButtonTabComponent(false));
 
-        long end = System.currentTimeMillis();
+		contentPane.setLayout(new BorderLayout(0, 5));
+		contentPane.add(infoPanel, BorderLayout.NORTH);
+		contentPane.add(editorPane, BorderLayout.CENTER);
+		contentPane.add(commandPanel, BorderLayout.EAST);
+		contentPane.add(progressPanel, BorderLayout.SOUTH);
 
-        System.out.println("\nCompleted Initializing Core Engine\nTotal time: " + (end - start) + "ms");
-	// }
-        // }
+		long end = System.currentTimeMillis();
 
-    }
+		System.out.println("\nCompleted Initializing Core Engine\nTotal time: " + (end - start) + "ms");
+		// }
+		// }
+
+	}
 }

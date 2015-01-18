@@ -76,8 +76,8 @@ public class TableNode extends BasicNode {
 
 		setJMenuBar(menuBar);
 		main.add(new JScrollPane(mainTable));
-		main.add(nwClmn, BorderLayout.NORTH);
-		main.add(nwRow, BorderLayout.SOUTH);
+		main.add(nwClmn, BorderLayout.LINE_START);
+		main.add(nwRow, BorderLayout.LINE_END);
 	}
 
 	private int[] askRowsAndColumns() {

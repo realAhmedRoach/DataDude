@@ -37,13 +37,11 @@ public class ButtonTabComponent extends JPanel {
 
 	private final JTabbedPane pane;
 	private boolean saveable;
-	private int index;
 
 	public ButtonTabComponent(boolean saveable) {
 
 		// unset default FlowLayout' gaps
 		super(new FlowLayout(FlowLayout.LEFT, 0, 0));
-		this.index = CoreEngine.currentTab;
 		this.saveable = saveable;
 		
 		this.pane = CoreEngine.editorPane;
@@ -103,10 +101,10 @@ public class ButtonTabComponent extends JPanel {
 				if (ret == JOptionPane.CANCEL_OPTION || ret == JOptionPane.YES_OPTION)
 					return;
 			}
-			if (i != -1) {
-				CoreEngine.currentTab--;
-				DataDude.getCurrentEngine().getNodes().remove(index);
-				pane.remove(i);
+			if (i > -1) {
+				CoreEngine c = DataDude.getCurrentEngine();
+				c.removeTab(c.getNodes().get(i));
+//				pane.remove(i);
 			}
 		}
 
