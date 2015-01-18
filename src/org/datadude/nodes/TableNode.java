@@ -23,12 +23,7 @@ import java.awt.event.ActionEvent;
 import java.io.*;
 import java.util.Vector;
 
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import org.datadude.DataDude;
