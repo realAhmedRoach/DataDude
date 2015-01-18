@@ -67,6 +67,7 @@ public class TableNode extends BasicNode {
 
 		int[] rac = this.askRowsAndColumns();
 		mainTable = new JTable(rac[0], rac[1]);
+		mainTable.setColumnSelectionAllowed(true);
 		mainTable.setVisible(true);
 		// TODO: Add new row and column buttons
 
@@ -130,6 +131,7 @@ public class TableNode extends BasicNode {
 
 			JTable newTable = new JTable(m);
 			newTable.setDragEnabled(true);
+			newTable.setColumnSelectionAllowed(true);
 			main.add(newTable);
 
 			setNewTitle(new File(file));
