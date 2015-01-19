@@ -35,7 +35,7 @@ public final class DataDude {
 	static JFrame preloader;
 	private static JLabel text;
 
-	public static final String VERSION = "DataDude 0.0.3 Patch 1";
+	public static final String VERSION = "DataDude 0.0.3 Patch 2";
 
 	public static final MemoryManager manager;
 
