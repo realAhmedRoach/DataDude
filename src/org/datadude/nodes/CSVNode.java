@@ -219,6 +219,8 @@ public class CSVNode extends BasicNode {
 
 	class DeleteListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			if(lines.length==0)
+				return;
 			// Clear Panel
 			textPanel.removeAll();
 
