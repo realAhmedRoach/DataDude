@@ -41,7 +41,7 @@ public class TableNode extends BasicNode {
 
 	JPanel main;
 	JTable mainTable;
-	JButton nwClmn, nwRow;
+	JButton nwClmn, nwRow,dlClmn,dlRow;
 
 	public TableNode(String _title) {
 		super(_title);
@@ -71,13 +71,27 @@ public class TableNode extends BasicNode {
 		nwClmn.setActionCommand("COLUMN");
 		nwRow = new JButton("New Row");
 		nwRow.setActionCommand("ROW");
+		nwClmn.setIcon(new ImageIcon(getClass().getResource("/images/silk/icons/add.png")));
+		nwRow.setIcon(new ImageIcon(getClass().getResource("/images/silk/icons/add.png")));
 		nwClmn.addActionListener(newListener);
 		nwRow.addActionListener(newListener);
 
+		dlClmn = new JButton("Delete Column");
+		dlClmn.setActionCommand("COLUMN");
+		dlRow = new JButton("Delete Row");
+		dlRow.setActionCommand("ROW");
+		dlClmn.setIcon(new ImageIcon(getClass().getResource("/images/silk/icons/delete.png")));
+		dlRow.setIcon(new ImageIcon(getClass().getResource("/images/silk/icons/delete.png")));
+		dlClmn.addActionListener(delListener);
+		dlRow.addActionListener(delListener);
+
+		
 		setJMenuBar(menuBar);
 		main.add(new JScrollPane(mainTable));
 		main.add(nwClmn, BorderLayout.LINE_START);
 		main.add(nwRow, BorderLayout.LINE_END);
+		main.add(dlClmn, BorderLayout.PAGE_START);
+		main.add(dlRow, BorderLayout.PAGE_END);
 	}
 
 	private int[] askRowsAndColumns() {
@@ -196,4 +210,35 @@ public class TableNode extends BasicNode {
 			model.addRow((Vector<?>)null);
 		}
 	};
+	private ActionListener delListener = (ActionEvent e) -> {
+		DefaultTableModel model = (DefaultTableModel) mainTable.getModel();
+		if ((e.getActionCommand()).equalsIgnoreCase("COLUMN")) {
+			int col = mainTable.getSelectedColumn()<=-1?0:mainTable.getSelectedColumn();
+			removeCol(col);
+		} else {
+			int row = mainTable.getSelectedRow()<=-1?0:mainTable.getSelectedRow();
+			model.removeRow(row);
+		}
+	};
+	private void removeCol(int id){
+        DefaultTableModel tmp = new DefaultTableModel();
+        int columnas = mainTable.getColumnCount();
+        for(int i=0;i<columnas;i++){
+            if(i!=id)
+                tmp.addColumn(mainTable.getColumnName(i));
+        }
+        int rows = mainTable.getRowCount();
+        String datos[] = new String[columnas-1];
+        for(int row=0;row<rows;row++){
+            for(int col=0,sel=0;col<columnas;col++,sel++){
+                if(col!=id)
+                    datos[sel] = (String) mainTable.getValueAt(row, col);
+                else
+                    sel--;
+            }
+            tmp.addRow(datos);
+        }
+        mainTable.setModel(tmp);
+
+    }
 }
