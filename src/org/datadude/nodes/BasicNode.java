@@ -21,12 +21,10 @@ package org.datadude.nodes;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
-import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 
-import org.datadude.CoreEngine;
 import org.datadude.DataDude;
 
 public abstract class BasicNode extends JInternalFrame implements ActionListener, Node {
