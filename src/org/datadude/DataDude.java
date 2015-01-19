@@ -62,7 +62,7 @@ public final class DataDude {
 	private DataDude() {
 	}
 
-	static void showPreloaderAndStart() {
+	static synchronized void showPreloaderAndStart() {
 		text = new JLabel("Loading DataDude..");
 		preloader = new JFrame("Loading...");
 		preloader.setSize(200, 100);
@@ -208,7 +208,7 @@ public final class DataDude {
 		return getFile(Login.getUser().getUserFolder());
 	}
 
-	private static void checkForUpdates() {
+	private static synchronized void checkForUpdates() {
 		try {
 			if (!Updater.getVersion().contains(VERSION)) {
 				download = new Thread() {
