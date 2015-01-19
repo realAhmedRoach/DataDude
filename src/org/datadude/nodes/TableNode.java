@@ -152,8 +152,12 @@ public class TableNode extends BasicNode {
 			JTable newTable = new JTable(m);
 			newTable.setDragEnabled(true);
 			newTable.setColumnSelectionAllowed(true);
-			main.add(newTable);
-
+			main.add(new JScrollPane(newTable));
+			main.add(nwClmn, BorderLayout.LINE_START);
+			main.add(nwRow, BorderLayout.LINE_END);
+			main.add(dlClmn, BorderLayout.PAGE_START);
+			main.add(dlRow, BorderLayout.PAGE_END);
+			
 			setNewTitle(new File(file));
 
 			o.close();
