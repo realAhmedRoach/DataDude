@@ -226,15 +226,15 @@ public class TableNode extends BasicNode {
 
 	private void removeCol(int id) {
 		DefaultTableModel tmp = new DefaultTableModel();
-		int columnas = mainTable.getColumnCount();
-		for (int i = 0; i < columnas; i++) {
+		int columns = mainTable.getColumnCount();
+		for (int i = 0; i < columns; i++) {
 			if (i != id)
 				tmp.addColumn(mainTable.getColumnName(i));
 		}
 		int rows = mainTable.getRowCount();
-		String datos[] = new String[columnas - 1];
+		String datos[] = new String[columns - 1];
 		for (int row = 0; row < rows; row++) {
-			for (int col = 0, sel = 0; col < columnas; col++, sel++) {
+			for (int col = 0, sel = 0; col < columns; col++, sel++) {
 				if (col != id)
 					datos[sel] = (String) mainTable.getValueAt(row, col);
 				else
@@ -243,6 +243,5 @@ public class TableNode extends BasicNode {
 			tmp.addRow(datos);
 		}
 		mainTable.setModel(tmp);
-
 	}
 }
