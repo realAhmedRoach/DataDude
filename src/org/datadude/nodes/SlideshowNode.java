@@ -17,6 +17,7 @@ public class SlideshowNode extends BasicNode {
 
 	ArrayList<Slide> slides;
 	JPanel buttons, slidePanel,editPanel;
+	JLabel lblTitle,lblText,lblImage;
 	JButton next, prev;
 	int slideNo;
 
@@ -26,7 +27,13 @@ public class SlideshowNode extends BasicNode {
 		createSampleSlides();
 		slidePanel = showSlides();
 
-		editPanel = new JPanel();
+		editPanel = new JPanel(new BoxLayout(editPanel,BoxLayout.Y_AXIS));
+		lblTitle = new JLabel("Title:");
+		lblText = new JLabel("Text:");
+		lblImage = new JLabel("Image:");
+		editPanel.add(lblTitle);
+		editPanel.add(lblText);
+		editPanel.add(lblImage);
 		
 		buttons = new JPanel();
 		next = new JButton("Next >");
@@ -37,8 +44,8 @@ public class SlideshowNode extends BasicNode {
 		prev.addActionListener(prevnext);
 		buttons.add(prev);
 		buttons.add(next);
-		add(slidePanel);
-		add(buttons, BorderLayout.SOUTH);
+		pane.add(slidePanel);
+		pane.add(buttons, BorderLayout.SOUTH);
 	}
 
 	private JPanel showSlides() {
@@ -73,7 +80,7 @@ public class SlideshowNode extends BasicNode {
 		return false;
 	}
 	private ActionListener prevnext = (ActionEvent e) -> {
-		remove(slidePanel);
+		pane.remove(slidePanel);
 		if (e.getActionCommand() == "NEXT") {
 			slideNo++;
 			if(slideNo==slides.size())
@@ -84,7 +91,7 @@ public class SlideshowNode extends BasicNode {
 				slideNo=slides.size()-1;
 		}
 		slidePanel = showSlides();
-		add(slidePanel);
+		pane.add(slidePanel);
 		refresh();
 	};
 }
