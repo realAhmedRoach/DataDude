@@ -1,6 +1,9 @@
 package org.datadude.nodes;
 
+import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -10,39 +13,52 @@ import org.datadude.nodes.slide.Slide;
 public class SlideshowNode extends BasicNode {
 	private static final long serialVersionUID = -9190594824769599302L;
 
+	Font TITLE = new Font("Action Man", Font.BOLD, 28);
+
 	ArrayList<Slide> slides;
-	JPanel buttons;
-	JButton next,prev;
-	
+	JPanel buttons, slidePanel;
+	JButton next, prev;
+	int slideNo;
+
 	public SlideshowNode(String _title) {
 		super(_title);
 		slides = new ArrayList<>(3);
 		createSampleSlides();
-		
+		slidePanel = showSlides();
+
 		buttons = new JPanel();
 		next = new JButton("Next >");
 		prev = new JButton("< Previous");
-		add(showSlides());
+		next.setActionCommand("NEXT");
+		prev.setActionCommand("PREV");
+		next.addActionListener(prevnext);
+		prev.addActionListener(prevnext);
+		buttons.add(prev);
+		buttons.add(next);
+		add(slidePanel);
+		add(buttons, BorderLayout.SOUTH);
 	}
 
 	private JPanel showSlides() {
-		JLabel title = new JLabel(slides.get(0).getTitle());
-		JLabel text = new JLabel(slides.get(0).getText());
+		JLabel title = new JLabel(slides.get(slideNo).getTitle());
+		title.setFont(TITLE);
+		JLabel text = new JLabel(slides.get(slideNo).getText());
 		JPanel p = new JPanel();
-		p.add(text);
 		p.add(title);
+		p.add(text);
 		return p;
 	}
-	
 
 	private void createSampleSlides() {
 		for (int i = 0; i < 3; i++) {
-			Slide s  = new Slide("HI","This is hi #"+i);
+			Slide s = new Slide("HI", "This is hi #" + i);
 			slides.add(s);
 		}
 	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
 	}
 
 	@Override
@@ -54,4 +70,19 @@ public class SlideshowNode extends BasicNode {
 	public boolean load(String file) {
 		return false;
 	}
+	private ActionListener prevnext = (ActionEvent e) -> {
+		remove(slidePanel);
+		if (e.getActionCommand() == "NEXT") {
+			slideNo++;
+			if(slideNo==slides.size())
+				slideNo=0;
+		} else if (e.getActionCommand() == "PREV") {
+			slideNo--;
+			if(slideNo<0)
+				slideNo=slides.size()-1;
+		}
+		slidePanel = showSlides();
+		add(slidePanel);
+		refresh();
+	};
 }

@@ -18,22 +18,14 @@
 
 package org.datadude.gui;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
+import java.awt.*;
+import java.awt.event.*;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import org.datadude.DataDude;
-import org.datadude.nodes.BasicNode;
-import org.datadude.nodes.CSVNode;
-import org.datadude.nodes.TableNode;
-import org.datadude.nodes.TextNode;
+import org.datadude.nodes.*;
 
 public class NewDialog extends JDialog {
 	private static final long serialVersionUID = 12L;
@@ -68,6 +60,8 @@ public class NewDialog extends JDialog {
 				n = new TableNode(txtName.getText());
 			else if (comboBox.getSelectedItem() == "CSV")
 				n = new CSVNode(txtName.getText());
+			else if(comboBox.getSelectedItem() == "Slideshow")
+				n = new SlideshowNode(txtName.getText());
 			else {
 				JOptionPane.showMessageDialog(null, "Not yet implemented!", "Not Available", JOptionPane.ERROR_MESSAGE);
 			}
@@ -123,7 +117,7 @@ public class NewDialog extends JDialog {
 		
 		
 		
-		String[] values = new String[] { "Text", "Table", "CSV" };
+		String[] values = new String[] { "Text", "Table", "CSV", "Slideshow" };
 
 		JLabel lblCreateNewFile = new JLabel("Create New File",SwingConstants.CENTER);
 		lblCreateNewFile.setFont(new Font("Action Man", Font.PLAIN, 17));
