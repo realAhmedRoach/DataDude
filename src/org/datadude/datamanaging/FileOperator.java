@@ -32,7 +32,9 @@ public class FileOperator {
 
 	/**
 	 * Creates a new FileOperator with the specified file
-	 * @param _file The file to use for operations.
+	 * 
+	 * @param _file
+	 *            The file to use for operations.
 	 */
 	public FileOperator(DataDudeFile _file) {
 		file = _file;
@@ -40,8 +42,11 @@ public class FileOperator {
 
 	/**
 	 * Writes an ArrayList into the file.
-	 * @param data The data to write
-	 * @param append Determine whether to append to the file or overwrite.
+	 * 
+	 * @param data
+	 *            The data to write
+	 * @param append
+	 *            Determine whether to append to the file or overwrite.
 	 * @return
 	 */
 	public boolean write(ArrayList<String> data, boolean append) {
@@ -57,8 +62,7 @@ public class FileOperator {
 				System.out.println("Found file");
 			}
 
-			BufferedWriter write = new BufferedWriter(new FileWriter(fileOp,
-					append));
+			BufferedWriter write = new BufferedWriter(new FileWriter(fileOp, append));
 
 			for (int i = 0; i < data.size(); i++) {
 				write.write(data.get(i));
@@ -76,6 +80,7 @@ public class FileOperator {
 
 	/**
 	 * Loads a file into an ArrayList
+	 * 
 	 * @return An ArrayList of Strings that has all the lines of the loaded file
 	 * @throws FileNotFoundException
 	 */
@@ -93,7 +98,7 @@ public class FileOperator {
 				while ((line = read.readLine()) != null) {
 					data.add(line);
 				}
-				
+
 				read.close();
 				read = null;
 			} catch (Exception e) {

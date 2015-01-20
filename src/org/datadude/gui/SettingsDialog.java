@@ -18,24 +18,13 @@
 
 package org.datadude.gui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JSeparator;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import org.datadude.DataDude;
@@ -54,11 +43,11 @@ public class SettingsDialog extends JDialog {
 		public void actionPerformed(ActionEvent paramActionEvent) {
 			changeSettings();
 		}
-		
+
 	};
 	private JTextField txtFolder;
 	private JTextField txtUserDisplay;
-	
+
 	/**
 	 * Launch the application.
 	 */
@@ -81,11 +70,11 @@ public class SettingsDialog extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new GridLayout(0, 2, 0, 30));
-		
+
 		JLabel lblChangeSettings = new JLabel("Change Settings");
 		lblChangeSettings.setFont(new Font("Arial Black", Font.BOLD, 16));
 		contentPanel.add(lblChangeSettings);
-		
+
 		JSeparator separator = new JSeparator();
 		contentPanel.add(separator);
 
@@ -96,7 +85,7 @@ public class SettingsDialog extends JDialog {
 		txtUserDisplay = new JTextField();
 		contentPanel.add(txtUserDisplay);
 		txtUserDisplay.setColumns(10);
-		
+
 		JLabel lblUsername = new JLabel("Username");
 		lblUsername.setForeground(Color.CYAN);
 		contentPanel.add(lblUsername);
@@ -108,23 +97,24 @@ public class SettingsDialog extends JDialog {
 		JLabel lblUserFolder = new JLabel("User Folder");
 		lblUserFolder.setForeground(Color.GREEN);
 		contentPanel.add(lblUserFolder);
-		
+
 		JPanel panel = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
 		flowLayout.setVgap(10);
 		contentPanel.add(panel);
-		
+
 		txtFolder = new JTextField();
 		panel.add(txtFolder);
 		txtFolder.setColumns(10);
-		
+
 		JButton btnBrowse = new JButton();
 		btnBrowse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-					txtFolder.setText(DataDude.getFolder());
+				txtFolder.setText(DataDude.getFolder());
 			}
 		});
-		btnBrowse.setIcon(new ImageIcon(SettingsDialog.class.getResource("/javax/swing/plaf/metal/icons/ocean/upFolder.gif")));
+		btnBrowse.setIcon(new ImageIcon(SettingsDialog.class
+				.getResource("/javax/swing/plaf/metal/icons/ocean/upFolder.gif")));
 		panel.add(btnBrowse);
 
 		JLabel lblPassword = new JLabel("Password (to change settings)");
@@ -147,7 +137,7 @@ public class SettingsDialog extends JDialog {
 
 		JButton cancelButton = new JButton("Cancel");
 		cancelButton.setActionCommand("Cancel");
-		cancelButton.addActionListener(new ActionListener () {
+		cancelButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -158,19 +148,19 @@ public class SettingsDialog extends JDialog {
 	}
 
 	private void changeSettings() {
-		if(Login.getUser().check(new String(txtPass.getPassword()))) {
-			if (txtUsername.getText().length()!=0) {
+		if (Login.getUser().check(new String(txtPass.getPassword()))) {
+			if (txtUsername.getText().length() != 0) {
 				File f = new File(DataDude.getPassLoc() + Login.getUser().getUserName());
 				f.delete();
 				Login.getUser().setUserName(txtUsername.getText());
 			}
-			if (txtFolder.getText().length()!=0) {
+			if (txtFolder.getText().length() != 0) {
 				Login.getUser().setUserFolder(txtFolder.getText());
 			}
 		} else {
-			DataDude.showError(this,new Exception("Wrong Password"),"Couldn't Change Settings");
+			DataDude.showError(this, new Exception("Wrong Password"), "Couldn't Change Settings");
 		}
-		
+
 		try {
 			Login.getUser().save();
 		} catch (IOException e) {

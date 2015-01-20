@@ -23,9 +23,8 @@ public final class StandardDialog {
 		addCancelByEscapeKey(onClose);
 	}
 
-
 	public void display() {
-	    fDialog.pack();
+		fDialog.pack();
 
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		Dimension window = fDialog.getSize();
@@ -57,7 +56,7 @@ public final class StandardDialog {
 
 	// PRIVATE
 	private JDialog fDialog;
-	
+
 	private void addCancelByEscapeKey(final int aOnClose) {
 		String CANCEL_ACTION_KEY = "CANCEL_ACTION_KEY";
 		int noModifiers = 0;
@@ -66,6 +65,7 @@ public final class StandardDialog {
 		inputMap.put(escapeKey, CANCEL_ACTION_KEY);
 		AbstractAction cancelAction = new AbstractAction() {
 			private static final long serialVersionUID = 2345L;
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (JFrame.DO_NOTHING_ON_CLOSE == aOnClose) {

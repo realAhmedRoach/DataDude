@@ -41,7 +41,7 @@ public class NewDialog extends JDialog {
 		try {
 			NewDialog dialog = new NewDialog();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-                        dialog.setLocationRelativeTo(DataDude.getCurrentEngine());
+			dialog.setLocationRelativeTo(DataDude.getCurrentEngine());
 			dialog.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -57,7 +57,7 @@ public class NewDialog extends JDialog {
 			n = new TableNode(txtName.getText());
 		else if (comboBox.getSelectedItem() == "CSV")
 			n = new CSVNode(txtName.getText());
-		else if(comboBox.getSelectedItem() == "Slideshow")
+		else if (comboBox.getSelectedItem() == "Slideshow")
 			n = new SlideshowNode(txtName.getText());
 		else {
 			JOptionPane.showMessageDialog(null, "Not yet implemented!", "Not Available", JOptionPane.ERROR_MESSAGE);
@@ -108,14 +108,12 @@ public class NewDialog extends JDialog {
 		it.setLayout(sl_it);
 		it.add(txtName);
 		txtName.setColumns(10);
-		
-		
-		
+
 		String[] values = new String[] { "Text", "Table", "CSV", "Slideshow" };
 
-		JLabel lblCreateNewFile = new JLabel("Create New File",SwingConstants.CENTER);
+		JLabel lblCreateNewFile = new JLabel("Create New File", SwingConstants.CENTER);
 		lblCreateNewFile.setFont(new Font("Action Man", Font.PLAIN, 17));
-		contentPanel.add(lblCreateNewFile,BorderLayout.NORTH);
+		contentPanel.add(lblCreateNewFile, BorderLayout.NORTH);
 		comboBox = new JComboBox<String>(values);
 		sl_it.putConstraint(SpringLayout.NORTH, comboBox, 6, SpringLayout.SOUTH, txtName);
 		sl_it.putConstraint(SpringLayout.WEST, comboBox, 0, SpringLayout.WEST, txtName);
@@ -124,7 +122,7 @@ public class NewDialog extends JDialog {
 		it.add(comboBox);
 
 		contentPanel.add(it);
-		
+
 		JPanel buttonPane = new JPanel();
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		getContentPane().add(buttonPane, BorderLayout.SOUTH);
