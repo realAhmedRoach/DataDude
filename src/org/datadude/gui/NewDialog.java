@@ -48,27 +48,21 @@ public class NewDialog extends JDialog {
 		}
 	}
 
-	private ActionListener newListener = new ActionListener() {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			dispose();
-			BasicNode n = null;
-			if (comboBox.getSelectedItem() == "Text")
-				n = new TextNode(txtName.getText());
-			else if (comboBox.getSelectedItem() == "Table")
-				n = new TableNode(txtName.getText());
-			else if (comboBox.getSelectedItem() == "CSV")
-				n = new CSVNode(txtName.getText());
-			else if(comboBox.getSelectedItem() == "Slideshow")
-				n = new SlideshowNode(txtName.getText());
-			else {
-				JOptionPane.showMessageDialog(null, "Not yet implemented!", "Not Available", JOptionPane.ERROR_MESSAGE);
-			}
-			DataDude.getCurrentEngine().addTab(n);
-
+	private ActionListener newListener = (ActionEvent e) -> {
+		dispose();
+		BasicNode n = null;
+		if (comboBox.getSelectedItem() == "Text")
+			n = new TextNode(txtName.getText());
+		else if (comboBox.getSelectedItem() == "Table")
+			n = new TableNode(txtName.getText());
+		else if (comboBox.getSelectedItem() == "CSV")
+			n = new CSVNode(txtName.getText());
+		else if(comboBox.getSelectedItem() == "Slideshow")
+			n = new SlideshowNode(txtName.getText());
+		else {
+			JOptionPane.showMessageDialog(null, "Not yet implemented!", "Not Available", JOptionPane.ERROR_MESSAGE);
 		}
-
+		DataDude.getCurrentEngine().addTab(n);
 	};
 
 	/**
