@@ -21,6 +21,11 @@ package org.datadude.datamanaging;
 
 import java.io.File;
 
+/**
+ * A class that represents
+ * a directory.
+ * @author aarh9
+ */
 public class Directory {
 
 	/**
@@ -37,6 +42,7 @@ public class Directory {
 	 * @param _path The file to use as the path
 	 */
 	public Directory(File _path) {
+		if (_path == null) throw new NullPointerException("Directory's path can't be null");
 		if (_path.isDirectory())
 			this.path = _path.getAbsolutePath();
 		else
@@ -50,14 +56,10 @@ public class Directory {
 	 */
 	public Directory(String path) {
 		File temp = new File(path);
-		if (temp.isDirectory()) {
-			if (temp.exists())
+		if (temp.isDirectory()) 
 				this.path = path;
-			else {
-				temp.mkdirs();
-				this.path = path;
-			}
-		} else {
+		else {
+			temp.mkdirs();
 			this.path = System.getProperty("user.home");
 		}
 	}

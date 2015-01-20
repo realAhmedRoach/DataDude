@@ -37,7 +37,7 @@ public class Database {
 		directory = new Directory();
 		dirPointer = new Pointer(Pointer.DIRECTORY_POINTER);
 		dirPointer.setCurrFile(new File(path));
-		files = new ArrayList<DataDudeFile>();
+		files = new ArrayList<>();
 				
 	}
 
