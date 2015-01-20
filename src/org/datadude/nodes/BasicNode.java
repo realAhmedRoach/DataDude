@@ -25,6 +25,7 @@ import java.io.File;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 
+import org.datadude.CoreEngine;
 import org.datadude.DataDude;
 
 public abstract class BasicNode extends JInternalFrame implements ActionListener, Node {
@@ -82,7 +83,7 @@ public abstract class BasicNode extends JInternalFrame implements ActionListener
 
 		saveI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
 		loadI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, ActionEvent.CTRL_MASK));
-		exitI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X,ActionEvent.CTRL_MASK));
+		exitI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, ActionEvent.CTRL_MASK));
 		cutI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, ActionEvent.CTRL_MASK));
 		copyI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK));
 		pasteI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, ActionEvent.CTRL_MASK));
@@ -144,11 +145,12 @@ public abstract class BasicNode extends JInternalFrame implements ActionListener
 	protected void exit() {
 		DataDude.getCurrentEngine().removeTab(this);
 	}
-	
+
 	protected void setNewTitle(File f) {
+		CoreEngine c = DataDude.getCurrentEngine();
 		if ((f.getName()).contains("."))
-			setTitle((f.getName()).split(".")[0]);
+			c.setTitleAt(c.getNodes().indexOf(this), (f.getName()).split(".")[0]);
 		else
-			setTitle(f.getName());
+			c.setTitleAt(c.getNodes().indexOf(this), f.getName());
 	}
 }
