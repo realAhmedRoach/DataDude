@@ -78,8 +78,7 @@ public class Pointer {
 			BufferedReader br = new BufferedReader(new FileReader(currFile));
 
 			if (location > 0)
-				for (int i = 0; i < location; i++)
-					br.readLine();
+				br.skip(location);
 			if (until <= 0) {
 				String line = null;
 				while ((line = br.readLine()) != null)
