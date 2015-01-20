@@ -13,10 +13,10 @@ import org.datadude.nodes.slide.Slide;
 public class SlideshowNode extends BasicNode {
 	private static final long serialVersionUID = -9190594824769599302L;
 
-	Font TITLE = new Font("Action Man", Font.BOLD, 28);
+	Font TITLE = new Font("Action Man", Font.BOLD, 72);
 
 	ArrayList<Slide> slides;
-	JPanel buttons, slidePanel;
+	JPanel buttons, slidePanel,editPanel;
 	JButton next, prev;
 	int slideNo;
 
@@ -26,6 +26,8 @@ public class SlideshowNode extends BasicNode {
 		createSampleSlides();
 		slidePanel = showSlides();
 
+		editPanel = new JPanel();
+		
 		buttons = new JPanel();
 		next = new JButton("Next >");
 		prev = new JButton("< Previous");
@@ -50,7 +52,7 @@ public class SlideshowNode extends BasicNode {
 	}
 
 	private void createSampleSlides() {
-		for (int i = 0; i < 3; i++) {
+		for (int i = 1; i < 4; i++) {
 			Slide s = new Slide("HI", "This is hi #" + i);
 			slides.add(s);
 		}
