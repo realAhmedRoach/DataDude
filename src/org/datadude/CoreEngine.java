@@ -196,7 +196,7 @@ public class CoreEngine extends JFrame {
 		// PROGRESS PANEL {
 		System.out.println("Initializing Progress Panel");
 		JPanel progressPanel = new JPanel();
-		progressPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 21, 0));
+		progressPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 21, 5));
 		progressPanel.setBackground(new Color(46, 139, 87));
 
 		progressBar = new JProgressBar();
@@ -266,7 +266,10 @@ public class CoreEngine extends JFrame {
 		editorPane.setTabComponentAt(currentTab, new ButtonTabComponent(false));
 
 		JPanel filePanel = new JPanel();
-		filePanel.add(new JScrollPane(new FileTree(Login.getUser().getUserFolder())));
+		JScrollPane s = new JScrollPane(new FileTree(Login.getUser().getUserFolder()));
+		s.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		s.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		filePanel.add(s);
 		
 		contentPane.setLayout(new BorderLayout(0, 5));
 		contentPane.add(infoPanel, BorderLayout.NORTH);
