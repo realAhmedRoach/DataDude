@@ -36,7 +36,6 @@ public class TextNode extends BasicNode {
 	public TextNode(String _title) {
 		super(_title);
 		init();
-		pad = " ";
 		ta = new JTextArea(); // textarea
 		scpane = new JScrollPane(ta); // scrollpane and add textarea to
 										// scrollpane
@@ -45,18 +44,8 @@ public class TextNode extends BasicNode {
 		ta.setWrapStyleWord(true);
 
 		pane.add(scpane, BorderLayout.CENTER);
-		pane.add(toolBar, BorderLayout.SOUTH);
-
-		lblStatus = new JLabel("Status");
-		toolBar.add(lblStatus);
-
-		saveI.addActionListener(this);
-		loadI.addActionListener(this);
-		exitI.addActionListener(this);
-		cutI.addActionListener(this);
-		copyI.addActionListener(this);
-		pasteI.addActionListener(this);
-		selectI.addActionListener(this);
+		initStatus();
+		initMenu();
 
 		setJMenuBar(menuBar);
 		setVisible(true);

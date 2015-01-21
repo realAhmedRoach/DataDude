@@ -17,7 +17,6 @@
  *******************************************************************************/
 package org.datadude.nodes;
 
-import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.*;
 import java.io.*;
@@ -56,20 +55,8 @@ public class CSVNode extends BasicNode {
 
 		btnDelete = new JButton("Delete");
 		btnDelete.setIcon(new ImageIcon(getClass().getResource("/images/silk/icons/delete.png")));
-		btnDelete.addActionListener(new DeleteListener());
-
-		pane.add(toolBar, BorderLayout.SOUTH);
-
-		lblStatus = new JLabel("Status");
-		toolBar.add(lblStatus);
-
-		saveI.addActionListener(this);
-		loadI.addActionListener(this);
-		exitI.addActionListener(this);
-		cutI.addActionListener(this);
-		copyI.addActionListener(this);
-		pasteI.addActionListener(this);
-		selectI.addActionListener(this);
+		initStatus();
+		initMenu();
 
 		lines = new JTextField[3];
 		for (int i = 0; i < lines.length; i++) {

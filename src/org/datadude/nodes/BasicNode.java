@@ -32,7 +32,6 @@ public abstract class BasicNode extends JInternalFrame implements ActionListener
 	private static final long serialVersionUID = -2795471245561416657L;
 	protected String title;
 	protected JMenuBar menuBar;
-	protected String pad;
 	protected JMenu fileM, editM;
 	protected JMenuItem loadI, cutI, copyI, pasteI, selectI, exitI, saveI;
 	protected JToolBar toolBar;
@@ -146,6 +145,22 @@ public abstract class BasicNode extends JInternalFrame implements ActionListener
 		DataDude.getCurrentEngine().removeTab(this);
 	}
 
+	protected void initStatus() {
+		lblStatus = new JLabel("Status");
+		toolBar.add(lblStatus);
+		pane.add(toolBar, BorderLayout.SOUTH);
+	}
+	
+	protected void initMenu() {
+		saveI.addActionListener(this);
+		loadI.addActionListener(this);
+		exitI.addActionListener(this);
+		cutI.addActionListener(this);
+		copyI.addActionListener(this);
+		pasteI.addActionListener(this);
+		selectI.addActionListener(this);
+	}
+	
 	protected void setNewTitle(File f) {
 		CoreEngine c = DataDude.getCurrentEngine();
 		if ((f.getName()).contains("."))

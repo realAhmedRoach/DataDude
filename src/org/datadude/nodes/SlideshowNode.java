@@ -23,6 +23,9 @@ public class SlideshowNode extends BasicNode {
 
 	public SlideshowNode(String _title) {
 		super(_title);
+		init();
+		initMenu();
+		initStatus();
 		slides = new ArrayList<>(3);
 		createSampleSlides();
 		slidePanel = showSlides();
