@@ -228,8 +228,7 @@ public class CoreEngine extends JFrame {
 		commandPanel.add(chat);
 
 		settings = new JButton("Settings");
-		settings.setIcon(new ImageIcon(CoreEngine.class
-				.getResource("/com/sun/java/swing/plaf/windows/icons/DetailsView.gif")));
+		settings.setIcon(new ImageIcon(getClass().getResource("/images/silk/icons/wrench.png")));
 		settings.addActionListener(settingsListener);
 		commandPanel.add(settings);
 
@@ -244,7 +243,7 @@ public class CoreEngine extends JFrame {
 
 		quit = new JButton("Quit");
 		commandPanel.add(quit);
-		quit.setIcon(new ImageIcon(CoreEngine.class.getResource("/javax/swing/plaf/metal/icons/ocean/paletteClose.gif")));
+		quit.setIcon(new ImageIcon(CoreEngine.class.getResource("/images/silk/icons/cross.png")));
 		quit.addActionListener(quitListener);
 		// }
 
