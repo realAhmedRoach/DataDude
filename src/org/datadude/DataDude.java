@@ -174,6 +174,7 @@ public final class DataDude {
 	}
 
 	public static void showError(Component parent, Exception e, String title) {
+		e.printStackTrace();
 		String text = "Something bad happened:\n" + e;
 		JOptionPane.showMessageDialog(parent, text, title, JOptionPane.ERROR_MESSAGE);
 	}

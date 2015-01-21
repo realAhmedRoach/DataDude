@@ -150,7 +150,7 @@ public abstract class BasicNode extends JInternalFrame implements ActionListener
 		toolBar.add(lblStatus);
 		pane.add(toolBar, BorderLayout.SOUTH);
 	}
-	
+
 	protected void initMenu() {
 		saveI.addActionListener(this);
 		loadI.addActionListener(this);
@@ -160,12 +160,9 @@ public abstract class BasicNode extends JInternalFrame implements ActionListener
 		pasteI.addActionListener(this);
 		selectI.addActionListener(this);
 	}
-	
+
 	protected void setNewTitle(File f) {
 		CoreEngine c = DataDude.getCurrentEngine();
-		if ((f.getName()).contains("."))
-			c.setTitleAt(c.getNodes().indexOf(this), (f.getName()).split(".")[0]);
-		else
-			c.setTitleAt(c.getNodes().indexOf(this), f.getName());
+		c.setTitleAt(c.getNodes().indexOf(this), f.getName());
 	}
 }

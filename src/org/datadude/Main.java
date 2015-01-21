@@ -20,7 +20,7 @@ package org.datadude;
 
 import java.io.File;
 
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 import com.alee.laf.WebLookAndFeel;
 
@@ -44,7 +44,11 @@ public class Main {
 	}
 
 	public static void setLnF() {
-		WebLookAndFeel.install();
+		try {
+			UIManager.setLookAndFeel(new WebLookAndFeel());
+		} catch (UnsupportedLookAndFeelException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

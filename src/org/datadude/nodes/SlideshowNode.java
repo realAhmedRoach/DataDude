@@ -30,7 +30,8 @@ public class SlideshowNode extends BasicNode {
 		createSampleSlides();
 		slidePanel = showSlides();
 
-		editPanel = new JPanel(new BoxLayout(editPanel,BoxLayout.Y_AXIS));
+		editPanel = new JPanel();
+		editPanel.setLayout(new BoxLayout(editPanel,BoxLayout.Y_AXIS));
 		lblTitle = new JLabel("Title:");
 		lblText = new JLabel("Text:");
 		lblImage = new JLabel("Image:");
