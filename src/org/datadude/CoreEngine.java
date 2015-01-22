@@ -23,12 +23,16 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
+
+import org.datadude.datamanaging.DataDudeFile;
 import org.datadude.gui.*;
 import org.datadude.nodes.*;
+
 
 import com.alee.extended.statusbar.WebMemoryBar;
 
@@ -151,6 +155,27 @@ public class CoreEngine extends JFrame {
 		JMenuItem mntmQuit = new JMenuItem("Quit");
 		mntmQuit.setIcon(new ImageIcon(CoreEngine.class.getResource("/images/silk/icons/cross.png")));
 		mntmQuit.addActionListener(quitListener);
+
+		JMenuItem mntmLoad = new JMenuItem("Load...");
+		mntmLoad.addActionListener((ActionEvent e) -> {
+			String toLoad = DataDude.getFile();
+			String extension = "";
+
+			int i = toLoad.lastIndexOf('.');
+			int p = Math.max(toLoad.lastIndexOf('/'), toLoad.lastIndexOf('\\'));
+
+			if (i > p) {
+				extension = toLoad.substring(i);
+			}
+			
+			BasicNode n = null;
+			if(extension == DataDudeFile.T_TEXT) {
+				n = new TextNode(toLoad.substring(p));
+			} else if (extension == DataDudeFile.T_TABLE) {
+				n = new TableNode(toLoad.substring(p));
+			}
+		});
+		mnFile.add(mntmLoad);
 		mnFile.add(mntmQuit);
 
 		JMenu mnHelp = new JMenu("Help");
@@ -270,12 +295,12 @@ public class CoreEngine extends JFrame {
 		s.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		s.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		filePanel.add(s);
-		
+
 		contentPane.setLayout(new BorderLayout(0, 5));
 		contentPane.add(infoPanel, BorderLayout.NORTH);
 		contentPane.add(editorPane, BorderLayout.CENTER);
 		contentPane.add(commandPanel, BorderLayout.EAST);
-		contentPane.add(filePanel,BorderLayout.WEST);
+		contentPane.add(filePanel, BorderLayout.WEST);
 		contentPane.add(progressPanel, BorderLayout.SOUTH);
 
 		long end = System.currentTimeMillis();
