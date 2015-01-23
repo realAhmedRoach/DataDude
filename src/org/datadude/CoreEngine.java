@@ -163,7 +163,6 @@ public class CoreEngine extends JFrame {
 
 			int i = toLoad.lastIndexOf('.');
 			int p = Math.max(toLoad.lastIndexOf('/'), toLoad.lastIndexOf('\\'));
-
 			if (i > p) {
 				extension = toLoad.substring(i);
 			}
@@ -173,7 +172,13 @@ public class CoreEngine extends JFrame {
 				n = new TextNode(toLoad.substring(p));
 			} else if (extension == DataDudeFile.T_TABLE) {
 				n = new TableNode(toLoad.substring(p));
+			} else if (extension == DataDudeFile.T_CSV) {
+				n = new CSVNode(toLoad.substring(p));
+			} else if (extension == DataDudeFile.T_SLIDESHOW) {
+				n = new SlideshowNode(toLoad.substring(p));
 			}
+			n.load(toLoad);
+			addTab(n);
 		});
 		mnFile.add(mntmLoad);
 		mnFile.add(mntmQuit);
