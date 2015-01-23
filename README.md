@@ -15,7 +15,7 @@ It is made in both [JavaFX](https://en.wikipedia.org/wiki/JavaFX) and [Swing](ht
 ##Features
 1. Basic save and load
 2. Multi-user support
-3. Text, [CSV][1], and Table Nodes!
+3. Text, [CSV][1], and Table Nodes! (More coming soon)
 
 ##License
 DataDude is licensed under the GNU [GPLv3][2]
