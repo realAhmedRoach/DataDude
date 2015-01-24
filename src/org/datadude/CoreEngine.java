@@ -168,15 +168,21 @@ public class CoreEngine extends JFrame {
 			}
 			
 			BasicNode n = null;
-			if(extension == DataDudeFile.T_TEXT) {
-				n = new TextNode(toLoad.substring(p));
-			} else if (extension == DataDudeFile.T_TABLE) {
-				n = new TableNode(toLoad.substring(p));
-			} else if (extension == DataDudeFile.T_CSV) {
-				n = new CSVNode(toLoad.substring(p));
-			} else if (extension == DataDudeFile.T_SLIDESHOW) {
-				n = new SlideshowNode(toLoad.substring(p));
-			}
+                    switch (extension) {
+                        case DataDudeFile.T_TEXT:
+                            n = new TextNode(toLoad.substring(p+1,i));
+                            break;
+                        case DataDudeFile.T_TABLE:
+                            n = new TableNode(toLoad.substring(p+1,i));
+                            break;
+                        case DataDudeFile.T_CSV:
+                            n = new CSVNode(toLoad.substring(p+1,i));
+                            break;
+                        case DataDudeFile.T_SLIDESHOW:
+                            n = new SlideshowNode(toLoad.substring(p+1,i));
+                            break;
+                    }
+                        System.out.println(toLoad);
 			n.load(toLoad);
 			addTab(n);
 		});
