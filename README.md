@@ -20,5 +20,8 @@ It is made in both [JavaFX](https://en.wikipedia.org/wiki/JavaFX) and [Swing](ht
 ##License
 DataDude is licensed under the GNU [GPLv3][2]
 
+##Contributing
+To contribute, either add an [issue](https://github.com/theTechnoKid/DataDude/issues/new), or fork this repo and add a pull request. I will evaluate it either the same day or the next.
+
 [1]: http://en.wikipedia.org/wiki/Comma-separated_values
 [2]: http://www.gnu.org/licenses/gpl.html
