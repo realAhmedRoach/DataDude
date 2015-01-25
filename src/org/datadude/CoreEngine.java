@@ -195,6 +195,9 @@ public class CoreEngine extends JFrame {
 		JMenuItem mntmShowAbout = new JMenuItem("Show About & Help");
 		mntmShowAbout.addActionListener((ActionEvent e) -> showHelp());
 		mnHelp.add(mntmShowAbout);
+		
+		JMenuItem mntmCredits = new JMenuItem("Credits");
+		mnHelp.add(mntmCredits);
 		// }
 
 		// CONTENT {
