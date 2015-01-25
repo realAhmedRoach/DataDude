@@ -16,3 +16,16 @@
     -fx-background-insets: 0, 0;
     -fx-padding: 0;
 }
+
+.button {
+    -fx-background-color: linear-gradient(#14D917,#14D997);
+    -fx-text-fill: lightgray;
+}
+
+.button:hover {
+    -fx-text-fill: white;
+}
+
+.button:pressed {
+    -fx-background-color: linear-gradient(#14D997,#14D917);
+}
