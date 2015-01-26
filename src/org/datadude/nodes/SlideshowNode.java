@@ -18,6 +18,7 @@ public class SlideshowNode extends BasicNode {
 	ArrayList<Slide> slides;
 	JPanel buttons, slidePanel,editPanel;
 	JLabel lblTitle,lblText,lblImage;
+	JTextField txtTitle,txtText;
 	JButton next, prev;
 	int slideNo;
 
@@ -35,8 +36,12 @@ public class SlideshowNode extends BasicNode {
 		lblTitle = new JLabel("Title:");
 		lblText = new JLabel("Text:");
 		lblImage = new JLabel("Image:");
+		txtTitle = new JTextField();
+		txtText = new JTextField();
 		editPanel.add(lblTitle);
+		editPanel.add(txtTitle);
 		editPanel.add(lblText);
+		editPanel.add(txtText);
 		editPanel.add(lblImage);
 		
 		buttons = new JPanel();
@@ -49,6 +54,7 @@ public class SlideshowNode extends BasicNode {
 		buttons.add(prev);
 		buttons.add(next);
 		pane.add(slidePanel);
+		pane.add(editPanel,BorderLayout.LINE_END);
 		pane.add(buttons, BorderLayout.SOUTH);
 	}
 
@@ -57,6 +63,7 @@ public class SlideshowNode extends BasicNode {
 		title.setFont(TITLE);
 		JLabel text = new JLabel(slides.get(slideNo).getText());
 		JPanel p = new JPanel();
+		p.setLayout(new BoxLayout(p,BoxLayout.Y_AXIS));
 		p.add(title);
 		p.add(text);
 		return p;
