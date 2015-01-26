@@ -20,7 +20,7 @@ public class FileTree extends JPanel {
 	public FileTree(String directory) {
 		fileSystemModel = new FileSystemModel(new File(directory));
 		fileTree = new JTree(fileSystemModel);
-		fileTree.setEditable(true);
+		fileTree.setEditable(false);
 		add(fileTree);
 		setSize(640, 480);
 		setVisible(true);

@@ -304,17 +304,15 @@ public class CoreEngine extends JFrame {
 		editorPane.setTitleAt(currentTab, "Welcome!");
 		editorPane.setTabComponentAt(currentTab, new ButtonTabComponent(false));
 
-		JPanel filePanel = new JPanel();
 		JScrollPane s = new JScrollPane(new FileTree(Login.getUser().getUserFolder()));
 		s.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		s.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		filePanel.add(s);
 
 		contentPane.setLayout(new BorderLayout(0, 5));
 		contentPane.add(infoPanel, BorderLayout.NORTH);
 		contentPane.add(editorPane, BorderLayout.CENTER);
 		contentPane.add(commandPanel, BorderLayout.EAST);
-		contentPane.add(filePanel, BorderLayout.WEST);
+		contentPane.add(s, BorderLayout.WEST);
 		contentPane.add(progressPanel, BorderLayout.SOUTH);
 
 		long end = System.currentTimeMillis();
