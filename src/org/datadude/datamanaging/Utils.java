@@ -109,14 +109,11 @@ public abstract class Utils {
 				fos.write(buffer, 0, len);
 			}
 		} finally {
-			try {
-				if (is != null) {
-					is.close();
-				}
-			} finally {
-				if (fos != null) {
-					fos.close();
-				}
+			if (is != null) {
+				is.close();
+			}
+			if (fos != null) {
+				fos.close();
 			}
 		}
 	}
