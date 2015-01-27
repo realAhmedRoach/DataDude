@@ -115,12 +115,23 @@ public class User implements Serializable {
 		}
 	}
 
+	/**
+	 * Gets the username of this user
+	 * 
+	 * @return the username
+	 */
 	public String getUserName() {
 		return user;
 	}
 
-	public void setUserName(String name) {
-		user = name;
+	/**
+	 * Sets the username of this user This gets used when the save function gets
+	 * called
+	 * 
+	 * @param username the new username
+	 */
+	public void setUserName(String username) {
+		user = username;
 	}
 
 	public String getName() {
