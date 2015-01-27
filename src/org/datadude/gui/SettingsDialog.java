@@ -65,7 +65,8 @@ public class SettingsDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public SettingsDialog() {
-		setBounds(100, 100, 530, 427);
+		setSize(530, 427);
+		setLocationRelativeTo(DataDude.getCurrentEngine());
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
