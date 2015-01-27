@@ -59,16 +59,7 @@ public class RegController implements Initializable {
 	}
 
 	public void doCancel(ActionEvent e) {
-		if (LoginFX.primaryStage != null) {
-			// Close this stage
-			thisStage.close();
-			// Setting original scene
-			LoginFX.primaryStage.setScene(LoginFX.scene);
-			// Showing the scene
-			LoginFX.primaryStage.show();
-		} else {
-			DataDude.showError(new IllegalStateException("LoginFX's primary " + "stage is null"));
-		}
+		doSwitch();
 	}
 
 	public void doReg(ActionEvent e) {
@@ -87,20 +78,25 @@ public class RegController implements Initializable {
 			currUser.setName(displayName.getText());
 			currUser.encrypt();
 			currUser.save();
-			if (LoginFX.primaryStage != null) {
-				// Close this stage
-				thisStage.close();
-				// Setting original scene
-				LoginFX.primaryStage.setScene(LoginFX.scene);
-				// Showing the scene
-				LoginFX.primaryStage.show();
-			} else {
-				DataDude.showError(new IllegalStateException("LoginFX's primary " + "stage is null"));
-			}
+			doSwitch();
 			thisStage = null;
 		} catch (IOException i) {
 			i.printStackTrace();
 		}
+	}
+
+	private void doSwitch() {
+		if (LoginFX.primaryStage != null) {
+			// Close this stage
+			thisStage.close();
+			// Setting original scene
+			LoginFX.primaryStage.setScene(LoginFX.scene);
+			// Showing the scene
+			LoginFX.primaryStage.show();
+		} else {
+			DataDude.showError(new IllegalStateException("LoginFX's primary stage is null"));
+		}
+
 	}
 
 }
