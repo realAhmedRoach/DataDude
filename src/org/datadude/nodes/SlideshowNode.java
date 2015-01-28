@@ -15,10 +15,10 @@ public class SlideshowNode extends BasicNode {
 	Font TITLE = new Font("Action Man", Font.BOLD, 72);
 
 	ArrayList<Slide> slides;
-	JPanel buttons, slidePanel,editPanel;
-	JLabel lblTitle,lblText,lblImage;
-	JTextField txtTitle,txtText;
-	JButton next, prev;
+	JPanel buttons, slidePanel, editPanel;
+	JLabel lblTitle, lblText, lblImage;
+	JTextField txtTitle, txtText;
+	JButton next, prev,save;
 	int slideNo;
 
 	public SlideshowNode(String _title) {
@@ -31,18 +31,23 @@ public class SlideshowNode extends BasicNode {
 		slidePanel = showSlides();
 
 		editPanel = new JPanel();
-		editPanel.setLayout(new BoxLayout(editPanel,BoxLayout.Y_AXIS));
+		editPanel.setLayout(new BoxLayout(editPanel, BoxLayout.Y_AXIS));
 		lblTitle = new JLabel("Title:");
 		lblText = new JLabel("Text:");
 		lblImage = new JLabel("Image:");
 		txtTitle = new JTextField();
 		txtText = new JTextField();
+		save = new JButton("Save");
+		save.addActionListener((ActionEvent e)->{
+			setSlides();
+		});
 		editPanel.add(lblTitle);
 		editPanel.add(txtTitle);
 		editPanel.add(lblText);
 		editPanel.add(txtText);
-		editPanel.add(lblImage);
-		
+//		editPanel.add(lblImage);
+		editPanel.add(save);
+
 		buttons = new JPanel();
 		next = new JButton("Next >");
 		prev = new JButton("< Previous");
@@ -53,20 +58,26 @@ public class SlideshowNode extends BasicNode {
 		buttons.add(prev);
 		buttons.add(next);
 		pane.add(slidePanel);
-		pane.add(editPanel,BorderLayout.LINE_END);
+		pane.add(editPanel, BorderLayout.LINE_END);
 		pane.add(buttons, BorderLayout.SOUTH);
 	}
 
 	private JPanel showSlides() {
-		JLabel title = new JLabel(slides.get(slideNo).getTitle());
+		JLabel title = new JLabel(slides.get(slideNo).getTitle(),SwingConstants.CENTER);
 		title.setFont(TITLE);
-		JLabel text = new JLabel(slides.get(slideNo).getText());
-		JPanel p = new JPanel(new GridBagLayout());
+		JLabel text = new JLabel(slides.get(slideNo).getText(),SwingConstants.LEADING);
+		JPanel p = new JPanel(new GridLayout(2,1,10,10));
 		p.add(title);
 		p.add(text);
 		return p;
 	}
 
+	private void setSlides() {
+		Slide curr = slides.get(slideNo);
+		curr.setTitle(txtTitle.getText());
+		curr.setText(txtText.getText());
+	}
+	
 	private void createSampleSlides() {
 		for (int i = 1; i < 4; i++) {
 			Slide s = new Slide("HI", "This is hi #" + i);
@@ -76,7 +87,7 @@ public class SlideshowNode extends BasicNode {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 	}
 
 	@Override
@@ -88,16 +99,17 @@ public class SlideshowNode extends BasicNode {
 	public boolean load(String file) {
 		return false;
 	}
+
 	private ActionListener prevnext = (ActionEvent e) -> {
 		pane.remove(slidePanel);
 		if (e.getActionCommand() == "NEXT") {
 			slideNo++;
-			if(slideNo==slides.size())
-				slideNo=0;
+			if (slideNo == slides.size())
+				slideNo = 0;
 		} else if (e.getActionCommand() == "PREV") {
 			slideNo--;
-			if(slideNo<0)
-				slideNo=slides.size()-1;
+			if (slideNo < 0)
+				slideNo = slides.size() - 1;
 		}
 		slidePanel = showSlides();
 		pane.add(slidePanel);
