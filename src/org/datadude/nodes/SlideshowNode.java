@@ -3,9 +3,14 @@ package org.datadude.nodes;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.datadude.nodes.slide.Slide;
 
@@ -18,7 +23,8 @@ public class SlideshowNode extends BasicNode {
 	JPanel buttons, slidePanel, editPanel;
 	JLabel lblTitle, lblText, lblImage;
 	JTextField txtTitle, txtText;
-	JButton next, prev,save;
+	JButton next, prev, save,browse;
+	File imgFile;
 	int slideNo;
 
 	public SlideshowNode(String _title) {
@@ -38,14 +44,17 @@ public class SlideshowNode extends BasicNode {
 		txtTitle = new JTextField();
 		txtText = new JTextField();
 		save = new JButton("Save");
-		save.addActionListener((ActionEvent e)->{
+		save.addActionListener((ActionEvent e) -> {
 			setSlides();
 		});
+		browse = new JButton("Browse");
+		browse.addActionListener(imgBrowse);
 		editPanel.add(lblTitle);
 		editPanel.add(txtTitle);
 		editPanel.add(lblText);
 		editPanel.add(txtText);
-//		editPanel.add(lblImage);
+		editPanel.add(lblImage);
+		editPanel.add(browse);
 		editPanel.add(save);
 
 		buttons = new JPanel();
@@ -63,12 +72,18 @@ public class SlideshowNode extends BasicNode {
 	}
 
 	private JPanel showSlides() {
-		JLabel title = new JLabel(slides.get(slideNo).getTitle(),SwingConstants.CENTER);
+		Slide curr = slides.get(slideNo);
+		JLabel title = new JLabel(curr.getTitle(), SwingConstants.CENTER);
 		title.setFont(TITLE);
-		JLabel text = new JLabel(slides.get(slideNo).getText(),SwingConstants.LEADING);
-		JPanel p = new JPanel(new GridLayout(2,1,10,10));
+		JLabel text = new JLabel(curr.getText(), SwingConstants.LEADING);
+		JLabel img = null;
+		if(curr.getImage()!=null)
+			img =new JLabel(new ImageIcon(curr.getImage()),SwingConstants.CENTER);;
+		JPanel p = new JPanel(new GridLayout(3, 1, 10, 10));
 		p.add(title);
 		p.add(text);
+		if(img!=null)
+			p.add(img);
 		return p;
 	}
 
@@ -76,8 +91,13 @@ public class SlideshowNode extends BasicNode {
 		Slide curr = slides.get(slideNo);
 		curr.setTitle(txtTitle.getText());
 		curr.setText(txtText.getText());
+		try {
+			curr.setImage(ImageIO.read(imgFile));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-	
+
 	private void createSampleSlides() {
 		for (int i = 1; i < 4; i++) {
 			Slide s = new Slide("HI", "This is hi #" + i);
@@ -114,5 +134,20 @@ public class SlideshowNode extends BasicNode {
 		slidePanel = showSlides();
 		pane.add(slidePanel);
 		refresh();
+	};
+	private ActionListener imgBrowse = (ActionEvent e) -> {
+		JFileChooser fileOpen = new JFileChooser();
+
+		// Get array of available formats
+		String[] suffices = ImageIO.getReaderFileSuffixes();
+		for (int i = 0; i < suffices.length; i++) {
+			FileFilter filter = new FileNameExtensionFilter(suffices[i] + " files", suffices[i]);
+			fileOpen.addChoosableFileFilter(filter);
+		}
+
+		int ret = fileOpen.showDialog(this, "Open Image");
+		if(ret!=JFileChooser.CANCEL_OPTION) {
+			imgFile = fileOpen.getSelectedFile();
+		}
 	};
 }
