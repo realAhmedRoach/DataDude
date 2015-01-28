@@ -1,7 +1,6 @@
 package org.datadude.nodes;
 
-import java.awt.BorderLayout;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -62,8 +61,7 @@ public class SlideshowNode extends BasicNode {
 		JLabel title = new JLabel(slides.get(slideNo).getTitle());
 		title.setFont(TITLE);
 		JLabel text = new JLabel(slides.get(slideNo).getText());
-		JPanel p = new JPanel();
-		p.setLayout(new BoxLayout(p,BoxLayout.Y_AXIS));
+		JPanel p = new JPanel(new GridBagLayout());
 		p.add(title);
 		p.add(text);
 		return p;
