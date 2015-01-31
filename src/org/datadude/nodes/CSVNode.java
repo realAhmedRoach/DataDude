@@ -76,13 +76,9 @@ public class CSVNode extends BasicNode {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		super.actionPerformed(e);
 		JMenuItem choice = (JMenuItem) e.getSource();
-		if (choice == saveI) {
-			if (save(getTitle())) {
-				lblStatus.setText("Succesfully saved CSV file.");
-			} else
-				lblStatus.setText("Error while saving!");
-		} else if (choice == loadI) {
+		if (choice == loadI) {
 			JFileChooser l = new JFileChooser();
 			l.setCurrentDirectory(new File(Login.getUser().getUserFolder()));
 			l.setDialogTitle("Open CSV File");
@@ -108,8 +104,6 @@ public class CSVNode extends BasicNode {
 			lines[selectedIndex].replaceSelection("");
 		} else if(choice == selectI)
 			lines[selectedIndex].selectAll();
-		 else if (choice == exitI)
-				exit();
 	}
 
 	@Override

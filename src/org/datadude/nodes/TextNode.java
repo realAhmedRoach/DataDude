@@ -70,12 +70,9 @@ public class TextNode extends BasicNode {
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		super.actionPerformed(e);
 		JMenuItem choice = (JMenuItem) e.getSource();
-		if (choice == saveI) {
-			if (save(getTitle())) {
-				lblStatus.setText("Succesfully saved text file.");
-			}
-		} else if (choice == loadI) {
+		if (choice == loadI) {
 			JFileChooser l = new JFileChooser();
 			l.setCurrentDirectory(new File(Login.getUser().getUserFolder()));
 			l.setDialogTitle("Open text File");
@@ -93,8 +90,6 @@ public class TextNode extends BasicNode {
 			ta.insert(DataDude.getClipboard(), ta.getCaretPosition());
 		else if (choice == selectI)
 			ta.selectAll();
-		else if (choice == exitI)
-			exit();
 	}
 
 	@Override
