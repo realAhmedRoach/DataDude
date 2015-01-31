@@ -140,7 +140,18 @@ public abstract class BasicNode extends JInternalFrame implements ActionListener
 
 	public void cleanup() {
 	}
-
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == exitI)
+			exit();
+		else if (e.getSource() == saveI)
+			if (save(getTitle()))
+				lblStatus.setText("Succesfully saved text file.");
+			else
+				lblStatus.setText("Error while saving!");
+	}
+	
 	protected void exit() {
 		DataDude.getCurrentEngine().removeTab(this);
 	}
