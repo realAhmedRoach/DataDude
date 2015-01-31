@@ -92,7 +92,8 @@ public class SlideshowNode extends BasicNode {
 		curr.setTitle(txtTitle.getText());
 		curr.setText(txtText.getText());
 		try {
-			curr.setImage(ImageIO.read(imgFile));
+			if (imgFile!=null)
+				curr.setImage(ImageIO.read(imgFile));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
