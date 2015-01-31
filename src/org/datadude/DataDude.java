@@ -29,7 +29,11 @@ import javax.swing.*;
 
 import org.datadude.datamanaging.Updater;
 import org.datadude.memory.MemoryManager;
-
+/**
+ * This has various utilities to get
+ * application specific variables.
+ * @author theTechnoKid
+ */
 public final class DataDude {
 
 	static JFrame preloader;
