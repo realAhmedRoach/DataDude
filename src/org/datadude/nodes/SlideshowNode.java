@@ -12,6 +12,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import org.datadude.Login;
 import org.datadude.nodes.slide.Slide;
 
 public class SlideshowNode extends BasicNode {
@@ -69,6 +70,9 @@ public class SlideshowNode extends BasicNode {
 		pane.add(slidePanel);
 		pane.add(editPanel, BorderLayout.LINE_END);
 		pane.add(buttons, BorderLayout.SOUTH);
+		
+		editM.setVisible(false);
+		setJMenuBar(menuBar);
 	}
 
 	private JPanel showSlides() {
@@ -80,6 +84,7 @@ public class SlideshowNode extends BasicNode {
 		if(curr.getImage()!=null)
 			img =new JLabel(new ImageIcon(curr.getImage()),SwingConstants.CENTER);;
 		JPanel p = new JPanel(new GridLayout(3, 1, 10, 10));
+		p.setMaximumSize(p.getPreferredSize());
 		p.add(title);
 		p.add(text);
 		if(img!=null)
@@ -97,6 +102,10 @@ public class SlideshowNode extends BasicNode {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		pane.remove(slidePanel);
+		slidePanel = showSlides();
+		pane.add(slidePanel);
+		refresh();
 	}
 
 	private void createSampleSlides() {
@@ -108,7 +117,18 @@ public class SlideshowNode extends BasicNode {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
+		super.actionPerformed(e);
+		JMenuItem choice = (JMenuItem) e.getSource();
+		if (choice == loadI) {
+			JFileChooser l = new JFileChooser();
+			l.setCurrentDirectory(new File(Login.getUser().getUserFolder()));
+			l.setDialogTitle("Open slideshow File");
+			l.showOpenDialog(this);
+			if (load(l.getSelectedFile().getAbsolutePath()))
+				lblStatus.setText("Succesfully loaded slideshow");
+			else
+				lblStatus.setText("Error while loading!");
+		}
 	}
 
 	@Override
