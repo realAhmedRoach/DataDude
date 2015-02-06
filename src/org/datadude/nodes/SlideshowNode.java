@@ -3,8 +3,7 @@ package org.datadude.nodes;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
@@ -13,6 +12,7 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.datadude.Login;
+import org.datadude.datamanaging.DataDudeFile;
 import org.datadude.nodes.slide.Slide;
 
 public class SlideshowNode extends BasicNode {
@@ -133,7 +133,15 @@ public class SlideshowNode extends BasicNode {
 
 	@Override
 	public boolean save(String file) {
-		return false;
+		File saveFile = new File(Login.getUser().getUserFolder() + File.separator + file + DataDudeFile.T_SLIDESHOW);
+		try {
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(saveFile));
+			oos.writeObject(slides);
+			oos.close();
+			return true;
+		} catch (IOException e) {
+			return false;
+		}
 	}
 
 	@Override
