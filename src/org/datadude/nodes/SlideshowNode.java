@@ -144,9 +144,22 @@ public class SlideshowNode extends BasicNode {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean load(String file) {
-		return false;
+		try {
+			ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
+			slides = (ArrayList<Slide>) in.readObject();
+			in.close();
+			pane.remove(slidePanel);
+			slidePanel = showSlides();
+			pane.add(slidePanel);
+			return true;
+		} catch (IOException e) {
+			return false;
+		} catch (ClassNotFoundException e) {
+			return false;
+		}
 	}
 
 	private ActionListener prevnext = (ActionEvent e) -> {
