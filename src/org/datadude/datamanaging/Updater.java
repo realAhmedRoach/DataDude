@@ -24,42 +24,51 @@ import java.util.ArrayList;
 /**
  * Updater for DataDude This checks if the version on the update database is the
  * same as the current version. If not, it downloads the file.
- * 
+ *
  * @author theTechnoKid
  */
 public class Updater {
 	private static final String update = "https://thetechnokid.github.io/DataDude/update.html";
 
+	private final static ArrayList<String> data;
+	static {
+		data = getData();
+	}
+
 	public static String getVersion() throws IOException {
-		String version = getData().get(0);
+		String version = data.get(0);
 		return version.substring(version.indexOf("[version]") + 9, version.indexOf("[/version]"));
 	}
 
 	public static String getWhatsNew() throws IOException {
-		String wasnew = getData().get(1);
+		String wasnew = data.get(1);
 		return wasnew.substring(wasnew.indexOf("[new]") + 5, wasnew.indexOf("[/new]"));
 	}
 
 	public static String getVersionNo() throws IOException {
-		String vno = getData().get(2);
+		String vno = data.get(2);
 		return vno.substring(vno.indexOf("[vno]") + 5, vno.indexOf("[/vno]"));
 	}
 
 	public static String getDownload() throws IOException {
-		String downLoc = getData().get(3);
+		String downLoc = data.get(3);
 		return downLoc.substring(downLoc.indexOf("[download]") + 10, downLoc.indexOf("[/download]"));
 	}
 
-	private static ArrayList<String> getData() throws IOException {
-		URL url = new URL(update);
-		InputStream html = url.openStream();
-		BufferedReader r = new BufferedReader(new InputStreamReader(html));
+	private static ArrayList<String> getData() {
+		try {
+			URL url = new URL(update);
+			InputStream html = url.openStream();
+			BufferedReader r = new BufferedReader(new InputStreamReader(html));
 
-		ArrayList<String> s = new ArrayList<String>();
-		String line = null;
-		while ((line = r.readLine()) != null)
-			s.add(line);
-		return s;
+			ArrayList<String> s = new ArrayList<String>();
+			String line = null;
+			while ((line = r.readLine()) != null)
+				s.add(line);
+			return s;
+		} catch (IOException e) {
+			return null;
+		}
 	}
 
 	public static void download() {
