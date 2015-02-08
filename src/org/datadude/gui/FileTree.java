@@ -4,8 +4,7 @@ import java.io.File;
 import java.util.Iterator;
 import java.util.Vector;
 
-import javax.swing.JPanel;
-import javax.swing.JTree;
+import javax.swing.*;
 import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
 import javax.swing.tree.TreeModel;
@@ -21,8 +20,9 @@ public class FileTree extends JPanel {
 		fileSystemModel = new FileSystemModel(new File(directory));
 		fileTree = new JTree(fileSystemModel);
 		fileTree.setEditable(false);
-		add(fileTree);
-		setSize(640, 480);
+		add(new JScrollPane(fileTree));
+		
+		setMaximumSize(getMinimumSize());
 		setVisible(true);
 	}
 }

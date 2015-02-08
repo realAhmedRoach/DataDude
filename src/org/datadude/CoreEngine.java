@@ -166,7 +166,7 @@ public class CoreEngine extends JFrame {
 			if (i > p) {
 				extension = toLoad.substring(i);
 			}
-			
+
 			BasicNode n = null;
                     switch (extension) {
                         case DataDudeFile.T_TEXT:
@@ -195,7 +195,7 @@ public class CoreEngine extends JFrame {
 		JMenuItem mntmShowAbout = new JMenuItem("Show About & Help");
 		mntmShowAbout.addActionListener((ActionEvent e) -> showHelp());
 		mnHelp.add(mntmShowAbout);
-		
+
 		JMenuItem mntmCredits = new JMenuItem("Credits");
 		mnHelp.add(mntmCredits);
 		// }
@@ -304,15 +304,11 @@ public class CoreEngine extends JFrame {
 		editorPane.setTitleAt(currentTab, "Welcome!");
 		editorPane.setTabComponentAt(currentTab, new ButtonTabComponent(false));
 
-		JScrollPane s = new JScrollPane(new FileTree(Login.getUser().getUserFolder()));
-		s.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		s.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-
 		contentPane.setLayout(new BorderLayout(0, 5));
 		contentPane.add(infoPanel, BorderLayout.NORTH);
 		contentPane.add(editorPane, BorderLayout.CENTER);
 		contentPane.add(commandPanel, BorderLayout.EAST);
-		contentPane.add(s, BorderLayout.WEST);
+		contentPane.add(new FileTree(Login.getUser().getUserFolder()), BorderLayout.WEST);
 		contentPane.add(progressPanel, BorderLayout.SOUTH);
 
 		long end = System.currentTimeMillis();
