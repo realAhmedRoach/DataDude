@@ -43,11 +43,7 @@ public class Main {
 	}
 
 	public static void setLnF() {
-		try {
-			UIManager.setLookAndFeel(new WebLookAndFeel());
-		} catch (UnsupportedLookAndFeelException e) {
-			e.printStackTrace();
-		}
+		WebLookAndFeel.install();
 	}
 
 	/**
