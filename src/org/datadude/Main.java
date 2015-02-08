@@ -39,7 +39,6 @@ public class Main {
 		}
 
 		System.out.println(DataDude.getPassLoc());
-		setLnF();
 		DataDude.showPreloaderAndStart();
 	}
 
@@ -57,7 +56,6 @@ public class Main {
 	 */
 	private static void checkForFolders() {
 		File f = new File(defaultDirectory() + "\\DataDude\\pass");
-		;
 
 		if (f.isDirectory()) {
 			firstTime = false;

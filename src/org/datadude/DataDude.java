@@ -15,7 +15,6 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-
 package org.datadude;
 
 import java.awt.*;
@@ -76,6 +75,7 @@ public final class DataDude {
 		preloader.getContentPane().add(text, BorderLayout.NORTH);
 		preloader.getContentPane().add(p);
 		preloader.setVisible(true);
+		Main.setLnF();
 
 		checkForUpdates();
 		if (download != null) {
