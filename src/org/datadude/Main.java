@@ -55,7 +55,7 @@ public class Main {
 	 * <code>firstTime</code> variable to true and make the folders.
 	 */
 	private static void checkForFolders() {
-		File f = new File(defaultDirectory() + "\\DataDude\\pass");
+		File f = new File(defaultDirectory() + File.separator + "DataDude" + File.separator + "pass");
 
 		if (f.isDirectory()) {
 			firstTime = false;
