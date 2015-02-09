@@ -178,6 +178,9 @@ public class SlideshowNode extends BasicNode {
 			if (slideNo < 0)
 				slideNo = slides.size() - 1;
 		}
+		txtTitle.setText(slides.get(slideNo).getTitle());
+		txtText.setText(slides.get(slideNo).getText());
+		imgFile = null;
 		slidePanel = showSlides();
 		pane.add(slidePanel);
 		refresh();
