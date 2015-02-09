@@ -11,6 +11,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import org.datadude.DataDude;
 import org.datadude.Login;
 import org.datadude.datamanaging.DataDudeFile;
 import org.datadude.nodes.slide.Slide;
@@ -140,6 +141,7 @@ public class SlideshowNode extends BasicNode {
 			oos.close();
 			return true;
 		} catch (IOException e) {
+			DataDude.showError(this, e, "Error while saving!");
 			return false;
 		}
 	}
@@ -157,8 +159,10 @@ public class SlideshowNode extends BasicNode {
 			refresh();
 			return true;
 		} catch (IOException e) {
+			DataDude.showError(this, e, "Error while loading!");
 			return false;
 		} catch (ClassNotFoundException e) {
+			DataDude.showError(this, e, "Error while loading!");
 			return false;
 		}
 	}
