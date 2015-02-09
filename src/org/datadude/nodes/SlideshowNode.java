@@ -70,7 +70,7 @@ public class SlideshowNode extends BasicNode {
 		pane.add(slidePanel);
 		pane.add(editPanel, BorderLayout.LINE_END);
 		pane.add(buttons, BorderLayout.SOUTH);
-		
+
 		editM.setVisible(false);
 		setJMenuBar(menuBar);
 	}
@@ -154,6 +154,7 @@ public class SlideshowNode extends BasicNode {
 			pane.remove(slidePanel);
 			slidePanel = showSlides();
 			pane.add(slidePanel);
+			refresh();
 			return true;
 		} catch (IOException e) {
 			return false;
