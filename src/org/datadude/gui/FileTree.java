@@ -10,9 +10,7 @@ import javax.swing.event.TreeModelListener;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
-public class FileTree extends JPanel {
-
-	private static final long serialVersionUID = -6070664739127600116L;
+public class FileTree {
 	private JTree fileTree;
 	private FileSystemModel fileSystemModel;
 
@@ -20,10 +18,10 @@ public class FileTree extends JPanel {
 		fileSystemModel = new FileSystemModel(new File(directory));
 		fileTree = new JTree(fileSystemModel);
 		fileTree.setEditable(false);
-		add(new JScrollPane(fileTree));
-		
-		setMaximumSize(getMinimumSize());
-		setVisible(true);
+		fileTree.setMaximumSize(fileTree.getMinimumSize());
+	}
+	public JScrollPane getPane() {
+		return new JScrollPane(fileTree,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 	}
 }
 

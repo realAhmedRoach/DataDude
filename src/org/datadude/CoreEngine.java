@@ -308,7 +308,7 @@ public class CoreEngine extends JFrame {
 		contentPane.add(infoPanel, BorderLayout.NORTH);
 		contentPane.add(editorPane, BorderLayout.CENTER);
 		contentPane.add(commandPanel, BorderLayout.EAST);
-		contentPane.add(new FileTree(Login.getUser().getUserFolder()), BorderLayout.WEST);
+		contentPane.add((new FileTree(Login.getUser().getUserFolder())).getPane(), BorderLayout.WEST);
 		contentPane.add(progressPanel, BorderLayout.SOUTH);
 
 		long end = System.currentTimeMillis();
