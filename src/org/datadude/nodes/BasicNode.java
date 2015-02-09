@@ -47,7 +47,7 @@ public abstract class BasicNode extends JInternalFrame implements ActionListener
 	/**
 	 * This is how plugins get loaded. This MUST BE RIGHT or else plugins won't
 	 * work
-	 * 
+	 *
 	 * @return The full class (binary) name for the Node.
 	 */
 	public final String getFullName() {
@@ -82,7 +82,7 @@ public abstract class BasicNode extends JInternalFrame implements ActionListener
 
 		saveI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
 		loadI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, ActionEvent.CTRL_MASK));
-		exitI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, ActionEvent.CTRL_MASK));
+		exitI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, ActionEvent.CTRL_MASK));
 		cutI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, ActionEvent.CTRL_MASK));
 		copyI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK));
 		pasteI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, ActionEvent.CTRL_MASK));
@@ -140,7 +140,7 @@ public abstract class BasicNode extends JInternalFrame implements ActionListener
 
 	public void cleanup() {
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == exitI)
@@ -151,7 +151,7 @@ public abstract class BasicNode extends JInternalFrame implements ActionListener
 			else
 				lblStatus.setText("Error while saving!");
 	}
-	
+
 	protected void exit() {
 		DataDude.getCurrentEngine().removeTab(this);
 	}
