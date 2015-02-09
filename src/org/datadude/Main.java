@@ -46,6 +46,10 @@ public class Main {
 		WebLookAndFeel.install();
 	}
 
+	public static boolean getFirstTime() {
+		return firstTime;
+	}
+
 	/**
 	 * Checks to see if the DataDude app data folder is there. If not, set the
 	 * <code>firstTime</code> variable to true and make the folders.
