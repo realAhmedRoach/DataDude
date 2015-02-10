@@ -56,7 +56,7 @@ public class LoginFX extends Application {
 	final Label lblMessage = new Label();
 	public static Scene scene;
 	public static Stage primaryStage;
-	
+
 	public static void init(String[] args) {
 		launch(args);
 	}
@@ -94,7 +94,7 @@ public class LoginFX extends Application {
 		btnLogin.setDefaultButton(true);
 
 		lblMessage.setTextFill(Color.ORANGERED);
-		
+
 		// Adding Nodes to GridPane layout
 		grid.add(lblUserName, 0, 0);
 		grid.add(txtUserName, 1, 0);
@@ -147,7 +147,7 @@ public class LoginFX extends Application {
 					r.init(stage);
 
 					stage.setResizable(false);
-
+					stage.setTitle("Register");
 					Scene s = new Scene(root);
 					stage.setScene(s);
 					stage.centerOnScreen();
