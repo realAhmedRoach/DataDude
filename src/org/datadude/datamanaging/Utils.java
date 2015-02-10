@@ -28,11 +28,18 @@ import java.util.EventListener;
 
 /**
  * Utilities used by various classes in DataDude
- * 
+ *
  * @author theTechnoKid
  */
 public abstract class Utils {
 
+	/**
+	 * Joins an array af strings using the
+	 * delimeter {@code d}.
+	 * @param r The array to be joined
+	 * @param d The delimeter
+	 * @return A string that has joined {@code r} with {@code d}
+	 */
 	public static String join(String r[], String d) {
 		if (r.length == 0)
 			return "";
@@ -45,7 +52,7 @@ public abstract class Utils {
 
 	/**
 	 * Removes listeners from a component to be garbage collected or serialized.
-	 * 
+	 *
 	 * @param comp
 	 *            The component to remove all listeners from
 	 */
@@ -89,6 +96,12 @@ public abstract class Utils {
 		}
 	}
 
+	/**
+	 * Downloads a file from a URL
+	 * @param url The URL to download from
+	 * @param localFilename The local file name
+	 * @throws IOException If an error occured.
+	 */
 	public static void downloadFromUrl(URL url, String localFilename) throws IOException {
 		InputStream is = null;
 		FileOutputStream fos = null;
