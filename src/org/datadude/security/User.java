@@ -19,11 +19,10 @@
 package org.datadude.security;
 
 import java.io.*;
-import java.security.*;
-import java.security.spec.*;
-import java.util.logging.*;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 
-import org.datadude.*;
+import org.datadude.DataDude;
 
 public class User implements Serializable {
 	private static final long serialVersionUID = 254827L;
@@ -50,7 +49,7 @@ public class User implements Serializable {
 		try {
 			salt = StringEncryptor.generateSalt();
 		} catch (NoSuchAlgorithmException ex) {
-			Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+			ex.printStackTrace();
 		}
 
 		userFolder = null;
@@ -68,7 +67,7 @@ public class User implements Serializable {
 				enc = new StringEncryptor();
 				return enc.authenticate(str, passBytes, salt);
 			} catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
-				Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+				ex.printStackTrace();
 				return false;
 			}
 		} else {
@@ -117,7 +116,7 @@ public class User implements Serializable {
 
 	/**
 	 * Gets the username of this user
-	 * 
+	 *
 	 * @return the username
 	 */
 	public String getUserName() {
@@ -127,7 +126,7 @@ public class User implements Serializable {
 	/**
 	 * Sets the username of this user This gets used when the save function gets
 	 * called
-	 * 
+	 *
 	 * @param username the new username
 	 */
 	public void setUserName(String username) {
