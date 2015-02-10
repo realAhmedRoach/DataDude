@@ -137,6 +137,7 @@ public class CoreEngine extends JFrame {
 		setTitle(DataDude.VERSION);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(874, 625);
+		setLocationRelativeTo(null);
 		// }
 
 		// MENU ITEMS {
