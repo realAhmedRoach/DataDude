@@ -17,6 +17,7 @@
  *******************************************************************************/
 package org.datadude.datamanaging;
 
+import java.awt.Desktop;
 import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
@@ -71,21 +72,11 @@ public class Updater {
 		}
 	}
 
-	public static void download() {
+	public static void openLink() {
 		try {
-			URL url = new URL(getDownload());
-			String localFilename = "dd_" + getVersionNo() + ".jar";
-			Utils.downloadFromUrl(url, localFilename);
+			Desktop.getDesktop().browse(new URL(getDownload()).toURI());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-	public static void run() throws IOException {
-		String[] run = { "java", "-jar", "dd_" + getVersionNo() + ".jar" };
-
-		Runtime.getRuntime().exec(run);
-
-		System.exit(0);
 	}
 }

@@ -22,15 +22,15 @@ import java.awt.datatransfer.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
 
 import javax.swing.*;
 
 import org.datadude.datamanaging.Updater;
 import org.datadude.memory.MemoryManager;
+
 /**
- * This has various utilities to get
- * application specific variables.
+ * This has various utilities to get application specific variables.
+ *
  * @author theTechnoKid
  */
 public final class DataDude {
@@ -82,7 +82,7 @@ public final class DataDude {
 			preloader.setSize(200, 150);
 			preloader.add(getUpdatePanel(), BorderLayout.SOUTH);
 			try {
-				text.setText("Run updated DataDude (" + Updater.getVersionNo() + ") ?");
+				text.setText("Download update (" + Updater.getVersionNo() + ") ?");
 				Thread.sleep(4500);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -97,12 +97,7 @@ public final class DataDude {
 		JButton yes = new JButton("Yes");
 		yes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					Thread.currentThread().notify();
-					Updater.run();
-				} catch (IOException ioe) {
-					showError(ioe);
-				}
+				download.start();
 			}
 		});
 		JButton no = new JButton("No");
@@ -218,12 +213,7 @@ public final class DataDude {
 			if (!Updater.getVersion().contains(VERSION)) {
 				download = new Thread() {
 					public void run() {
-						try {
-							Updater.download();
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-
+							Updater.openLink();
 					}
 				};
 			}
