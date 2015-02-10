@@ -43,7 +43,7 @@ public class Main {
 	}
 
 	public static void setLnF() {
-		WebLookAndFeel.install();
+		WebLookAndFeel.install(true);
 	}
 
 	public static boolean getFirstTime() {
