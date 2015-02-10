@@ -47,7 +47,7 @@ public class Splash extends JFrame {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-				
+
 		// Apply a transparent color to the background
 		// This is ALL important, without this, it won't work!
 		setBackground(new Color(0, 255, 0, 0));
