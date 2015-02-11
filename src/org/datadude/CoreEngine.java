@@ -309,9 +309,12 @@ public class CoreEngine extends JFrame {
 				.setBorder(new TitledBorder(null, "Editor", TitledBorder.LEADING, TitledBorder.TOP, null, Color.CYAN));
 		editorPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		editorPane.setBackground(new Color(255, 153, 102));
-		editorPane.add(n);
-		editorPane.setTitleAt(currentTab, "Welcome!");
-		editorPane.setTabComponentAt(currentTab, new ButtonTabComponent(false));
+		if (Main.getFirstTime()) {
+			editorPane.add(n);
+			editorPane.setTitleAt(currentTab, "Welcome!");
+			editorPane.setTabComponentAt(currentTab, new ButtonTabComponent(false));
+			currentTab++;
+		}
 
 		contentPane.setLayout(new BorderLayout(0, 5));
 		contentPane.add(infoPanel, BorderLayout.NORTH);
