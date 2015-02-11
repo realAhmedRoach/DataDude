@@ -79,6 +79,14 @@ public class CoreEngine extends JFrame {
 		f.setVisible(true);
 	}
 
+	private void showCredits() {
+		JFrame f = new JFrame("Credits");
+		f.getContentPane().add(new JLabel(DataDude.HTML_CRDT_TXT));
+		f.pack();
+		f.setLocationRelativeTo(null);
+		f.setVisible(true);
+	}
+
 	public static void init() {
 		EventQueue.invokeLater(() -> {
 			try {
@@ -197,6 +205,7 @@ public class CoreEngine extends JFrame {
 		mnHelp.add(mntmShowAbout);
 
 		JMenuItem mntmCredits = new JMenuItem("Credits");
+		mntmCredits.addActionListener((ActionEvent e) -> showCredits());
 		mnHelp.add(mntmCredits);
 		// }
 
@@ -211,7 +220,7 @@ public class CoreEngine extends JFrame {
 		System.out.println("Adding Info Panel");
 		JPanel infoPanel = new JPanel();
 		infoPanel.setBackground(Color.ORANGE);
-		infoPanel.setBorder(new TitledBorder(null, "Info", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		infoPanel.setBorder(new TitledBorder("Info"));
 		infoPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 5));
 
 		JLabel lblWelcome = new JLabel("Welcome, " + Login.getUser().getName());

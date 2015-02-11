@@ -52,10 +52,13 @@ public final class DataDude {
 			+ "<p>DataDude is a data managing application designed to have "
 			+ "many nodes, or data types, that can be opened in it.</p>" + "<h2>Nodes</h2>"
 			+ "<p>Currently, DataDude has the following nodes:</p>" + "<ul>" + "<li>Text</li>"
-			+ "<li>CSV (Comma-seperated Values)</li>" + "<li>Table</li>" + "</ul>"
+			+ "<li>CSV (Comma-seperated Values)</li>" + "<li>Table</li>" + "<li>Slideshow</li>" + "</ul>"
 			+ "<p>They are explained further on the Github project page</p>" + "<h2>License</h2>"
 			+ "<p>DataDude is licensed under the GNU GPLv3 license</p>" + "<h3>Have Fun</h3>"
 			+ "<p>Feel free to email me at: thetechnokid11@gmail.com</p>";
+	public static final String HTML_CRDT_TXT = "<html>" + "<h1>Credits</h1>"
+			+ "<p>DataDude uses the following libraries:</p>" + "<ul>" + "<li>WebLaF</li>" + "<li>OpenCSV</li>"
+			+ "<li>FamFamFam Silk Icons</li>" + "</ul>";
 
 	static {
 		manager = new MemoryManager();
@@ -213,7 +216,7 @@ public final class DataDude {
 			if (!Updater.getVersion().contains(VERSION)) {
 				download = new Thread() {
 					public void run() {
-							Updater.openLink();
+						Updater.openLink();
 					}
 				};
 			}
