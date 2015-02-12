@@ -151,7 +151,7 @@ public class SettingsDialog extends JDialog {
 	private void changeSettings() {
 		if (Login.getUser().check(new String(txtPass.getPassword()))) {
 			if (txtUsername.getText().length() != 0) {
-				File f = new File(DataDude.getPassLoc() + Login.getUser().getUserName());
+				File f = new File(DataDude.getPassLoc() + Login.getUser().getUserName() + ".ser");
 				f.delete();
 				Login.getUser().setUserName(txtUsername.getText());
 			}
