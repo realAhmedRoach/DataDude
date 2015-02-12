@@ -49,7 +49,7 @@ public class SettingsDialog extends JDialog {
 	private JTextField txtUserDisplay;
 
 	/**
-	 * Launch the application.
+	 * Launch the dialog.
 	 */
 	public static void init() {
 		try {
