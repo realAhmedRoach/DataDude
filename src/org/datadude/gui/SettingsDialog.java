@@ -155,12 +155,11 @@ public class SettingsDialog extends JDialog {
 				f.delete();
 				Login.getUser().setUserName(txtUsername.getText());
 			}
-			if (txtFolder.getText().length() != 0) {
+			if (txtFolder.getText().length() != 0)
 				Login.getUser().setUserFolder(txtFolder.getText());
-			}
-		} else {
+
+		} else
 			DataDude.showError(this, new Exception("Wrong Password"), "Couldn't Change Settings");
-		}
 
 		try {
 			Login.getUser().save();
