@@ -40,7 +40,7 @@ public class SettingsDialog extends JDialog {
 
 	private ActionListener settingsListener = new ActionListener() {
 		@Override
-		public void actionPerformed(ActionEvent paramActionEvent) {
+		public void actionPerformed(ActionEvent e) {
 			changeSettings();
 		}
 
