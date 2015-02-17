@@ -23,6 +23,8 @@ DataDude is licensed under the GNU [GPLv3][2]
 ##Contributing
 To contribute, either add an [issue](3), or [fork](4) this repo and add a pull request. I will evaluate it either the same day or the next.
 
+<img src="http://www.eclipse.org/artwork/images/v2/eclipse-mp-built-800x274.png" width="132"></img>
+
 [1]: http://en.wikipedia.org/wiki/Comma-separated_values
 [2]: http://www.gnu.org/licenses/gpl.html
 [3]: https://github.com/theTechnoKid/DataDude/issues/new
