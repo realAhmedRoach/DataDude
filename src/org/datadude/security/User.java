@@ -103,8 +103,9 @@ public class User implements Serializable {
 	public void setUserFolder(String _userFolder) {
 		try {
 			this.userFolder = _userFolder;
-			if (!new File(this.userFolder).exists()) {
-				new File(this.userFolder).mkdirs();
+			File f = new File(this.userFolder);
+			if (!f.exists()) {
+				f.mkdirs();
 			}
 		} catch (NullPointerException e) {
 			setUserFolder(System.getProperty("user.home") + File.separator + "DataDude Users" + File.separator
