@@ -30,8 +30,8 @@ public class ClientGUI extends JFrame implements ActionListener {
 
 	// Constructor connection receiving a socket number
 	public ClientGUI(String host, int port) {
-
 		super("DataDude Chat Client");
+
 		defaultPort = port;
 		defaultHost = host;
 
@@ -86,7 +86,7 @@ public class ClientGUI extends JFrame implements ActionListener {
 		southPanel.add(whoIsIn);
 		add(southPanel, BorderLayout.SOUTH);
 
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setSize(600, 600);
 		setVisible(true);
 		tf.requestFocus();

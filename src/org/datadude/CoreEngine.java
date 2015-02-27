@@ -27,6 +27,8 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
+import org.datadude.chat.ClientGUI;
+import org.datadude.chat.ServerGUI;
 import org.datadude.datamanaging.DataDudeFile;
 import org.datadude.gui.*;
 import org.datadude.nodes.*;
@@ -267,12 +269,16 @@ public class CoreEngine extends JFrame {
 		server = new JButton("Start Server");
 		server.setIcon(new ImageIcon(CoreEngine.class
 				.getResource("/com/sun/java/swing/plaf/windows/icons/Computer.gif")));
-		server.setEnabled(false);
+		server.addActionListener((ActionEvent e)->{
+			new ServerGUI(1500);
+		});
 		commandPanel.add(server);
 
 		chat = new JButton("Chat");
 		chat.setIcon(new ImageIcon(CoreEngine.class.getResource("/javax/swing/plaf/metal/icons/ocean/computer.gif")));
-		chat.setEnabled(false);
+		chat.addActionListener((ActionEvent e) ->{
+			new ClientGUI("",1500);
+		});
 		commandPanel.add(chat);
 
 		settings = new JButton("Settings");

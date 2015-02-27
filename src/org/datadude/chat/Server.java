@@ -20,7 +20,7 @@ public class Server {
 	// the port number to listen for connection
 	private int port;
 	// the boolean that will be turned of to stop the server
-	private boolean keepGoing;
+	private boolean running;
 
 	public Server(int port, ServerGUI sg) {
 		// GUI or not
@@ -34,20 +34,21 @@ public class Server {
 	}
 
 	public void start() {
-		keepGoing = true;
+		running = true;
 		/* create socket server and wait for connection requests */
 		try {
 			// the socket used by the server
 			ServerSocket serverSocket = new ServerSocket(port);
 
 			// infinite loop to wait for connections
-			while (keepGoing) {
+			while (running) {
 				// format message saying we are waiting
-				display("Server waiting for Clients on port " + port + ".");
+				display("Server started on "+InetAddress.getLocalHost().getHostAddress());
+				display("Server waiting for clients on port " + port + ".");
 
 				Socket socket = serverSocket.accept(); // accept connection
 				// if I was asked to stop
-				if (!keepGoing)
+				if (!running)
 					break;
 				ClientThread t = new ClientThread(socket); // make a thread of
 															// it
@@ -82,7 +83,7 @@ public class Server {
 	 * For the GUI to stop the server
 	 */
 	protected void stop() {
-		keepGoing = false;
+		running = false;
 		// connect to myself as Client to exit statement
 		// Socket socket = serverSocket.accept();
 		try {
