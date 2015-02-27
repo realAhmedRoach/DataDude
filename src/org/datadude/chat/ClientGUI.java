@@ -29,7 +29,7 @@ public class ClientGUI extends JFrame implements ActionListener {
 	private String defaultHost;
 
 	// Constructor connection receiving a socket number
-	ClientGUI(String host, int port) {
+	public ClientGUI(String host, int port) {
 
 		super("DataDude Chat Client");
 		defaultPort = port;
