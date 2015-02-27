@@ -103,8 +103,8 @@ public class CoreEngine extends JFrame {
 		nodes.add(n);
 		editorPane.addTab(n.getTitle(), n);
 		editorPane.setSelectedIndex(editorPane.getTabCount() - 1);
-		currentTab++;
 		editorPane.setTabComponentAt(currentTab, new ButtonTabComponent(true));
+		currentTab = editorPane.getTabCount();
 	}
 
 	public void removeTab(Node n) {
@@ -328,6 +328,5 @@ public class CoreEngine extends JFrame {
 		System.out.println("\nCompleted Initializing Core Engine\nTotal time: " + (end - start) + "ms");
 		// }
 		// }
-
 	}
 }
