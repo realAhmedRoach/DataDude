@@ -38,7 +38,7 @@ public final class DataDude {
 	static JFrame preloader;
 	private static JLabel text;
 
-	public static final String VERSION = "DataDude 0.0.4-rc1";
+	public static final String VERSION = "DataDude 0.0.4-rc1p1";
 
 	public static final MemoryManager manager;
 
@@ -108,6 +108,7 @@ public final class DataDude {
 			public void actionPerformed(ActionEvent e) {
 				p.setVisible(false);
 				text.setText("Loading...");
+				preloader.setSize(200, 100);
 			}
 		});
 		p.add(yes);
