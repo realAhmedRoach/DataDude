@@ -91,12 +91,6 @@ public class ServerGUI extends JFrame implements ActionListener, WindowListener 
 		tPortNumber.setEditable(false);
 	}
 
-	// entry point to start the Server
-	public static void main(String[] arg) {
-		// start server default port 1500
-		new ServerGUI(1500);
-	}
-
 	/*
 	 * If the user click the X button to close the application I need to close
 	 * the connection with the server to free the port
