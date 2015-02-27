@@ -55,7 +55,7 @@ public class Splash extends JFrame {
 		add(new JLabel(new ImageIcon(splash)));
 		setVisible(true);
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(2500);
 			CoreEngine.init();
 			dispose();
 		} catch (InterruptedException e) {
