@@ -1,6 +1,9 @@
 package org.datadude.chat;
 
 import javax.swing.*;
+
+import org.datadude.Login;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -10,9 +13,9 @@ import java.awt.event.*;
 public class ClientGUI extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
-	// will first hold "Username:", later on "Enter message"
+	// will hold "Enter message"
 	private JLabel label;
-	// to hold the Username and later on the messages
+	// to hold the the messages
 	private JTextField tf;
 	// to hold the server address an the port number
 	private JTextField tfServer, tfPort;
@@ -54,9 +57,9 @@ public class ClientGUI extends JFrame implements ActionListener {
 		northPanel.add(serverAndPort);
 
 		// the Label and the TextField
-		label = new JLabel("Enter your username below", SwingConstants.CENTER);
+		label = new JLabel("Enter your message below", SwingConstants.CENTER);
 		northPanel.add(label);
-		tf = new JTextField("Anonymous");
+		tf = new JTextField();
 		tf.setBackground(Color.WHITE);
 		northPanel.add(tf);
 		add(northPanel, BorderLayout.NORTH);
@@ -126,6 +129,14 @@ public class ClientGUI extends JFrame implements ActionListener {
 		// if it is the Logout button
 		if (o == logout) {
 			client.sendMessage(new ChatMessage(ChatMessage.LOGOUT, ""));
+			// enable login button
+			login.setEnabled(true);
+			// disable the 2 buttons
+			logout.setEnabled(false);
+			whoIsIn.setEnabled(false);
+			// enable the Server and Port JTextField
+			tfServer.setEditable(true);
+			tfPort.setEditable(true);
 			return;
 		}
 		// if it the who is in button
@@ -144,10 +155,8 @@ public class ClientGUI extends JFrame implements ActionListener {
 
 		if (o == login) {
 			// ok it is a connection request
-			String username = tf.getText().trim();
-			// empty username ignore it
-			if (username.length() == 0)
-				return;
+			String username = Login.getUser().getUserName();
+
 			// empty serverAddress ignore it
 			String server = tfServer.getText().trim();
 			if (server.length() == 0)
@@ -168,7 +177,6 @@ public class ClientGUI extends JFrame implements ActionListener {
 			if (!client.start())
 				return;
 			tf.setText("");
-			label.setText("Enter your message below");
 			connected = true;
 
 			// disable login button
