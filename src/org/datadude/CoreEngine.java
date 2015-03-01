@@ -267,8 +267,7 @@ public class CoreEngine extends JFrame {
 		commandPanel.setLayout(new BoxLayout(commandPanel, BoxLayout.Y_AXIS));
 
 		server = new JButton("Start Server");
-		server.setIcon(new ImageIcon(CoreEngine.class
-				.getResource("/com/sun/java/swing/plaf/windows/icons/Computer.gif")));
+		server.setIcon(new ImageIcon(CoreEngine.class.getResource("/images/silk/icons/application_osx_terminal.png")));
 		server.addActionListener((ActionEvent e)->{
 			new ServerGUI(1500);
 		});
@@ -287,6 +286,7 @@ public class CoreEngine extends JFrame {
 		commandPanel.add(settings);
 
 		JButton btnRefresh = new JButton("Refresh");
+		btnRefresh.setIcon(new ImageIcon(CoreEngine.class.getResource("/images/silk/icons/arrow_refresh.png")));
 		btnRefresh.addActionListener((ActionEvent e) -> {
 			lblCurrfolder.setText("<html><b>User Folder:</b> " + Login.getUser().getUserFolder() + "</html>");
 			lblWelcome.setText("Welcome, " + Login.getUser().getName());
