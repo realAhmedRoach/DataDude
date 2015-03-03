@@ -23,7 +23,7 @@ package org.datadude.datamanaging;
 public class CSVParser {
 	private String line;
 	private String[] parsedLine;
-	
+
 	/**
 	 * Create the parser
 	 * @param _line the string to be parsed.
@@ -31,7 +31,7 @@ public class CSVParser {
 	public CSVParser(String _line) {
 		line = _line;
 	}
-	
+
 	public String getLine() {
 		return line;
 	}
@@ -45,7 +45,7 @@ public class CSVParser {
 	}
 
 	public String[] parse() {
-		parsedLine = line.split(",");
+		parsedLine = line.split("\\s*,\\s*");
 		return parsedLine;
 	}
 }
