@@ -33,7 +33,7 @@ import org.datadude.datamanaging.DataDudeFile;
 
 /**
  * Node for showing tables
- * 
+ *
  * @author theTechnoKid
  */
 public class TableNode extends BasicNode {
@@ -53,8 +53,7 @@ public class TableNode extends BasicNode {
 
 		initMenu();
 
-		int[] rac = this.askRowsAndColumns();
-		mainTable = new JTable(rac[0], rac[1]);
+		mainTable = new JTable(5, 5);
 		mainTable.setColumnSelectionAllowed(true);
 		mainTable.setVisible(true);
 
@@ -84,26 +83,9 @@ public class TableNode extends BasicNode {
 		main.add(dlRow, BorderLayout.PAGE_END);
 	}
 
-	private int[] askRowsAndColumns() {
-		int[] rac = new int[2];
-		try {
-			rac[0] = Integer.parseInt(JOptionPane.showInputDialog("How many rows?"));
-			if (rac[0] > 200)
-				rac[0] = 200;
-			rac[1] = Integer.parseInt(JOptionPane.showInputDialog("How many columns?"));
-			if (rac[1] > 200)
-				rac[1] = 200;
-		} catch (NumberFormatException e) {
-			rac[0] = 3;
-			rac[1] = 3;
-		}
-
-		return rac;
-	}
-
 	/**
 	 * Saves the file.
-	 * 
+	 *
 	 * @return Success of save.
 	 */
 	public boolean save(String file) {
