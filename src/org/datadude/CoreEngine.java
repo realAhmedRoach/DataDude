@@ -29,7 +29,6 @@ import javax.swing.border.TitledBorder;
 
 import org.datadude.chat.ClientGUI;
 import org.datadude.chat.ServerGUI;
-import org.datadude.datamanaging.DataDudeFile;
 import org.datadude.gui.*;
 import org.datadude.nodes.*;
 
@@ -40,6 +39,7 @@ public class CoreEngine extends JFrame {
 	private static final long serialVersionUID = 1295L;
 
 	private JPanel contentPane;
+	private FileTree tree;
 	JButton files, newFile, chat, settings, quit, server;
 	JLabel lblCurrfolder;
 	JProgressBar progressBar;
@@ -170,31 +170,7 @@ public class CoreEngine extends JFrame {
 		mntmNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, ActionEvent.CTRL_MASK));
 		mntmLoad.addActionListener((ActionEvent e) -> {
 			String toLoad = DataDude.getFile();
-			String extension = "";
-
-			int i = toLoad.lastIndexOf('.');
-			int p = Math.max(toLoad.lastIndexOf('/'), toLoad.lastIndexOf('\\'));
-			if (i > p)
-				extension = toLoad.substring(i);
-
-			BasicNode n = null;
-			switch (extension) {
-			case DataDudeFile.T_TEXT:
-				n = new TextNode(toLoad.substring(p + 1, i));
-				break;
-			case DataDudeFile.T_TABLE:
-				n = new TableNode(toLoad.substring(p + 1, i));
-				break;
-			case DataDudeFile.T_CSV:
-				n = new CSVNode(toLoad.substring(p + 1, i));
-				break;
-			case DataDudeFile.T_SLIDESHOW:
-				n = new SlideshowNode(toLoad.substring(p + 1, i));
-				break;
-			}
-			System.out.println(toLoad);
-			n.load(toLoad);
-			addTab(n);
+			addTab(DataDude.open(toLoad));
 		});
 		mnFile.add(mntmLoad);
 		mnFile.add(mntmQuit);
@@ -290,6 +266,7 @@ public class CoreEngine extends JFrame {
 		btnRefresh.addActionListener((ActionEvent e) -> {
 			lblCurrfolder.setText("<html><b>User Folder:</b> " + Login.getUser().getUserFolder() + "</html>");
 			lblWelcome.setText("Welcome, " + Login.getUser().getName());
+			tree.refresh();
 			revalidate();
 			repaint();
 		});
@@ -326,7 +303,7 @@ public class CoreEngine extends JFrame {
 		contentPane.add(infoPanel, BorderLayout.NORTH);
 		contentPane.add(editorPane, BorderLayout.CENTER);
 		contentPane.add(commandPanel, BorderLayout.EAST);
-		contentPane.add((new FileTree(Login.getUser().getUserFolder())).getPane(), BorderLayout.WEST);
+		contentPane.add(tree.getPane(), BorderLayout.WEST);
 		contentPane.add(progressPanel, BorderLayout.SOUTH);
 
 		long end = System.currentTimeMillis();

@@ -25,8 +25,10 @@ import java.io.File;
 
 import javax.swing.*;
 
+import org.datadude.datamanaging.DataDudeFile;
 import org.datadude.datamanaging.Updater;
 import org.datadude.memory.MemoryManager;
+import org.datadude.nodes.*;
 
 /**
  * This has various utilities to get application specific variables.
@@ -66,6 +68,35 @@ public final class DataDude {
 	}
 
 	private DataDude() {
+	}
+
+	public static BasicNode open(String toLoad) {
+		String extension = "";
+
+		int i = toLoad.lastIndexOf('.');
+		int p = Math.max(toLoad.lastIndexOf('/'), toLoad.lastIndexOf('\\'));
+		if (i > p)
+			extension = toLoad.substring(i);
+
+		BasicNode n = null;
+		String title = toLoad.substring(p + 1, i);
+		switch (extension) {
+		case DataDudeFile.T_TEXT:
+			n = new TextNode(title);
+			break;
+		case DataDudeFile.T_TABLE:
+			n = new TableNode(title);
+			break;
+		case DataDudeFile.T_CSV:
+			n = new CSVNode(title);
+			break;
+		case DataDudeFile.T_SLIDESHOW:
+			n = new SlideshowNode(title);
+			break;
+		}
+		System.out.println(toLoad);
+		n.load(toLoad);
+		return n;
 	}
 
 	static synchronized void showPreloaderAndStart() {

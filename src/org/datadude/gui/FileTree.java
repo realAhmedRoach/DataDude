@@ -1,28 +1,61 @@
 package org.datadude.gui;
 
+import java.awt.event.*;
 import java.io.File;
 import java.util.Iterator;
 import java.util.Vector;
 
-import javax.swing.*;
+import javax.swing.JScrollPane;
+import javax.swing.JTree;
 import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
+import org.datadude.DataDude;
+import org.datadude.nodes.BasicNode;
+
 public class FileTree {
 	private JTree fileTree;
 	private FileSystemModel fileSystemModel;
+	private String dir;
 
 	public FileTree(String directory) {
-		fileSystemModel = new FileSystemModel(new File(directory));
+		dir = directory;
+		fileSystemModel = new FileSystemModel(new File(dir));
 		fileTree = new JTree(fileSystemModel);
 		fileTree.setEditable(false);
 		fileTree.setMaximumSize(fileTree.getMinimumSize());
+		fileTree.addMouseListener(ml);
 	}
+
+	public void refresh() {
+		fileSystemModel = new FileSystemModel(new File(dir));
+		fileTree.setModel(fileSystemModel);
+	}
+
 	public JScrollPane getPane() {
-		return new JScrollPane(fileTree,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		return new JScrollPane(fileTree, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 	}
+
+	private MouseListener ml = new MouseAdapter() {
+		public void mousePressed(MouseEvent e) {
+			int selRow = fileTree.getRowForLocation(e.getX(), e.getY());
+			TreePath selPath = fileTree.getPathForLocation(e.getX(), e.getY());
+			if (selRow != -1) {
+				if (e.getClickCount() == 2) {
+					doubleClick(selRow, selPath);
+				}
+			}
+
+		}
+
+		private void doubleClick(int selRow, TreePath selPath) {
+			File file = (File) selPath.getLastPathComponent();
+			BasicNode n = DataDude.open(file.getAbsolutePath());
+			DataDude.getCurrentEngine().addTab(n);
+		}
+	};
 }
 
 class FileSystemModel implements TreeModel {
