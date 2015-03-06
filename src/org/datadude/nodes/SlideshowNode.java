@@ -25,7 +25,7 @@ public class SlideshowNode extends BasicNode {
 	JPanel buttons, slidePanel, editPanel;
 	JLabel lblTitle, lblText, lblImage;
 	JTextField txtTitle, txtText;
-	JButton next, prev, save,browse;
+	JButton next, prev, save, browse;
 	File imgFile;
 	int slideNo;
 
@@ -82,13 +82,14 @@ public class SlideshowNode extends BasicNode {
 		title.setFont(TITLE);
 		JLabel text = new JLabel(curr.getText(), SwingConstants.LEADING);
 		JLabel img = null;
-		if(curr.getImage()!=null)
-			img =new JLabel(new ImageIcon(curr.getImage()),SwingConstants.CENTER);;
+		if (curr.getImage() != null)
+			img = new JLabel(new ImageIcon(curr.getImage()), SwingConstants.CENTER);
+		;
 		JPanel p = new JPanel(new GridLayout(3, 1, 10, 10));
 		p.setMaximumSize(p.getPreferredSize());
 		p.add(title);
 		p.add(text);
-		if(img!=null)
+		if (img != null)
 			p.add(img);
 		return p;
 	}
@@ -98,7 +99,7 @@ public class SlideshowNode extends BasicNode {
 		curr.setTitle(txtTitle.getText());
 		curr.setText(txtText.getText());
 		try {
-			if (imgFile!=null)
+			if (imgFile != null)
 				curr.setImage(ImageIO.read(imgFile));
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -196,7 +197,7 @@ public class SlideshowNode extends BasicNode {
 		}
 
 		int ret = fileOpen.showDialog(this, "Open Image");
-		if(ret!=JFileChooser.CANCEL_OPTION) {
+		if (ret != JFileChooser.CANCEL_OPTION) {
 			imgFile = fileOpen.getSelectedFile();
 		}
 	};
