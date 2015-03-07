@@ -36,9 +36,8 @@ public class TextNode extends BasicNode {
 	public TextNode(String _title) {
 		super(_title);
 		init();
-		ta = new JTextArea(); // textarea
-		scpane = new JScrollPane(ta); // scrollpane and add textarea to
-										// scrollpane
+		ta = new JTextArea();
+		scpane = new JScrollPane(ta);
 
 		ta.setLineWrap(true);
 		ta.setWrapStyleWord(true);
@@ -53,7 +52,7 @@ public class TextNode extends BasicNode {
 
 	/**
 	 * Saves the file.
-	 * 
+	 *
 	 * @return Success of save.
 	 */
 	public boolean save(String file) {
