@@ -31,10 +31,7 @@ import java.util.ArrayList;
 public class Updater {
 	private static final String update = "https://thetechnokid.github.io/DataDude/update.html";
 
-	private final static ArrayList<String> data;
-	static {
-		data = getData();
-	}
+	private final static ArrayList<String> data = getData();
 
 	public static String getVersion() throws IOException {
 		String version = data.get(0);
@@ -68,6 +65,7 @@ public class Updater {
 				s.add(line);
 			return s;
 		} catch (IOException e) {
+			e.printStackTrace();
 			return null;
 		}
 	}
