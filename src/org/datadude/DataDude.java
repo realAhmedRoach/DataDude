@@ -93,6 +93,9 @@ public final class DataDude {
 		case DataDudeFile.T_SLIDESHOW:
 			n = new SlideshowNode(title);
 			break;
+		case ".html":
+			n = new StyledTextNode(title);
+			break;
 		}
 		System.out.println(toLoad);
 		n.load(toLoad);

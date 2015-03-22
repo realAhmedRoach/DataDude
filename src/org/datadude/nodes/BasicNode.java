@@ -147,7 +147,7 @@ public abstract class BasicNode extends JInternalFrame implements ActionListener
 			exit();
 		else if (e.getSource() == saveI)
 			if (save(getTitle()))
-				lblStatus.setText("Succesfully saved text file.");
+				lblStatus.setText("Succesfully saved file.");
 			else
 				lblStatus.setText("Error while saving!");
 	}

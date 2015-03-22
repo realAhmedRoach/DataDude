@@ -59,6 +59,8 @@ public class NewDialog extends JDialog {
 			n = new CSVNode(txtName.getText());
 		else if (comboBox.getSelectedItem() == "Slideshow")
 			n = new SlideshowNode(txtName.getText());
+		else if (comboBox.getSelectedItem() == "Styled Text")
+			n = new StyledTextNode(txtName.getText());
 		else {
 			JOptionPane.showMessageDialog(null, "Not yet implemented!", "Not Available", JOptionPane.ERROR_MESSAGE);
 		}
@@ -109,7 +111,7 @@ public class NewDialog extends JDialog {
 		it.add(txtName);
 		txtName.setColumns(10);
 
-		String[] values = new String[] { "Text", "Table", "CSV", "Slideshow" };
+		String[] values = new String[] { "Text", "Table", "CSV", "Slideshow", "Styled Text" };
 
 		JLabel lblCreateNewFile = new JLabel("Create New File", SwingConstants.CENTER);
 		lblCreateNewFile.setFont(new Font("Action Man", Font.PLAIN, 17));

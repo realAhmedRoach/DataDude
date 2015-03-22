@@ -39,7 +39,7 @@ public class CoreEngine extends JFrame {
 	private static final long serialVersionUID = 1295L;
 
 	private JPanel contentPane;
-	private FileTree tree;
+	private FileTree tree = new FileTree(Login.getUser().getUserFolder());
 	JButton files, newFile, chat, settings, quit, server;
 	JLabel lblCurrfolder;
 	JProgressBar progressBar;
