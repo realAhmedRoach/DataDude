@@ -108,18 +108,6 @@ public class StyledTextNode extends BasicNode {
 		redoAction = new RedoAction();
 		editM.add(redoAction);
 
-		editM.addSeparator();
-
-		// These actions come from the default editor kit.
-		// Get the ones we want and stick them in the menu.
-		editM.add(getActionByName(DefaultEditorKit.cutAction));
-		editM.add(getActionByName(DefaultEditorKit.copyAction));
-		editM.add(getActionByName(DefaultEditorKit.pasteAction));
-
-		editM.addSeparator();
-
-		editM.add(getActionByName(DefaultEditorKit.selectAllAction));
-
 		return editM;
 	}
 
