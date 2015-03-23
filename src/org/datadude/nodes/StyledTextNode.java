@@ -144,7 +144,7 @@ public class StyledTextNode extends BasicNode {
 		JMenu font = new JMenu("Font");
 
 		font.add(new StyledEditorKit.FontFamilyAction("Serif", "Serif"));
-		font.add(new StyledEditorKit.FontFamilyAction("SansSerif", "SansSerif"));
+		font.add(new StyledEditorKit.FontFamilyAction("SansSerif", "Sans Serif"));
 		font.add(new StyledEditorKit.FontFamilyAction("Consolas", "Consolas"));
 
 		menu.add(font);
@@ -173,9 +173,9 @@ public class StyledTextNode extends BasicNode {
 		return actions;
 	}
 
-	private Action getActionByName(String name) {
-		return actions.get(name);
-	}
+//	private Action getActionByName(String name) {
+//		return actions.get(name);
+//	}
 
 	class UndoAction extends AbstractAction {
 
