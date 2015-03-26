@@ -34,6 +34,8 @@ public class StyledTextNode extends BasicNode {
 	public StyledTextNode(String _title) {
 		super(_title);
 		init();
+		initMenu();
+		initStatus();
 		// Create the text pane and configure it.
 		textPane = new JTextPane();
 		textPane.setCaretPosition(0);
@@ -56,7 +58,7 @@ public class StyledTextNode extends BasicNode {
 		createEditMenu();
 		JMenu styleMenu = createStyleMenu();
 		menuBar.add(styleMenu);
-		setJMenuBar(menuBar);
+
 
 		// Add some key bindings.
 		addBindings();
@@ -64,6 +66,8 @@ public class StyledTextNode extends BasicNode {
 
 		// Start watching for undoable edits and caret changes.
 		doc.addUndoableEditListener(new MyUndoableEditListener());
+
+		setJMenuBar(menuBar);
 	}
 
 	// This one listens for edits that can be undone.
@@ -239,37 +243,6 @@ public class StyledTextNode extends BasicNode {
 		}
 	}
 
-	/**
-	 * Create the GUI and show it. For thread safety, this method should be
-	 * invoked from the event dispatch thread.
-	 */
-	private static void createAndShowGUI() {
-		// Create and set up the window.
-		final StyledTextNode node = new StyledTextNode("StyledText");
-
-		// Display the window.
-		node.setSize(500, 500);
-		node.setVisible(true);
-		JFrame f = new JFrame();
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.add(node);
-		f.pack();
-		f.setVisible(true);
-	}
-
-	// The standard main method.
-	public static void main(String[] args) {
-		// Schedule a job for the event dispatch thread:
-		// creating and showing this application's GUI.
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				// Turn off metal's use of bold fonts
-				UIManager.put("swing.boldMetal", Boolean.FALSE);
-				createAndShowGUI();
-			}
-		});
-	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		super.actionPerformed(e);
@@ -319,7 +292,7 @@ public class StyledTextNode extends BasicNode {
 
 	@Override
 	public boolean save(String file) {
-		File saveFile = new File(file);
+		File saveFile = new File(Login.getUser().getUserFolder() + File.separator + file + ".html");
 		if (textPane.getText().length() > 0) {
 
 			StyledDocument doc = (StyledDocument) textPane.getDocument();
