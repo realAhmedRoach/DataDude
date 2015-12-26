@@ -120,7 +120,8 @@ public class CoreEngine extends JFrame {
 	}
 
 	public void setTitleAt(int index, String title) {
-		editorPane.setTitleAt(index, title);
+		if (editorPane.getTabCount()>0)
+			editorPane.setTitleAt(index+1, title);
 	}
 
 	/**

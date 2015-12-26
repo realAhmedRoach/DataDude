@@ -132,6 +132,8 @@ public class TableNode extends BasicNode {
 			main.add(dlClmn, BorderLayout.PAGE_START);
 			main.add(dlRow, BorderLayout.PAGE_END);
 
+			setNewTitle(new File(file));
+			
 			o.close();
 			refresh();
 			return true;
