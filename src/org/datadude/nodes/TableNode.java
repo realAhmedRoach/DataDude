@@ -117,7 +117,8 @@ public class TableNode extends BasicNode {
 		try {
 			ObjectInputStream o = new ObjectInputStream(new FileInputStream(loadFile));
 
-			Vector c = (Vector) o.readObject();
+			Vector c = new Vector(100);
+			c = (Vector) o.readObject();
 			DefaultTableModel m = new DefaultTableModel();
 			m.setDataVector(c, (Vector) o.readObject());
 
@@ -130,8 +131,6 @@ public class TableNode extends BasicNode {
 			main.add(nwRow, BorderLayout.LINE_END);
 			main.add(dlClmn, BorderLayout.PAGE_START);
 			main.add(dlRow, BorderLayout.PAGE_END);
-
-			setNewTitle(new File(file));
 
 			o.close();
 			refresh();
