@@ -40,7 +40,7 @@ public final class DataDude {
 	static JFrame preloader;
 	private static JLabel text;
 
-	public static final String VERSION = "DataDude 0.0.4-rc2p1";
+	public static final String VERSION = "DataDude 0.0.4-rc2";
 
 	public static final MemoryManager manager;
 
@@ -248,7 +248,7 @@ public final class DataDude {
 
 	private static synchronized void checkForUpdates() {
 		try {
-			if (!Updater.getVersion().contains(VERSION)) {
+			if (!Updater.getVersion().equals(VERSION)) {
 				download = new Thread() {
 					public void run() {
 						Updater.openLink();
