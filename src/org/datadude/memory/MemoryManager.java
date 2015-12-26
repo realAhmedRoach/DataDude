@@ -40,7 +40,7 @@ public class MemoryManager extends TimerTask {
 	@Override
 	public void run() {
 		System.out.println("Mem: " + getFreeMemory() + "KB");
-		if (getFreeMemory() < 2) {
+		if (getFreeMemory() < 30000) {
 			System.gc();
 		}
 	}
