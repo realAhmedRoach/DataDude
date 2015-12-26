@@ -21,6 +21,7 @@ public class Server {
 	private int port;
 	// the boolean that will be turned of to stop the server
 	private boolean running;
+	private Socket socket;
 
 	public Server(int port, ServerGUI sg) {
 		// GUI or not
@@ -87,9 +88,13 @@ public class Server {
 		// connect to myself as Client to exit statement
 		// Socket socket = serverSocket.accept();
 		try {
-			new Socket("localhost", port);
+			socket = new Socket("localhost", port);
 		} catch (Exception e) {
-			// nothing I can really do
+			try {
+				socket.close();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
 	}
 
