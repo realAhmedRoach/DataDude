@@ -164,11 +164,11 @@ public class CoreEngine extends JFrame {
 
 		JMenuItem mntmQuit = new JMenuItem("Quit");
 		mntmQuit.setIcon(new ImageIcon(CoreEngine.class.getResource("/images/silk/icons/cross.png")));
-		mntmNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, ActionEvent.ALT_MASK));
+		mntmQuit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, ActionEvent.ALT_MASK));
 		mntmQuit.addActionListener(quitListener);
 
 		JMenuItem mntmLoad = new JMenuItem("Load...");
-		mntmNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, ActionEvent.CTRL_MASK));
+		mntmLoad.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, ActionEvent.CTRL_MASK));
 		mntmLoad.addActionListener((ActionEvent e) -> {
 			String toLoad = DataDude.getFile();
 			addTab(DataDude.open(toLoad));
