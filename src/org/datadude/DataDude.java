@@ -22,6 +22,7 @@ import java.awt.datatransfer.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 
 import javax.swing.*;
 
@@ -210,6 +211,14 @@ public final class DataDude {
 		return clipboardContent;
 	}
 
+	public static void exit() {
+		try {
+			Login.getUser().save();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static void showError(Component parent, Exception e, String title) {
 		e.printStackTrace();
 		String text = "Something bad happened:\n" + e;

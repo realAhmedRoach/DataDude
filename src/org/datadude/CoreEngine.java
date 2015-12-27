@@ -49,7 +49,7 @@ public class CoreEngine extends JFrame {
 	private final ArrayList<Node> nodes = new ArrayList<>();
 
 	private ActionListener quitListener = (ActionEvent e) -> {
-		exit();
+		DataDude.exit();
 		System.exit(0);
 	};
 
@@ -64,14 +64,6 @@ public class CoreEngine extends JFrame {
 			/* WTF? */
 		}
 	};
-
-	private void exit() {
-		try {
-			Login.getUser().save();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 
 	private void showHelp() {
 		JFrame f = new JFrame("About & Help");
@@ -136,7 +128,7 @@ public class CoreEngine extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				exit();
+				DataDude.exit();
 			}
 		});
 		// }
