@@ -15,38 +15,28 @@
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
-            <MenuItem mnemonicParsing="false" text="New" />
-            <MenuItem mnemonicParsing="false" text="Open…" />
+            <MenuItem fx:id="newM" mnemonicParsing="false" text="New" />
+            <MenuItem fx:id="openM" mnemonicParsing="false" text="Open…" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
+            <MenuItem fx:id="closeM" mnemonicParsing="false" text="Close" />
+            <MenuItem fx:id="saveM" mnemonicParsing="false" text="Save" />
+            <MenuItem fx:id="saveAsM" mnemonicParsing="false" text="Save As…" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
+            <MenuItem fx:id="settingsM" mnemonicParsing="false" text="Preferences…" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
+            <MenuItem fx:id="quitM" mnemonicParsing="false" text="Quit" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
                <items>
-                  <MenuItem mnemonicParsing="false" text="About" />
-                  <MenuItem mnemonicParsing="false" text="Credits" />
+                  <MenuItem fx:id="aboutM" mnemonicParsing="false" text="About" />
+                  <MenuItem fx:id="creditsM" mnemonicParsing="false" text="Credits" />
                </items>
         </Menu>
       </menus>
     </MenuBar>
       <FlowPane alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" text="New">
-               <FlowPane.margin>
-                  <Insets left="30.0" top="55.0" />
-               </FlowPane.margin>
-            </Button>
-            <Button mnemonicParsing="false" text="Files">
-               <FlowPane.margin>
-                  <Insets left="10.0" top="55.0" />
-               </FlowPane.margin>
-            </Button>
             <Label prefHeight="17.0" prefWidth="78.0" text="User Folder:">
                <font>
                   <Font name="System Bold" size="12.0" />
@@ -60,32 +50,42 @@
                   <Insets top="50.0" />
                </FlowPane.margin>
             </Label>
+            <Button fx:id="newB" mnemonicParsing="false" text="New">
+               <FlowPane.margin>
+                  <Insets left="30.0" top="55.0" />
+               </FlowPane.margin>
+            </Button>
+            <Button fx:id="filesB" mnemonicParsing="false" text="Files">
+               <FlowPane.margin>
+                  <Insets left="10.0" top="55.0" />
+               </FlowPane.margin>
+            </Button>
             <Separator orientation="VERTICAL" prefHeight="105.0">
                <FlowPane.margin>
                   <Insets left="30.0" />
                </FlowPane.margin>
             </Separator>
-            <Button mnemonicParsing="false" text="Chat">
+            <Button fx:id="chatB" mnemonicParsing="false" text="Chat">
                <FlowPane.margin>
                   <Insets left="30.0" top="55.0" />
                </FlowPane.margin>
             </Button>
-            <Button mnemonicParsing="false" text="Start Server">
+            <Button fx:id="serverB" mnemonicParsing="false" text="Start Server">
                <FlowPane.margin>
                   <Insets left="10.0" top="55.0" />
                </FlowPane.margin>
             </Button>
-            <Button mnemonicParsing="false" text="Settings">
+            <Button fx:id="settingsB" mnemonicParsing="false" text="Settings">
                <FlowPane.margin>
                   <Insets left="10.0" top="55.0" />
                </FlowPane.margin>
             </Button>
-            <Button mnemonicParsing="false" text="Refresh">
+            <Button fx:id="refreshB" mnemonicParsing="false" text="Refresh">
                <FlowPane.margin>
                   <Insets left="10.0" top="55.0" />
                </FlowPane.margin>
             </Button>
-            <Button mnemonicParsing="false" text="Quit">
+            <Button fx:id="quitB" mnemonicParsing="false" text="Quit">
                <FlowPane.margin>
                   <Insets left="10.0" top="55.0" />
                </FlowPane.margin>
