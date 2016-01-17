@@ -28,7 +28,8 @@ import javax.swing.border.BevelBorder;
 import org.datadude.CoreEngine;
 import org.datadude.DataDude;
 
-public abstract class BasicNode extends JInternalFrame implements ActionListener, Node {
+public abstract class BasicNode extends JInternalFrame
+		implements ActionListener, Node {
 	private static final long serialVersionUID = -2795471245561416657L;
 	protected String title;
 	protected JMenuBar menuBar;
@@ -39,7 +40,8 @@ public abstract class BasicNode extends JInternalFrame implements ActionListener
 	protected JLabel lblStatus;
 
 	public BasicNode(String _title) {
-		setBorder(new BevelBorder(BevelBorder.RAISED, Color.CYAN, Color.RED, Color.GREEN, Color.YELLOW));
+		setBorder(new BevelBorder(BevelBorder.RAISED, Color.CYAN, Color.RED,
+				Color.GREEN, Color.YELLOW));
 		title = _title;
 		setTitle(title);
 	}
@@ -66,27 +68,40 @@ public abstract class BasicNode extends JInternalFrame implements ActionListener
 		editM = new JMenu("Edit");
 
 		exitI = new JMenuItem("Exit");
-		exitI.setIcon(new ImageIcon(BasicNode.class.getResource("/com/alee/laf/filechooser/icons/remove.png")));
+		exitI.setIcon(new ImageIcon(BasicNode.class
+				.getResource("/com/alee/laf/filechooser/icons/remove.png")));
 		cutI = new JMenuItem("Cut");
-		cutI.setIcon(new ImageIcon(BasicNode.class.getResource("/com/sun/javafx/scene/web/skin/Cut_16x16_JFX.png")));
+		cutI.setIcon(new ImageIcon(BasicNode.class.getResource(
+				"/com/sun/javafx/scene/web/skin/Cut_16x16_JFX.png")));
 		copyI = new JMenuItem("Copy");
-		copyI.setIcon(new ImageIcon(BasicNode.class.getResource("/com/alee/extended/ninepatch/icons/copy.png")));
+		copyI.setIcon(new ImageIcon(BasicNode.class
+				.getResource("/com/alee/extended/ninepatch/icons/copy.png")));
 		pasteI = new JMenuItem("Paste");
-		pasteI.setIcon(new ImageIcon(BasicNode.class.getResource("/com/alee/extended/ninepatch/icons/paste.png")));
+		pasteI.setIcon(new ImageIcon(BasicNode.class
+				.getResource("/com/alee/extended/ninepatch/icons/paste.png")));
 		selectI = new JMenuItem("Select All");
 		saveI = new JMenuItem("Save"); // menuitems
-		saveI.setIcon(new ImageIcon(BasicNode.class.getResource("/com/alee/extended/ninepatch/icons/save.png")));
+		saveI.setIcon(new ImageIcon(BasicNode.class
+				.getResource("/com/alee/extended/ninepatch/icons/save.png")));
 		loadI = new JMenuItem("Load");
-		loadI.setIcon(new ImageIcon(BasicNode.class.getResource("/com/alee/extended/ninepatch/icons/open.png")));
+		loadI.setIcon(new ImageIcon(BasicNode.class
+				.getResource("/com/alee/extended/ninepatch/icons/open.png")));
 		toolBar = new JToolBar();
 
-		saveI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
-		loadI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, ActionEvent.CTRL_MASK));
-		exitI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, ActionEvent.CTRL_MASK));
-		cutI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, ActionEvent.CTRL_MASK));
-		copyI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK));
-		pasteI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, ActionEvent.CTRL_MASK));
-		selectI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.CTRL_MASK));
+		saveI.setAccelerator(
+				KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
+		loadI.setAccelerator(
+				KeyStroke.getKeyStroke(KeyEvent.VK_L, ActionEvent.CTRL_MASK));
+		exitI.setAccelerator(
+				KeyStroke.getKeyStroke(KeyEvent.VK_W, ActionEvent.CTRL_MASK));
+		cutI.setAccelerator(
+				KeyStroke.getKeyStroke(KeyEvent.VK_X, ActionEvent.CTRL_MASK));
+		copyI.setAccelerator(
+				KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK));
+		pasteI.setAccelerator(
+				KeyStroke.getKeyStroke(KeyEvent.VK_V, ActionEvent.CTRL_MASK));
+		selectI.setAccelerator(
+				KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.CTRL_MASK));
 
 		menuBar.add(fileM);
 		menuBar.add(editM);
@@ -174,6 +189,7 @@ public abstract class BasicNode extends JInternalFrame implements ActionListener
 
 	protected void setNewTitle(File f) {
 		CoreEngine c = DataDude.getCurrentEngine();
-		c.setTitleAt(c.getNodes().indexOf(this), f.getName());
+		if (c.getNodes().indexOf(this) > -1)
+			c.setTitleAt(c.getNodes().indexOf(this), f.getName());
 	}
 }
