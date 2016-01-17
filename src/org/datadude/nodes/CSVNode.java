@@ -50,11 +50,13 @@ public class CSVNode extends BasicNode {
 
 		textPanel = new JPanel();
 		btnNew = new JButton("New");
-		btnNew.setIcon(new ImageIcon(getClass().getResource("/images/silk/icons/add.png")));
+		btnNew.setIcon(new ImageIcon(
+				getClass().getResource("/images/silk/icons/add.png")));
 		btnNew.addActionListener(new NewListener());
 
 		btnDelete = new JButton("Delete");
-		btnDelete.setIcon(new ImageIcon(getClass().getResource("/images/silk/icons/delete.png")));
+		btnDelete.setIcon(new ImageIcon(
+				getClass().getResource("/images/silk/icons/delete.png")));
 		initStatus();
 		initMenu();
 
@@ -92,7 +94,8 @@ public class CSVNode extends BasicNode {
 				lines[selectedIndex].replaceSelection(DataDude.getClipboard());
 			else
 				try {
-					lines[selectedIndex].getDocument().insertString(lines[selectedIndex].getCaretPosition(),
+					lines[selectedIndex].getDocument().insertString(
+							lines[selectedIndex].getCaretPosition(),
 							DataDude.getClipboard(), null);
 				} catch (BadLocationException e1) {
 					e1.printStackTrace();
@@ -102,25 +105,30 @@ public class CSVNode extends BasicNode {
 		else if (choice == cutI) {
 			DataDude.setClipboard(lines[selectedIndex].getSelectedText());
 			lines[selectedIndex].replaceSelection("");
-		} else if(choice == selectI)
+		} else if (choice == selectI)
 			lines[selectedIndex].selectAll();
 	}
 
 	@Override
 	public boolean save(String file) {
 		try {
-			File f = new File(Login.getUser().getUserFolder() + File.separator + file + DataDudeFile.T_CSV);
+			File f = new File(Login.getUser().getUserFolder() + File.separator
+					+ file + DataDudeFile.T_CSV);
 			f.createNewFile();
-			CSVWriter w = new CSVWriter(new FileWriter(f), ',', CSVWriter.DEFAULT_QUOTE_CHARACTER,
-					CSVWriter.DEFAULT_ESCAPE_CHARACTER, System.getProperty("line.separator"));
+			CSVWriter w = new CSVWriter(new FileWriter(f), ',',
+					CSVWriter.DEFAULT_QUOTE_CHARACTER,
+					CSVWriter.DEFAULT_ESCAPE_CHARACTER,
+					System.getProperty("line.separator"));
 
 			// Write It Out
 			for (int i = 0; i < lines.length; i++)
-				w.writeNext(lines[i].getText().split("\\s*,\\s*"), false);
+				if (!(lines[i].getText().isEmpty())) // Make sure it isn't empty
+					w.writeNext(lines[i].getText().split("\\s*,\\s*"), false);
 
 			w.close();
 		} catch (Exception e) {
-			String text = "Exception while trying to save file:\n" + e.getMessage();
+			String text = "Exception while trying to save file:\n"
+					+ e.getMessage();
 			DataDude.showError(this, e, text);
 			return false;
 		}
@@ -160,7 +168,8 @@ public class CSVNode extends BasicNode {
 			refresh();
 			r.close();
 		} catch (Exception e) {
-			String text = "Exception while trying to load file:\n" + e.toString();
+			String text = "Exception while trying to load file:\n"
+					+ e.toString();
 			e.printStackTrace();
 			DataDude.showError(this, e, text);
 			return false;
@@ -200,15 +209,15 @@ public class CSVNode extends BasicNode {
 
 	class DeleteListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if(lines.length==0)
+			if (lines.length == 0)
 				return;
 			// Clear Panel
 			textPanel.removeAll();
 
 			layout.setVgap(layout.getVgap() + 5);
 
-			JTextField[] newLines = new JTextField[lines.length - 1];
-			for (int i = 0; i < (lines.length - 1); i++)
+			JTextField[] newLines = new JTextField[lines.length - 2];
+			for (int i = 0; i < (lines.length - 2); i++)
 				newLines[i] = lines[i]; // Copy all lines except last one
 
 			lines = newLines;
