@@ -57,6 +57,8 @@ public class CSVNode extends BasicNode {
 		btnDelete = new JButton("Delete");
 		btnDelete.setIcon(new ImageIcon(
 				getClass().getResource("/images/silk/icons/delete.png")));
+		btnDelete.addActionListener(new DeleteListener());
+		
 		initStatus();
 		initMenu();
 
