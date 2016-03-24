@@ -24,7 +24,7 @@ import java.io.File;
 /**
  * A class that represents
  * a directory.
- * @author aarh9
+ * @author theTechnoKid
  */
 public class Directory {
 
