@@ -1,7 +1,7 @@
 DataDude
 =======
 DataDude is a data managing application designed to have many nodes (data types) in one application.
-It is made in both [JavaFX](https://en.wikipedia.org/wiki/JavaFX) and [Swing](https://en.wikipedia.org/wiki/Swing_(Java)).
+It uses both [JavaFX](https://en.wikipedia.org/wiki/JavaFX) and [Swing](https://en.wikipedia.org/wiki/Swing_(Java)).
 
 ##Libraries
 3. [WebLaF](http://weblookandfeel.com)
